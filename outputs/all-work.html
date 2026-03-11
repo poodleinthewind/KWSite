@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Work — Kyle Watson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0a0a0a; --bg-elevated: #111111; --bg-card: #141414;
+  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
+  --accent: #c8ff00; --border: #1e1e1e;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+}
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #2a2a2a var(--bg); }
+body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+::selection { background: var(--accent); color: var(--bg); }
+
+/* ─── CURSOR ─── */
+.custom-cursor { width: 10px; height: 10px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.15s ease, width 0.25s ease, height 0.25s ease; mix-blend-mode: difference; }
+.custom-cursor.hover { width: 36px; height: 36px; }
+
+/* ─── NAV ─── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
+.nav-name { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; text-decoration: none; }
+.nav-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; opacity: 0.5; text-decoration: none; transition: opacity 0.2s; }
+.nav-back:hover { opacity: 1; }
+
+/* ─── PAGE HEADER ─── */
+.page-header {
+  padding: 10rem 3rem 4rem;
+  border-bottom: 1px solid var(--border);
+}
+.page-header-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.page-header-label a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.page-header-label a:hover { color: var(--text-secondary); }
+.page-header-label .sep { opacity: 0.3; }
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+.page-desc {
+  max-width: 600px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* ─── FILTER BAR ─── */
+.filter-bar {
+  padding: 1.5rem 3rem;
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+.filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.filter-btn:hover { color: var(--text-secondary); border-color: var(--border); }
+.filter-btn.active { color: var(--text-primary); border-color: var(--text-dim); }
+
+/* ─── PROJECTS GRID — same 12-col system as homepage ─── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0.75rem;
+  padding: 0.75rem 0.75rem 8rem;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 3px;
+  background: var(--bg-card);
+  min-height: 320px;
+  text-decoration: none;
+  display: block;
+  color: var(--text-primary);
+}
+.project-card.size-large  { grid-column: span 7; aspect-ratio: 16/10; }
+.project-card.size-medium { grid-column: span 5; aspect-ratio: 4/3; }
+.project-card.size-small  { grid-column: span 6; aspect-ratio: 16/10; }
+.project-card.size-wide   { grid-column: span 12; aspect-ratio: 21/7; }
+
+.project-visual { width: 100%; height: 100%; position: absolute; inset: 0; transition: transform 0.9s cubic-bezier(0.16,1,0.3,1); overflow: hidden; }
+.project-card:hover .project-visual { transform: scale(1.04); }
+
+.shape { position: absolute; border-radius: 50%; filter: blur(50px); opacity: 0.45; animation: float 9s ease-in-out infinite; }
+
+/* Visual themes per project */
+.pv-1  .shape { width: 220px; height: 220px; background: #1e3a5f; top: 15%; right: 10%; }
+.pv-2  .shape { width: 260px; height: 160px; background: #11998e; bottom: 10%; left: 15%; animation-delay: -2s; }
+.pv-3  .shape { width: 190px; height: 190px; background: #1a5a30; top: 30%; left: 35%; animation-delay: -4s; }
+.pv-4  .shape { width: 230px; height: 170px; background: #5a1a8a; bottom: 20%; right: 20%; animation-delay: -1s; }
+.pv-5  .shape { width: 210px; height: 210px; background: #0055aa; top: 15%; right: 20%; animation-delay: -3s; }
+.pv-6  .shape { width: 250px; height: 180px; background: #7a1a3a; top: 25%; left: 15%; animation-delay: -5s; }
+.pv-7  .shape { width: 240px; height: 180px; background: #1c2b4a; bottom: 15%; right: 15%; animation-delay: -6s; }
+.pv-8  .shape { width: 200px; height: 200px; background: #1a1a1a; top: 20%; left: 20%; animation-delay: -7s; }
+.pv-9  .shape { width: 230px; height: 160px; background: #5a1010; top: 30%; right: 25%; animation-delay: -0.5s; }
+.pv-10 .shape { width: 220px; height: 190px; background: #0a2040; bottom: 25%; left: 10%; animation-delay: -2.5s; }
+.pv-11 .shape { width: 260px; height: 170px; background: #5c1010; top: 15%; left: 30%; animation-delay: -4.5s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(12px,-8px) scale(1.04); }
+  66% { transform: translate(-8px,12px) scale(0.96); }
+}
+
+.project-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.05) 50%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 2rem; z-index: 2;
+}
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+.project-tag {
+  font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em;
+  text-transform: uppercase; font-weight: 500;
+  background: linear-gradient(90deg, #f4845f 0%, #e8637a 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  border: 1px solid rgba(244,132,95,0.3);
+  padding: 0.3rem 0.75rem; border-radius: 2px;
+}
+.project-title { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.3rem; }
+.project-card.size-large .project-title { font-size: clamp(1.2rem, 2.5vw, 2rem); }
+.project-client { font-size: 0.78rem; color: var(--text-secondary); font-weight: 300; }
+
+.project-index { position: absolute; top: 1.5rem; left: 1.5rem; font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; z-index: 3; }
+.project-arrow { position: absolute; top: 1.5rem; right: 1.5rem; width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(4px); transition: all 0.3s ease; z-index: 3; }
+.project-arrow svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.project-card:hover .project-arrow { opacity: 1; transform: translateY(0); }
+
+/* Hidden when filtered out */
+.project-card.hidden { display: none; }
+
+/* ─── FOOTER ─── */
+.footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--text-dim); }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--text-dim); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
+.footer-links a:hover { color: var(--text-primary); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1200px) {
+  .project-card.size-large, .project-card.size-medium, .project-card.size-small { grid-column: span 6; aspect-ratio: 4/3; min-height: auto; }
+  .project-card.size-wide { grid-column: span 12; }
+}
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .page-header { padding: 6rem 1.5rem 2rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
+  /* filter bar: horizontally scrollable, no wrap */
+  .filter-bar { padding: 1rem 1.5rem; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 0.4rem; }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-btn { white-space: nowrap; padding: 0.6rem 1.2rem; font-size: 0.65rem; flex-shrink: 0; }
+  .projects-grid { padding: 0.5rem 0.5rem 4rem; gap: 0.5rem; }
+  .project-card.size-large, .project-card.size-medium, .project-card.size-small { grid-column: span 12; aspect-ratio: 4/3; }
+  .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  .custom-cursor { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="custom-cursor" id="cursor"></div>
+
+<nav>
+  <a href="index.html" class="nav-name">KYLE WATSON</a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<header class="page-header">
+  <div class="page-header-label">
+    <a href="index.html">← Back</a>
+    <span class="sep">/</span>
+    <span>All Work</span>
+  </div>
+  <h1 class="page-title">All Work</h1>
+  <p class="page-desc">Fifteen years across motion, brand, AI, and experiential. Directed for Google, IBM, YouTube, Palo Alto Networks, and more.</p>
+</header>
+
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="ai">AI</button>
+  <button class="filter-btn" data-filter="motion">Motion</button>
+  <button class="filter-btn" data-filter="experiential">Experiential</button>
+  <button class="filter-btn" data-filter="design">Design</button>
+  <button class="filter-btn" data-filter="3d">3D</button>
+</div>
+
+<div class="projects-grid">
+
+  <!-- 1: large — CoreWeave x Aston Martin F1 -->
+  <a href="project-coreweave-aston-martin.html" class="project-card size-large" data-categories="ai 3d design">
+    <span class="project-index">1</span>
+    <div class="project-visual pv-1"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">3D</span></div>
+      <div class="project-title">CoreWeave x Aston Martin F1</div>
+      <div class="project-client">Asteria Film — Hybrid AI brand film</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 2: medium — Moonvalley: Marey -->
+  <a href="project-moonvalley-marey.html" class="project-card size-medium" data-categories="ai motion">
+    <span class="project-index">2</span>
+    <div class="project-visual pv-2"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">Film</span></div>
+      <div class="project-title">Moonvalley: Marey</div>
+      <div class="project-client">Moonvalley</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 3: medium — New Landscapes -->
+  <a href="project-new-landscapes.html" class="project-card size-medium" data-categories="ai motion 3d">
+    <span class="project-index">3</span>
+    <div class="project-visual pv-3"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">3D</span><span class="project-tag">Motion</span></div>
+      <div class="project-title">New Landscapes</div>
+      <div class="project-client">Palo Alto Networks — Godfrey Dadich &amp; Partners</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 4: large — Prediction Machines -->
+  <a href="project-prediction-machines.html" class="project-card size-large" data-categories="ai motion design">
+    <span class="project-index">4</span>
+    <div class="project-visual pv-4"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Motion</span></div>
+      <div class="project-title">Prediction Machines</div>
+      <div class="project-client"><!-- TODO --></div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 5: small — IBM Open Minds -->
+  <a href="project-ibm-open-minds.html" class="project-card size-small" data-categories="motion design">
+    <span class="project-index">5</span>
+    <div class="project-visual pv-5"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
+      <div class="project-title">IBM Open Minds</div>
+      <div class="project-client">IBM</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 6: small — Mirror State -->
+  <a href="project-mirror-state.html" class="project-card size-small" data-categories="ai design">
+    <span class="project-index">6</span>
+    <div class="project-visual pv-6"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Design</span></div>
+      <div class="project-title">Mirror State</div>
+      <div class="project-client"><!-- TODO --></div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 7: large — Google Next '19 -->
+  <a href="project-google-next.html" class="project-card size-large" data-categories="experiential motion design">
+    <span class="project-index">7</span>
+    <div class="project-visual pv-7"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Experiential</span><span class="project-tag">Motion</span><span class="project-tag">Design</span></div>
+      <div class="project-title">Google Next '19</div>
+      <div class="project-client">Google — AdAge Best Experiential 2019</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 8: medium — Unity -->
+  <a href="project-unity.html" class="project-card size-medium" data-categories="motion design">
+    <span class="project-index">8</span>
+    <div class="project-visual pv-8"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Design</span><span class="project-tag">Brand</span></div>
+      <div class="project-title">Unity</div>
+      <div class="project-client">InterSystems</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 9: medium — YouTube Forge -->
+  <a href="project-youtube-forge.html" class="project-card size-medium" data-categories="motion design experiential">
+    <span class="project-index">9</span>
+    <div class="project-visual pv-9"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
+      <div class="project-title">YouTube Forge</div>
+      <div class="project-client">YouTube</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 10: large — Google Groove Around the Globe -->
+  <a href="project-google-groove.html" class="project-card size-large" data-categories="experiential motion">
+    <span class="project-index">10</span>
+    <div class="project-visual pv-10"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Experiential</span></div>
+      <div class="project-title">Google Groove Around the Globe</div>
+      <div class="project-client">Google</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 11: small — Sports Illustrated Sportsbook -->
+  <a href="project-si-sportsbook.html" class="project-card size-small" data-categories="design motion">
+    <span class="project-index">11</span>
+    <div class="project-visual pv-11"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Design</span><span class="project-tag">Brand</span></div>
+      <div class="project-title">Sports Illustrated Sportsbook</div>
+      <div class="project-client">Sports Illustrated</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+</div>
+
+<footer class="footer">
+  <span class="footer-copy">&copy; 2026 Kyle Watson</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
+    <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+<script>
+// ─── CURSOR ───
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, .filter-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+// ─── FILTERS ───
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.project-card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    cards.forEach(card => {
+      const cats = card.dataset.categories || '';
+      if (filter === 'all' || cats.includes(filter)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// ─── PARALLAX ───
+cards.forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    const visual = card.querySelector('.project-visual');
+    if (visual) visual.style.transform = `scale(1.04) translate(${x * -10}px, ${y * -10}px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    const visual = card.querySelector('.project-visual');
+    if (visual) visual.style.transform = '';
+  });
+});
+</script>
+</body>
+</html>

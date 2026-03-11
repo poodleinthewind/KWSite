@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Play — Kyle Watson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg-elevated: #111111;
+  --bg-card: #141414;
+  --text-primary: #e8e8e8;
+  --text-secondary: #888888;
+  --text-dim: #444444;
+  --accent: #c8ff00;
+  --border: #1e1e1e;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ─── CUSTOM CURSOR ─── */
+.custom-cursor {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.25s ease, height 0.25s ease, opacity 0.3s ease;
+  mix-blend-mode: difference;
+}
+.custom-cursor.hover { width: 36px; height: 36px; }
+
+/* ─── GRAIN ─── */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  padding: 1.6rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.5;
+}
+
+.nav-location {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.5;
+}
+
+.nav-menu-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0;
+}
+
+/* ─── MENU OVERLAY ─── */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0a;
+  z-index: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.menu-close {
+  position: absolute;
+  top: 1.6rem;
+  right: 3rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-close:hover { color: var(--text-primary); }
+
+.menu-links {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-link {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  text-decoration: none;
+  line-height: 1.1;
+  opacity: 0.25;
+  transition: opacity 0.3s ease;
+}
+
+.menu-link:hover { opacity: 1; }
+
+/* ─── PAGE HEADER ─── */
+.play-header {
+  padding: 10rem 3rem 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.play-header-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.play-header-label a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.play-header-label a:hover { color: var(--text-secondary); }
+
+.play-header-label .sep { opacity: 0.3; }
+
+.play-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.play-header-desc {
+  max-width: 600px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* ─── FILTER BAR ─── */
+.filter-bar {
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: none;
+  border: 1px solid transparent;
+  padding: 0.35rem 0.85rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filter-btn:hover { color: var(--text-secondary); border-color: var(--border); }
+.filter-btn.active { color: var(--text-primary); border-color: var(--text-dim); }
+
+/* ─── MASONRY / PLAY GRID ─── */
+.play-gallery {
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+/* Grid placements for visual rhythm */
+.pg-item { overflow: hidden; cursor: pointer; position: relative; border-radius: 2px; }
+
+.pg-item-xl  { grid-column: span 8; aspect-ratio: 16/9; }
+.pg-item-sm  { grid-column: span 4; aspect-ratio: 4/3; }
+.pg-item-med { grid-column: span 6; aspect-ratio: 4/3; }
+.pg-item-lg  { grid-column: span 7; aspect-ratio: 4/3; }
+.pg-item-s5  { grid-column: span 5; aspect-ratio: 4/3; }
+.pg-item-wide { grid-column: span 12; aspect-ratio: 21/6; }
+.pg-item-third { grid-column: span 4; aspect-ratio: 1/1; }
+
+.pg-visual {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  filter: grayscale(0.4) brightness(0.7);
+}
+
+.pg-item:hover .pg-visual {
+  transform: scale(1.06);
+  filter: grayscale(0) brightness(0.95);
+}
+
+/* Play visual backgrounds */
+.pv-a { background: linear-gradient(135deg, #1a1a2e 0%, #e94560 100%); }
+.pv-b { background: linear-gradient(135deg, #0f3460 0%, #533483 100%); }
+.pv-c { background: linear-gradient(135deg, #0d0d0d 0%, #11998e 100%); }
+.pv-d { background: linear-gradient(135deg, #2d1b69 0%, #c33764 100%); }
+.pv-e { background: linear-gradient(135deg, #0f0c29 0%, #928DAB 100%); }
+.pv-f { background: linear-gradient(135deg, #1c1c1c 0%, #4a00e0 60%, #8e2de2 100%); }
+.pv-g { background: linear-gradient(135deg, #0d1117 0%, #00b4d8 100%); }
+.pv-h { background: linear-gradient(160deg, #1b1b2f 0%, #e94560 40%, #0f3460 100%); }
+.pv-i { background: linear-gradient(135deg, #0a0a0a 0%, #c8ff00 100%); }
+.pv-j { background: radial-gradient(ellipse at 30% 40%, #533483 0%, #0d0d0d 70%); }
+.pv-k { background: linear-gradient(135deg, #111 0%, #302b63 50%, #24243e 100%); }
+.pv-l { background: conic-gradient(from 180deg at 50% 50%, #1a1a2e, #e94560, #0f3460, #11998e, #1a1a2e); }
+
+/* ─── ITEM META OVERLAY ─── */
+.pg-meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.pg-item:hover .pg-meta { opacity: 1; }
+
+.pg-meta-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+.pg-meta-year {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.12s; }
+.stagger-3 { transition-delay: 0.18s; }
+.stagger-4 { transition-delay: 0.25s; }
+.stagger-5 { transition-delay: 0.32s; }
+.stagger-6 { transition-delay: 0.38s; }
+.stagger-7 { transition-delay: 0.44s; }
+.stagger-8 { transition-delay: 0.5s; }
+
+/* ─── LIGHTBOX ─── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.94);
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: min(90vw, 1100px);
+}
+
+.lightbox-visual {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.lightbox-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.lightbox-year {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 1.75rem;
+  right: 2rem;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 810;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.lightbox-close:hover { color: var(--accent); }
+
+.lightbox-prev, .lightbox-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 810;
+  padding: 1rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.lightbox-prev { left: 1.5rem; }
+.lightbox-next { right: 1.5rem; }
+.lightbox-prev:hover, .lightbox-next:hover { color: var(--accent); }
+
+/* ─── FOOTER ─── */
+.footer {
+  padding: 2.5rem 3rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.footer-left {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover { color: var(--text-primary); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-title, .nav-location { display: none; }
+  .play-header { padding: 7rem 1.5rem 3rem; }
+  .filter-bar { padding: 1rem 1.5rem; overflow-x: auto; }
+  .play-gallery { padding: 1.5rem; gap: 0.75rem; }
+  .pg-item-xl, .pg-item-lg, .pg-item-wide { grid-column: span 12; }
+  .pg-item-sm, .pg-item-med, .pg-item-s5 { grid-column: span 6; }
+  .pg-item-third { grid-column: span 6; }
+  .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  .custom-cursor { display: none; }
+}
+
+@media (max-width: 480px) {
+  .pg-item-sm, .pg-item-med, .pg-item-s5, .pg-item-third { grid-column: span 12; }
+}
+</style>
+</head>
+<body>
+
+<div class="custom-cursor" id="cursor"></div>
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-name">KYLE WATSON</a>
+  <span class="nav-title">MULTIDISCIPLINARY CREATIVE DIRECTOR</span>
+  <span class="nav-location">LOS ANGELES, CALIFORNIA</span>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
+</nav>
+
+<!-- MENU OVERLAY -->
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" id="menuClose" aria-label="Close menu">CLOSE</button>
+  <div class="menu-content">
+    <ul class="menu-links">
+      <li><a href="index.html#work" class="menu-link">Work</a></li>
+      <li><a href="index.html#archive" class="menu-link">Archive</a></li>
+      <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="index.html#about" class="menu-link">About</a></li>
+      <li><a href="index.html#contact" class="menu-link">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="play-header">
+  <div class="play-header-label">
+    <a href="index.html">← Back</a>
+    <span class="sep">/</span>
+    <span>Play</span>
+  </div>
+  <h1>Play</h1>
+  <p class="play-header-desc">
+    Illustration, motion experiments, painting studies, and personal R&D. The work that doesn't have a client brief, a deadline, or a deliverable — only a question.
+  </p>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="illustration">Illustration</button>
+  <button class="filter-btn" data-filter="motion">Motion</button>
+  <button class="filter-btn" data-filter="painting">Painting</button>
+  <button class="filter-btn" data-filter="3d">3D</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&#x2715;</button>
+  <button class="lightbox-prev" id="lightboxPrev">&#x2190;</button>
+  <button class="lightbox-next" id="lightboxNext">&#x2192;</button>
+  <div class="lightbox-content">
+    <div class="lightbox-visual" id="lightboxVisual"></div>
+    <div class="lightbox-meta">
+      <span class="lightbox-title" id="lightboxTitle"></span>
+      <span class="lightbox-year" id="lightboxYear"></span>
+    </div>
+  </div>
+</div>
+
+<!-- PLAY GALLERY — asymmetric 12-col grid -->
+<div class="play-gallery">
+
+  <!-- Row 1: XL + SM -->
+  <div class="pg-item pg-item-xl reveal stagger-1"
+       data-title="Untitled Study" data-year="2024" data-category="illustration">
+    <div class="pg-visual pv-a"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Untitled Study</span>
+      <span class="pg-meta-year">2024</span>
+    </div>
+  </div>
+
+  <div class="pg-item pg-item-sm reveal stagger-2"
+       data-title="Color Field No. 3" data-year="2023" data-category="painting">
+    <div class="pg-visual pv-b"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Color Field No. 3</span>
+      <span class="pg-meta-year">2023</span>
+    </div>
+  </div>
+
+  <!-- Row 2: SM + MED + SM -->
+  <div class="pg-item pg-item-sm reveal stagger-3"
+       data-title="Dark Matter" data-year="2023" data-category="3d">
+    <div class="pg-visual pv-c"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Dark Matter</span>
+      <span class="pg-meta-year">2023</span>
+    </div>
+  </div>
+
+  <div class="pg-item pg-item-med reveal stagger-4"
+       data-title="The Long Way" data-year="2022" data-category="illustration">
+    <div class="pg-visual pv-d"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">The Long Way</span>
+      <span class="pg-meta-year">2022</span>
+    </div>
+  </div>
+
+  <div class="pg-item pg-item-sm reveal stagger-5"
+       data-title="Noise Field" data-year="2022" data-category="motion">
+    <div class="pg-visual pv-e"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Noise Field</span>
+      <span class="pg-meta-year">2022</span>
+    </div>
+  </div>
+
+  <!-- Row 3: LG + S5 -->
+  <div class="pg-item pg-item-lg reveal stagger-6"
+       data-title="Violet Hour" data-year="2022" data-category="painting">
+    <div class="pg-visual pv-f"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Violet Hour</span>
+      <span class="pg-meta-year">2022</span>
+    </div>
+  </div>
+
+  <div class="pg-item pg-item-s5 reveal stagger-7"
+       data-title="Blue Shift" data-year="2021" data-category="3d">
+    <div class="pg-visual pv-g"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Blue Shift</span>
+      <span class="pg-meta-year">2021</span>
+    </div>
+  </div>
+
+  <!-- Row 4: full-width panoramic -->
+  <div class="pg-item pg-item-wide reveal"
+       data-title="Signal / Noise" data-year="2021" data-category="motion">
+    <div class="pg-visual pv-h"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Signal / Noise</span>
+      <span class="pg-meta-year">2021</span>
+    </div>
+  </div>
+
+  <!-- Row 5: three thirds -->
+  <div class="pg-item pg-item-third reveal stagger-1"
+       data-title="Acid Study" data-year="2021" data-category="illustration">
+    <div class="pg-visual pv-i"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Acid Study</span>
+      <span class="pg-meta-year">2021</span>
+    </div>
+  </div>
+
+  <div class="pg-item pg-item-third reveal stagger-2"
+       data-title="Deep Field" data-year="2020" data-category="3d">
+    <div class="pg-visual pv-j"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Deep Field</span>
+      <span class="pg-meta-year">2020</span>
+    </div>
+  </div>
+
+  <div class="pg-item pg-item-third reveal stagger-3"
+       data-title="Orbit" data-year="2020" data-category="motion">
+    <div class="pg-visual pv-k"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Orbit</span>
+      <span class="pg-meta-year">2020</span>
+    </div>
+  </div>
+
+  <!-- Row 6: SM + XL -->
+  <div class="pg-item pg-item-sm reveal stagger-4"
+       data-title="Form Study #7" data-year="2020" data-category="painting">
+    <div class="pg-visual pv-l"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Form Study #7</span>
+      <span class="pg-meta-year">2020</span>
+    </div>
+  </div>
+
+  <div class="pg-item pg-item-xl reveal stagger-5"
+       data-title="Spectrum" data-year="2019" data-category="illustration">
+    <div class="pg-visual pv-a" style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 40%, #24243e 100%);"></div>
+    <div class="pg-meta">
+      <span class="pg-meta-title">Spectrum</span>
+      <span class="pg-meta-year">2019</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left">&copy; 2026 Kyle Watson</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
+    <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+<script>
+// ─── CUSTOM CURSOR ───
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .pg-item').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+// ─── MENU OVERLAY ───
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuClose = document.getElementById('menuClose');
+
+menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
+menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
+
+// ─── SCROLL REVEAL ───
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ─── FILTER ───
+const filterBtns = document.querySelectorAll('.filter-btn');
+const allItems = document.querySelectorAll('.pg-item');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.filter;
+    allItems.forEach(item => {
+      if (cat === 'all' || item.dataset.category === cat) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+
+// ─── LIGHTBOX ───
+const lightbox    = document.getElementById('lightbox');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev  = document.getElementById('lightboxPrev');
+const lightboxNext  = document.getElementById('lightboxNext');
+const lightboxVisual = document.getElementById('lightboxVisual');
+const lightboxTitle  = document.getElementById('lightboxTitle');
+const lightboxYear   = document.getElementById('lightboxYear');
+
+// Build ordered list of visible items
+function getVisibleItems() {
+  return Array.from(document.querySelectorAll('.pg-item')).filter(el => el.style.display !== 'none');
+}
+
+let currentIndex = 0;
+
+function openLightbox(item, items) {
+  currentIndex = items.indexOf(item);
+
+  // Copy the pg-visual's computed background into the lightbox visual
+  const visual = item.querySelector('.pg-visual');
+  if (visual) {
+    const style = getComputedStyle(visual);
+    lightboxVisual.style.background = style.background;
+    lightboxVisual.style.backgroundImage = style.backgroundImage;
+  }
+
+  lightboxTitle.textContent = item.dataset.title || '';
+  lightboxYear.textContent  = item.dataset.year || '';
+
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showAdjacentItem(dir) {
+  const items = getVisibleItems();
+  currentIndex = (currentIndex + dir + items.length) % items.length;
+  openLightbox(items[currentIndex], items);
+}
+
+// Attach click to each item
+allItems.forEach(item => {
+  item.style.cursor = 'pointer';
+  item.addEventListener('click', () => {
+    openLightbox(item, getVisibleItems());
+  });
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightboxPrev.addEventListener('click', () => showAdjacentItem(-1));
+lightboxNext.addEventListener('click', () => showAdjacentItem(1));
+
+// Backdrop close
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft')  showAdjacentItem(-1);
+  if (e.key === 'ArrowRight') showAdjacentItem(1);
+});
+</script>
+
+</body>
+</html>
