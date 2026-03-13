@@ -25,9 +25,21 @@ body { background: var(--bg); color: var(--text-primary); font-family: var(--fon
 img { display: block; max-width: 100%; }
 nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
 .nav-name { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; text-decoration: none; }
-.nav-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; opacity: 0.5; text-decoration: none; transition: opacity 0.2s; }
-.nav-back:hover { opacity: 1; }
+.nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
+
+/* ─── FULLSCREEN MENU ─── */
+.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-overlay.open { opacity: 1; pointer-events: all; }
+.menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
+.menu-close:hover { color: var(--text-primary); }
+.menu-links { list-style: none; }
+.menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
+.menu-link:hover { color: var(--accent); padding-right: 1rem; }
 .project-header { padding: 8rem 3rem 3rem; border-bottom: 1px solid var(--border); }
+.header-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.header-back a { color: var(--text-dim); text-decoration: none; transition: color 0.3s ease; }
+.header-back a:hover { color: var(--text-secondary); }
+.header-back .sep { opacity: 0.3; }
 .header-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
 .header-title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 5rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); }
 .hero-video { background: var(--bg); padding: 0 3rem; }
@@ -99,10 +111,26 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 <nav class="top">
   <a href="index.html" class="nav-name">KYLE WATSON</a>
-  <a href="index.html" class="nav-back">← All Work</a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
 </nav>
 
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" id="menuClose" aria-label="Close menu">CLOSE</button>
+  <div class="menu-content">
+    <ul class="menu-links">
+      <li><a href="index.html#work" class="menu-link">Work</a></li>
+      <li><a href="all-work.html" class="menu-link">Archive</a></li>
+      <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="index.html#about" class="menu-link">About</a></li>
+      <li><a href="index.html#contact" class="menu-link">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
 <header class="project-header">
+  <div class="header-back">
+    <a href="all-work.html">← Back</a>
+  </div>
   <div class="header-tags"><!-- TODO: tags --></div>
   <h1 class="header-title">IBM Open Minds</h1>
 </header>
@@ -182,5 +210,15 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuClose = document.getElementById('menuClose');
+menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
+menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
+menuOverlay.querySelectorAll('.menu-link').forEach(link => {
+  link.addEventListener('click', () => menuOverlay.classList.remove('open'));
+});
+</script>
 </body>
 </html>

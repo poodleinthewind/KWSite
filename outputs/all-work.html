@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Work — Kyle Watson</title>
+<title>Archive — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -28,8 +28,16 @@ body { background: var(--bg); color: var(--text-primary); font-family: var(--fon
 /* ─── NAV ─── */
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
 .nav-name { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; text-decoration: none; }
-.nav-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; opacity: 0.5; text-decoration: none; transition: opacity 0.2s; }
-.nav-back:hover { opacity: 1; }
+.nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
+
+/* ─── FULLSCREEN MENU ─── */
+.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-overlay.open { opacity: 1; pointer-events: all; }
+.menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
+.menu-close:hover { color: var(--text-primary); }
+.menu-links { list-style: none; }
+.menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
+.menu-link:hover { color: var(--accent); padding-right: 1rem; }
 
 /* ─── PAGE HEADER ─── */
 .page-header {
@@ -167,6 +175,11 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
 .project-arrow svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .project-card:hover .project-arrow { opacity: 1; transform: translateY(0); }
 
+/* THUMBNAIL & HOVER VIDEO */
+.project-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.project-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; opacity: 0; transition: opacity 0.4s ease; }
+.project-card:hover .project-video { opacity: 1; }
+
 /* Hidden when filtered out */
 .project-card.hidden { display: none; }
 
@@ -202,16 +215,27 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
 
 <nav>
   <a href="index.html" class="nav-name">KYLE WATSON</a>
-  <a href="index.html" class="nav-back">← Back</a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
 </nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" id="menuClose" aria-label="Close menu">CLOSE</button>
+  <div class="menu-content">
+    <ul class="menu-links">
+      <li><a href="index.html#work" class="menu-link">Work</a></li>
+      <li><a href="all-work.html" class="menu-link">Archive</a></li>
+      <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="index.html#about" class="menu-link">About</a></li>
+      <li><a href="index.html#contact" class="menu-link">Contact</a></li>
+    </ul>
+  </div>
+</div>
 
 <header class="page-header">
   <div class="page-header-label">
     <a href="index.html">← Back</a>
-    <span class="sep">/</span>
-    <span>All Work</span>
   </div>
-  <h1 class="page-title">All Work</h1>
+  <h1 class="page-title">Archive</h1>
   <p class="page-desc">Fifteen years across motion, brand, AI, and experiential. Directed for Google, IBM, YouTube, Palo Alto Networks, and more.</p>
 </header>
 
@@ -226,22 +250,26 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
 
 <div class="projects-grid">
 
-  <!-- 1: large — CoreWeave x Aston Martin F1 -->
+  <!-- 010: CoreWeave x Aston Martin F1 -->
   <a href="project-coreweave-aston-martin.html" class="project-card size-large" data-categories="ai 3d design">
-    <span class="project-index">1</span>
+    <span class="project-index">010</span>
     <div class="project-visual pv-1"><div class="shape"></div></div>
+    <img class="project-thumb" src="https://kyfolio.b-cdn.net/010_Coreweave/video/thumb.jpg" alt="">
+    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4"></video>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">3D</span></div>
       <div class="project-title">CoreWeave x Aston Martin F1</div>
-      <div class="project-client">Asteria Film — Hybrid AI brand film</div>
+      <div class="project-client">Asteria Film</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 2: medium — Moonvalley: Marey -->
+  <!-- 020: Moonvalley: Marey -->
   <a href="project-moonvalley-marey.html" class="project-card size-medium" data-categories="ai motion">
-    <span class="project-index">2</span>
+    <span class="project-index">020</span>
     <div class="project-visual pv-2"><div class="shape"></div></div>
+    <img class="project-thumb" src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="">
+    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/020_Marey/video/marey_launch_v1.mp4" data-start="10" data-end="26"></video>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">Film</span></div>
       <div class="project-title">Moonvalley: Marey</div>
@@ -250,33 +278,44 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 3: medium — New Landscapes -->
-  <a href="project-new-landscapes.html" class="project-card size-medium" data-categories="ai motion 3d">
-    <span class="project-index">3</span>
+  <!-- 030: Mirror State -->
+  <a href="project-mirror-state.html" class="project-card size-medium" data-categories="ai design">
+    <span class="project-index">030</span>
+    <div class="project-visual pv-6"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Design</span></div>
+      <div class="project-title">Mirror State</div>
+      <div class="project-client"></div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 040: New Landscapes -->
+  <a href="project-new-landscapes.html" class="project-card size-large" data-categories="ai motion 3d">
+    <span class="project-index">040</span>
     <div class="project-visual pv-3"><div class="shape"></div></div>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">3D</span><span class="project-tag">Motion</span></div>
       <div class="project-title">New Landscapes</div>
-      <div class="project-client">Palo Alto Networks — Godfrey Dadich &amp; Partners</div>
+      <div class="project-client">Palo Alto Networks</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 4: large — Prediction Machines -->
-  <a href="project-prediction-machines.html" class="project-card size-large" data-categories="ai motion design">
-    <span class="project-index">4</span>
-    <div class="project-visual pv-4"><div class="shape"></div></div>
+  <!-- 050: Spotify -->
+  <a href="#" class="project-card size-small" data-categories="motion design" style="pointer-events:none;opacity:0.4;">
+    <span class="project-index">050</span>
+    <div class="project-visual pv-5"><div class="shape"></div></div>
     <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Motion</span></div>
-      <div class="project-title">Prediction Machines</div>
-      <div class="project-client"><!-- TODO --></div>
+      <div class="project-tags"><span class="project-tag">Coming Soon</span></div>
+      <div class="project-title">Spotify</div>
+      <div class="project-client">Spotify</div>
     </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 5: small — IBM Open Minds -->
+  <!-- 060: IBM Open Minds -->
   <a href="project-ibm-open-minds.html" class="project-card size-small" data-categories="motion design">
-    <span class="project-index">5</span>
+    <span class="project-index">060</span>
     <div class="project-visual pv-5"><div class="shape"></div></div>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
@@ -286,45 +325,33 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 6: small — Mirror State -->
-  <a href="project-mirror-state.html" class="project-card size-small" data-categories="ai design">
-    <span class="project-index">6</span>
-    <div class="project-visual pv-6"><div class="shape"></div></div>
+  <!-- 070: Prediction Machines -->
+  <a href="project-prediction-machines.html" class="project-card size-large" data-categories="ai motion design">
+    <span class="project-index">070</span>
+    <div class="project-visual pv-4"><div class="shape"></div></div>
     <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Design</span></div>
-      <div class="project-title">Mirror State</div>
-      <div class="project-client"><!-- TODO --></div>
+      <div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Motion</span></div>
+      <div class="project-title">Prediction Machines</div>
+      <div class="project-client"></div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 7: large — Google Next '19 -->
-  <a href="project-google-next.html" class="project-card size-large" data-categories="experiential motion design">
-    <span class="project-index">7</span>
-    <div class="project-visual pv-7"><div class="shape"></div></div>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Experiential</span><span class="project-tag">Motion</span><span class="project-tag">Design</span></div>
-      <div class="project-title">Google Next '19</div>
-      <div class="project-client">Google — AdAge Best Experiential 2019</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 8: medium — Unity -->
+  <!-- 080: Unity -->
   <a href="project-unity.html" class="project-card size-medium" data-categories="motion design">
-    <span class="project-index">8</span>
+    <span class="project-index">080</span>
     <div class="project-visual pv-8"><div class="shape"></div></div>
     <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Design</span><span class="project-tag">Brand</span></div>
+      <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Design</span></div>
       <div class="project-title">Unity</div>
       <div class="project-client">InterSystems</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 9: medium — YouTube Forge -->
+  <!-- 090: YouTube Forge -->
   <a href="project-youtube-forge.html" class="project-card size-medium" data-categories="motion design experiential">
-    <span class="project-index">9</span>
+    <span class="project-index">090</span>
     <div class="project-visual pv-9"><div class="shape"></div></div>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
@@ -334,26 +361,96 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 10: large — Google Groove Around the Globe -->
-  <a href="project-google-groove.html" class="project-card size-large" data-categories="experiential motion">
-    <span class="project-index">10</span>
+  <!-- 100: Home for Dinner -->
+  <a href="project-home-for-dinner.html" class="project-card size-small" data-categories="motion advertising">
+    <span class="project-index">100</span>
     <div class="project-visual pv-10"><div class="shape"></div></div>
+    <img class="project-thumb" src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/video/thumb.jpg" alt="" style="object-fit: cover; transform: scale(1.15);">
+    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/video/INTS848_TrakCare_HomeForDinner_Agency_01.mp4" data-start="2" data-end="15" style="object-fit: cover; transform: scale(1.15);"></video>
     <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Experiential</span></div>
-      <div class="project-title">Google Groove Around the Globe</div>
+      <div class="project-tags"><span class="project-tag">Healthcare</span><span class="project-tag">Advertising</span></div>
+      <div class="project-title">Home for Dinner</div>
+      <div class="project-client">InterSystems</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 110: Google Next -->
+  <a href="project-google-next.html" class="project-card size-large" data-categories="experiential motion design">
+    <span class="project-index">110</span>
+    <div class="project-visual pv-7"><div class="shape"></div></div>
+    <img class="project-thumb" src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/opensource_thumb.jpg" alt="">
+    <img class="project-video" src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/opensource_01.gif" alt="Google Next" loading="lazy">
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Experiential</span><span class="project-tag">Motion</span><span class="project-tag">Design</span></div>
+      <div class="project-title">Google Next</div>
       <div class="project-client">Google</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 11: small — Sports Illustrated Sportsbook -->
+  <!-- 120: Sports Illustrated Sportsbook -->
   <a href="project-si-sportsbook.html" class="project-card size-small" data-categories="design motion">
-    <span class="project-index">11</span>
+    <span class="project-index">120</span>
     <div class="project-visual pv-11"><div class="shape"></div></div>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Design</span><span class="project-tag">Brand</span></div>
-      <div class="project-title">Sports Illustrated Sportsbook</div>
+      <div class="project-title">SI Sportsbook</div>
       <div class="project-client">Sports Illustrated</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 130: Groove Around the Globe -->
+  <a href="project-google-groove.html" class="project-card size-large" data-categories="experiential motion">
+    <span class="project-index">130</span>
+    <div class="project-visual pv-10"><div class="shape"></div></div>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Experiential</span><span class="project-tag">Motion</span></div>
+      <div class="project-title">Groove Around the Globe</div>
+      <div class="project-client">Google</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 140: Save Our Stories -->
+  <a href="project-save-our-stories.html" class="project-card size-medium" data-categories="design campaign">
+    <span class="project-index">140</span>
+    <div class="project-visual pv-12"><div class="shape"></div></div>
+    <img class="project-thumb" src="https://kyfolio.b-cdn.net/140_Save-Our-Stories/video/thumb.jpg" alt="">
+    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/140_Save-Our-Stories/video/sos_film.mp4" data-start="21" data-end="28"></video>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Art Direction</span><span class="project-tag">Campaign</span></div>
+      <div class="project-title">Save Our Stories</div>
+      <div class="project-client">826 Valencia</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 150: Barefoot Toe-llective -->
+  <a href="project-barefoot.html" class="project-card size-medium" data-categories="art-direction animation">
+    <span class="project-index">150</span>
+    <div class="project-visual pv-12"><div class="shape"></div></div>
+    <img class="project-thumb" src="https://kyfolio.b-cdn.net/150_Barefoot/video/thumb.jpg" alt="">
+    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/150_Barefoot/video/cooler_pour.mp4"></video>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Art Direction</span><span class="project-tag">Animation</span></div>
+      <div class="project-title">Barefoot Toe-llective</div>
+      <div class="project-client">Barefoot Wine</div>
+    </div>
+    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+  </a>
+
+  <!-- 170: Why I Work -->
+  <a href="project-wells-fargo.html" class="project-card size-small" data-categories="campaign documentary">
+    <span class="project-index">170</span>
+    <div class="project-visual pv-12"><div class="shape"></div></div>
+    <img class="project-thumb" src="https://kyfolio.b-cdn.net/170_Wells-Fargo/video/thumb.jpg" alt="">
+    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/170_Wells-Fargo/video/whyiwork_alexis.mov" data-start="2"></video>
+    <div class="project-overlay">
+      <div class="project-tags"><span class="project-tag">Brand Campaign</span><span class="project-tag">Documentary</span></div>
+      <div class="project-title">Why I Work</div>
+      <div class="project-client">Wells Fargo</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
@@ -379,6 +476,45 @@ document.addEventListener('mousemove', e => {
 document.querySelectorAll('a, .filter-btn').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+// ─── HOVER VIDEO ───
+document.querySelectorAll('.project-card').forEach(card => {
+  const video = card.querySelector('.project-video');
+  if (!video) return;
+
+  const startTime = parseFloat(video.dataset.start) || 0;
+  const endTime = parseFloat(video.dataset.end) || 0;
+
+  // Loop within start–end range
+  if (endTime > startTime) {
+    video.addEventListener('timeupdate', () => {
+      if (video.currentTime >= endTime) video.currentTime = startTime;
+    });
+  }
+
+  card.addEventListener('mouseenter', () => {
+    if (!video.src && video.dataset.src) {
+      video.src = video.dataset.src;
+    }
+    video.currentTime = startTime;
+    video.play().catch(() => {});
+  });
+
+  card.addEventListener('mouseleave', () => {
+    video.pause();
+    video.currentTime = startTime;
+  });
+});
+
+// ─── MENU ───
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuClose = document.getElementById('menuClose');
+menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
+menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
+menuOverlay.querySelectorAll('.menu-link').forEach(link => {
+  link.addEventListener('click', () => menuOverlay.classList.remove('open'));
 });
 
 // ─── FILTERS ───

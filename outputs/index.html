@@ -136,6 +136,7 @@ nav {
   z-index: 800;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   padding: 5rem 3rem 3rem;
   opacity: 0;
   pointer-events: none;
@@ -177,12 +178,13 @@ nav {
   color: var(--text-primary);
   text-decoration: none;
   line-height: 1.15;
-  transition: color 0.3s ease, padding-left 0.3s ease;
+  text-align: right;
+  transition: color 0.3s ease, padding-right 0.3s ease;
 }
 
 .menu-link:hover {
   color: var(--accent);
-  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* ─── HERO ─── */
@@ -540,6 +542,12 @@ section {
   opacity: 1;
   transform: translate(0, 0);
 }
+
+/* THUMBNAIL & HOVER VIDEO */
+.project-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.project-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; opacity: 0; transition: opacity 0.4s ease; }
+.project-card:hover .project-video { opacity: 1; }
+.project-visual { z-index: 0; }
 
 /* ─── ALL WORK CTA ─── */
 .all-work-cta {
@@ -992,6 +1000,9 @@ section {
   /* hero: push content below fixed nav */
   .hero { padding: 5rem 1.5rem 4rem; }
   .hero-philosophy { font-size: 1rem; }
+  /* morph text: contain wrapped text within filter bounds */
+  .morph-container { height: 4.5rem; width: 100%; }
+  .morph-text { white-space: normal; width: 100%; font-size: clamp(1.5rem, 6.2vw, 2.2rem); line-height: 1.2; }
   .projects-grid { grid-template-columns: 1fr; }
   .project-card.size-large,
   .project-card.size-medium,
@@ -1057,7 +1068,7 @@ section {
   <div class="menu-content">
     <ul class="menu-links">
       <li><a href="#work" class="menu-link">Work</a></li>
-      <li><a href="all-work.html" class="menu-link">All Work</a></li>
+      <li><a href="all-work.html" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
       <li><a href="#about" class="menu-link">About</a></li>
       <li><a href="#contact" class="menu-link">Contact</a></li>
@@ -1105,6 +1116,7 @@ section {
     <a href="project-coreweave-aston-martin.html" class="project-card size-large reveal stagger-1">
       <span class="project-index">1</span>
       <div class="project-visual pv-1"><div class="shape"></div></div>
+      <img class="project-thumb" src="https://kyfolio.b-cdn.net/010_Coreweave/video/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4">
       <div class="project-overlay">
         <div class="project-tags">
           <span class="project-tag">Generative AI</span>
@@ -1120,6 +1132,7 @@ section {
     <a href="project-moonvalley-marey.html" class="project-card size-medium reveal stagger-2">
       <span class="project-index">2</span>
       <div class="project-visual pv-2"><div class="shape"></div></div>
+      <img class="project-thumb" src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/020_Marey/video/marey_launch_v1.mp4" data-start="10" data-end="26">
       <div class="project-overlay">
         <div class="project-tags">
           <span class="project-tag">Generative AI</span>
@@ -1191,7 +1204,7 @@ section {
 <section id="archive" style="padding: 0;">
   <div class="all-work-cta reveal">
     <a href="all-work.html" class="all-work-link">
-      <span class="all-work-text">All Work</span>
+      <span class="all-work-text">Archive</span>
       <span class="all-work-arrow">→</span>
     </a>
   </div>
@@ -1499,6 +1512,42 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
   if (e.key === 'ArrowLeft') prevLightbox();
   if (e.key === 'ArrowRight') nextLightbox();
+});
+
+// ─── HOVER VIDEO ───
+document.querySelectorAll('.project-thumb[data-video]').forEach(thumb => {
+  const card = thumb.closest('.project-card');
+  const startTime = parseFloat(thumb.dataset.start) || 0;
+  const endTime = parseFloat(thumb.dataset.end) || 0;
+  let video = null;
+
+  card.addEventListener('mouseenter', () => {
+    if (!video) {
+      video = document.createElement('video');
+      video.className = 'project-video';
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.src = thumb.dataset.video;
+      thumb.after(video);
+      if (endTime > startTime) {
+        video.addEventListener('timeupdate', () => {
+          if (video.currentTime >= endTime) video.currentTime = startTime;
+        });
+      }
+    }
+    video.currentTime = startTime;
+    video.play().catch(() => {});
+    video.style.opacity = '1';
+  });
+
+  card.addEventListener('mouseleave', () => {
+    if (video) {
+      video.pause();
+      video.currentTime = startTime;
+      video.style.opacity = '0';
+    }
+  });
 });
 
 // ─── PROJECT CARD PARALLAX ───

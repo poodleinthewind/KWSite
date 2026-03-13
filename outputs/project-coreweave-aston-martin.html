@@ -27,18 +27,32 @@ img { display: block; max-width: 100%; }
 /* NAV */
 nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
 .nav-name { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; text-decoration: none; }
-.nav-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; opacity: 0.5; text-decoration: none; transition: opacity 0.2s; }
-.nav-back:hover { opacity: 1; }
+.nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
+
+/* ─── FULLSCREEN MENU ─── */
+.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-overlay.open { opacity: 1; pointer-events: all; }
+.menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
+.menu-close:hover { color: var(--text-primary); }
+.menu-links { list-style: none; }
+.menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
+.menu-link:hover { color: var(--accent); padding-right: 1rem; }
 
 /* PROJECT HEADER */
 .project-header { padding: 8rem 3rem 3rem; border-bottom: 1px solid var(--border); }
+.header-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.header-back a { color: var(--text-dim); text-decoration: none; transition: color 0.3s ease; }
+.header-back a:hover { color: var(--text-secondary); }
+.header-back .sep { opacity: 0.3; }
 .header-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
 .header-title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 5rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); }
 
 /* HERO VIDEO */
 .hero-video { background: var(--bg); padding: 0 3rem 0; }
 .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; }
+.video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+video { display: block; max-width: 100%; }
 .video-wrap .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0d0d 0%, var(--project-color) 100%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
 
 /* INTRO */
@@ -150,11 +164,27 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 <nav class="top">
   <a href="index.html" class="nav-name">KYLE WATSON</a>
-  <a href="index.html" class="nav-back">← All Work</a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
 </nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" id="menuClose" aria-label="Close menu">CLOSE</button>
+  <div class="menu-content">
+    <ul class="menu-links">
+      <li><a href="index.html#work" class="menu-link">Work</a></li>
+      <li><a href="all-work.html" class="menu-link">Archive</a></li>
+      <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="index.html#about" class="menu-link">About</a></li>
+      <li><a href="index.html#contact" class="menu-link">Contact</a></li>
+    </ul>
+  </div>
+</div>
 
 <!-- ══ PROJECT HEADER ══ -->
 <header class="project-header">
+  <div class="header-back">
+    <a href="all-work.html">← Back</a>
+  </div>
   <div class="header-tags">
     <span class="tag">Generative AI</span>
     <span class="tag">3D</span>
@@ -170,22 +200,17 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 ══════════════════════════════════════════════════════ -->
 <div class="hero-video">
   <div class="video-wrap">
-    <!--
-    <iframe
-      src="https://iframe.mediadelivery.net/embed/LIBRARY_ID/VIDEO_ID?autoplay=0&loop=1&muted=1&preload=true"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-      allowfullscreen loading="lazy">
-    </iframe>
-    -->
-    <div class="ph">CoreWeave x Aston Martin F1</div>
+    <video controls playsinline poster="https://kyfolio.b-cdn.net/010_Coreweave/video/thumb.jpg">
+      <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4" type="video/mp4">
+    </video>
   </div>
 </div>
 
 <!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>CoreWeave powers some of the most compute-intensive AI workloads on the planet. When they partnered with the Aston Martin Aramco F1 team, the brief was to make that infrastructure feel alive — to translate raw processing power into something visceral and visually coherent.</p>
-    <p>The work was genuinely hybrid: generative AI pipelines feeding 3D environments, hand-crafted in After Effects, then pushed through graphic design systems that had to hold up at broadcast quality. No single tool owned it. Every frame was a negotiation between the machine and the hand.</p>
+    <p>An AI brand film for CoreWeave and the Aston Martin Aramco F1 team. The brief was to make cloud infrastructure feel alive — to translate raw processing power into something visceral and cinematic.</p>
+    <p>Art direction, 3D, and animation across Cinema 4D, Octane, Redshift, MoonValley Marey, Cavalry, ComfyUI, and After Effects. Generative AI pipelines feeding 3D environments, hand-finished frame by frame.</p>
   </div>
   <aside class="meta">
     <div class="meta-block">
@@ -194,11 +219,15 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     </div>
     <div class="meta-block">
       <div class="meta-label">Role</div>
-      <div class="meta-value">Animator & Art Director</div>
+      <div class="meta-value">Art Director, 3D Lead, Animator</div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Studio</div>
       <div class="meta-value">Asteria Film</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Tools</div>
+      <div class="meta-value">Cinema 4D, Octane Render, Redshift, MoonValley Marey, Cavalry, ComfyUI, After Effects, Photoshop, Figma</div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Year</div>
@@ -207,10 +236,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   </aside>
 </div>
 
-<!-- ══ FULL-BLEED MEDIA ══
-  Swap .ph-rect for an image, GIF, or video when ready.
-══ -->
-<div class="bleed"><div class="ph-rect"></div></div>
+<!-- ══ FULL-BLEED ══ -->
+<div class="bleed"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_01.jpg" alt="CoreWeave UI frame" loading="lazy"></div>
 
 <!-- ══ PROCESS ══ -->
 <div class="section">
@@ -218,38 +245,244 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
   <div class="split">
     <div class="split-text">
-      <h3>Designing with the machine</h3>
-      <p>Generative AI wasn't a shortcut — it was a collaborator. We built custom pipelines that produced raw material: texture, light, motion. Then the real work started: curating, directing, and compositing those outputs into something that felt intentional rather than accidental.</p>
+      <h3>Mirror</h3>
+      <p>Reflective CG environments built to visualize CoreWeave's processing power. The mirror sequences used Octane and Redshift to create infinite-depth compositions — light bouncing through layers of data.</p>
     </div>
     <div class="split-media">
-      <!-- <img src="..." alt="Generative pipeline stills"> -->
-      <div class="ph"></div>
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Mirror/mirror_isolated.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
   <div class="split flip">
     <div class="split-text">
-      <h3>Speed and precision at F1 scale</h3>
-      <p>Formula 1 is defined by hundredths of a second. The visual language had to carry that tension — 3D environments built for speed, graphic systems designed for clarity under pressure. Every cut, every transition had to feel like a pit stop: exact and fast.</p>
+      <h3>Mirror &mdash; Process</h3>
+      <p>Breaking down the mirror comp. Layers of reflection, refraction, and volumetric light stacked and timed to the edit. The raw process clips show how each element was isolated before final compositing in After Effects.</p>
     </div>
     <div class="split-media">
-      <!-- <img src="..." alt="3D environment frames"> -->
-      <div class="ph"></div>
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Mirror/mirror_comp_v01.mov" type="video/quicktime">
+      </video>
     </div>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>Wind Tunnel</h3>
+      <p>Smoke simulations and wind tunnel visualizations tying the F1 aerodynamics story to CoreWeave's compute. Fluid dynamics rendered at high resolution, capturing the speed and precision of both worlds.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/SmokeTunnel/wind_tunnel_01.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="split flip">
+    <div class="split-text">
+      <h3>Wind Tunnel &mdash; Speed Tests</h3>
+      <p>Iterating on smoke density, particle speed, and camera movement. These tests determined how fast the simulations could run before the aerodynamic detail broke down.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/SmokeTunnel/wind_tunnel_smokespeed_01.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>CRT &amp; Signal</h3>
+      <p>Analog textures on digital infrastructure. CRT scan lines and signal noise layered over data visualizations to ground the tech in something tactile and physical.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/CRT/crt_01.mov" type="video/quicktime">
+      </video>
+    </div>
+  </div>
+
+  <div class="split flip">
+    <div class="split-text">
+      <h3>CRT &mdash; Extended</h3>
+      <p>Longer CRT sequences exploring different degradation patterns — the visual language of data moving through hardware. Each pass was a different combination of interference and resolution.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/CRT/crt_02.mov" type="video/quicktime">
+      </video>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>Miniatures</h3>
+      <p>Tilt-shift 3D renders of the Aston Martin at miniature scale — a visual device to make the massive feel intimate. Each angle composed to feel like a diorama you could hold in your hand.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_01.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="split flip">
+    <div class="split-text">
+      <h3>Miniature &mdash; Depth</h3>
+      <p>Depth pass renders used to control focus and atmospheric haze in the miniature sequences. The depth maps let us dial the tilt-shift effect precisely in post.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_01_depth_v02.mov" type="video/quicktime">
+      </video>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>Tokyo Prism</h3>
+      <p>A prismatic light study set in an urban environment. Refracted beams of data rendered through glass and metal — testing how CoreWeave's visual identity could live in the physical world.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Mirror/tokyo_prism.mov" type="video/quicktime">
+      </video>
+    </div>
+  </div>
+
+  <div class="split flip">
+    <div class="split-text">
+      <h3>Boxes</h3>
+      <p>Geometric primitives choreographed to represent data architecture. Simple forms stacking, shifting, and reorganizing — the visual metaphor for compute infrastructure at work.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Boxes/boxes_process.mov" type="video/quicktime">
+      </video>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>Smoke &amp; X-Ray</h3>
+      <p>Volumetric smoke passes combined with boolean geometry renders. The x-ray look stripped the car back to its structural bones — pure engineering visible through computational fog.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/smoke_xray_boole.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="split flip">
+    <div class="split-text">
+      <h3>Desert</h3>
+      <p>An environmental comp placing the F1 car in a desert landscape — testing how the visual system translated outside the track. Heat shimmer, dust, and light.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Desert/desert_comp_v01.mov" type="video/quicktime">
+      </video>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>Moon</h3>
+      <p>Lunar surface comp — pushing the visual language to its extreme. If CoreWeave's compute can take you anywhere, why not the moon. An exploration that tested the boundaries of the brand world.</p>
+    </div>
+    <div class="split-media">
+      <video autoplay muted loop playsinline>
+        <source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Moon/moon_comp_v01.mov" type="video/quicktime">
+      </video>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROCESS — DATA & UI ══ -->
+<div class="section">
+  <div class="section-label">Process &mdash; Data &amp; UI</div>
+  <div class="gallery g-2">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/loader_comp.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/datawave.mov" type="video/quicktime"></video></div>
+  </div>
+  <div class="gallery g-3" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/smoke_01.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/boole.mov" type="video/quicktime"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/windsim_v01.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/wind_tunnel_test.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Mirror/mirror_process.mov" type="video/quicktime"></video></div>
+  </div>
+</div>
+
+<!-- ══ MINIATURES ══ -->
+<div class="section">
+  <div class="section-label">Miniatures &mdash; All Angles</div>
+  <div class="gallery g-3">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_02.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_03.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_04.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_05.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_06.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-3" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_07.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_08.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_09.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_10.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_11.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-3" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_12.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_13.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_14.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_15.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_16.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-3" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_17.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_18.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_19.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_20.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_21.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-3" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_22.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_23.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_24.mp4" type="video/mp4"></video></div>
+  </div>
+  <div class="gallery g-1-2" style="margin-top:.75rem">
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_25.mp4" type="video/mp4"></video></div>
+    <div class="g-item std"><video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover"><source src="https://kyfolio.b-cdn.net/010_Coreweave/video/Miniature/miniature_01_depth_v03.mov" type="video/quicktime"></video></div>
   </div>
 </div>
 
 <!-- ══ STILLS ══ -->
 <div class="section">
   <div class="section-label">Stills</div>
-  <div class="gallery g-2-1">
-    <div class="g-item wide"><div class="ph"></div></div>
-    <div class="g-item tall"><div class="ph"></div></div>
+  <div class="gallery g-2">
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_02.jpg" alt="UI frame" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_03.jpg" alt="UI frame" loading="lazy"></div>
   </div>
   <div class="gallery g-3" style="margin-top:.75rem">
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_04.jpg" alt="UI frame" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_05.jpg" alt="UI frame" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_06.jpg" alt="UI frame" loading="lazy"></div>
+  </div>
+  <div class="gallery g-1-2" style="margin-top:.75rem">
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/wirebuild_frame.png" alt="Wireframe build" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_01.jpg" alt="UI frame hero" loading="lazy"></div>
   </div>
 </div>
 
@@ -257,11 +490,9 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <div class="section">
   <div class="section-label">Credits</div>
   <div class="credits">
-    <div><div class="credit-role">Animator & Art Director</div><div class="credit-name">Kyle Watson</div></div>
+    <div><div class="credit-role">Art Director, 3D Lead, Animator</div><div class="credit-name">Kyle Watson</div></div>
     <div><div class="credit-role">Studio</div><div class="credit-name">Asteria Film</div></div>
     <div><div class="credit-role">Client</div><div class="credit-name">CoreWeave x Aston Martin F1</div></div>
-    <div><div class="credit-role">3D</div><div class="credit-name">—</div></div>
-    <div><div class="credit-role">Producer</div><div class="credit-name">—</div></div>
     <div><div class="credit-role">Year</div><div class="credit-name">2025</div></div>
   </div>
 </div>
@@ -270,7 +501,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <nav class="pagination">
   <a href="index.html" class="page-item prev">
     <span class="page-dir">← Back</span>
-    <span class="page-title">All Work</span>
+    <span class="page-title">Archive</span>
   </a>
   <a href="project-moonvalley-marey.html" class="page-item next">
     <span class="page-dir">Next →</span>
@@ -287,5 +518,15 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   </div>
 </footer>
 
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuClose = document.getElementById('menuClose');
+menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
+menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
+menuOverlay.querySelectorAll('.menu-link').forEach(link => {
+  link.addEventListener('click', () => menuOverlay.classList.remove('open'));
+});
+</script>
 </body>
 </html>

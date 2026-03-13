@@ -132,7 +132,7 @@ nav {
   z-index: 600;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
   padding: 3rem;
   opacity: 0;
@@ -176,11 +176,12 @@ nav {
   color: var(--text-primary);
   text-decoration: none;
   line-height: 1.1;
+  text-align: right;
   opacity: 0.25;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, padding-right 0.3s ease;
 }
 
-.menu-link:hover { opacity: 1; }
+.menu-link:hover { opacity: 1; padding-right: 1rem; }
 
 /* ─── PAGE HEADER ─── */
 .play-header {

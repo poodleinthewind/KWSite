@@ -25,43 +25,75 @@ body { background: var(--bg); color: var(--text-primary); font-family: var(--fon
 img { display: block; max-width: 100%; }
 nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
 .nav-name { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; text-decoration: none; }
-.nav-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; opacity: 0.5; text-decoration: none; transition: opacity 0.2s; }
-.nav-back:hover { opacity: 1; }
+.nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
+
+/* ─── FULLSCREEN MENU ─── */
+.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-overlay.open { opacity: 1; pointer-events: all; }
+.menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
+.menu-close:hover { color: var(--text-primary); }
+.menu-links { list-style: none; }
+.menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
+.menu-link:hover { color: var(--accent); padding-right: 1rem; }
 .project-header { padding: 8rem 3rem 3rem; border-bottom: 1px solid var(--border); }
+.header-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.header-back a { color: var(--text-dim); text-decoration: none; transition: color 0.3s ease; }
+.header-back a:hover { color: var(--text-secondary); }
+.header-back .sep { opacity: 0.3; }
 .header-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
 .header-title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 5rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); }
 .hero-video { background: var(--bg); padding: 0 3rem; }
-.video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; }
+.video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; overflow: hidden; }
+.video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-.video-wrap .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0d0d 0%, var(--project-color) 100%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
-.intro { padding: 5rem 3rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 6rem; border-bottom: 1px solid var(--border); }
-.intro-text { font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; max-width: 580px; }
+.intro { padding: 3rem 3rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 4rem 1px 1fr; gap: 0; align-items: start; min-height: 20rem; }
+.intro-text { font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
 .intro-text p + p { margin-top: 1.2rem; }
-.meta { padding-top: 0.25rem; }
-.meta-block { margin-bottom: 2.25rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--border); }
-.meta-block:last-child { border-bottom: none; margin-bottom: 0; }
+.intro-divider { grid-column: 3; background: var(--border); width: 1px; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.meta { grid-column: 4; display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 0; padding-left: 0; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.meta-block { padding: 1.2rem 1.5rem; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.meta-block:nth-child(odd) { border-left: none; }
+.meta-block:last-child { border-bottom: none; }
+.meta-block:nth-last-child(2):nth-child(odd) { border-bottom: none; }
 .meta-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.6rem; }
-.meta-value { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; line-height: 1.7; }
+.meta-value { font-size: 0.85rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
 .meta-value strong { color: var(--text-primary); font-weight: 400; display: block; }
 .tag { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 2px; font-weight: 500; background: linear-gradient(90deg, #f4845f 0%, #e8637a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; border: 1px solid rgba(244,132,95,0.3); }
 .bleed { width: 100%; overflow: hidden; }
-.bleed .ph-rect { height: 60vh; min-height: 380px; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
+.bleed img { width: 100%; height: 60vh; min-height: 380px; object-fit: cover; }
 .section { padding: 5rem 3rem; border-bottom: 1px solid var(--border); }
 .section-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 3rem; }
+.year-label { font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 300; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
 .split:last-child { margin-bottom: 0; }
 .split.flip { direction: rtl; }
 .split.flip > * { direction: ltr; }
+.split-text { padding-right: 3rem; }
+.split.flip .split-text { padding-right: 3rem; padding-left: 0; }
 .split-text h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
 .split-text p { font-size: 0.9rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
 .split-media { aspect-ratio: 4/3; overflow: hidden; background: var(--bg-card); position: relative; }
-.split-media .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
+.split-media img { width: 100%; height: 100%; object-fit: cover; }
+.split-media.gif { aspect-ratio: auto; overflow: visible; background: none; }
+.split-media.gif img { width: 100%; height: auto; object-fit: contain; }
 .gallery { display: grid; gap: 0.75rem; }
 .g-2 { grid-template-columns: 1fr 1fr; }
 .g-3 { grid-template-columns: repeat(3, 1fr); }
+.g-4 { grid-template-columns: repeat(4, 1fr); }
 .g-item { overflow: hidden; position: relative; background: var(--bg-card); }
 .g-item.std { aspect-ratio: 4/3; }
-.g-item .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.28; }
+.g-item.wide { aspect-ratio: 16/9; }
+.g-item.gif-item { aspect-ratio: auto; overflow: visible; }
+.g-item img { width: 100%; height: 100%; object-fit: cover; }
+.g-item.gif-item img { height: auto; object-fit: contain; }
+.gallery.gif-gallery .g-item { aspect-ratio: auto; overflow: visible; }
+.gallery.gif-gallery .g-item img { height: auto; object-fit: contain; }
+.process-hero { width: 100%; }
+.process-hero img { width: 100%; height: auto; display: block; }
+.year-divider { padding: 3.5rem 3rem; text-align: center; border-bottom: 1px solid var(--border); position: relative; }
+.year-divider::before { content: ''; position: absolute; top: 0; left: 3rem; right: 3rem; height: 1px; background: linear-gradient(90deg, transparent, var(--text-dim), transparent); }
+.year-divider h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 0.5rem; }
+.year-divider .year-sub { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-dim); }
 .credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 4rem; }
 .credit-role { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.35rem; }
 .credit-name { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; }
@@ -77,21 +109,31 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .footer-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--text-dim); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
 .footer-links a:hover { color: var(--text-primary); }
 @media (max-width: 900px) {
-  .intro { grid-template-columns: 1fr; gap: 3rem; }
+  .intro { grid-template-columns: 1fr; min-height: auto; }
+  .intro-text { padding-right: 0; }
+  .intro-divider { display: none; }
+  .meta { display: none; }
   .split { grid-template-columns: 1fr; gap: 2.5rem; }
   .split.flip { direction: ltr; }
   .credits { grid-template-columns: 1fr 1fr; }
+  .g-4 { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
   nav.top { padding: 1.2rem 1.5rem; }
   .project-header { padding: 6rem 1.5rem 2.5rem; }
   .hero-video { padding: 0 1.5rem; }
   .intro, .section { padding: 3rem 1.5rem; }
-  .bleed .ph-rect { height: 40vh; min-height: 240px; }
+  .bleed img { height: 40vh; min-height: 240px; }
   .g-3 { grid-template-columns: 1fr 1fr; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .page-item { padding: 2rem 1.5rem; }
+  .year-divider { padding: 4rem 1.5rem; text-align: left; }
+  .year-divider h2 { text-align: left; }
+  .year-divider .year-sub { text-align: left; }
+  .split-text { padding-right: 0; }
+  .split.flip .split-text { padding-left: 0; }
+  .gallery.gif-gallery.g-2 { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -99,37 +141,54 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 <nav class="top">
   <a href="index.html" class="nav-name">KYLE WATSON</a>
-  <a href="index.html" class="nav-back">← All Work</a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
 </nav>
 
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" id="menuClose" aria-label="Close menu">CLOSE</button>
+  <div class="menu-content">
+    <ul class="menu-links">
+      <li><a href="index.html#work" class="menu-link">Work</a></li>
+      <li><a href="all-work.html" class="menu-link">Archive</a></li>
+      <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="index.html#about" class="menu-link">About</a></li>
+      <li><a href="index.html#contact" class="menu-link">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
 <header class="project-header">
+  <div class="header-back">
+    <a href="all-work.html">&larr; Back</a>
+  </div>
   <div class="header-tags">
     <span class="tag">Experiential</span>
     <span class="tag">Motion</span>
     <span class="tag">Design</span>
   </div>
-  <h1 class="header-title">Google Next '19</h1>
+  <h1 class="header-title">Google Next</h1>
 </header>
 
-<div class="hero-video">
-  <div class="video-wrap">
-    <!--
-    <iframe src="https://iframe.mediadelivery.net/embed/LIBRARY_ID/VIDEO_ID?autoplay=0&loop=1&muted=1&preload=true"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    -->
-    <div class="ph">Google Next</div>
-  </div>
+<!-- ─── HERO IMAGE ─── -->
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_05.jpg" alt="Google Next 2019 keynote stage" loading="eager" style="height: 75vh; min-height: 480px;">
 </div>
 
+<div class="year-divider">
+  <h2>Next &rsquo;19</h2>
+  <div class="year-sub">Google Cloud &mdash; San Francisco</div>
+</div>
+
+<!-- ─── INTRO ─── -->
 <div class="intro">
   <div class="intro-text">
-    <p>For my third year creative directing the content at Google Next we worked in tandem with Jorge Estrada and the gang at Ordinary Folks to concept and animate around the constantly changing stage narrative at Next '19.</p>
-    <p>This project was featured on <em>AdAge</em>'s list of best experiential for 2019.</p>
+    <p>For my third year creative directing the content at Google Next we worked in tandem with Jorge Estrada and the gang at Ordinary Folks to concept and animate around the constantly changing stage narrative at Next &rsquo;19. This project was featured on <em>AdAge</em>&rsquo;s list of best experiential for 2019.</p>
   </div>
-  <aside class="meta">
+  <div class="intro-divider"></div>
+  <div class="meta">
     <div class="meta-block">
       <div class="meta-label">Client</div>
-      <div class="meta-value"><strong>Google</strong></div>
+      <div class="meta-value"><strong>Google Cloud</strong></div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Role</div>
@@ -137,74 +196,193 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     </div>
     <div class="meta-block">
       <div class="meta-label">Agency</div>
-      <div class="meta-value">George P. Johnson</div>
+      <div class="meta-value">Jack Morton</div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Collaborators</div>
-      <div class="meta-value">Jorge Estrada<br>Ordinary Folks</div>
+      <div class="meta-value">Andy Babbitz, Jorge Estrada, Ordinary Folks, Camille Connolly</div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Year</div>
-      <div class="meta-value">2019</div>
+      <div class="meta-value">2018 &ndash; 2019</div>
     </div>
-  </aside>
+  </div>
 </div>
 
-<div class="bleed"><div class="ph-rect"></div></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!-- ─── NEXT '19 ─── -->
+<!-- ══════════════════════════════════════════════════ -->
 
 <div class="section">
-  <div class="section-label">Process</div>
+  <div class="section-label">Process &mdash; Next &rsquo;19</div>
+
   <div class="split">
     <div class="split-text">
       <h3>Building tools, not videos.</h3>
       <p>We learned from previous years that if we were going to have success with an animated show, we needed to create an asset library that was both simple and flexible.</p>
       <p>We concepted a plethora of visual metaphors based off of the rough scripts we had. Assets were then shuffled around until moments before Sundar took stage.</p>
     </div>
-    <div class="split-media"><div class="ph"></div></div>
+    <div class="split-media gif">
+      <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/opensource_01.gif" alt="Open source animation" loading="lazy">
+    </div>
   </div>
+
   <div class="split flip">
     <div class="split-text">
-      <h3>Curves, Arcs, Twists, Turns. . .</h3>
+      <h3>Curves, Arcs, Twists, Turns&hellip;</h3>
       <p>Designing the actual visuals was the easiest part of our job. The challenge was in creating a narrative thread between the dozens of disparate scripts and teams that would share the stage at Next.</p>
       <p>We helped the teams at Cloud shape their story arcs and distill them into something that would be easily digestible for the tens of thousands tuning-in.</p>
       <p>We were constantly storyboarding and sketching, using our simple shape language to illustrate vast concepts such as migration, security, and evolution.</p>
     </div>
-    <div class="split-media"><div class="ph"></div></div>
+    <div class="split-media gif">
+      <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/augmented_analytics.gif" alt="Augmented analytics animation" loading="lazy">
+    </div>
   </div>
 </div>
 
+<!-- ─── NEXT '19 STILLS ─── -->
 <div class="section">
-  <div class="section-label">Stills</div>
+  <div class="section-label">Stills &mdash; Next &rsquo;19</div>
+
   <div class="gallery g-3">
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/day1_01.jpg" alt="Next '19 day 1" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_01.jpg" alt="Next '19 event" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_07.jpg" alt="Next '19 stage" loading="lazy"></div>
   </div>
+
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_10.jpg" alt="Next '19 keynote" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_11.jpg" alt="Next '19 audience" loading="lazy"></div>
+  </div>
+
+</div>
+
+<!-- ─── PROCESS GIFS: '19 ─── -->
+<div class="section">
+  <div class="section-label">Process &mdash; Animation Explorations</div>
+
+  <div class="process-hero">
+    <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/process_perspectives.gif" alt="Perspectives process" loading="lazy">
+  </div>
+
+  <div class="process-hero" style="margin-top:2rem">
+    <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/process_positions.gif" alt="Positions process" loading="lazy">
+  </div>
+
+  <div class="process-hero" style="margin-top:2rem">
+    <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/process_vision.gif" alt="Vision process" loading="lazy">
+  </div>
+
+  <div class="gallery gif-gallery g-3" style="margin-top:3rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/serverless_intro.gif" alt="Serverless intro" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/opensource_02.gif" alt="Open source" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/grid.gif" alt="Grid animation" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ─── MORE '19 STILLS ─── -->
+<div class="section">
+  <div class="section-label">More &mdash; Next &rsquo;19</div>
+  <div class="gallery g-3">
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_08.jpg" alt="Next '19" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_14.jpg" alt="Next '19" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_16.jpg" alt="Next '19" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- ─── NEXT '18 ─── -->
+<!-- ══════════════════════════════════════════════════ -->
+
+<div class="year-divider">
+  <h2>Next &rsquo;18</h2>
+  <div class="year-sub">Google Cloud &mdash; San Francisco</div>
+</div>
+
+<!-- ─── BLEED: 2018 Keynote ─── -->
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/day0_01.jpg" alt="Google Next 2018 keynote stage" loading="lazy">
+</div>
+
+<!-- ─── INTRO '18 ─── -->
+<div class="intro">
+  <div class="intro-text">
+    <p>Every year Google Cloud Next is reinvented. In 2018 it was our job to break through the expected 16:9 format and tell a more dynamic story on four giant rotating LED cubes.</p>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="meta">
+    <div class="meta-block">
+      <div class="meta-label">Client</div>
+      <div class="meta-value"><strong>Google Cloud</strong></div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">Creative Director</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Agency</div>
+      <div class="meta-value">Jack Morton</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2018</div>
+    </div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-label">Credits</div>
-  <div class="credits">
-    <div><div class="credit-role">Creative Director</div><div class="credit-name">Kyle Watson</div></div>
-    <div><div class="credit-role">Animation</div><div class="credit-name">Jorge Estrada<br>Ordinary Folks</div></div>
-    <div><div class="credit-role">Client</div><div class="credit-name">Google</div></div>
-    <div><div class="credit-role">Agency</div><div class="credit-name">George P. Johnson</div></div>
-    <div><div class="credit-role">Press</div><div class="credit-name"><em>AdAge</em> Best Experiential 2019</div></div>
-    <div><div class="credit-role">Year</div><div class="credit-name">2019</div></div>
+  <div class="section-label">Process &mdash; Next &rsquo;18</div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>Before there were letters&hellip;</h3>
+      <p>There were symbols. The brand team at Google did a fantastic job designing a package of stylized glyphs that we translated across the four cubes to tell our story. A crop for a photo, an animated infographic, or a sweeping transition &mdash; it all started with this language.</p>
+    </div>
+    <div class="split-media gif">
+      <img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/timelapse_01.gif" alt="Cube timelapse" loading="lazy">
+    </div>
+  </div>
+
+  <div class="split flip">
+    <div class="split-text">
+      <h3>Making (and breaking)</h3>
+      <p>To create a system that works, you spend a lot of time breaking things. You can only find the &lsquo;do&rsquo;s&rsquo; when you spend a lot of time realizing the &lsquo;don&rsquo;ts&rsquo;.</p>
+      <p>We introduced broad rules and stress tested them all in one pipeline. A process that we were only able to discover through years of experience on this particular project.</p>
+    </div>
+    <div class="split-media gif">
+      <img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/grid_01.png" alt="Grid system" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- ─── NEXT '18 STILLS ─── -->
+<div class="section">
+  <div class="section-label">Stills &mdash; Next &rsquo;18</div>
+  <div class="gallery g-3">
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/day1_01.jpg" alt="Next '18 day 1" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/day1_02.jpg" alt="Next '18 day 1" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/event_02.jpg" alt="Next '18 event" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ─── VIDEO (Combined) ─── -->
+<div class="section">
+  <div class="section-label">Video</div>
+  <div style="width:100%;margin-bottom:2rem">
+    <video autoplay muted loop playsinline style="width:100%;display:block"><source src="https://kyfolio.b-cdn.net/110_Next/Next%202019/video/industrial_rev_v01.mp4" type="video/mp4"></video>
+  </div>
+  <div style="width:100%">
+    <video autoplay muted loop playsinline style="width:100%;display:block"><source src="https://kyfolio.b-cdn.net/110_Next/Next%202018/video/stacking_eval_03.mp4" type="video/mp4"></video>
   </div>
 </div>
 
 <nav class="pagination">
   <a href="project-mirror-state.html" class="page-item prev">
-    <span class="page-dir">← Previous</span>
+    <span class="page-dir">&larr; Previous</span>
     <span class="page-title">Mirror State</span>
   </a>
   <a href="project-unity.html" class="page-item next">
-    <span class="page-dir">Next →</span>
+    <span class="page-dir">Next &rarr;</span>
     <span class="page-title">Unity</span>
   </a>
 </nav>
@@ -217,5 +395,15 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuClose = document.getElementById('menuClose');
+menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
+menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
+menuOverlay.querySelectorAll('.menu-link').forEach(link => {
+  link.addEventListener('click', () => menuOverlay.classList.remove('open'));
+});
+</script>
 </body>
 </html>

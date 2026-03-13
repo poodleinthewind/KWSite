@@ -3,14 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wells Fargo — Experiential — Kyle Watson</title>
+<title>Why I Work — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root { --project-color: #d71e28; }
-/* ─── SWAP PER PROJECT ─── */
-/* --project-color: #hex; */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -25,27 +23,44 @@ html { scrollbar-width: thin; scrollbar-color: #2a2a2a var(--bg); }
 body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--bg); }
 img { display: block; max-width: 100%; }
+video { display: block; max-width: 100%; }
 
 /* NAV */
 nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
 .nav-name { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; text-decoration: none; }
-.nav-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; opacity: 0.5; text-decoration: none; transition: opacity 0.2s; }
-.nav-back:hover { opacity: 1; }
+.nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
+
+/* ─── FULLSCREEN MENU ─── */
+.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-overlay.open { opacity: 1; pointer-events: all; }
+.menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
+.menu-close:hover { color: var(--text-primary); }
+.menu-links { list-style: none; }
+.menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
+.menu-link:hover { color: var(--accent); padding-right: 1rem; }
+
+/* PROJECT HEADER */
+.project-header { padding: 8rem 3rem 3rem; border-bottom: 1px solid var(--border); }
+.header-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.header-back a { color: var(--text-dim); text-decoration: none; transition: color 0.3s ease; }
+.header-back a:hover { color: var(--text-secondary); }
+.header-back .sep { opacity: 0.3; }
+.header-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+.header-title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 5rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); }
 
 /* HERO VIDEO */
-.hero-video { padding-top: 4.5rem; background: #000; }
+.hero-video { background: var(--bg); padding: 0 3rem 0; }
 .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; }
-.video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-wrap .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0d0d 0%, var(--project-color) 100%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
 
 /* INTRO */
 .intro { padding: 5rem 3rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 6rem; border-bottom: 1px solid var(--border); }
-.intro-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1; margin-bottom: 2rem; }
 .intro-text { font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; max-width: 580px; }
 .intro-text p + p { margin-top: 1.2rem; }
 
 /* SIDEBAR META */
-.meta { padding-top: 0.5rem; }
+.meta { padding-top: 0.25rem; }
 .meta-block { margin-bottom: 2.25rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--border); }
 .meta-block:last-child { border-bottom: none; margin-bottom: 0; }
 .meta-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.6rem; }
@@ -54,10 +69,9 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.2rem; }
 .tag { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 2px; font-weight: 500; background: linear-gradient(90deg, #f4845f 0%, #e8637a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; border: 1px solid rgba(244,132,95,0.3); }
 
-/* FULL-BLEED (edge-to-edge) — video, image, or GIF */
+/* FULL-BLEED */
 .bleed { width: 100%; overflow: hidden; }
-.bleed img, .bleed gif { width: 100%; display: block; }
-.bleed .video-wrap { padding-bottom: 56.25%; }
+.bleed img { width: 100%; display: block; }
 .bleed .ph-rect { height: 60vh; min-height: 380px; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* SECTION WRAPPER */
@@ -65,19 +79,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .section:last-of-type { border-bottom: none; }
 .section-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 3rem; }
 
-/* NARRATIVE (standalone text, no image) */
+/* NARRATIVE */
 .narrative { max-width: 680px; }
 .narrative h3 { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
 .narrative p { font-size: 0.95rem; line-height: 1.95; color: var(--text-secondary); font-weight: 300; }
 .narrative p + p { margin-top: 1rem; }
 
-/* SINGLE IMAGE (contained with padding) */
-.img-block { margin-top: 2rem; }
-.img-block img { width: 100%; border-radius: 2px; }
-.img-block .ph { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; border-radius: 2px; }
-.img-caption { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--text-dim); margin-top: 0.75rem; }
-
-/* SPLIT ROW (text + media) */
+/* SPLIT ROW */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
 .split:last-child { margin-bottom: 0; }
 .split.flip { direction: rtl; }
@@ -86,8 +94,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .split-text p { font-size: 0.9rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
 .split-text p + p { margin-top: 1rem; }
 .split-media { aspect-ratio: 4/3; overflow: hidden; background: var(--bg-card); position: relative; }
-.split-media img, .split-media .ph { width: 100%; height: 100%; object-fit: cover; }
-.split-media .ph { background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
+.split-media img { width: 100%; height: 100%; object-fit: cover; }
+.split-media .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* GALLERY */
 .gallery { display: grid; gap: 0.75rem; }
@@ -136,104 +144,166 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .project-header { padding: 6rem 1.5rem 2.5rem; }
   .hero-video { padding: 0 1.5rem; }
   .intro, .section { padding: 3rem 1.5rem; }
-  .bleed .ph-rect { height: 40vh; min-height: 240px; }
   .g-3 { grid-template-columns: 1fr 1fr; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .page-item { padding: 2rem 1.5rem; }
 }
-
 </style>
 </head>
 <body>
 
 <nav class="top">
   <a href="index.html" class="nav-name">KYLE WATSON</a>
-  <a href="index.html" class="nav-back">← All Work</a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
 </nav>
 
-<header class="project-header">
-  <div class="header-tags"><span class="tag">Experiential</span><span class="tag">Interactive</span><span class="tag">Brand</span></div>
-  <h1 class="header-title">Wells Fargo — Experiential</h1>
-</header>
-
-<div class="hero-video">
-  <div class="video-wrap">
-    <!--
-    <iframe src="https://iframe.mediadelivery.net/embed/LIBRARY_ID/VIDEO_ID?autoplay=0&loop=1&muted=1&preload=true"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-      allowfullscreen loading="lazy"></iframe>
-    -->
-    <div class="ph">Wells Fargo — Experiential</div>
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" id="menuClose" aria-label="Close menu">CLOSE</button>
+  <div class="menu-content">
+    <ul class="menu-links">
+      <li><a href="index.html#work" class="menu-link">Work</a></li>
+      <li><a href="all-work.html" class="menu-link">Archive</a></li>
+      <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="index.html#about" class="menu-link">About</a></li>
+      <li><a href="index.html#contact" class="menu-link">Contact</a></li>
+    </ul>
   </div>
 </div>
 
+<!-- ══ PROJECT HEADER ══ -->
+<header class="project-header">
+  <div class="header-back">
+    <a href="all-work.html">&larr; Back</a>
+  </div>
+  <div class="header-tags">
+    <span class="tag">Art Direction</span>
+    <span class="tag">Campaign</span>
+    <span class="tag">Film</span>
+  </div>
+  <h1 class="header-title">Why I Work</h1>
+</header>
+
+<!-- ══ HERO VIDEO ══ -->
+<div class="hero-video">
+  <div class="video-wrap">
+    <video controls playsinline poster="https://kyfolio.b-cdn.net/170_Wells-Fargo/video/thumb.jpg">
+      <source src="https://kyfolio.b-cdn.net/170_Wells-Fargo/video/whyiwork_compilation.mov" type="video/quicktime">
+    </video>
+  </div>
+</div>
+
+<!-- ══ INTRO ══ -->
 <div class="intro">
-  <div class="intro-text"><p>A large-scale experiential activation built to communicate Wells Fargo's community banking philosophy in physical space. The brief was to make people feel the brand rather than read about it.</p><p>We designed an environment that turned financial data into something navigable and human — spatial storytelling at a scale that changes how you experience information.</p></div>
+  <div class="intro-text">
+    <p>A brief about work. A campaign about life.</p>
+  </div>
   <aside class="meta">
-    <div class="meta-block"><div class="meta-label">Client</div><div class="meta-value"><strong>Wells Fargo</strong></div></div>
-    <div class="meta-block"><div class="meta-label">Role</div><div class="meta-value">Creative Director — Experiential</div></div>
-    <div class="meta-block"><div class="meta-label">Agency</div><div class="meta-value">George P Johnson</div></div>
-    <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2017</div></div>
+    <div class="meta-block">
+      <div class="meta-label">Client</div>
+      <div class="meta-value"><strong>Wells Fargo</strong></div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Role</div>
+      <div class="meta-value">Art Director</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Agency</div>
+      <div class="meta-value">BBDO SF</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2016</div>
+    </div>
   </aside>
 </div>
 
-<!-- Full-bleed media: swap .ph-rect for <img src="..."> or a video iframe -->
-<div class="bleed"><div class="ph-rect"></div></div>
+<!-- ══ FULL-BLEED HERO IMAGE ══ -->
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/170_Wells-Fargo/stills/bag.jpg" alt="Why I Work campaign photography">
+</div>
 
+<!-- ══ PROCESS ══ -->
 <div class="section">
   <div class="section-label">Process</div>
+
   <div class="split">
-    <div class="split-text"><h3>Spatial storytelling</h3><p>Data visualization at human scale requires different thinking than screen-based work. We designed for bodies moving through space, not eyes moving across a screen.</p></div>
-    <div class="split-media"><div class="ph"></div></div>
+    <div class="split-text">
+      <h3>Initial Campaign Phase</h3>
+      <p>To kick off Wells Fargo's 2015 brand campaign, we hit the road to find out what drives people to do the work they do. We found a well rounded group of candidates that spoke to us personally, slapped together a small crew and hit the road to meet America's workforce.</p>
+    </div>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/170_Wells-Fargo/stills/pencil.jpg" alt="Campaign creative detail">
+    </div>
   </div>
+
   <div class="split flip">
-    <div class="split-text"><h3>Technology as texture</h3><p>Every interactive element was designed to feel inevitable — not like technology showing off, but like the most natural way to tell that story in that space.</p></div>
-    <div class="split-media"><div class="ph"></div></div>
+    <div class="split-text">
+      <h3>Photography Journey</h3>
+      <p>We sent solo photographers out on their own journeys. They travelled America talking to ordinary people about well. . . . ordinary things. They chatted about their mornings, their days, their lives, and how their identities at work related to who they were in their lives.</p>
+    </div>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/170_Wells-Fargo/stills/mockup_oddfellows.png" alt="Oddfellows animation mockup">
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>Closing Reflection</h3>
+      <p>We set out to learn a little more about work. . . . we wound up finding out a lot more about life.</p>
+    </div>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/170_Wells-Fargo/stills/thumb.jpg" alt="Campaign still">
+    </div>
   </div>
 </div>
 
-<div class="section">
-  <div class="section-label">Stills</div>
-  <div class="gallery g-3">
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
-  </div>
-  <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
-  </div>
-</div>
-
+<!-- ══ CREDITS ══ -->
 <div class="section">
   <div class="section-label">Credits</div>
   <div class="credits">
-    <div><div class="credit-role">Creative Director</div><div class="credit-name">Kyle Watson</div></div>
-    <div><div class="credit-role">Agency</div><div class="credit-name">George P Johnson</div></div>
-    <div><div class="credit-role">Client</div><div class="credit-name">Wells Fargo</div></div>
-    <div><div class="credit-role">Year</div><div class="credit-name">2017</div></div>
+    <div><div class="credit-role">BBDO Art Director</div><div class="credit-name">Kyle Watson</div></div>
+    <div><div class="credit-role">BBDO Creative Director</div><div class="credit-name">Alex Stainton</div></div>
+    <div><div class="credit-role">BBDO ECD</div><div class="credit-name">Matt Miller</div></div>
+    <div><div class="credit-role">Director</div><div class="credit-name">Brandon Loper</div></div>
+    <div><div class="credit-role">Editor</div><div class="credit-name">Cooper Kenward</div></div>
+    <div><div class="credit-role">Executive Producer</div><div class="credit-name">Dalia Burde</div></div>
+    <div><div class="credit-role">Producer</div><div class="credit-name">Heron Calisch Dolen</div></div>
+    <div><div class="credit-role">Animation Studio</div><div class="credit-name">Oddfellows</div></div>
+    <div><div class="credit-role">Production Company</div><div class="credit-name">Avocados and Coconuts</div></div>
   </div>
 </div>
 
+<!-- ══ PREV / NEXT ══ -->
 <nav class="pagination">
-  <a href="project-youtube-creator.html" class="page-item prev">
-    <span class="page-dir">← Previous</span>
-    <span class="page-title">YouTube — Creator Campaign</span>
+  <a href="project-barefoot.html" class="page-item prev">
+    <span class="page-dir">&larr; Previous</span>
+    <span class="page-title">Barefoot</span>
   </a>
-  <a href="project-barbie-bbdo.html" class="page-item next">
-    <span class="page-dir">Next →</span>
-    <span class="page-title">Barbie — BBDO Campaign</span>
+  <a href="project-coreweave-aston-martin.html" class="page-item next">
+    <span class="page-dir">Next &rarr;</span>
+    <span class="page-title">CoreWeave &mdash; Aston Martin</span>
   </a>
 </nav>
 
 <footer class="footer">
   <span class="footer-copy">&copy; 2026 Kyle Watson</span>
   <div class="footer-links">
-    <a href="index.html">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
     <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuClose = document.getElementById('menuClose');
+menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
+menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
+menuOverlay.querySelectorAll('.menu-link').forEach(link => {
+  link.addEventListener('click', () => menuOverlay.classList.remove('open'));
+});
+</script>
 </body>
 </html>
