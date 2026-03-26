@@ -128,16 +128,15 @@ nav {
 .menu-overlay {
   position: fixed;
   inset: 0;
-  background: #0a0a0a;
-  z-index: 600;
+  background: var(--bg);
+  z-index: 800;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
-  padding: 3rem;
+  padding: 5rem 3rem 3rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .menu-overlay.open {
@@ -150,7 +149,7 @@ nav {
   top: 1.6rem;
   right: 3rem;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -164,24 +163,24 @@ nav {
 
 .menu-links {
   list-style: none;
-  padding: 0;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .menu-link {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-size: clamp(3rem, 8vw, 7rem);
   font-weight: 300;
   letter-spacing: -0.03em;
   color: var(--text-primary);
   text-decoration: none;
-  line-height: 1.1;
+  line-height: 1.15;
   text-align: right;
-  opacity: 0.25;
-  transition: opacity 0.3s ease, padding-right 0.3s ease;
+  transition: color 0.3s ease, padding-right 0.3s ease;
 }
 
-.menu-link:hover { opacity: 1; padding-right: 1rem; }
+.menu-link:hover { color: #f4845f; padding-right: 1rem; }
 
 /* ─── PAGE HEADER ─── */
 .play-header {
@@ -254,35 +253,26 @@ nav {
 .filter-btn:hover { color: var(--text-secondary); border-color: var(--border); }
 .filter-btn.active { color: var(--text-primary); border-color: var(--text-dim); }
 
-/* ─── MASONRY / PLAY GRID ─── */
+/* ─── PLAY GRID ─── */
 .play-gallery {
   padding: 3rem;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1rem;
+  columns: 3;
+  column-gap: 1rem;
 }
 
-/* Grid placements for visual rhythm */
-.pg-item { overflow: hidden; cursor: pointer; position: relative; border-radius: 2px; }
-
-.pg-item-xl  { grid-column: span 8; aspect-ratio: 16/9; }
-.pg-item-sm  { grid-column: span 4; aspect-ratio: 4/3; }
-.pg-item-med { grid-column: span 6; aspect-ratio: 4/3; }
-.pg-item-lg  { grid-column: span 7; aspect-ratio: 4/3; }
-.pg-item-s5  { grid-column: span 5; aspect-ratio: 4/3; }
-.pg-item-wide { grid-column: span 12; aspect-ratio: 21/6; }
-.pg-item-third { grid-column: span 4; aspect-ratio: 1/1; }
+.pg-item {
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border-radius: 2px;
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
 
 .pg-visual {
   width: 100%;
-  height: 100%;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
-  filter: grayscale(0.4) brightness(0.7);
-}
-
-.pg-item:hover .pg-visual {
-  transform: scale(1.06);
-  filter: grayscale(0) brightness(0.95);
+  height: auto;
+  display: block;
 }
 
 /* Play visual backgrounds */
@@ -374,9 +364,10 @@ nav {
 
 .lightbox-visual {
   width: 100%;
-  aspect-ratio: 16/9;
+  max-height: 80vh;
   border-radius: 3px;
   transition: opacity 0.2s ease;
+  object-fit: contain;
 }
 
 .lightbox-meta {
@@ -473,18 +464,18 @@ nav {
 @media (max-width: 768px) {
   nav { padding: 1.2rem 1.5rem; }
   .nav-title, .nav-location { display: none; }
+  .menu-overlay { padding: 4rem 1.5rem 2rem; }
+  .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
+  .menu-close { right: 1.5rem; top: 1.2rem; }
   .play-header { padding: 7rem 1.5rem 3rem; }
   .filter-bar { padding: 1rem 1.5rem; overflow-x: auto; }
-  .play-gallery { padding: 1.5rem; gap: 0.75rem; }
-  .pg-item-xl, .pg-item-lg, .pg-item-wide { grid-column: span 12; }
-  .pg-item-sm, .pg-item-med, .pg-item-s5 { grid-column: span 6; }
-  .pg-item-third { grid-column: span 6; }
+  .play-gallery { padding: 1.5rem; columns: 2; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .custom-cursor { display: none; }
 }
 
 @media (max-width: 480px) {
-  .pg-item-sm, .pg-item-med, .pg-item-s5, .pg-item-third { grid-column: span 12; }
+  .play-gallery { columns: 1; }
 }
 </style>
 </head>
@@ -528,14 +519,6 @@ nav {
   </p>
 </header>
 
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="illustration">Illustration</button>
-  <button class="filter-btn" data-filter="motion">Motion</button>
-  <button class="filter-btn" data-filter="painting">Painting</button>
-  <button class="filter-btn" data-filter="3d">3D</button>
-</div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
@@ -543,7 +526,7 @@ nav {
   <button class="lightbox-prev" id="lightboxPrev">&#x2190;</button>
   <button class="lightbox-next" id="lightboxNext">&#x2192;</button>
   <div class="lightbox-content">
-    <div class="lightbox-visual" id="lightboxVisual"></div>
+    <img class="lightbox-visual" id="lightboxVisual" src="" alt="">
     <div class="lightbox-meta">
       <span class="lightbox-title" id="lightboxTitle"></span>
       <span class="lightbox-year" id="lightboxYear"></span>
@@ -551,132 +534,54 @@ nav {
   </div>
 </div>
 
-<!-- PLAY GALLERY — asymmetric 12-col grid -->
+<!-- PLAY GALLERY — masonry columns -->
 <div class="play-gallery">
-
-  <!-- Row 1: XL + SM -->
-  <div class="pg-item pg-item-xl reveal stagger-1"
-       data-title="Untitled Study" data-year="2024" data-category="illustration">
-    <div class="pg-visual pv-a"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Untitled Study</span>
-      <span class="pg-meta-year">2024</span>
-    </div>
-  </div>
-
-  <div class="pg-item pg-item-sm reveal stagger-2"
-       data-title="Color Field No. 3" data-year="2023" data-category="painting">
-    <div class="pg-visual pv-b"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Color Field No. 3</span>
-      <span class="pg-meta-year">2023</span>
-    </div>
-  </div>
-
-  <!-- Row 2: SM + MED + SM -->
-  <div class="pg-item pg-item-sm reveal stagger-3"
-       data-title="Dark Matter" data-year="2023" data-category="3d">
-    <div class="pg-visual pv-c"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Dark Matter</span>
-      <span class="pg-meta-year">2023</span>
-    </div>
-  </div>
-
-  <div class="pg-item pg-item-med reveal stagger-4"
-       data-title="The Long Way" data-year="2022" data-category="illustration">
-    <div class="pg-visual pv-d"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">The Long Way</span>
-      <span class="pg-meta-year">2022</span>
-    </div>
-  </div>
-
-  <div class="pg-item pg-item-sm reveal stagger-5"
-       data-title="Noise Field" data-year="2022" data-category="motion">
-    <div class="pg-visual pv-e"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Noise Field</span>
-      <span class="pg-meta-year">2022</span>
-    </div>
-  </div>
-
-  <!-- Row 3: LG + S5 -->
-  <div class="pg-item pg-item-lg reveal stagger-6"
-       data-title="Violet Hour" data-year="2022" data-category="painting">
-    <div class="pg-visual pv-f"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Violet Hour</span>
-      <span class="pg-meta-year">2022</span>
-    </div>
-  </div>
-
-  <div class="pg-item pg-item-s5 reveal stagger-7"
-       data-title="Blue Shift" data-year="2021" data-category="3d">
-    <div class="pg-visual pv-g"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Blue Shift</span>
-      <span class="pg-meta-year">2021</span>
-    </div>
-  </div>
-
-  <!-- Row 4: full-width panoramic -->
-  <div class="pg-item pg-item-wide reveal"
-       data-title="Signal / Noise" data-year="2021" data-category="motion">
-    <div class="pg-visual pv-h"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Signal / Noise</span>
-      <span class="pg-meta-year">2021</span>
-    </div>
-  </div>
-
-  <!-- Row 5: three thirds -->
-  <div class="pg-item pg-item-third reveal stagger-1"
-       data-title="Acid Study" data-year="2021" data-category="illustration">
-    <div class="pg-visual pv-i"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Acid Study</span>
-      <span class="pg-meta-year">2021</span>
-    </div>
-  </div>
-
-  <div class="pg-item pg-item-third reveal stagger-2"
-       data-title="Deep Field" data-year="2020" data-category="3d">
-    <div class="pg-visual pv-j"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Deep Field</span>
-      <span class="pg-meta-year">2020</span>
-    </div>
-  </div>
-
-  <div class="pg-item pg-item-third reveal stagger-3"
-       data-title="Orbit" data-year="2020" data-category="motion">
-    <div class="pg-visual pv-k"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Orbit</span>
-      <span class="pg-meta-year">2020</span>
-    </div>
-  </div>
-
-  <!-- Row 6: SM + XL -->
-  <div class="pg-item pg-item-sm reveal stagger-4"
-       data-title="Form Study #7" data-year="2020" data-category="painting">
-    <div class="pg-visual pv-l"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Form Study #7</span>
-      <span class="pg-meta-year">2020</span>
-    </div>
-  </div>
-
-  <div class="pg-item pg-item-xl reveal stagger-5"
-       data-title="Spectrum" data-year="2019" data-category="illustration">
-    <div class="pg-visual pv-a" style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 40%, #24243e 100%);"></div>
-    <div class="pg-meta">
-      <span class="pg-meta-title">Spectrum</span>
-      <span class="pg-meta-year">2019</span>
-    </div>
-  </div>
-
+  <div class="pg-item reveal" data-title="Blue Spiral Neon" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png" alt="Blue Spiral Neon" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif" alt="Chromatic Chain" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Chromatic Orb" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg" alt="Chromatic Orb" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Blue Moon Face" data-src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png" alt="Blue Moon Face" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="If You Wish" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg" alt="If You Wish" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif" alt="Globby Eyes" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif" alt="Bird Warrior" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Collage Portrait" data-src="https://kyfolio.b-cdn.net/_Play/collage-portrait-blue.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/collage-portrait-blue.jpg" alt="Collage Portrait" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Marble Spheres" data-src="https://kyfolio.b-cdn.net/_Play/marble-spheres.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/marble-spheres.jpg" alt="Marble Spheres" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Fall in Love" data-src="https://kyfolio.b-cdn.net/_Play/fall-in-love-chrome.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/fall-in-love-chrome.jpg" alt="Fall in Love" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Peeking Over the Fence" data-src="https://kyfolio.b-cdn.net/_Play/peeking-over-fence.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/peeking-over-fence.jpg" alt="Peeking Over the Fence" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Blue Abstract" data-src="https://kyfolio.b-cdn.net/_Play/blue-abstract-framed.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/blue-abstract-framed.jpg" alt="Blue Abstract" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Art4All Poster" data-src="https://kyfolio.b-cdn.net/_Play/art4all-poster.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/art4all-poster.jpg" alt="Art4All Poster" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Dino Boy — Clay" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-clay.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/dino-boy-clay.jpg" alt="Dino Boy Clay" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Dino Boy — Lit" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-lit.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/dino-boy-lit.jpg" alt="Dino Boy Lit" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Dino Boy — Sketch" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-sketch.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/dino-boy-sketch.jpg" alt="Dino Boy Sketch" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Belonging Arch Poster" data-src="https://kyfolio.b-cdn.net/_Play/belonging-arch-poster.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/belonging-arch-poster.jpg" alt="Belonging Arch Poster" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Mycology Club" data-src="https://kyfolio.b-cdn.net/_Play/mycology-club-print.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/mycology-club-print.jpg" alt="Mycology Club" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Cowboy Man" data-src="https://kyfolio.b-cdn.net/_Play/cowboy-man.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/cowboy-man.jpg" alt="Cowboy Man" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Don't Smoke" data-src="https://kyfolio.b-cdn.net/_Play/dont-smoke-painting.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/dont-smoke-painting.jpg" alt="Don't Smoke" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Flybox Space Portal" data-src="https://kyfolio.b-cdn.net/_Play/flybox-space-portal.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/flybox-space-portal.jpg" alt="Flybox Space Portal" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Moon Man" data-src="https://kyfolio.b-cdn.net/_Play/moon-man.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/moon-man.jpg" alt="Moon Man" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Pink Mask" data-src="https://kyfolio.b-cdn.net/_Play/pink-mask-creature.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/pink-mask-creature.jpg" alt="Pink Mask" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Gas Can Sky" data-src="https://kyfolio.b-cdn.net/_Play/gas-can-sky.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/gas-can-sky.jpg" alt="Gas Can Sky" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Collage Portrait Gold" data-src="https://kyfolio.b-cdn.net/_Play/collage-portrait-gold.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/collage-portrait-gold.jpg" alt="Collage Portrait Gold" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Love Me" data-src="https://kyfolio.b-cdn.net/_Play/love-me-yellow.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/love-me-yellow.jpg" alt="Love Me" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Moonface Collage" data-src="https://kyfolio.b-cdn.net/_Play/moonface-collage.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/moonface-collage.jpg" alt="Moonface Collage" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Purple Collage" data-src="https://kyfolio.b-cdn.net/_Play/purple-collage.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/purple-collage.jpg" alt="Purple Collage" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Orange Strongman" data-src="https://kyfolio.b-cdn.net/_Play/orange-strongman.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/orange-strongman.jpg" alt="Orange Strongman" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Portrait Banner" data-src="https://kyfolio.b-cdn.net/_Play/portrait-banner-outdoor.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/portrait-banner-outdoor.jpg" alt="Portrait Banner" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Iridescent Starburst" data-src="https://kyfolio.b-cdn.net/_Play/iridescent-starburst.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/iridescent-starburst.jpg" alt="Iridescent Starburst" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Prismatic Glass" data-src="https://kyfolio.b-cdn.net/_Play/prismatic-glass.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/prismatic-glass.jpg" alt="Prismatic Glass" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Spaceman Planets" data-src="https://kyfolio.b-cdn.net/_Play/spaceman-planets.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/spaceman-planets.jpg" alt="Spaceman Planets" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Blue Figure Studio" data-src="https://kyfolio.b-cdn.net/_Play/blue-figure-studio.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/blue-figure-studio.jpg" alt="Blue Figure Studio" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Piano Night" data-src="https://kyfolio.b-cdn.net/_Play/piano-night.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/piano-night.jpg" alt="Piano Night" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Colorful TV Woman" data-src="https://kyfolio.b-cdn.net/_Play/colorful-tv-woman.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/colorful-tv-woman.jpg" alt="Colorful TV Woman" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Split Face" data-src="https://kyfolio.b-cdn.net/_Play/split-face-painting.jpeg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/split-face-painting.jpeg" alt="Split Face" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Striped Gold Face" data-src="https://kyfolio.b-cdn.net/_Play/striped-gold-face.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/striped-gold-face.jpg" alt="Striped Gold Face" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Liquid Chrome Moon" data-src="https://kyfolio.b-cdn.net/_Play/liquid-chrome-moon.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/liquid-chrome-moon.jpg" alt="Liquid Chrome Moon" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Planet Character" data-src="https://kyfolio.b-cdn.net/_Play/planet-character.png"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/planet-character.png" alt="Planet Character" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Black Swirl" data-src="https://kyfolio.b-cdn.net/_Play/black-swirl.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/black-swirl.jpg" alt="Black Swirl" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Warm Gradient" data-src="https://kyfolio.b-cdn.net/_Play/warm-gradient-curve.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/warm-gradient-curve.jpg" alt="Warm Gradient" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="TugBoat" data-src="https://kyfolio.b-cdn.net/_Play/TugBoat.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/TugBoat.jpg" alt="TugBoat" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Use Your Heart" data-src="https://kyfolio.b-cdn.net/_Play/use-your-heart-sign.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/use-your-heart-sign.jpg" alt="Use Your Heart" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Mycology Tiedye" data-src="https://kyfolio.b-cdn.net/_Play/mycology-tiedye-flag.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/mycology-tiedye-flag.jpg" alt="Mycology Tiedye" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Warm Gradient Rod" data-src="https://kyfolio.b-cdn.net/_Play/warm-gradient-rod.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/warm-gradient-rod.jpg" alt="Warm Gradient Rod" loading="lazy"></div>
 </div>
 
 <!-- FOOTER -->
@@ -685,7 +590,7 @@ nav {
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
-    <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
 
@@ -718,24 +623,7 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
 revealEls.forEach(el => revealObserver.observe(el));
 
-// ─── FILTER ───
-const filterBtns = document.querySelectorAll('.filter-btn');
 const allItems = document.querySelectorAll('.pg-item');
-
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const cat = btn.dataset.filter;
-    allItems.forEach(item => {
-      if (cat === 'all' || item.dataset.category === cat) {
-        item.style.display = '';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-  });
-});
 
 // ─── LIGHTBOX ───
 const lightbox    = document.getElementById('lightbox');
@@ -756,13 +644,9 @@ let currentIndex = 0;
 function openLightbox(item, items) {
   currentIndex = items.indexOf(item);
 
-  // Copy the pg-visual's computed background into the lightbox visual
-  const visual = item.querySelector('.pg-visual');
-  if (visual) {
-    const style = getComputedStyle(visual);
-    lightboxVisual.style.background = style.background;
-    lightboxVisual.style.backgroundImage = style.backgroundImage;
-  }
+  const src = item.dataset.src || '';
+  lightboxVisual.src = src;
+  lightboxVisual.alt = item.dataset.title || '';
 
   lightboxTitle.textContent = item.dataset.title || '';
   lightboxYear.textContent  = item.dataset.year || '';

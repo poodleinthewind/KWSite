@@ -22,19 +22,21 @@
 html { scrollbar-width: thin; scrollbar-color: #2a2a2a var(--bg); }
 body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--bg); }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
 .nav-name { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; text-decoration: none; }
 .nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
 
 /* ─── FULLSCREEN MENU ─── */
-.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .menu-overlay.open { opacity: 1; pointer-events: all; }
 .menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
 .menu-close:hover { color: var(--text-primary); }
-.menu-links { list-style: none; }
+.menu-links { list-style: none; margin-top: auto; margin-bottom: auto; }
 .menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
-.menu-link:hover { color: var(--accent); padding-right: 1rem; }
+.menu-link:hover { color: #f4845f; padding-right: 1rem; }
+
+/* ─── PROJECT HEADER ─── */
 .project-header { padding: 8rem 3rem 3rem; border-bottom: 1px solid var(--border); }
 .header-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
 .header-back a { color: var(--text-dim); text-decoration: none; transition: color 0.3s ease; }
@@ -42,69 +44,121 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .header-back .sep { opacity: 0.3; }
 .header-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
 .header-title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 5rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); }
+
+/* ─── HERO ─── */
 .hero-video { background: var(--bg); padding: 0 3rem; }
 .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-.video-wrap .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0d0d 0%, var(--project-color) 100%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
-.intro { padding: 5rem 3rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 6rem; border-bottom: 1px solid var(--border); }
-.intro-text { font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; max-width: 580px; }
+
+/* ─── INTRO ─── */
+.intro { padding: 3rem 3rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; align-items: start; min-height: 20rem; }
+.intro-text { padding-right: 3rem; font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; max-width: 580px; }
 .intro-text p + p { margin-top: 1.2rem; }
-.meta { padding-top: 0.25rem; }
-.meta-block { margin-bottom: 2.25rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--border); }
-.meta-block:last-child { border-bottom: none; margin-bottom: 0; }
+.intro-divider { grid-column: 2; background: var(--border); width: 1px; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.meta { grid-column: 3; display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 0; padding-left: 0; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.meta-block { padding: 1.2rem 1.5rem; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.meta-block:nth-child(odd) { border-left: none; }
+.meta-block:last-child { border-bottom: none; }
+.meta-block:nth-last-child(2):nth-child(odd) { border-bottom: none; }
 .meta-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.6rem; }
-.meta-value { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; line-height: 1.7; }
+.meta-value { font-size: 0.85rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
 .meta-value strong { color: var(--text-primary); font-weight: 400; display: block; }
 .tag { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 2px; font-weight: 500; background: linear-gradient(90deg, #f4845f 0%, #e8637a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; border: 1px solid rgba(244,132,95,0.3); }
+
+/* ─── FULL BLEED ─── */
 .bleed { width: 100%; overflow: hidden; }
-.bleed .ph-rect { height: 60vh; min-height: 380px; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
+.bleed img { width: 100%; height: auto; display: block; }
+
+/* ─── INSET IMAGE ─── */
+.inset { padding: 0 3rem; }
+.inset img { width: 100%; height: auto; display: block; }
+
+/* ─── SECTIONS ─── */
 .section { padding: 5rem 3rem; border-bottom: 1px solid var(--border); }
 .section-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 3rem; }
+
+/* ─── SPLIT ─── */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
 .split:last-child { margin-bottom: 0; }
 .split.flip { direction: rtl; }
 .split.flip > * { direction: ltr; }
 .split-text h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
 .split-text p { font-size: 0.9rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
-.split-media { aspect-ratio: 4/3; overflow: hidden; background: var(--bg-card); position: relative; }
-.split-media .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
+.split-text p + p { margin-top: 1rem; }
+.split-media { overflow: hidden; background: var(--bg-card); position: relative; }
+.split-media img { width: 100%; height: auto; display: block; }
+
+/* ─── GALLERY ─── */
 .gallery { display: grid; gap: 0.75rem; }
+.gallery + .gallery { margin-top: 0.75rem; }
 .g-2 { grid-template-columns: 1fr 1fr; }
 .g-3 { grid-template-columns: repeat(3, 1fr); }
+.g-2-1 { grid-template-columns: 2fr 1fr; }
+.g-1-2 { grid-template-columns: 1fr 2fr; }
 .g-item { overflow: hidden; position: relative; background: var(--bg-card); }
-.g-item.std { aspect-ratio: 4/3; }
-.g-item .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.28; }
+.g-item img { width: 100%; height: auto; display: block; }
+
+/* ─── TOGGLE GRID (1fr 1fr with empty div for rhythm) ─── */
+.toggle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
+.toggle-grid .empty { background: var(--bg-card); min-height: 200px; }
+.toggle-grid img { width: 100%; height: auto; display: block; }
+
+/* ─── PROCESS HERO ─── */
+.process-hero { overflow: hidden; }
+.process-hero img { width: 100%; height: auto; display: block; }
+
+/* ─── CREDITS ─── */
 .credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 4rem; }
 .credit-role { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.35rem; }
 .credit-name { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; }
+
+/* ─── PAGINATION ─── */
 .pagination { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
 .page-item { padding: 3rem; text-decoration: none; color: var(--text-primary); transition: background 0.3s ease; display: flex; flex-direction: column; gap: 0.6rem; }
 .page-item:hover { background: var(--bg-card); }
 .page-item.next { text-align: right; border-left: 1px solid var(--border); }
 .page-dir { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
 .page-title { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.4rem); font-weight: 300; letter-spacing: -0.02em; }
+
+/* ─── FOOTER ─── */
 .footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 .footer-copy { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--text-dim); }
 .footer-links { display: flex; gap: 2rem; }
 .footer-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--text-dim); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
 .footer-links a:hover { color: var(--text-primary); }
+
+/* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
-  .intro { grid-template-columns: 1fr; gap: 3rem; }
+  .intro { grid-template-columns: 1fr; min-height: auto; }
+  .intro-divider { display: none; }
+  .meta { display: none; }
   .split { grid-template-columns: 1fr; gap: 2.5rem; }
   .split.flip { direction: ltr; }
   .credits { grid-template-columns: 1fr 1fr; }
+  .toggle-grid { grid-template-columns: 1fr; }
+  .toggle-grid .empty { display: none; }
 }
 @media (max-width: 768px) {
   nav.top { padding: 1.2rem 1.5rem; }
+  .menu-overlay { padding: 4rem 1.5rem 2rem; }
+  .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
+  .menu-close { right: 1.5rem; top: 1.2rem; }
   .project-header { padding: 6rem 1.5rem 2.5rem; }
   .hero-video { padding: 0 1.5rem; }
   .intro, .section { padding: 3rem 1.5rem; }
-  .bleed .ph-rect { height: 40vh; min-height: 240px; }
+  .inset { padding: 0 1.5rem; }
   .g-3 { grid-template-columns: 1fr 1fr; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .page-item { padding: 2rem 1.5rem; }
 }
+
+/* CREDITS TOGGLE */
+.credits-toggle { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; padding: 0; width: 100%; }
+.credits-arrow { font-size: 0.55rem; color: var(--text-dim); transition: transform 0.3s ease; }
+.credits-toggle[aria-expanded="true"] .credits-arrow { transform: rotate(180deg); }
+.credits-content { margin-top: 2rem; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; }
+.credits-section { padding-bottom: 3rem; }
 </style>
 </head>
 <body>
@@ -127,100 +181,183 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   </div>
 </div>
 
+<!-- ══ PROJECT HEADER ══ -->
 <header class="project-header">
   <div class="header-back">
-    <a href="all-work.html">← Back</a>
+    <a href="all-work.html">&larr; Back</a>
   </div>
   <div class="header-tags">
-    <span class="tag">Motion</span>
-    <span class="tag">Design</span>
-    <span class="tag">Brand</span>
+    <span class="tag">Design System</span>
+    <span class="tag">Motion Design</span>
   </div>
   <h1 class="header-title">Unity</h1>
 </header>
 
+<!-- ══ HERO VIDEO ══ -->
 <div class="hero-video">
   <div class="video-wrap">
-    <!--
-    <iframe src="https://iframe.mediadelivery.net/embed/LIBRARY_ID/VIDEO_ID?autoplay=0&loop=1&muted=1&preload=true"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    -->
-    <div class="ph">Unity</div>
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/a898fb54-1372-4835-9bcd-ff1e74d6e1ee?autoplay=false&loop=false&muted=false&preload=true&controls=true" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
 
+<!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>Beneath a thin outer crust is an endless graphic matrix that is always moving, buzzing, and adapting.</p>
-    <p>The story of "Unity" is the journey of how we carefully weave between this 2-ply system.</p>
-    <p>Everything hinges on our ability to carefully reveal the magnificently complex architecture that lies just beyond our friendly and seemingly simple facade.</p>
+    <p>&ldquo;Unity&rdquo; represents a motion-first design approach &mdash; an evolution of a system meant to visualize progress and structure through a rigid grid that shows people, data, technology, and their spatial relationships.</p>
+    <p>Beneath a thin outer crust exists an endless graphic matrix that is always moving, buzzing, and adapting. Everything hinges on our ability to carefully reveal the magnificently complex architecture that lies just beyond our friendly and seemingly simple facade.</p>
   </div>
-  <aside class="meta">
+  <div class="intro-divider"></div>
+  <div class="meta">
     <div class="meta-block">
       <div class="meta-label">Client</div>
       <div class="meta-value"><strong>InterSystems</strong></div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Role</div>
-      <div class="meta-value">Creative Director<br>Motion Designer</div>
+      <div class="meta-value">Design Lead, Animator</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Agency</div>
+      <div class="meta-value">Godfrey Dadich &amp; Partners</div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Year</div>
       <div class="meta-value">2022</div>
     </div>
-  </aside>
+  </div>
 </div>
 
-<div class="bleed"><div class="ph-rect"></div></div>
+<!-- ══ FULL BLEED HERO IMAGE ══ -->
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/070_Unity/stills/Frame%201.jpg" alt="Unity design system overview" loading="eager">
+</div>
 
+<!-- ══ PROCESS ══ -->
 <div class="section">
   <div class="section-label">Process</div>
+
   <div class="split">
     <div class="split-text">
       <h3>Designed to move.</h3>
-      <p>"Unity" is a motion-first design approach. An evolution of a system intended to visualize progress and structure by using a rigid grid to show people, data, technology, and their proximity.</p>
+      <p>The system prioritizes animation as a foundational element rather than an afterthought. Beneath a thin outer crust exists an endless graphic matrix that is always moving, buzzing, and adapting.</p>
+      <p>The design carefully balances a friendly facade with the complex architecture beneath.</p>
     </div>
-    <div class="split-media"><div class="ph"></div></div>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/070_Unity/stills/03_01_Master_2.gif" alt="Unity animation exploration" loading="lazy">
+    </div>
   </div>
+
   <div class="split flip">
     <div class="split-text">
-      <h3>Keyframes first.</h3>
-      <p>In contrast to a more common design workflow, we often found ourselves starting with animation as a vehicle for abstract discovery. We'd then identify moments of interest and weave them into the static design language.</p>
-      <p>We consider everything that lives in the illustrated matrix as if it could animate itself into life. . . . even if it never does.</p>
+      <h3>Keyframes-first workflow.</h3>
+      <p>Rather than conventional design processes, the team started with animation for abstract discovery, then identified moments of visual interest to weave into the static design language.</p>
+      <p>Everything in the illustrated matrix was considered as potentially animatable &mdash; even if it never moves.</p>
     </div>
-    <div class="split-media"><div class="ph"></div></div>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/070_Unity/stills/03_02_Master_4.gif" alt="Keyframes-first animation process" loading="lazy">
+    </div>
   </div>
 </div>
 
+<!-- ══ SYSTEM STILLS ══ -->
 <div class="section">
-  <div class="section-label">Stills</div>
-  <div class="gallery g-3">
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
+  <div class="section-label">System</div>
+
+  <!-- Full-width GIF -->
+  <div class="process-hero">
+    <img src="https://kyfolio.b-cdn.net/070_Unity/stills/Comp_1.gif" alt="Unity system animation" loading="lazy">
   </div>
-  <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
+
+  <!-- 2-up row -->
+  <div class="gallery g-2" style="margin-top:0.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/01.png" alt="Unity design system element" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/02.png" alt="Unity design system element" loading="lazy"></div>
+  </div>
+
+  <!-- Toggle grid: image left, empty right -->
+  <div class="toggle-grid">
+    <div><img src="https://kyfolio.b-cdn.net/070_Unity/stills/Asset%2076.png" alt="Unity graphic asset" loading="lazy"></div>
+    <div class="empty"></div>
+  </div>
+
+  <!-- Toggle grid: empty left, image right -->
+  <div class="toggle-grid">
+    <div class="empty"></div>
+    <div><img src="https://kyfolio.b-cdn.net/070_Unity/stills/Asset%2080.png" alt="Unity graphic asset" loading="lazy"></div>
   </div>
 </div>
 
+<!-- ══ FULL BLEED ILLUSTRATION ══ -->
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/070_Unity/stills/IS_ILLUS_02_02.jpg" alt="Unity illustration system" loading="lazy">
+</div>
+
+<!-- ══ LAYERS + EXPLORATION ══ -->
 <div class="section">
-  <div class="section-label">Credits</div>
+  <div class="section-label">Exploration</div>
+
+  <!-- Asymmetric 2:1 -->
+  <div class="gallery g-2-1">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/Web-Layers_001.png" alt="Unity web layers" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/03.png" alt="Unity element" loading="lazy"></div>
+  </div>
+
+  <!-- Full-width GIF -->
+  <div class="process-hero" style="margin-top:0.75rem">
+    <img src="https://kyfolio.b-cdn.net/070_Unity/stills/03_05_Master_4.gif" alt="Unity motion exploration" loading="lazy">
+  </div>
+
+  <!-- 3-up row -->
+  <div class="gallery g-3" style="margin-top:0.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/IS_ILLUS_03_03.jpg" alt="Unity illustration" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/IS_ILLUS_04_001.jpg" alt="Unity illustration" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/04.png" alt="Unity design element" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ══ FULL BLEED SHAPE EXPLORATION ══ -->
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/070_Unity/stills/INTS715_ShapeExploration_KW_220125_001_Master%20Grid_2022-01-26_14.30.03.jpg" alt="Unity shape exploration master grid" loading="lazy">
+</div>
+
+<!-- ══ MOTION DETAILS ══ -->
+<div class="section">
+  <div class="section-label">Motion</div>
+
+  <div class="gallery g-2">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/03_4.gif" alt="Unity motion detail" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/Comp_3.gif" alt="Unity animation composition" loading="lazy"></div>
+  </div>
+
+  <!-- Inset single image -->
+  <div class="gallery" style="margin-top:0.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/INT_Layers_001.png" alt="Unity internal layers" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ══ CREDITS ══ -->
+<div class="section credits-section">
+  <button class="credits-toggle" aria-expanded="false">
+    <span class="section-label" style="margin-bottom:0">Credits</span>
+    <span class="credits-arrow">&#9660;</span>
+  </button>
+  <div class="credits-content" style="display:none;">
   <div class="credits">
-    <div><div class="credit-role">Creative Director, Motion Designer</div><div class="credit-name">Kyle Watson</div></div>
+    <div><div class="credit-role">Creative Director</div><div class="credit-name">Kyle Watson</div></div>
+    <div><div class="credit-role">Agency</div><div class="credit-name">Godfrey Dadich &amp; Partners</div></div>
     <div><div class="credit-role">Client</div><div class="credit-name">InterSystems</div></div>
-    <div><div class="credit-role">Year</div><div class="credit-name">2022</div></div>
+  </div>
   </div>
 </div>
 
+<!-- ══ PREV / NEXT ══ -->
 <nav class="pagination">
   <a href="project-google-next.html" class="page-item prev">
-    <span class="page-dir">← Previous</span>
+    <span class="page-dir">&larr; Previous</span>
     <span class="page-title">Google Next</span>
   </a>
   <a href="project-youtube-forge.html" class="page-item next">
-    <span class="page-dir">Next →</span>
+    <span class="page-dir">Next &rarr;</span>
     <span class="page-title">YouTube Forge</span>
   </a>
 </nav>
@@ -230,7 +367,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
-    <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
 <script>
@@ -241,6 +378,24 @@ menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
 menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
 menuOverlay.querySelectorAll('.menu-link').forEach(link => {
   link.addEventListener('click', () => menuOverlay.classList.remove('open'));
+});
+
+// Credits toggle
+document.querySelectorAll('.credits-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    const content = btn.nextElementSibling;
+    btn.setAttribute('aria-expanded', !expanded);
+    if (!expanded) {
+      content.style.display = 'block';
+      content.style.maxHeight = content.scrollHeight + 'px';
+      content.style.opacity = '1';
+    } else {
+      content.style.maxHeight = '0';
+      content.style.opacity = '0';
+      setTimeout(() => { content.style.display = 'none'; }, 400);
+    }
+  });
 });
 </script>
 </body>

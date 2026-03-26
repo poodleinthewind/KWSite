@@ -28,13 +28,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
 
 /* ─── FULLSCREEN MENU ─── */
-.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .menu-overlay.open { opacity: 1; pointer-events: all; }
 .menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
 .menu-close:hover { color: var(--text-primary); }
-.menu-links { list-style: none; }
+.menu-links { list-style: none; margin-top: auto; margin-bottom: auto; }
 .menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
-.menu-link:hover { color: var(--accent); padding-right: 1rem; }
+.menu-link:hover { color: #f4845f; padding-right: 1rem; }
 .project-header { padding: 8rem 3rem 3rem; border-bottom: 1px solid var(--border); }
 .header-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
 .header-back a { color: var(--text-dim); text-decoration: none; transition: color 0.3s ease; }
@@ -46,11 +46,11 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; overflow: hidden; }
 .video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-.intro { padding: 3rem 3rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 4rem 1px 1fr; gap: 0; align-items: start; min-height: 20rem; }
-.intro-text { font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
+.intro { padding: 3rem 3rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; align-items: start; min-height: 20rem; }
+.intro-text { font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; padding-right: 3rem; }
 .intro-text p + p { margin-top: 1.2rem; }
-.intro-divider { grid-column: 3; background: var(--border); width: 1px; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
-.meta { grid-column: 4; display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 0; padding-left: 0; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.intro-divider { grid-column: 2; background: var(--border); width: 1px; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.meta { grid-column: 3; display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 0; padding-left: 0; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
 .meta-block { padding: 1.2rem 1.5rem; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .meta-block:nth-child(odd) { border-left: none; }
 .meta-block:last-child { border-bottom: none; }
@@ -120,6 +120,9 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 }
 @media (max-width: 768px) {
   nav.top { padding: 1.2rem 1.5rem; }
+  .menu-overlay { padding: 4rem 1.5rem 2rem; }
+  .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
+  .menu-close { right: 1.5rem; top: 1.2rem; }
   .project-header { padding: 6rem 1.5rem 2.5rem; }
   .hero-video { padding: 0 1.5rem; }
   .intro, .section { padding: 3rem 1.5rem; }
@@ -135,6 +138,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .split.flip .split-text { padding-left: 0; }
   .gallery.gif-gallery.g-2 { grid-template-columns: 1fr; }
 }
+
+/* CREDITS TOGGLE */
+.credits-toggle { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; padding: 0; width: 100%; }
+.credits-arrow { font-size: 0.55rem; color: var(--text-dim); transition: transform 0.3s ease; }
+.credits-toggle[aria-expanded="true"] .credits-arrow { transform: rotate(180deg); }
+.credits-content { margin-top: 2rem; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; }
+.credits-section { padding-bottom: 3rem; }
 </style>
 </head>
 <body>
@@ -171,7 +181,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 <!-- ─── HERO IMAGE ─── -->
 <div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_05.jpg" alt="Google Next 2019 keynote stage" loading="eager" style="height: 75vh; min-height: 480px;">
+  <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_05.jpg" alt="Google Next 2019 keynote stage" loading="eager" style="height: 75vh; min-height: 480px;">
 </div>
 
 <div class="year-divider">
@@ -223,7 +233,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <p>We concepted a plethora of visual metaphors based off of the rough scripts we had. Assets were then shuffled around until moments before Sundar took stage.</p>
     </div>
     <div class="split-media gif">
-      <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/opensource_01.gif" alt="Open source animation" loading="lazy">
+      <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_01.gif" alt="Open source animation" loading="lazy">
     </div>
   </div>
 
@@ -235,7 +245,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <p>We were constantly storyboarding and sketching, using our simple shape language to illustrate vast concepts such as migration, security, and evolution.</p>
     </div>
     <div class="split-media gif">
-      <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/augmented_analytics.gif" alt="Augmented analytics animation" loading="lazy">
+      <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/augmented_analytics.gif" alt="Augmented analytics animation" loading="lazy">
     </div>
   </div>
 </div>
@@ -245,14 +255,14 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="section-label">Stills &mdash; Next &rsquo;19</div>
 
   <div class="gallery g-3">
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/day1_01.jpg" alt="Next '19 day 1" loading="lazy"></div>
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_01.jpg" alt="Next '19 event" loading="lazy"></div>
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_07.jpg" alt="Next '19 stage" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/day1_01.jpg" alt="Next '19 day 1" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_01.jpg" alt="Next '19 event" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_07.jpg" alt="Next '19 stage" loading="lazy"></div>
   </div>
 
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_10.jpg" alt="Next '19 keynote" loading="lazy"></div>
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_11.jpg" alt="Next '19 audience" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_10.jpg" alt="Next '19 keynote" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_11.jpg" alt="Next '19 audience" loading="lazy"></div>
   </div>
 
 </div>
@@ -262,21 +272,21 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="section-label">Process &mdash; Animation Explorations</div>
 
   <div class="process-hero">
-    <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/process_perspectives.gif" alt="Perspectives process" loading="lazy">
+    <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/process_perspectives.gif" alt="Perspectives process" loading="lazy">
   </div>
 
   <div class="process-hero" style="margin-top:2rem">
-    <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/process_positions.gif" alt="Positions process" loading="lazy">
+    <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/process_positions.gif" alt="Positions process" loading="lazy">
   </div>
 
   <div class="process-hero" style="margin-top:2rem">
-    <img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/process_vision.gif" alt="Vision process" loading="lazy">
+    <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/process_vision.gif" alt="Vision process" loading="lazy">
   </div>
 
   <div class="gallery gif-gallery g-3" style="margin-top:3rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/serverless_intro.gif" alt="Serverless intro" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/opensource_02.gif" alt="Open source" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/grid.gif" alt="Grid animation" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/serverless_intro.gif" alt="Serverless intro" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_02.gif" alt="Open source" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/grid.gif" alt="Grid animation" loading="lazy"></div>
   </div>
 </div>
 
@@ -284,9 +294,9 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <div class="section">
   <div class="section-label">More &mdash; Next &rsquo;19</div>
   <div class="gallery g-3">
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_08.jpg" alt="Next '19" loading="lazy"></div>
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_14.jpg" alt="Next '19" loading="lazy"></div>
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202019/stills/event_16.jpg" alt="Next '19" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_08.jpg" alt="Next '19" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_14.jpg" alt="Next '19" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_16.jpg" alt="Next '19" loading="lazy"></div>
   </div>
 </div>
 
@@ -301,7 +311,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 <!-- ─── BLEED: 2018 Keynote ─── -->
 <div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/day0_01.jpg" alt="Google Next 2018 keynote stage" loading="lazy">
+  <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202018/stills/day0_01.jpg" alt="Google Next 2018 keynote stage" loading="lazy">
 </div>
 
 <!-- ─── INTRO '18 ─── -->
@@ -339,7 +349,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <p>There were symbols. The brand team at Google did a fantastic job designing a package of stylized glyphs that we translated across the four cubes to tell our story. A crop for a photo, an animated infographic, or a sweeping transition &mdash; it all started with this language.</p>
     </div>
     <div class="split-media gif">
-      <img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/timelapse_01.gif" alt="Cube timelapse" loading="lazy">
+      <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202018/stills/timelapse_01.gif" alt="Cube timelapse" loading="lazy">
     </div>
   </div>
 
@@ -350,7 +360,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <p>We introduced broad rules and stress tested them all in one pipeline. A process that we were only able to discover through years of experience on this particular project.</p>
     </div>
     <div class="split-media gif">
-      <img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/grid_01.png" alt="Grid system" loading="lazy">
+      <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202018/stills/grid_01.png" alt="Grid system" loading="lazy">
     </div>
   </div>
 </div>
@@ -359,9 +369,9 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <div class="section">
   <div class="section-label">Stills &mdash; Next &rsquo;18</div>
   <div class="gallery g-3">
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/day1_01.jpg" alt="Next '18 day 1" loading="lazy"></div>
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/day1_02.jpg" alt="Next '18 day 1" loading="lazy"></div>
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/110_Next/Next%202018/stills/event_02.jpg" alt="Next '18 event" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202018/stills/day1_01.jpg" alt="Next '18 day 1" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202018/stills/day1_02.jpg" alt="Next '18 day 1" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202018/stills/event_02.jpg" alt="Next '18 event" loading="lazy"></div>
   </div>
 </div>
 
@@ -369,10 +379,14 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <div class="section">
   <div class="section-label">Video</div>
   <div style="width:100%;margin-bottom:2rem">
-    <video autoplay muted loop playsinline style="width:100%;display:block"><source src="https://kyfolio.b-cdn.net/110_Next/Next%202019/video/industrial_rev_v01.mp4" type="video/mp4"></video>
+    <div class="video-wrap">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/c9b86aae-2043-4336-bd8c-a68a94154a03?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
   </div>
   <div style="width:100%">
-    <video autoplay muted loop playsinline style="width:100%;display:block"><source src="https://kyfolio.b-cdn.net/110_Next/Next%202018/video/stacking_eval_03.mp4" type="video/mp4"></video>
+    <div class="video-wrap">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/98d1a61a-d6c7-4e6c-815f-8d5df9d41669?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
   </div>
 </div>
 
@@ -392,7 +406,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
-    <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
 <script>
@@ -403,6 +417,24 @@ menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
 menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
 menuOverlay.querySelectorAll('.menu-link').forEach(link => {
   link.addEventListener('click', () => menuOverlay.classList.remove('open'));
+});
+
+// Credits toggle
+document.querySelectorAll('.credits-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    const content = btn.nextElementSibling;
+    btn.setAttribute('aria-expanded', !expanded);
+    if (!expanded) {
+      content.style.display = 'block';
+      content.style.maxHeight = content.scrollHeight + 'px';
+      content.style.opacity = '1';
+    } else {
+      content.style.maxHeight = '0';
+      content.style.opacity = '0';
+      setTimeout(() => { content.style.display = 'none'; }, 400);
+    }
+  });
 });
 </script>
 </body>

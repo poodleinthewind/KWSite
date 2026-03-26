@@ -28,13 +28,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
 
 /* ─── FULLSCREEN MENU ─── */
-.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .menu-overlay.open { opacity: 1; pointer-events: all; }
 .menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
 .menu-close:hover { color: var(--text-primary); }
-.menu-links { list-style: none; }
+.menu-links { list-style: none; margin-top: auto; margin-bottom: auto; }
 .menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
-.menu-link:hover { color: var(--accent); padding-right: 1rem; }
+.menu-link:hover { color: #f4845f; padding-right: 1rem; }
 .project-header { padding: 8rem 3rem 3rem; border-bottom: 1px solid var(--border); }
 .header-back { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
 .header-back a { color: var(--text-dim); text-decoration: none; transition: color 0.3s ease; }
@@ -44,11 +44,11 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .tag { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 2px; font-weight: 500; background: linear-gradient(90deg, #f4845f 0%, #e8637a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; border: 1px solid rgba(244,132,95,0.3); }
 
 /* INTRO — matches Google Next pattern */
-.intro { padding: 3rem 3rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 4rem 1px 1fr; gap: 0; align-items: start; min-height: 20rem; }
+.intro { padding: 3rem 3rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; align-items: start; min-height: 20rem; }
 .intro-text { font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
 .intro-text p + p { margin-top: 1.2rem; }
-.intro-divider { grid-column: 3; background: var(--border); width: 1px; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
-.meta { grid-column: 4; display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 0; padding-left: 0; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.intro-divider { grid-column: 2; background: var(--border); width: 1px; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.meta { grid-column: 3; display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 0; padding-left: 0; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
 .meta-block { padding: 1.2rem 1.5rem; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .meta-block:nth-child(odd) { border-left: none; }
 .meta-block:last-child { border-bottom: none; }
@@ -118,6 +118,9 @@ video { display: block; max-width: 100%; }
 }
 @media (max-width: 768px) {
   nav.top { padding: 1.2rem 1.5rem; }
+  .menu-overlay { padding: 4rem 1.5rem 2rem; }
+  .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
+  .menu-close { right: 1.5rem; top: 1.2rem; }
   .project-header { padding: 6rem 1.5rem 2.5rem; }
   .intro, .section { padding: 3rem 1.5rem; }
   .bleed img { height: 40vh; min-height: 240px; }
@@ -126,6 +129,13 @@ video { display: block; max-width: 100%; }
   .split-text { padding-right: 0; }
   .split.flip .split-text { padding-left: 0; }
 }
+
+/* CREDITS TOGGLE */
+.credits-toggle { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; padding: 0; width: 100%; }
+.credits-arrow { font-size: 0.55rem; color: var(--text-dim); transition: transform 0.3s ease; }
+.credits-toggle[aria-expanded="true"] .credits-arrow { transform: rotate(180deg); }
+.credits-content { margin-top: 2rem; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; }
+.credits-section { padding-bottom: 3rem; }
 </style>
 </head>
 <body>
@@ -163,9 +173,7 @@ video { display: block; max-width: 100%; }
 <!-- ─── HERO VIDEO ─── -->
 <div class="bleed">
   <div class="video-wrap">
-    <video controls playsinline poster="https://kyfolio.b-cdn.net/100_Home-for-Dinner/video/thumb.jpg">
-      <source src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/video/INTS848_TrakCare_HomeForDinner_Agency_01.mp4" type="video/mp4">
-    </video>
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/aa6344aa-413b-4a8b-8caf-cb6da8d7be4e?autoplay=false&loop=false&muted=false&preload=true&controls=true&t=5" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
 
@@ -223,7 +231,7 @@ video { display: block; max-width: 100%; }
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
-    <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
 
@@ -235,6 +243,24 @@ menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
 menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
 menuOverlay.querySelectorAll('.menu-link').forEach(link => {
   link.addEventListener('click', () => menuOverlay.classList.remove('open'));
+});
+
+// Credits toggle
+document.querySelectorAll('.credits-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    const content = btn.nextElementSibling;
+    btn.setAttribute('aria-expanded', !expanded);
+    if (!expanded) {
+      content.style.display = 'block';
+      content.style.maxHeight = content.scrollHeight + 'px';
+      content.style.opacity = '1';
+    } else {
+      content.style.maxHeight = '0';
+      content.style.opacity = '0';
+      setTimeout(() => { content.style.display = 'none'; }, 400);
+    }
+  });
 });
 </script>
 </body>

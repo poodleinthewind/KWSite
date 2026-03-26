@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a" media="(max-width: 768px)">
+<meta name="theme-color" content="#f6f3ec" media="(min-width: 769px)">
 <title>Kyle Watson — Creative Director</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,14 +13,14 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #0a0a0a;
-  --bg-elevated: #111111;
-  --bg-card: #141414;
-  --text-primary: #e8e8e8;
-  --text-secondary: #888888;
-  --text-dim: #444444;
-  --accent: #c8ff00;
-  --border: #1e1e1e;
+  --bg: #f6f3ec;
+  --bg-elevated: #edeae3;
+  --bg-card: #e8e5de;
+  --text-primary: #010103;
+  --text-secondary: #555555;
+  --text-dim: #999999;
+  --accent: #010103;
+  --border: #d4d0c8;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Space Grotesk', monospace;
@@ -27,7 +29,8 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: #2a2a2a var(--bg);
+  scrollbar-color: #c4c0b8 var(--bg);
+  background: var(--bg);
 }
 
 body {
@@ -84,7 +87,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  mix-blend-mode: difference;
 }
 
 .nav-name {
@@ -93,8 +95,9 @@ nav {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
+  transition: color 0.4s;
 }
 
 .nav-title {
@@ -103,7 +106,8 @@ nav {
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.6);
+  transition: color 0.4s;
 }
 
 .nav-location {
@@ -112,7 +116,8 @@ nav {
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.6);
+  transition: color 0.4s;
 }
 
 .nav-menu-btn {
@@ -124,9 +129,14 @@ nav {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #fff;
+  color: #ffffff;
   padding: 0;
+  transition: color 0.4s;
 }
+nav.nav--dark .nav-name,
+nav.nav--dark .nav-menu-btn { color: var(--text-primary); }
+nav.nav--dark .nav-title,
+nav.nav--dark .nav-location { color: var(--text-dim); }
 
 /* ─── FULLSCREEN MENU ─── */
 .menu-overlay {
@@ -183,7 +193,7 @@ nav {
 }
 
 .menu-link:hover {
-  color: var(--accent);
+  color: #f4845f;
   padding-right: 1rem;
 }
 
@@ -192,27 +202,49 @@ nav {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 5rem 3rem 7rem;
+  padding: 5rem 3rem 3rem;
   position: relative;
   overflow: hidden;
+  background: #0a0a0a;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,255,0,0.025) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 80% at 80% 20%, rgba(80,80,80,0.06) 0%, transparent 50%);
   z-index: 0;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+.hero-video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: 177.78vh; /* 16:9 ratio */
+  height: 56.25vw;
+  transform: translate(-50%, -50%);
+  border: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.hero-video iframe.loaded {
+  opacity: 1;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 960px;
+  max-width: 80vw;
   display: flex;
   flex-direction: column;
   flex: 1;
+  color: #ffffff;
 }
 
 /* Morph text sits in a flex-grow zone — vertically centered in that space */
@@ -220,6 +252,81 @@ nav {
   flex: 1;
   display: flex;
   align-items: center;
+}
+
+/* ─── HERO STATEMENT ─── */
+.hero-content--statement {
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-bottom: 4vh;
+}
+
+.hero-statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  max-width: 100%;
+}
+
+.hero-line-top,
+.hero-line-mid,
+.hero-line-bot {
+  display: block;
+}
+.hero-line-top {
+  white-space: nowrap;
+}
+.hero-statement .anim-inner {
+  display: block;
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+.hero-line-1,
+.hero-line-2,
+.hero-line-3,
+.hero-line-4,
+.hero-line-5,
+.hero-line-6,
+.hero-line-7 { display: block; }
+
+/* Rotating word carousel inline */
+.word-carousel {
+  display: inline-flex;
+  position: relative;
+  overflow: hidden;
+  vertical-align: bottom;
+  height: 1.1em;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.word-carousel .word-sizer {
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+.word-carousel .word-item {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  opacity: 0;
+  transform: translateY(110%);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #f4845f;
+  -webkit-text-fill-color: #f4845f;
+}
+
+.word-carousel .word-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.word-carousel .word-item.exit-up {
+  opacity: 0;
+  transform: translateY(-110%);
 }
 
 /* ─── TYPE ANIMATION — keyframes (reliable on page load) ─── */
@@ -461,7 +568,7 @@ section {
 .project-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.05) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.03) 50%, transparent 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -533,7 +640,7 @@ section {
   width: 18px;
   height: 18px;
   fill: none;
-  stroke: var(--accent);
+  stroke: #fff;
   stroke-width: 2;
   stroke-linecap: round;
 }
@@ -576,6 +683,9 @@ section {
   color: var(--accent);
   display: inline-block;
   line-height: 1;
+  font-family: var(--font-display), sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-text-stroke: 0;
   animation: arrowPulseH 4s ease-in-out infinite;
 }
 .all-work-link:hover .all-work-arrow {
@@ -715,7 +825,7 @@ section {
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.96);
+  background: rgba(246,243,236,0.96);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -737,9 +847,9 @@ section {
 }
 .lightbox-visual {
   width: 100%;
-  aspect-ratio: 4/3;
+  max-height: 80vh;
   border-radius: 4px;
-  overflow: hidden;
+  object-fit: contain;
   transition: opacity 0.3s ease;
 }
 .lightbox-meta {
@@ -785,9 +895,8 @@ section {
 
 /* ─── PLAY — 3 TOP / 2 BOTTOM ─── */
 .play-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 0.75rem;
+  columns: 3;
+  column-gap: 0.75rem;
   padding: 0 0 2rem;
 }
 
@@ -796,34 +905,43 @@ section {
   overflow: hidden;
   cursor: pointer;
   position: relative;
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
 }
-
-/* Irregular sizing */
-.pi-1 { grid-column: span 5; aspect-ratio: 4/3; }
-.pi-2 { grid-column: span 4; aspect-ratio: 4/3; }
-.pi-3 { grid-column: span 3; aspect-ratio: 1/1; }
-.pi-4 { grid-column: span 7; aspect-ratio: 16/7; }
-.pi-5 { grid-column: span 5; aspect-ratio: 16/9; }
 
 .play-visual {
   width: 100%;
-  height: 100%;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
-  filter: grayscale(0.5) brightness(0.75);
+  height: auto;
+  display: block;
 }
-
-.play-item:hover .play-visual {
-  transform: scale(1.06);
-  filter: grayscale(0) brightness(0.95);
-}
-
-.pp-1 { background: linear-gradient(135deg, #1a1a2e 0%, #e94560 100%); }
-.pp-2 { background: linear-gradient(135deg, #0f3460 0%, #533483 100%); }
-.pp-3 { background: linear-gradient(135deg, #0d0d0d 0%, #11998e 100%); }
-.pp-4 { background: linear-gradient(135deg, #2d1b69 0%, #c33764 100%); }
-.pp-5 { background: linear-gradient(135deg, #0f0c29 0%, #928DAB 100%); }
 
 /* ─── ABOUT ─── */
+.about-text {
+  position: relative;
+}
+
+.about-hero {
+  position: relative;
+  width: 41%;
+  margin-bottom: 2.5rem;
+}
+
+.about-photo {
+  width: 41%;
+  border-radius: 2px;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.about-hero h3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1.2rem 0;
+  margin: 0;
+  color: var(--text-primary);
+}
+
 .about-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -836,7 +954,6 @@ section {
   font-size: clamp(1.8rem, 3vw, 2.8rem);
   font-weight: 300;
   line-height: 1.25;
-  margin-bottom: 2.5rem;
   letter-spacing: -0.02em;
 }
 
@@ -907,78 +1024,112 @@ section {
 }
 
 /* ─── CONTACT / FOOTER ─── */
-.contact {
-  text-align: center;
-  padding: 10rem 3rem 5rem;
+.contact-footer {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.contact-label {
+.contact-footer-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 0%;
+  z-index: 0;
+}
+
+.contact-footer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+
+.contact-footer-content {
+  position: relative;
+  z-index: 2;
+  padding: 3rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.contact-footer-label {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 2rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 1.5rem;
 }
 
-.contact h2 {
+.contact-footer-links {
+  list-style: none;
+  margin-bottom: 4rem;
+}
+
+.contact-footer-links li {
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.contact-footer-links a {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 300;
-  letter-spacing: -0.03em;
-  margin-bottom: 2.5rem;
-  line-height: 1;
-}
-
-.contact-email {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
-  color: var(--text-secondary);
+  font-weight: 400;
+  color: #fff;
   text-decoration: none;
-  letter-spacing: 0.04em;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.25rem;
-  transition: color 0.3s ease, border-color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  transition: opacity 0.3s ease;
 }
 
-.contact-email:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+.contact-footer-links:hover a {
+  opacity: 0.4;
 }
 
-.footer {
-  padding: 2.5rem 3rem;
-  border-top: 1px solid var(--border);
+.contact-footer-links li:hover a {
+  opacity: 1;
+}
+
+.contact-footer-links .link-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  flex-shrink: 0;
+}
+
+.contact-footer-bottom {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.15);
 }
 
-.footer-left {
+.contact-footer-bottom span {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   letter-spacing: 0.12em;
-  color: var(--text-dim);
-}
-
-.footer-links {
-  display: flex;
-  gap: 2rem;
-}
-
-.footer-links a {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  color: var(--text-dim);
-  text-decoration: none;
+  color: rgba(255,255,255,0.4);
   text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: var(--text-primary);
 }
 
 /* ─── RESPONSIVE ─── */
@@ -994,11 +1145,43 @@ section {
 }
 
 @media (max-width: 768px) {
+  /* dark mode for mobile */
+  :root {
+    --bg: #0a0a0a;
+    --bg-elevated: #111111;
+    --bg-card: #1a1a1a;
+    --text-primary: #e8e8e8;
+    --text-secondary: #888888;
+    --text-dim: #444444;
+    --accent: #c8ff00;
+    --border: #1e1e1e;
+  }
+  body { background: #0a0a0a; color: #e8e8e8; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
+  .nav-name, .nav-menu-btn { color: #fff; }
+  nav.nav--dark .nav-name, nav.nav--dark .nav-menu-btn { color: #fff; }
+  .section-header h2 { color: #e8e8e8; }
+  .section-header .count { color: #444; }
+  .project-title { color: #e8e8e8; }
+  .project-meta { color: #888; }
+  .about-text h3, .about-text p { color: #888; }
+  .about-details h4 { color: #e8e8e8; }
+  .about-details p, .about-details li { color: #888; }
+  ::selection { background: #c8ff00; color: #0a0a0a; }
+  .all-work-text { color: #e8e8e8; }
+  .all-work-arrow { color: #e8e8e8; }
+  .menu-overlay { padding: calc(4rem + env(safe-area-inset-top, 0px)) calc(1.5rem + env(safe-area-inset-right, 0px)) calc(2rem + env(safe-area-inset-bottom, 0px)) calc(1.5rem + env(safe-area-inset-left, 0px)); background: #0a0a0a; }
+  .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); text-align: right; }
+  .menu-close { right: 1.5rem; top: 1.2rem; }
   nav { padding: 1.2rem 1.5rem; }
   .nav-title, .nav-location { display: none; }
   section { padding: 5rem 1.5rem; }
   /* hero: push content below fixed nav */
-  .hero { padding: 5rem 1.5rem 4rem; }
+  .hero { padding: 5rem 1.5rem 4rem; min-height: 70vh; }
+  .hero-video { display: none; }
+  .hero-statement { font-size: clamp(2.2rem, 8vw, 3.6rem); }
+  .hero-line-top { white-space: normal; }
+  .hero-line-mid, .hero-line-bot { display: inline; }
+  .word-carousel { display: block; }
   .hero-philosophy { font-size: 1rem; }
   /* morph text: contain wrapped text within filter bounds */
   .morph-container { height: 4.5rem; width: 100%; }
@@ -1008,27 +1191,27 @@ section {
   .project-card.size-medium,
   .project-card.size-small { grid-column: span 1; aspect-ratio: 16/10; min-height: auto; }
   .more-work-grid { grid-template-columns: 1fr; }
-  /* play grid: 2 per row at tablet, easier to tap */
-  .pi-1, .pi-2, .pi-3 { grid-column: span 6; aspect-ratio: 4/3; }
-  .pi-4 { grid-column: span 12; aspect-ratio: 16/7; }
-  .pi-5 { grid-column: span 12; aspect-ratio: 16/9; }
+  .play-grid { columns: unset; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
   .hero-scroll { display: none; }
   .custom-cursor { display: none; }
-  .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   /* all-work / play CTAs */
   .all-work-cta { padding: 1rem 1.5rem 1.5rem; }
   /* play section: stack header on very small viewports */
   #play .all-work-cta { flex-wrap: wrap; gap: 0.5rem; }
   /* about */
   .about-text p { font-size: 1rem; }
-  /* contact */
-  .contact { padding: 6rem 1.5rem 3rem; }
-  .contact h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
+  /* contact footer */
+  .contact-footer-video { object-position: 80% 25%; }
+  .contact-footer-content { padding: 2rem 1.5rem; justify-content: center; }
+  .contact-footer-links a { font-size: clamp(1.8rem, 7vw, 3rem); }
+  .contact-footer-links .link-label { display: none; }
+  .contact-footer-bottom { padding: 1.5rem; }
 }
 
 @media (max-width: 480px) {
-  .pi-1, .pi-2, .pi-3 { grid-column: span 12; aspect-ratio: 4/3; }
-  .pi-4, .pi-5 { grid-column: span 12; aspect-ratio: 16/9; }
+  .projects-grid .pi-1, .projects-grid .pi-2, .projects-grid .pi-3 { grid-column: span 12; }
+  .projects-grid .pi-4, .projects-grid .pi-5 { grid-column: span 12; }
+  .play-item { grid-column: span 1; }
   .projects-grid { gap: 0.75rem; }
   /* all-work CTA stacks on small phones */
   .all-work-link { font-size: 1.8rem; }
@@ -1079,23 +1262,15 @@ section {
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-content">
+  <div class="hero-content hero-content--statement">
 
-    <div class="hero-morph-wrap">
-      <div class="morph-container" id="morphContainer">
-        <span class="morph-text" id="morphText1">You will not lose</span>
-        <span class="morph-text" id="morphText2">not if you use your heart.</span>
-      </div>
-    </div>
+    <h1 class="hero-statement">
+      <span class="anim-inner"><span class="hero-line-top">Kyle Watson is a Los Angeles based <span class="word-carousel" id="roleCarousel"><span class="word-sizer">creative director,</span><span class="word-item active">creative director,</span><span class="word-item">artist,</span><span class="word-item">animator,</span><span class="word-item">designer,</span></span></span><span class="hero-line-mid">who manipulates processes and conventions to realize ideas.</span></span>
+    </h1>
 
-    <div class="hero-label">
-      <span class="anim-inner">Creative Director — Motion — Experiential</span>
-    </div>
-
-    <p class="hero-philosophy">
-      <span class="anim-inner">15 years of navigating the edges of advertising, animation, motion, experiential, art, and design.</span>
-    </p>
-
+  </div>
+  <div class="hero-video">
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/9bb3ed1f-52e6-4952-b89f-544777ec4167?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
   <div class="hero-scroll">
     <span>Scroll</span>
@@ -1164,7 +1339,7 @@ section {
     <!-- 4: large -->
     <a href="project-prediction-machines.html" class="project-card size-large reveal stagger-4">
       <span class="project-index">4</span>
-      <div class="project-visual pv-4"><div class="shape"></div></div>
+      <div class="project-visual pv-4"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC010_Mountains_002.png" alt="Prediction Machines" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="shape"></div></div>
       <div class="project-overlay">
         <div class="project-tags"></div>
         <div class="project-title">Prediction Machines</div>
@@ -1177,10 +1352,11 @@ section {
     <a href="project-ibm-open-minds.html" class="project-card size-small reveal stagger-5">
       <span class="project-index">5</span>
       <div class="project-visual pv-5"><div class="shape"></div></div>
+      <img class="project-thumb" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumbnail-Loop.mp4">
       <div class="project-overlay">
         <div class="project-tags"></div>
         <div class="project-title">IBM Open Minds</div>
-        <div class="project-client"></div>
+        <div class="project-client">IBM</div>
       </div>
       <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     </a>
@@ -1211,21 +1387,23 @@ section {
 </section>
 
 <!-- PLAY -->
-<section id="play" style="padding-top: 4rem; border-top: 1px solid var(--border);">
+<section id="play" style="padding-top: 4rem; padding-bottom: 4rem; border-top: 1px solid var(--border);">
   <div class="all-work-cta reveal" style="flex-direction: row; align-items: flex-end; justify-content: space-between; padding: 0 0 2rem;">
     <a href="play.html" class="all-work-link">
       <span class="all-work-text">Play</span>
-      <span class="all-work-arrow play-arrow-anim">↗</span>
+      <svg class="all-work-arrow play-arrow-anim" width="0.6em" height="0.6em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
     <p class="all-work-sub" style="padding-bottom: 0.4rem;">Illustration — Animation — Painting — Experimentation</p>
   </div>
 
   <div class="play-grid">
-    <div class="play-item pi-1 reveal stagger-1" data-lightbox="1" data-title="Untitled Study" data-year="2024"><div class="play-visual pp-1"></div></div>
-    <div class="play-item pi-2 reveal stagger-2" data-lightbox="2" data-title="Color Field No. 3" data-year="2023"><div class="play-visual pp-2"></div></div>
-    <div class="play-item pi-3 reveal stagger-3" data-lightbox="3" data-title="Dark Matter" data-year="2023"><div class="play-visual pp-3"></div></div>
-    <div class="play-item pi-4 reveal stagger-4" data-lightbox="4" data-title="The Long Way" data-year="2022"><div class="play-visual pp-4"></div></div>
-    <div class="play-item pi-5 reveal stagger-5" data-lightbox="5" data-title="Noise Field" data-year="2022"><div class="play-visual pp-5"></div></div>
+    <div class="play-item pi-1 reveal stagger-1" data-lightbox="1" data-title="Blue Spiral Neon" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png" alt="Blue Spiral Neon" loading="lazy"></div>
+    <div class="play-item pi-2 reveal stagger-2" data-lightbox="2" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif" alt="Chromatic Chain" loading="lazy"></div>
+    <div class="play-item pi-3 reveal stagger-3" data-lightbox="3" data-title="Chromatic Orb" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg" alt="Chromatic Orb" loading="lazy"></div>
+    <div class="play-item pi-4 reveal stagger-4" data-lightbox="4" data-title="Blue Moon Face" data-src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png" alt="Blue Moon Face" loading="lazy"></div>
+    <div class="play-item pi-5 reveal stagger-5" data-lightbox="5" data-title="If You Wish Arches" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg" alt="If You Wish Arches" loading="lazy"></div>
+    <div class="play-item pi-6 reveal stagger-6" data-lightbox="6" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif" alt="Globby Eyes" loading="lazy"></div>
+    <div class="play-item pi-7 reveal stagger-7" data-lightbox="7" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif" alt="Bird Warrior" loading="lazy"></div>
   </div>
 </section>
 
@@ -1235,7 +1413,7 @@ section {
   <button class="lightbox-prev" id="lightboxPrev">&#x2190;</button>
   <button class="lightbox-next" id="lightboxNext">&#x2192;</button>
   <div class="lightbox-content">
-    <div class="lightbox-visual" id="lightboxVisual"></div>
+    <img class="lightbox-visual" id="lightboxVisual" src="" alt="">
     <div class="lightbox-meta">
       <span class="lightbox-title" id="lightboxTitle"></span>
       <span class="lightbox-year" id="lightboxYear"></span>
@@ -1244,7 +1422,7 @@ section {
 </div>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" style="padding-top: 4rem;">
   <div class="section-header reveal">
     <h2>About</h2>
     <span class="count">Info</span>
@@ -1252,7 +1430,7 @@ section {
 
   <div class="about-section">
     <div class="about-text reveal">
-      <h3>Everything, for the love of the <em>process.</em></h3>
+      <img class="about-photo" src="https://kyfolio.b-cdn.net/_Play/pink-mask-creature.jpg" alt="" loading="lazy">
       <p>
         Most Kyle's on the internet started their careers first by pounding enormous amounts of monster energy drink, then gradually progressing to abstract expressionism via punching holes in drywall.
       </p>
@@ -1282,6 +1460,7 @@ section {
           <li>Advertising</li>
           <li>Brand Narrative</li>
           <li>Visual Storytelling</li>
+          <li>Emerging Technology & AI Workflows</li>
         </ul>
       </div>
 
@@ -1317,24 +1496,48 @@ section {
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-label reveal">Get in touch</div>
-  <h2 class="reveal stagger-1">Let's make something.</h2>
-  <a href="mailto:kyle@kylewatson.work" class="contact-email reveal stagger-2">kyle@kylewatson.work</a>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-left">&copy; 2026 Kyle Watson</div>
-  <div class="footer-links">
-    <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
-    <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+<!-- CONTACT / FOOTER -->
+<footer class="contact-footer" id="contact">
+  <img src="https://kyfolio.b-cdn.net/_Play/dino-boy-lit_2.jpg" alt="" class="contact-footer-video">
+  <div class="contact-footer-overlay"></div>
+  <div class="contact-footer-content">
+    <div class="contact-footer-label">Get in touch</div>
+    <ul class="contact-footer-links">
+      <li>
+        <a href="mailto:kyle@kylewatson.work">Email</a>
+        <span class="link-label">Mail</span>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
+        <span class="link-label">Follow</span>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="link-label">Connect</span>
+      </li>
+      <li>
+        <a href="https://kyfolio.b-cdn.net/_Resume/Kyle-Watson-Resume.pdf" target="_blank" download>Resume</a>
+        <span class="link-label">Download</span>
+      </li>
+    </ul>
+  </div>
+  <div class="contact-footer-bottom">
+    <span>&copy; 2026 Kyle Watson</span>
+    <span>Los Angeles, CA</span>
   </div>
 </footer>
 
 <script>
+// ─── HERO VIDEO FADE-IN ───
+(function() {
+  const heroIframe = document.querySelector('.hero-video iframe');
+  if (heroIframe) {
+    heroIframe.addEventListener('load', function() {
+      setTimeout(() => heroIframe.classList.add('loaded'), 1500);
+    });
+  }
+})();
+
 // ─── CUSTOM CURSOR ───
 const cursor = document.getElementById('cursor');
 document.addEventListener('mousemove', e => {
@@ -1389,69 +1592,40 @@ const observer = new IntersectionObserver((entries) => {
 
 revealElements.forEach(el => observer.observe(el));
 
-// ─── MORPH TEXT ANIMATION ───
-const morphPhrases = [
-  "You will not lose",
-  "not if you use your heart.",
-  "Too much consideration",
-  "becomes doubt.",
-  "Be the particle of dust",
-  "not the mountain in its shadow."
-];
+// ─── WORD CAROUSEL ───
+function initCarousel(id, holdMs) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const words = el.querySelectorAll('.word-item');
+  const sizer = el.querySelector('.word-sizer');
+  let current = 0;
 
-const morphText1 = document.getElementById('morphText1');
-const morphText2 = document.getElementById('morphText2');
-
-let morphIndex = 0;
-let morphProgress = 0;
-let cooldown = 2.0;         // seconds to hold first phrase
-const MORPH_DURATION = 2.0; // seconds to morph between phrases
-let lastTimestamp = null;
-
-function runMorph(timestamp) {
-  if (!lastTimestamp) lastTimestamp = timestamp;
-  const dt = Math.min((timestamp - lastTimestamp) / 1000, 0.05); // cap dt to avoid jumps
-  lastTimestamp = timestamp;
-
-  const i1 = morphIndex % morphPhrases.length;
-  const i2 = (morphIndex + 1) % morphPhrases.length;
-  morphText1.textContent = morphPhrases[i1];
-  morphText2.textContent = morphPhrases[i2];
-
-  if (cooldown > 0) {
-    // Holding — show text1 fully visible
-    cooldown -= dt;
-    morphText1.style.opacity = '1';
-    morphText1.style.filter = 'blur(0px)';
-    morphText2.style.opacity = '0';
-    morphText2.style.filter = 'blur(8px)';
-  } else {
-    // Morphing — cross-dissolve with per-element blur
-    morphProgress += dt / MORPH_DURATION;
-
-    if (morphProgress >= 1) {
-      morphProgress = 0;
-      cooldown = 1.5;
-      morphIndex++;
-    } else {
-      const p = morphProgress;
-      const MAX_BLUR = 10; // px — stays within individual letter bounds at this font size
-
-      // text1 blurs out linearly, text2 clears in linearly
-      const blur1 = p * MAX_BLUR;
-      const blur2 = (1 - p) * MAX_BLUR;
-
-      morphText1.style.opacity = String(1 - p);
-      morphText1.style.filter  = `blur(${blur1}px)`;
-      morphText2.style.opacity = String(p);
-      morphText2.style.filter  = `blur(${blur2}px)`;
-    }
+  function updateWidth(word) {
+    if (sizer) sizer.textContent = word.textContent;
   }
+  updateWidth(words[0]);
 
-  requestAnimationFrame(runMorph);
+  setInterval(() => {
+    const prev = words[current];
+    prev.classList.remove('active');
+    prev.classList.add('exit-up');
+    current = (current + 1) % words.length;
+    words[current].classList.add('active');
+    updateWidth(words[current]);
+    setTimeout(() => prev.classList.remove('exit-up'), 500);
+  }, holdMs);
 }
+initCarousel('roleCarousel', 2000);
 
-requestAnimationFrame(runMorph);
+// ─── NAV COLOR SWAP (white over hero, dark over content) ───
+const navEl = document.querySelector('nav');
+const heroSection = document.getElementById('hero');
+if (navEl && heroSection) {
+  const obs = new IntersectionObserver(([e]) => {
+    navEl.classList.toggle('nav--dark', !e.isIntersecting);
+  }, { threshold: 0.05 });
+  obs.observe(heroSection);
+}
 
 // ─── LIGHTBOX ───
 const lightbox = document.getElementById('lightbox');
@@ -1465,15 +1639,12 @@ const lightboxYear = document.getElementById('lightboxYear');
 const playItems = Array.from(document.querySelectorAll('[data-lightbox]'));
 let currentLightboxIndex = 0;
 
-// Gradient class per item (matches pp-1 through pp-5 in CSS)
-const playVisualClasses = ['pp-1', 'pp-2', 'pp-3', 'pp-4', 'pp-5'];
-
 function openLightbox(index) {
   currentLightboxIndex = index;
   const item = playItems[index];
-  const vcls = playVisualClasses[index] || 'pp-1';
 
-  lightboxVisual.className = 'lightbox-visual ' + vcls;
+  lightboxVisual.src = item.dataset.src || '';
+  lightboxVisual.alt = item.dataset.title || '';
   lightboxTitle.textContent = item.dataset.title || '';
   lightboxYear.textContent = item.dataset.year || '';
 

@@ -1,0 +1,113 @@
+<!--
+  MORPH TEXT ANIMATION — archived from homepage hero
+  Originally sat inside .hero-morph-wrap, cycling through phrase pairs with blur crossfade.
+  Can be dropped back into any page.
+-->
+
+<!-- ═══ CSS ═══ -->
+<style>
+.hero-morph-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.morph-container {
+  position: relative;
+  height: clamp(2.2rem, 4.2vw, 3.6rem);
+  margin-bottom: 3rem;
+}
+
+.morph-text {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  will-change: opacity, filter;
+}
+
+/* Mobile override */
+@media (max-width: 768px) {
+  .morph-text {
+    white-space: normal;
+    width: 100%;
+    font-size: clamp(1.5rem, 6.2vw, 2.2rem);
+    line-height: 1.2;
+  }
+}
+</style>
+
+<!-- ═══ HTML ═══ -->
+<div class="hero-morph-wrap">
+  <div class="morph-container" id="morphContainer">
+    <span class="morph-text" id="morphText1">You will not lose</span>
+    <span class="morph-text" id="morphText2">not if you use your heart.</span>
+  </div>
+</div>
+
+<!-- ═══ JS ═══ -->
+<script>
+const morphPhrases = [
+  "You will not lose",
+  "not if you use your heart.",
+  "Too much consideration",
+  "becomes doubt.",
+  "Be the particle of dust",
+  "not the mountain in its shadow."
+];
+
+const morphText1 = document.getElementById('morphText1');
+const morphText2 = document.getElementById('morphText2');
+
+let morphIndex = 0;
+let morphProgress = 0;
+let cooldown = 2.0;         // seconds to hold first phrase
+const MORPH_DURATION = 2.0; // seconds to morph between phrases
+let lastTimestamp = null;
+
+function runMorph(timestamp) {
+  if (!lastTimestamp) lastTimestamp = timestamp;
+  const dt = Math.min((timestamp - lastTimestamp) / 1000, 0.05);
+  lastTimestamp = timestamp;
+
+  const i1 = morphIndex % morphPhrases.length;
+  const i2 = (morphIndex + 1) % morphPhrases.length;
+  morphText1.textContent = morphPhrases[i1];
+  morphText2.textContent = morphPhrases[i2];
+
+  if (cooldown > 0) {
+    cooldown -= dt;
+    morphText1.style.opacity = '1';
+    morphText1.style.filter = 'blur(0px)';
+    morphText2.style.opacity = '0';
+    morphText2.style.filter = 'blur(8px)';
+  } else {
+    morphProgress += dt / MORPH_DURATION;
+
+    if (morphProgress >= 1) {
+      morphProgress = 0;
+      cooldown = 1.5;
+      morphIndex++;
+    } else {
+      const p = morphProgress;
+      const MAX_BLUR = 10;
+      const blur1 = p * MAX_BLUR;
+      const blur2 = (1 - p) * MAX_BLUR;
+
+      morphText1.style.opacity = String(1 - p);
+      morphText1.style.filter  = `blur(${blur1}px)`;
+      morphText2.style.opacity = String(p);
+      morphText2.style.filter  = `blur(${blur2}px)`;
+    }
+  }
+
+  requestAnimationFrame(runMorph);
+}
+
+requestAnimationFrame(runMorph);
+</script>

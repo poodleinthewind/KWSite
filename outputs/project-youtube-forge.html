@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root { --project-color: #2a0a0a; }
+:root { --project-color: #1a0a0a; }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -31,13 +31,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
 
 /* ─── FULLSCREEN MENU ─── */
-.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .menu-overlay.open { opacity: 1; pointer-events: all; }
 .menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
 .menu-close:hover { color: var(--text-primary); }
-.menu-links { list-style: none; }
+.menu-links { list-style: none; margin-top: auto; margin-bottom: auto; }
 .menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
-.menu-link:hover { color: var(--accent); padding-right: 1rem; }
+.menu-link:hover { color: #f4845f; padding-right: 1rem; }
 
 /* PROJECT HEADER */
 .project-header { padding: 8rem 3rem 3rem; border-bottom: 1px solid var(--border); }
@@ -55,16 +55,18 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .video-wrap .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0d0d 0%, var(--project-color) 100%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
 
 /* INTRO */
-.intro { padding: 5rem 3rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 6rem; border-bottom: 1px solid var(--border); }
-.intro-text { font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; max-width: 580px; }
+.intro { padding: 3rem 3rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; align-items: start; min-height: 20rem; }
+.intro-text { padding-right: 3rem; font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; max-width: 580px; }
 .intro-text p + p { margin-top: 1.2rem; }
 
-/* SIDEBAR META */
-.meta { padding-top: 0.25rem; }
-.meta-block { margin-bottom: 2.25rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--border); }
-.meta-block:last-child { border-bottom: none; margin-bottom: 0; }
+.intro-divider { grid-column: 2; background: var(--border); width: 1px; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.meta { grid-column: 3; display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 0; padding-left: 0; align-self: stretch; margin-top: -3rem; margin-bottom: -3rem; }
+.meta-block { padding: 1.2rem 1.5rem; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.meta-block:nth-child(odd) { border-left: none; }
+.meta-block:last-child { border-bottom: none; }
+.meta-block:nth-last-child(2):nth-child(odd) { border-bottom: none; }
 .meta-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.6rem; }
-.meta-value { font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; line-height: 1.7; }
+.meta-value { font-size: 0.85rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
 .meta-value strong { color: var(--text-primary); font-weight: 400; display: block; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.2rem; }
 .tag { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 2px; font-weight: 500; background: linear-gradient(90deg, #f4845f 0%, #e8637a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; border: 1px solid rgba(244,132,95,0.3); }
@@ -93,8 +95,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .split-text h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
 .split-text p { font-size: 0.9rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
 .split-text p + p { margin-top: 1rem; }
-.split-media { aspect-ratio: 4/3; overflow: hidden; background: var(--bg-card); position: relative; }
-.split-media img { width: 100%; height: 100%; object-fit: cover; }
+.split-media { overflow: hidden; background: var(--bg-card); position: relative; }
+.split-media img { width: 100%; display: block; }
 .split-media .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* GALLERY */
@@ -105,11 +107,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .g-2-1 { grid-template-columns: 2fr 1fr; }
 .g-1-2 { grid-template-columns: 1fr 2fr; }
 .g-item { overflow: hidden; position: relative; background: var(--bg-card); }
-.g-item.std  { aspect-ratio: 4/3; }
-.g-item.wide { aspect-ratio: 16/7; }
-.g-item.sq   { aspect-ratio: 1/1; }
-.g-item.tall { aspect-ratio: 3/4; }
-.g-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.g-item img { width: 100%; display: block; }
 .g-item .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.28; }
 
 /* CREDITS */
@@ -134,13 +132,18 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  .intro { grid-template-columns: 1fr; gap: 3rem; }
+  .intro { grid-template-columns: 1fr; min-height: auto; }
+  .intro-divider { display: none; }
+  .meta { display: none; }
   .split { grid-template-columns: 1fr; gap: 2.5rem; }
   .split.flip { direction: ltr; }
   .credits { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
   nav.top { padding: 1.2rem 1.5rem; }
+  .menu-overlay { padding: 4rem 1.5rem 2rem; }
+  .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
+  .menu-close { right: 1.5rem; top: 1.2rem; }
   .project-header { padding: 6rem 1.5rem 2.5rem; }
   .hero-video { padding: 0 1.5rem; }
   .intro, .section { padding: 3rem 1.5rem; }
@@ -149,6 +152,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .page-item { padding: 2rem 1.5rem; }
 }
+
+/* CREDITS TOGGLE */
+.credits-toggle { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; padding: 0; width: 100%; }
+.credits-arrow { font-size: 0.55rem; color: var(--text-dim); transition: transform 0.3s ease; }
+.credits-toggle[aria-expanded="true"] .credits-arrow { transform: rotate(180deg); }
+.credits-content { margin-top: 2rem; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; }
+.credits-section { padding-bottom: 3rem; }
 </style>
 </head>
 <body>
@@ -177,27 +187,24 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <a href="all-work.html">&larr; Back</a>
   </div>
   <div class="header-tags">
-    <span class="tag">Creative Direction</span>
-    <span class="tag">Design</span>
-    <span class="tag">Experiential</span>
-    <span class="tag">Animation</span>
+    <span class="tag">Event Design</span>
+    <span class="tag">Brand Identity</span>
   </div>
   <h1 class="header-title">Forge</h1>
 </header>
 
-<!-- ══ HERO VIDEO ══ -->
-<div class="hero-video">
-  <div class="video-wrap">
-    <div class="ph">Forge &mdash; YouTube</div>
-  </div>
+<!-- ══ HERO IMAGE ══ -->
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/080_Forge/stills/meeno-YouT%202019.11%20Forge%20%20-1229.jpg" alt="Forge event for YouTube" loading="eager" style="width:100%;">
 </div>
 
 <!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>Sometimes it's hard to tell whether YouTube is just a video platform or a portal to a bottomless galaxy of content where time ceases to exist. Naturally with all that depth comes responsibility, and that's why YouTube invited us to create a vision for Forge &mdash; a special event where we could help them stop time for a moment to think deeply about the best way to step into the future.</p>
+    <p>A special event concept created for YouTube to help the platform stop time for a moment to think deeply about the best way to step into the future. YouTube functions as both a video platform and a portal to a bottomless galaxy of content where time ceases to exist.</p>
   </div>
-  <aside class="meta">
+  <div class="intro-divider"></div>
+  <div class="meta">
     <div class="meta-block">
       <div class="meta-label">Client</div>
       <div class="meta-value"><strong>YouTube</strong></div>
@@ -214,64 +221,105 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <div class="meta-label">Year</div>
       <div class="meta-value">2019</div>
     </div>
-  </aside>
+  </div>
 </div>
 
-<!-- ══ FULL-BLEED ══ -->
-<div class="bleed"><div class="ph-rect"></div></div>
+<!-- ══ FULL-BLEED: IDENTITY ══ -->
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/080_Forge/stills/Asset%201grid.png" alt="Forge visual identity grid" loading="lazy" style="width:100%;">
+</div>
 
-<!-- ══ PROCESS ══ -->
+<!-- ══ PROCESS: DEPTH AS IDENTITY ══ -->
 <div class="section">
   <div class="section-label">Process</div>
 
   <div class="split">
     <div class="split-text">
-      <h3>The Voids In-Between</h3>
-      <p>The infinite expanse of content on YouTube can't exist without structure. A simple structure &mdash; a square &mdash; was sent back into space to see what a cascade of layers could communicate. As the idea evolved, more brand authenticity surfaced in the voids in-between than in the actual depth itself.</p>
+      <h3>Depth as Identity</h3>
+      <p>The foundational idea involved sending a simple structure &mdash; a square &mdash; back into space to see what a cascade of layers could communicate. Brand authenticity surfaced in the voids in-between more prominently than in the actual depth itself.</p>
     </div>
-    <div class="split-media"><div class="ph"></div></div>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/080_Forge/stills/Stage1-gigapixel-low%20resolution%20v2-2x.jpg" alt="Forge stage — depth as identity" loading="lazy">
+    </div>
   </div>
 
   <div class="split flip">
     <div class="split-text">
       <h3>Threading the Look</h3>
-      <p>An impactful lockup, collateral, stage design, on-screen content, and animation direction were just a few of the items that extended the look.</p>
+      <p>Threading the look across multiple formats &mdash; from branding to physical stage installation to digital animation &mdash; created a cohesive brand experience. Deliverables included visual identity lockup, collateral design, stage design, on-screen content, animation direction, and merchandise.</p>
     </div>
-    <div class="split-media"><div class="ph"></div></div>
-  </div>
-
-  <div class="split">
-    <div class="split-text">
-      <h3>IRL</h3>
-      <p>It all came alive in a very real way on the stage that the amazing Matt Gates interpreted from crude pencil sketches and Photoshop comps.</p>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/080_Forge/stills/brochure_Layers.jpg" alt="Forge brochure threading the look" loading="lazy">
     </div>
-    <div class="split-media"><div class="ph"></div></div>
   </div>
 </div>
 
-<!-- ══ STILLS ══ -->
+<!-- ══ FULL-BLEED: SCREEN DESIGN ══ -->
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/080_Forge/stills/Screen%20Shot%202021-02-12%20at%202.36.04%20PM.png" alt="Forge screen design" loading="lazy" style="width:100%;">
+</div>
+
+<!-- ══ STAGE DESIGN ══ -->
 <div class="section">
-  <div class="section-label">Stills</div>
-  <div class="gallery g-3">
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
+  <div class="section-label">Stage Design</div>
+  <div class="gallery g-2">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/NEAL_BLACK_L%20copyNew_New.jpg" alt="Forge stage — dark wide" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/NEAL_RED_LNew_New.jpg" alt="Forge stage — red wide" loading="lazy"></div>
   </div>
-  <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item std"><div class="ph"></div></div>
-    <div class="g-item std"><div class="ph"></div></div>
+  <div class="gallery g-3">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/BLUE_LNew_New.jpg" alt="Forge stage — blue" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/TEAL_CNew_New.jpg" alt="Forge stage — teal" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/FIRESIDE_CNew_New.jpg" alt="Forge fireside" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ══ KEYNOTE FRAMES ══ -->
+<div class="section">
+  <div class="section-label">Keynote Frames</div>
+  <div class="gallery g-3">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/Neal_Slides_1.jpg" alt="Forge keynote frame 1" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/Neal_Slides_2.jpg" alt="Forge keynote frame 2" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/Neal_Slides4.jpg" alt="Forge keynote frame 3" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ══ COLLATERAL ══ -->
+<div class="section">
+  <div class="section-label">Collateral</div>
+  <div class="gallery g-2">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/T-Shirt.jpg" alt="Forge t-shirt front" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/T-shirt_back_layers.jpg" alt="Forge t-shirt back" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ══ IRL ══ -->
+<div class="section">
+  <div class="section-label">IRL</div>
+  <div class="gallery g-2">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/meeno-YouT%202019.11%20Forge%20%20-1122.jpg" alt="Forge event" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/meeno-YouT%202019.11%20Forge%20%20-1136.jpg" alt="Forge event" loading="lazy"></div>
+  </div>
+  <div class="gallery g-3">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/meeno-YouT%202019.11%20Forge%20%20-1204.jpg" alt="Forge event" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/meeno-YouT%202019.11%20Forge%20%20-1205.jpg" alt="Forge event" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/080_Forge/stills/meeno-YouT%202019.11%20Forge%20%20-1208.jpg" alt="Forge event" loading="lazy"></div>
   </div>
 </div>
 
 <!-- ══ CREDITS ══ -->
-<div class="section">
-  <div class="section-label">Credits</div>
+<div class="section credits-section">
+  <button class="credits-toggle" aria-expanded="false">
+    <span class="section-label" style="margin-bottom:0">Credits</span>
+    <span class="credits-arrow">&#9660;</span>
+  </button>
+  <div class="credits-content" style="display:none;">
   <div class="credits">
     <div><div class="credit-role">Creative Director / Designer</div><div class="credit-name">Kyle Watson</div></div>
     <div><div class="credit-role">AD / Designer</div><div class="credit-name">Leslie Chang</div></div>
     <div><div class="credit-role">Scenic Design</div><div class="credit-name">Matt Gates</div></div>
     <div><div class="credit-role">Executive Producers</div><div class="credit-name">Irene Boschetti, Jess Buck</div></div>
     <div><div class="credit-role">Agency</div><div class="credit-name">Jack Morton</div></div>
+  </div>
   </div>
 </div>
 
@@ -292,7 +340,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
-    <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
 
@@ -304,6 +352,24 @@ menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
 menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
 menuOverlay.querySelectorAll('.menu-link').forEach(link => {
   link.addEventListener('click', () => menuOverlay.classList.remove('open'));
+});
+
+// Credits toggle
+document.querySelectorAll('.credits-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    const content = btn.nextElementSibling;
+    btn.setAttribute('aria-expanded', !expanded);
+    if (!expanded) {
+      content.style.display = 'block';
+      content.style.maxHeight = content.scrollHeight + 'px';
+      content.style.opacity = '1';
+    } else {
+      content.style.maxHeight = '0';
+      content.style.opacity = '0';
+      setTimeout(() => { content.style.display = 'none'; }, 400);
+    }
+  });
 });
 </script>
 </body>
