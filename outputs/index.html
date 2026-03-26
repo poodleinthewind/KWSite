@@ -1050,7 +1050,7 @@ section {
 .about-text .closing-line {
   font-size: 0.9rem;
   color: var(--text-dim);
-  font-style: italic;
+  font-style: normal;
   margin-top: 2rem;
   letter-spacing: 0.02em;
 }
@@ -1276,6 +1276,7 @@ section {
   /* play section: stack header on very small viewports */
   #play .all-work-cta { flex-wrap: wrap; gap: 0.5rem; }
   /* about */
+  .about-photo { border: 1px solid rgba(255,255,255,0.15); }
   .about-text p { font-size: 1rem; }
   /* contact footer */
   .contact-footer { min-height: auto; }
@@ -1381,7 +1382,7 @@ section {
           <span class="project-tag">3D</span>
         </div>
         <div class="project-title">CoreWeave x Aston Martin F1</div>
-        <div class="project-client">Asteria Film — Hybrid AI brand film</div>
+        <div class="project-client">CoreWeave</div>
       </div>
       <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     </a>
@@ -1397,7 +1398,7 @@ section {
           <span class="project-tag">Film</span>
           <span class="project-tag">Motion</span>
         </div>
-        <div class="project-title">Moonvalley: Marey</div>
+        <div class="project-title">Marey</div>
         <div class="project-client">Moonvalley — Animation &amp; Design</div>
       </div>
       <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
@@ -1438,7 +1439,7 @@ section {
       <div class="project-overlay">
         <div class="project-tags"></div>
         <div class="project-title">Mirror State</div>
-        <div class="project-client"></div>
+        <div class="project-client">Proofpoint</div>
       </div>
       <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     </a>
@@ -1450,7 +1451,7 @@ section {
       <img class="project-thumb" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumbnail-Loop.mp4">
       <div class="project-overlay">
         <div class="project-tags"></div>
-        <div class="project-title">IBM Open Minds</div>
+        <div class="project-title">Open Minds</div>
         <div class="project-client">IBM</div>
       </div>
       <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
@@ -1513,18 +1514,17 @@ section {
     <div class="about-text reveal">
       <video class="about-photo" autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/_Site/KW-Spin.mp4"></video>
       <p>
-        Most Kyle's on the internet started their careers first by pounding enormous amounts of monster energy drink, then gradually progressing to abstract expressionism via punching holes in drywall.
+        Most Kyle's on the internet started their careers first by pounding enormous amounts of monster energy drink, then gradually progressed to abstract expressionism via punching holes in drywall.
       </p>
       <p>
-        For me it started with music, from there it was making huge paintings, then writing on huge paintings, working on houses, working in advertising, working in tech, being ravenous in my pursuit to learn more about motion, 3D and of course design.
+        For me it started with music, from there it was making huge paintings, then writing on huge paintings, cleaning windows on high-rise buildings, working on houses, working in advertising, working in tech, being ravenous in my pursuit to learn more about people, movement, and of course design.
       </p>
       <p>
-        15 years of industrial tinkering has led me to Los Angeles, where I am currently focused on <strong>developing hybrid workflows that allow us to retain our individuality while executing at the scale and speed of AI.</strong>
+        I've spent my life trying to reduce friction between raw human insights and the technicalities associated with expressing them with integrity and truth. In other words, <span style="font-weight:600; background:linear-gradient(90deg,#f4845f,#e8637a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">I only practice the piano so I can play the blues when I'm sad.</span>
       </p>
       <p>
-        As a visual designer it makes perfect sense that my core interests are in what we cannot see. The beginnings of stories unfolding between a person, an animal, a place, a motivation, a brand. . . .
+        I am currently based in Los Angeles, where I work with clients as a broad creative partner, leveraging a uniquely personal breadth of experience to help solve problems that transcend mediums.
       </p>
-      <p class="closing-line">More than ever I feel an urgency and responsibility to bring these intangibles like process, personality, and soul to everything that I make.</p>
     </div>
 
     <div class="about-details reveal stagger-2">
@@ -1664,8 +1664,11 @@ menuOverlay.querySelectorAll('.menu-link').forEach(link => {
     const target = document.querySelector(href);
     menuOverlay.classList.remove('open');
     setTimeout(() => {
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 400);
+      if (target) {
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 20;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }, 450);
   });
 });
 

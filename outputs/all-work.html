@@ -229,6 +229,18 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
   .project-card.size-wide { grid-column: span 12; }
 }
 @media (max-width: 768px) {
+  :root {
+    --bg: #0a0a0a; --bg-elevated: #141414; --bg-card: #1a1a1a;
+    --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
+    --accent: #e8e8e8; --border: #222222;
+  }
+  html { background: var(--bg); scrollbar-color: #333 var(--bg); }
+  body { background: var(--bg); }
+  ::selection { background: var(--accent); color: var(--bg); }
+  .filter-btn { border-color: #333; color: var(--text-secondary); }
+  .filter-btn:hover, .filter-btn.active { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
+  .project-title { color: #fff; }
+  .project-client { color: rgba(255,255,255,0.7); }
   nav { padding: 1.2rem 1.5rem; }
   .page-header { padding: 6rem 1.5rem 2rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
   /* filter bar: horizontally scrollable, no wrap */
@@ -293,12 +305,12 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">3D</span></div>
       <div class="project-title">CoreWeave x Aston Martin F1</div>
-      <div class="project-client">Asteria Film</div>
+      <div class="project-client">CoreWeave</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 020: Moonvalley: Marey -->
+  <!-- 020: Marey -->
   <a href="project-moonvalley-marey.html" class="project-card size-medium" data-categories="ai motion 3d">
     <span class="project-index">020</span>
     <div class="project-visual pv-2"><div class="shape"></div></div>
@@ -306,7 +318,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/020_Marey/video/marey_launch_v1.mp4" data-start="10" data-end="26"></video>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">Film</span></div>
-      <div class="project-title">Moonvalley: Marey</div>
+      <div class="project-title">Marey</div>
       <div class="project-client">Moonvalley</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
@@ -319,7 +331,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Design</span></div>
       <div class="project-title">Mirror State</div>
-      <div class="project-client"></div>
+      <div class="project-client">Proofpoint</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
@@ -347,7 +359,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     </div>
   </a>
 
-  <!-- 060: IBM Open Minds -->
+  <!-- 060: Open Minds -->
   <a href="project-ibm-open-minds.html" class="project-card size-small" data-categories="motion design experiential">
     <span class="project-index">060</span>
     <div class="project-visual pv-5"><div class="shape"></div></div>
@@ -355,7 +367,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumbnail-Loop.mp4"></video>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
-      <div class="project-title">IBM Open Minds</div>
+      <div class="project-title">Open Minds</div>
       <div class="project-client">IBM</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
@@ -385,14 +397,14 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 090: YouTube Forge -->
+  <!-- 090: Forge -->
   <a href="project-youtube-forge.html" class="project-card size-medium" data-categories="motion design experiential 3d">
     <span class="project-index">090</span>
     <div class="project-visual pv-9"><div class="shape"></div></div>
     <img class="project-thumb" src="https://kyfolio.b-cdn.net/080_Forge/stills/NEAL_BLACK_L%20copyNew_New.jpg" alt="" style="transform: scale(1.15); object-position: center 40%;">
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
-      <div class="project-title">YouTube Forge</div>
+      <div class="project-title">Forge</div>
       <div class="project-client">YouTube</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
@@ -412,15 +424,15 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 110: Google Next -->
+  <!-- 110: Next -->
   <a href="project-google-next.html" class="project-card size-large" data-categories="experiential motion design 3d">
     <span class="project-index">110</span>
     <div class="project-visual pv-7"><div class="shape"></div></div>
     <img class="project-thumb" src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_thumb.jpg" alt="">
-    <img class="project-video" src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_01.gif" alt="Google Next" loading="lazy">
+    <img class="project-video" src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_01.gif" alt="Next" loading="lazy">
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Experiential</span><span class="project-tag">Motion</span><span class="project-tag">Design</span></div>
-      <div class="project-title">Google Next</div>
+      <div class="project-title">Next</div>
       <div class="project-client">Google</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
