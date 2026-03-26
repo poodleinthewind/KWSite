@@ -15,6 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kyle Watson — Creative Director">
 <meta name="twitter:image" content="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Pyro-Tunnel-01.png">
+<link rel="preconnect" href="https://kyfolio.b-cdn.net" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -228,7 +229,7 @@ nav.nav--dark .nav-location { color: var(--text-dim); }
   z-index: 1;
   overflow: hidden;
 }
-.hero-video iframe {
+.hero-video video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -237,12 +238,12 @@ nav.nav--dark .nav-location { color: var(--text-dim); }
   width: 177.78vh; /* 16:9 ratio */
   height: 56.25vw;
   transform: translate(-50%, -50%);
-  border: none;
+  object-fit: cover;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.6s ease;
 }
-.hero-video iframe.loaded {
+.hero-video video.loaded {
   opacity: 1;
 }
 
@@ -936,8 +937,10 @@ section {
 }
 
 .about-photo {
-  width: 41%;
-  border-radius: 2px;
+  width: 60%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 50%;
   display: block;
   margin-bottom: 2rem;
 }
@@ -1283,7 +1286,7 @@ section {
 
   </div>
   <div class="hero-video">
-    <iframe src="https://iframe.mediadelivery.net/embed/615661/9bb3ed1f-52e6-4952-b89f-544777ec4167?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <video autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4"></video>
   </div>
   <div class="hero-scroll">
     <span>Scroll</span>
@@ -1443,7 +1446,7 @@ section {
 
   <div class="about-section">
     <div class="about-text reveal">
-      <img class="about-photo" src="https://kyfolio.b-cdn.net/_Play/pink-mask-creature.jpg" alt="" loading="lazy">
+      <video class="about-photo" autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/_Site/KW-Spin.mp4"></video>
       <p>
         Most Kyle's on the internet started their careers first by pounding enormous amounts of monster energy drink, then gradually progressing to abstract expressionism via punching holes in drywall.
       </p>
@@ -1543,11 +1546,12 @@ section {
 <script>
 // ─── HERO VIDEO FADE-IN ───
 (function() {
-  const heroIframe = document.querySelector('.hero-video iframe');
-  if (heroIframe) {
-    heroIframe.addEventListener('load', function() {
-      setTimeout(() => heroIframe.classList.add('loaded'), 1500);
-    });
+  const heroVideo = document.querySelector('.hero-video video');
+  if (heroVideo) {
+    heroVideo.addEventListener('canplay', function() {
+      heroVideo.classList.add('loaded');
+    }, { once: true });
+    if (heroVideo.readyState >= 3) heroVideo.classList.add('loaded');
   }
 })();
 

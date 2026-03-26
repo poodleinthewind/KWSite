@@ -268,12 +268,14 @@ nav {
   break-inside: avoid;
   margin-bottom: 1rem;
   opacity: 0;
-  transform: translateY(20px);
-  animation: pgFadeIn 0.6s ease forwards;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes pgFadeIn {
-  to { opacity: 1; transform: translateY(0); }
+.pg-item.ready {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }
 
 .pg-visual {
@@ -312,6 +314,7 @@ nav {
 }
 
 .pg-item:hover .pg-meta { opacity: 1; }
+
 
 .pg-meta-title {
   font-family: var(--font-mono);
@@ -518,12 +521,10 @@ nav {
 <header class="play-header">
   <div class="play-header-label">
     <a href="index.html">← Back</a>
-    <span class="sep">/</span>
-    <span>Play</span>
   </div>
   <h1>Play</h1>
   <p class="play-header-desc">
-    Illustration, motion experiments, painting studies, and personal R&D. The work that doesn't have a client brief, a deadline, or a deliverable — only a question.
+    Illustration, motion experiments, painting studies, and personal R&D.<br>Relentlessly exploring ideas on the fringes of capability and curiosity.
   </p>
 </header>
 
@@ -633,9 +634,18 @@ revealEls.forEach(el => revealObserver.observe(el));
 
 const allItems = document.querySelectorAll('.pg-item');
 
-// Staggered fade-in for gallery items
-allItems.forEach((item, i) => {
-  item.style.animationDelay = `${i * 0.04}s`;
+// Wait for all images to load, then stagger-reveal to avoid reflow glitching
+const imgs = Array.from(document.querySelectorAll('.pg-visual'));
+const loaded = imgs.map(img => {
+  if (img.complete && img.naturalHeight > 0) return Promise.resolve();
+  return new Promise(r => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); });
+});
+Promise.all(loaded).then(() => {
+  allItems.forEach((item, i) => {
+    setTimeout(() => {
+      item.classList.add('ready');
+    }, i * 40);
+  });
 });
 
 // ─── LIGHTBOX ───
