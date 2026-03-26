@@ -10,14 +10,14 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --bg: #0a0a0a; --bg-elevated: #111111; --bg-card: #141414;
-  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #444444;
-  --accent: #c8ff00; --border: #1e1e1e;
+  --bg: #f6f3ec; --bg-elevated: #edeae3; --bg-card: #e8e5de;
+  --text-primary: #010103; --text-secondary: #555555; --text-dim: #999999;
+  --accent: #010103; --border: #d4d0c8;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Space Grotesk', monospace;
 }
-html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #2a2a2a var(--bg); }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #c4c0b8 var(--bg); background: var(--bg); }
 body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--bg); }
 
@@ -116,7 +116,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
   cursor: pointer;
   border-radius: 3px;
   background: var(--bg-card);
-  min-height: 320px;
+  min-height: 0;
   text-decoration: none;
   display: block;
   color: var(--text-primary);
@@ -125,6 +125,39 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
 .project-card.size-medium { grid-column: span 5; aspect-ratio: 4/3; }
 .project-card.size-small  { grid-column: span 6; aspect-ratio: 16/10; }
 .project-card.size-wide   { grid-column: span 12; aspect-ratio: 21/7; }
+
+/* 3-wide asymmetric at large screens */
+@media (min-width: 1400px) {
+  .projects-grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: auto;
+  }
+  /* Reset all cards to small by default */
+  .project-card.size-large,
+  .project-card.size-medium,
+  .project-card.size-small {
+    grid-column: span 3;
+    aspect-ratio: 16/10;
+  }
+  /* Row 1 pattern: large + small + small (1st of every 9) */
+  .projects-grid .project-card:nth-child(9n+1) {
+    grid-column: span 6;
+    aspect-ratio: 16/8;
+  }
+  /* Row 2 pattern: small + large + small (5th of every 9) */
+  .projects-grid .project-card:nth-child(9n+5) {
+    grid-column: span 6;
+    aspect-ratio: 16/8;
+  }
+  /* Row 3 pattern: small + small + large (9th of every 9, i.e. 9n) */
+  .projects-grid .project-card:nth-child(9n) {
+    grid-column: span 6;
+    aspect-ratio: 16/8;
+  }
+  .project-card.size-wide {
+    grid-column: span 12;
+  }
+}
 
 .project-visual { width: 100%; height: 100%; position: absolute; inset: 0; transition: transform 0.9s cubic-bezier(0.16,1,0.3,1); overflow: hidden; }
 .project-card:hover .project-visual { transform: scale(1.04); }
@@ -166,9 +199,9 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
   border: 1px solid rgba(244,132,95,0.3);
   padding: 0.3rem 0.75rem; border-radius: 2px;
 }
-.project-title { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.3rem; }
+.project-title { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.3rem; color: #fff; }
 .project-card.size-large .project-title { font-size: clamp(1.2rem, 2.5vw, 2rem); }
-.project-client { font-size: 0.78rem; color: var(--text-secondary); font-weight: 300; }
+.project-client { font-size: 0.78rem; color: rgba(255,255,255,0.7); font-weight: 300; }
 
 .project-index { position: absolute; top: 1.5rem; left: 1.5rem; font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; z-index: 3; }
 .project-arrow { position: absolute; top: 1.5rem; right: 1.5rem; width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(4px); transition: all 0.3s ease; z-index: 3; }
@@ -535,7 +568,7 @@ filterBtns.forEach(btn => {
     const filter = btn.dataset.filter;
     cards.forEach(card => {
       const cats = card.dataset.categories || '';
-      if (filter === 'all' || cats.includes(filter)) {
+      if (filter === 'all' || cats.split(' ').includes(filter)) {
         card.classList.remove('hidden');
       } else {
         card.classList.add('hidden');
