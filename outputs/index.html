@@ -936,13 +936,24 @@ section {
   margin-bottom: 2.5rem;
 }
 
+.about-photo-row {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 1rem;
+}
 .about-photo {
-  width: 60%;
+  width: 45%;
+  min-width: 45%;
   aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 50%;
   display: block;
-  margin-bottom: 2rem;
+}
+.about-pullquote {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  line-height: 1.4;
 }
 
 .about-hero h3 {
@@ -981,6 +992,15 @@ section {
   margin-bottom: 1.5rem;
   font-weight: 300;
 }
+.about-text p.about-pullquote {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: #000;
+  margin-bottom: 0;
+}
 
 .about-text p strong {
   color: var(--text-primary);
@@ -996,7 +1016,7 @@ section {
 }
 
 .about-details {
-  padding-top: 0.5rem;
+  padding-top: 4rem;
 }
 
 .detail-block {
@@ -1052,7 +1072,8 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% 0%;
+  object-position: 30% 0%;
+  transform: scaleX(-1);
   z-index: 0;
 }
 
@@ -1176,6 +1197,7 @@ section {
   .project-title { color: #e8e8e8; }
   .project-meta { color: #888; }
   .about-text h3, .about-text p { color: #888; }
+  .about-text p.about-pullquote { color: #e8e8e8; }
   .about-details h4 { color: #e8e8e8; }
   .about-details p, .about-details li { color: #888; }
   ::selection { background: #c8ff00; color: #0a0a0a; }
@@ -1446,9 +1468,12 @@ section {
 
   <div class="about-section">
     <div class="about-text reveal">
-      <video class="about-photo" autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/_Site/KW-Spin.mp4"></video>
+      <div class="about-photo-row">
+        <video class="about-photo" autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/_Site/KW-Spin.mp4"></video>
+        <p class="about-pullquote">Most Kyle's on the internet started their careers first by pounding enormous amounts of monster energy drink . . .</p>
+      </div>
       <p>
-        Most Kyle's on the internet started their careers first by pounding enormous amounts of monster energy drink, then gradually progressing to abstract expressionism via punching holes in drywall.
+        . . . then gradually progressing to abstract expressionism via punching holes in drywall.
       </p>
       <p>
         For me it started with music, from there it was making huge paintings, then writing on huge paintings, working on houses, working in advertising, working in tech, being ravenous in my pursuit to learn more about motion, 3D and of course design.
