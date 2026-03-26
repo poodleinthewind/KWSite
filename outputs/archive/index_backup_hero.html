@@ -209,54 +209,52 @@ nav.nav--dark .nav-location { color: var(--text-dim); }
 
 /* ─── HERO ─── */
 .hero {
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 12rem 3rem 0;
-  background: var(--bg);
+  padding: 5rem 3rem 3rem;
   position: relative;
-  z-index: 2;
-  min-height: 45vh;
+  overflow: hidden;
+  background: #0a0a0a;
 }
 
 .hero-bg {
-  display: none;
-}
-.hero-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
   z-index: 0;
 }
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
 .hero-video video {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: 177.78vh; /* 16:9 ratio */
+  height: 56.25vw;
+  transform: translate(-50%, -50%);
   object-fit: cover;
-  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
-.hero-video-spacer {
-  height: 100vh;
-}
-.hero-bottom-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 0;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-dim);
+.hero-video video.loaded {
+  opacity: 1;
 }
 
 .hero-content {
+  position: relative;
+  z-index: 2;
   max-width: 80vw;
   display: flex;
   flex-direction: column;
-  color: var(--text-primary);
+  flex: 1;
+  color: #ffffff;
 }
 
 /* Morph text sits in a flex-grow zone — vertically centered in that space */
@@ -277,9 +275,9 @@ nav.nav--dark .nav-location { color: var(--text-dim); }
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 2.8vw, 2.4rem);
   font-weight: 500;
-  line-height: 1.25;
+  line-height: 1.1;
   letter-spacing: -0.035em;
-  color: var(--text-primary);
+  color: #ffffff;
   max-width: 100%;
 }
 
@@ -308,8 +306,8 @@ nav.nav--dark .nav-location { color: var(--text-dim); }
   display: inline-flex;
   position: relative;
   overflow: hidden;
-  vertical-align: baseline;
-  height: 1.3em;
+  vertical-align: bottom;
+  height: 1.1em;
   transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -327,10 +325,6 @@ nav.nav--dark .nav-location { color: var(--text-dim); }
   opacity: 0;
   transform: translateY(110%);
   transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  color: inherit;
-  -webkit-text-fill-color: inherit;
-}
-.word-carousel .word-item.word-item--default {
   color: #f4845f;
   -webkit-text-fill-color: #f4845f;
 }
@@ -469,9 +463,6 @@ nav.nav--dark .nav-location { color: var(--text-dim); }
 /* ─── SECTION SHARED ─── */
 section {
   padding: 8rem 3rem;
-  background: var(--bg);
-  position: relative;
-  z-index: 1;
 }
 
 .section-header {
@@ -546,7 +537,7 @@ section {
 }
 
 .project-card.size-small {
-  grid-column: span 5;
+  grid-column: span 6;
   aspect-ratio: 16/10;
 }
 
@@ -556,27 +547,17 @@ section {
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: auto;
   }
-  /* Reset all cards to small by default */
-  .project-card.size-large,
-  .project-card.size-medium,
-  .project-card.size-small {
+  .project-card.size-large {
+    grid-column: span 6;
+    aspect-ratio: 16/8;
+  }
+  .project-card.size-medium {
     grid-column: span 3;
     aspect-ratio: 16/10;
   }
-  /* Row 1 pattern: large + small + small (1st of every 9) */
-  .projects-grid .project-card:nth-child(9n+1) {
-    grid-column: span 6;
-    aspect-ratio: 16/8;
-  }
-  /* Row 2 pattern: small + large + small (5th of every 9) */
-  .projects-grid .project-card:nth-child(9n+5) {
-    grid-column: span 6;
-    aspect-ratio: 16/8;
-  }
-  /* Row 3 pattern: small + small + large (9th of every 9, i.e. 9n) */
-  .projects-grid .project-card:nth-child(9n) {
-    grid-column: span 6;
-    aspect-ratio: 16/8;
+  .project-card.size-small {
+    grid-column: span 3;
+    aspect-ratio: 16/10;
   }
 }
 
@@ -982,8 +963,8 @@ section {
   margin-bottom: 1rem;
 }
 .about-photo {
-  width: 55%;
-  min-width: 55%;
+  width: 45%;
+  min-width: 45%;
   aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 50%;
@@ -1103,7 +1084,6 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  z-index: 1;
 }
 
 .contact-footer-video {
@@ -1251,9 +1231,8 @@ section {
   .nav-title, .nav-location { display: none; }
   section { padding: 5rem 1.5rem; }
   /* hero: push content below fixed nav */
-  .hero { padding: 5rem 1.5rem 2rem; min-height: auto; }
+  .hero { padding: 5rem 1.5rem 4rem; min-height: 70vh; }
   .hero-video { display: none; }
-  .hero-video-spacer { display: none; }
   .hero-statement { font-size: clamp(2.2rem, 8vw, 3.6rem); }
   .hero-line-top { white-space: normal; }
   .hero-line-mid, .hero-line-bot { display: inline; }
@@ -1345,21 +1324,18 @@ section {
   <div class="hero-content hero-content--statement">
 
     <h1 class="hero-statement">
-      <span class="anim-inner"><span class="hero-line-top">Kyle Watson is a Los Angeles based <span class="word-carousel" id="roleCarousel"><span class="word-sizer">creative director,</span><span class="word-item word-item--default active">creative director,</span><span class="word-item">designer,</span><span class="word-item">animator,</span><span class="word-item">artist,</span></span></span><span class="hero-line-mid">who manipulates processes and conventions to realize ideas.</span></span>
+      <span class="anim-inner"><span class="hero-line-top">Kyle Watson is a Los Angeles based <span class="word-carousel" id="roleCarousel"><span class="word-sizer">creative director,</span><span class="word-item active">creative director,</span><span class="word-item">artist,</span><span class="word-item">animator,</span><span class="word-item">designer,</span></span></span><span class="hero-line-mid">who manipulates processes and conventions to realize ideas.</span></span>
     </h1>
 
   </div>
-  <div class="hero-bottom-bar">
-    <span>Fall in love with the mystery ↓</span>
-    <span>Scroll to view more ↓</span>
+  <div class="hero-video">
+    <video autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4"></video>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
-
-<!-- HERO VIDEO — fixed behind content -->
-<div class="hero-video">
-  <video autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4"></video>
-</div>
-<div class="hero-video-spacer"></div>
 
 <!-- FEATURED WORK -->
 <section id="work" style="padding-bottom: 1rem;">
@@ -1431,27 +1407,27 @@ section {
       <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     </a>
 
-    <!-- 5: large (center) -->
-    <a href="project-mirror-state.html" class="project-card size-large reveal stagger-5">
+    <!-- 5: small -->
+    <a href="project-ibm-open-minds.html" class="project-card size-small reveal stagger-5">
       <span class="project-index">5</span>
-      <div class="project-visual pv-6"><div class="shape"></div></div>
-      <div class="project-overlay">
-        <div class="project-tags"></div>
-        <div class="project-title">Mirror State</div>
-        <div class="project-client"></div>
-      </div>
-      <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-    </a>
-
-    <!-- 6: small -->
-    <a href="project-ibm-open-minds.html" class="project-card size-small reveal stagger-6">
-      <span class="project-index">6</span>
       <div class="project-visual pv-5"><div class="shape"></div></div>
       <img class="project-thumb" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumbnail-Loop.mp4">
       <div class="project-overlay">
         <div class="project-tags"></div>
         <div class="project-title">IBM Open Minds</div>
         <div class="project-client">IBM</div>
+      </div>
+      <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+    </a>
+
+    <!-- 6: large -->
+    <a href="project-mirror-state.html" class="project-card size-large reveal stagger-6">
+      <span class="project-index">6</span>
+      <div class="project-visual pv-6"><div class="shape"></div></div>
+      <div class="project-overlay">
+        <div class="project-tags"></div>
+        <div class="project-title">Mirror State</div>
+        <div class="project-client"></div>
       </div>
       <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
     </a>
@@ -1470,7 +1446,7 @@ section {
 </section>
 
 <!-- PLAY -->
-<section id="play" style="padding-top: 3rem; padding-bottom: 2rem; border-top: 1px solid var(--border);">
+<section id="play" style="padding-top: 4rem; padding-bottom: 4rem; border-top: 1px solid var(--border);">
   <div class="all-work-cta reveal" style="flex-direction: row; align-items: flex-end; justify-content: space-between; padding: 0 0 2rem;">
     <a href="play.html" class="all-work-link">
       <span class="all-work-text">Play</span>
@@ -1482,6 +1458,8 @@ section {
   <div class="play-grid">
     <div class="play-item pi-1 reveal stagger-1" data-lightbox="1" data-title="Blue Spiral Neon" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png" alt="Blue Spiral Neon" loading="lazy"></div>
     <div class="play-item pi-2 reveal stagger-2" data-lightbox="2" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif" alt="Chromatic Chain" loading="lazy"></div>
+    <div class="play-item pi-3 reveal stagger-3" data-lightbox="3" data-title="Chromatic Orb" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg" alt="Chromatic Orb" loading="lazy"></div>
+    <div class="play-item pi-4 reveal stagger-4" data-lightbox="4" data-title="Blue Moon Face" data-src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png" alt="Blue Moon Face" loading="lazy"></div>
     <div class="play-item pi-5 reveal stagger-5" data-lightbox="5" data-title="If You Wish Arches" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg" alt="If You Wish Arches" loading="lazy"></div>
     <div class="play-item pi-6 reveal stagger-6" data-lightbox="6" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif" alt="Globby Eyes" loading="lazy"></div>
     <div class="play-item pi-7 reveal stagger-7" data-lightbox="7" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif" alt="Bird Warrior" loading="lazy"></div>
@@ -1706,21 +1684,14 @@ function initCarousel(id, holdMs) {
 }
 initCarousel('roleCarousel', 2000);
 
-// ─── NAV COLOR — dark over light sections, white over footer ───
+// ─── NAV COLOR SWAP (white over hero, dark over content) ───
 const navEl = document.querySelector('nav');
-if (navEl) {
-  navEl.classList.add('nav--dark');
-  const footer = document.querySelector('.contact-footer');
-  if (footer) {
-    const footerObs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        navEl.classList.remove('nav--dark');
-      } else {
-        navEl.classList.add('nav--dark');
-      }
-    }, { threshold: 0, rootMargin: '-1px 0px -95% 0px' });
-    footerObs.observe(footer);
-  }
+const heroSection = document.getElementById('hero');
+if (navEl && heroSection) {
+  const obs = new IntersectionObserver(([e]) => {
+    navEl.classList.toggle('nav--dark', !e.isIntersecting);
+  }, { threshold: 0.05 });
+  obs.observe(heroSection);
 }
 
 // ─── LIGHTBOX ───
