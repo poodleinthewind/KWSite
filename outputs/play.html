@@ -15,7 +15,7 @@
   --bg-elevated: #111111;
   --bg-card: #141414;
   --text-primary: #e8e8e8;
-  --text-secondary: #888888;
+  --text-secondary: #aaaaaa;
   --text-dim: #444444;
   --accent: #c8ff00;
   --border: #1e1e1e;
@@ -469,13 +469,14 @@ nav {
   .menu-close { right: 1.5rem; top: 1.2rem; }
   .play-header { padding: 7rem 1.5rem 3rem; }
   .filter-bar { padding: 1rem 1.5rem; overflow-x: auto; }
-  .play-gallery { padding: 1.5rem; columns: 2; }
+  .play-gallery { padding: 0.75rem; columns: 2; column-gap: 0.5rem; }
+  .pg-item { margin-bottom: 0.5rem; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .custom-cursor { display: none; }
 }
 
 @media (max-width: 480px) {
-  .play-gallery { columns: 1; }
+  .play-gallery { columns: 2; column-gap: 0.5rem; }
 }
 </style>
 </head>

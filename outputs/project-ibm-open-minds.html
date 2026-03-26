@@ -13,7 +13,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #0a0a0a; --bg-card: #111111;
-  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
+  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #555555;
   --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -105,6 +105,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .credits { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
+  .header-tags { display: none; }
+  .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
@@ -113,7 +115,10 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .hero-video { padding: 0 1.5rem; }
   .intro, .section { padding: 3rem 1.5rem; }
   .bleed .ph-rect { height: 40vh; min-height: 240px; }
-  .g-3 { grid-template-columns: 1fr 1fr; }
+  .g-2 { grid-template-columns: 1fr; }
+  .g-3 { grid-template-columns: 1fr; }
+  .gallery { gap: 0.5rem; }
+  .hero-video { padding: 0; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .page-item { padding: 2rem 1.5rem; }
@@ -262,9 +267,9 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <div class="g-item"><img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Stage-Design-03.png" alt="Stage design render" loading="lazy"></div>
     <div class="g-item"><img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Portrait-Sheri-Hinish-02.jpg" alt="Sheri Hinish portrait" loading="lazy"></div>
   </div>
-  <div class="gallery g-2" style="margin-top:.75rem;">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Logo-Asset-01.png" alt="Open Minds logo" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Logo-Asset-02.png" alt="Open Minds logo" loading="lazy"></div>
+  <div style="margin-top:.75rem; display:grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; max-width: 60%; margin-left: auto; margin-right: auto;">
+    <img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Logo-Asset-01.png" alt="Open Minds logo" loading="lazy" style="width:100%;display:block;">
+    <img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Logo-Asset-02.png" alt="Open Minds logo" loading="lazy" style="width:100%;display:block;">
   </div>
 </div>
 

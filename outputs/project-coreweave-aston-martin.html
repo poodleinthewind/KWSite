@@ -13,7 +13,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #0a0a0a; --bg-card: #111111;
-  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
+  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #555555;
   --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -50,8 +50,20 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .hero-video { background: var(--bg); padding: 0 3rem 0; }
 .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; }
 .video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
+.video-wrap iframe.loaded { opacity: 1; }
 video { display: block; max-width: 100%; }
+/* Lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.95); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.lightbox.open { opacity: 1; pointer-events: all; }
+.lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+.lightbox-close { position: absolute; top: 1.5rem; right: 2rem; font-size: 2rem; color: #e8e8e8; background: none; border: none; cursor: pointer; z-index: 10; }
+.lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2.5rem; color: #e8e8e8; background: none; border: none; cursor: pointer; padding: 1rem; opacity: 0.7; transition: opacity 0.3s; }
+.lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+.g-item img { cursor: zoom-in; }
+.bleed img { cursor: zoom-in; }
 
 /* INTRO */
 .intro { padding: 3rem 3rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; align-items: start; min-height: 20rem; }
@@ -126,19 +138,32 @@ video { display: block; max-width: 100%; }
 .breakdown:last-child { margin-bottom: 0; }
 .breakdown-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
 .breakdown-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.carousel { display: flex; gap: 0.75rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0 0 1rem; scrollbar-width: thin; scrollbar-color: #2a2a2a transparent; }
-.carousel-spacer { flex: 0 0 calc(50% - min(27.5vw, 390px) - 0.375rem); pointer-events: none; }
+.carousel { display: flex; gap: 0.75rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 0 0 1rem; scrollbar-width: none; }
+.carousel::-webkit-scrollbar { display: none; }
+.carousel-spacer { flex: 0 0 calc(50% - min(32.5vw, 480px) - 0.375rem); pointer-events: none; scroll-snap-align: none; }
 .carousel-wrap { position: relative; }
-.carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(8px); color: var(--text-primary); width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; transition: background 0.3s, opacity 0.3s; opacity: 0.6; }
-.carousel-arrow:hover { background: rgba(255,255,255,0.15); opacity: 1; }
-.carousel-arrow.prev { left: 1rem; }
-.carousel-arrow.next { right: 1rem; }
+.carousel-arrow { background: none; border: none; padding: 0.5rem; color: #e8e8e8; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 2.2rem; font-weight: 300; transition: opacity 0.3s; opacity: 1; }
+.carousel-arrow:hover { opacity: 0.7; }
+.carousel-arrow.prev { animation: nudge-left 2s ease-in-out infinite; }
+.carousel-arrow.next { animation: nudge-right 2s ease-in-out infinite; }
+@keyframes nudge-left { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-8px); } }
+@keyframes nudge-right { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
+.carousel-nav { display: none; }
 .carousel::-webkit-scrollbar { height: 4px; }
 .carousel::-webkit-scrollbar-track { background: transparent; }
 .carousel::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
-.carousel-item { flex: 0 0 auto; width: 55vw; max-width: 780px; min-width: 300px; scroll-snap-align: center; position: relative; opacity: 0.35; transform: scale(0.82); transform-origin: center center; transition: opacity 0.4s ease, transform 0.4s ease; }
+.carousel-item { flex: 0 0 auto; width: 65vw; max-width: 960px; min-width: 300px; scroll-snap-align: center; position: relative; opacity: 0.5; transform: scale(0.92); transform-origin: center center; transition: opacity 0.4s ease, transform 0.4s ease; }
 .carousel-item.active { opacity: 1; transform: scale(1); }
+.carousel-dots { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 1rem; }
+.carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--text-dim); border: none; padding: 0; cursor: pointer; transition: background 0.3s ease, transform 0.3s ease; }
+.carousel-dot.active { background: var(--text-primary); transform: scale(1.4); }
+.carousel-hint { display: flex; align-items: center; justify-content: center; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-top: 1.25rem; }
+.hint-text { opacity: 0.6; }
+@keyframes hint-bounce-left { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
+@keyframes hint-bounce-right { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
 .carousel-item video { width: 100%; height: auto; display: block; background: var(--bg-card); }
+.carousel-item .video-wrap { pointer-events: none; }
+.carousel-item .video-wrap iframe { pointer-events: none; }
 .carousel-item .ph-slot { aspect-ratio: 16/9; min-height: unset; }
 .carousel-step { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.6rem; transition: color 0.4s ease; }
 .carousel-item.active .carousel-step { color: var(--text-secondary); }
@@ -180,14 +205,18 @@ video { display: block; max-width: 100%; }
   .carousel-item { width: 75vw; min-width: 260px; }
 }
 @media (max-width: 768px) {
+  .header-tags { display: none; }
+  .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
   .menu-close { right: 1.5rem; top: 1.2rem; }
   .project-header { padding: 6rem 1.5rem 2.5rem; }
-  .hero-video { padding: 0 1.5rem; }
+  .hero-video { padding: 0; }
   .intro, .section { padding: 3rem 1.5rem; }
+  .g-2 { grid-template-columns: 1fr 1fr; }
   .g-3 { grid-template-columns: 1fr 1fr; }
+  .gallery { gap: 0.5rem; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .page-item { padding: 2rem 1.5rem; }
@@ -237,8 +266,8 @@ video { display: block; max-width: 100%; }
 
 <!-- ══ HERO VIDEO ══ -->
 <div class="hero-video">
-  <div class="video-wrap">
-    <iframe src="https://iframe.mediadelivery.net/embed/615661/f77900c1-c09f-4712-adad-c5c9df6ef103?autoplay=false&loop=false&muted=false&preload=true&controls=true" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+  <div class="video-wrap" style="pointer-events:auto">
+    <iframe style="pointer-events:auto" src="https://iframe.mediadelivery.net/embed/615661/61d5896d-f987-4eac-9863-4db97d748e0c?autoplay=false&loop=false&muted=false&preload=true&controls=true" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
 
@@ -274,7 +303,7 @@ video { display: block; max-width: 100%; }
 </div>
 
 <!-- ══ FULL-BLEED ══ -->
-<div class="bleed"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_01.jpg" alt="CoreWeave UI frame" loading="lazy"></div>
+<div class="bleed"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Frame-01.jpg" alt="CoreWeave UI frame" loading="lazy"></div>
 
 <!-- ══ PULL QUOTE ══ -->
 <div class="pull-quote" style="border-bottom: 1px solid var(--border);">
@@ -286,19 +315,16 @@ video { display: block; max-width: 100%; }
   <div class="section-label">Production Approach</div>
   <div class="approach-grid">
     <div class="approach-item">
-      <div class="approach-img"><img src="slides/slide_069.png" alt="F1 car in green light — LoRA training reference" loading="lazy"></div>
       <div class="approach-num">01</div>
       <h3>Custom LoRAs</h3>
       <p>Trained custom LoRAs on Aston Martin F1 data — liveries, aerodynamic forms, track environments — so the AI output felt native to the brand.</p>
     </div>
     <div class="approach-item">
-      <div class="approach-img"><img src="slides/slide_087.png" alt="Grayscale 3D wireframe — Pre-AI texturing" loading="lazy"></div>
       <div class="approach-num">02</div>
       <h3>3D + AI Rendering</h3>
       <p>Built grayscale 3D animations in Cinema 4D as structural foundation, then textured and rendered through generative AI pipelines.</p>
     </div>
     <div class="approach-item">
-      <div class="approach-img"><img src="slides/slide_089.png" alt="RC car miniature — Physical filming setup" loading="lazy"></div>
       <div class="approach-num">03</div>
       <h3>Miniature RC Filming</h3>
       <p>Shot miniature RC cars for dynamic motion — real physics, real light — then style-transferred the footage through AI.</p>
@@ -306,307 +332,315 @@ video { display: block; max-width: 100%; }
   </div>
 </div>
 
-<!-- ══ PHASE 01: TRAINING DATA ══ -->
+<!-- ══ PROCESS WRITEUP ══ -->
 <div class="section">
-  <div class="section-label">Phase 01 — Training Data</div>
-  <div class="split">
-    <div class="split-text">
-      <h3>Building the visual language</h3>
-      <p>The first step was training a series of custom LoRAs on Aston Martin Aramco F1 imagery — car renders, livery details, aerodynamic surfaces, pit environments, and track photography. The goal was to give the AI a native understanding of the brand's visual DNA so that generated frames felt authentic rather than approximated.</p>
-    </div>
-    <div class="split-media"><img src="slides/slide_070.png" alt="F1 car dark render — Training data reference image" loading="lazy"></div>
-  </div>
+  <p class="body-text" style="max-width:680px; color:var(--text-secondary); line-height:1.7; margin-bottom:3rem;">The process behind Asteria unfolded across eight interconnected workstreams — from building custom training datasets and filming miniature RC cars, to designing procedural UI systems and compositing final shots through layered AI pipelines. Below is a breakdown of each phase.</p>
 </div>
-<div class="section" style="padding-top:0;">
-  <div class="gallery g-3">
-    <div class="g-item"><img src="slides/slide_069.png" alt="Full car, green light" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_071.png" alt="Top-down view, training data" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_072.png" alt="Wheel detail, green glow" loading="lazy"></div>
+
+<!-- ══ TRAINING DATA ══ -->
+<div class="section">
+  <div class="section-label">Training Data</div>
+  <div class="gallery g-2">
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Training-Data-Shot-01.png" alt="Training data — F1 car dark render" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Training-Data-Shot-06.png" alt="Training data — Full car, green light" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
   </div>
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_073.png" alt="Pit / paddock environment" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_074.png" alt="Grayscale F1 car reference" loading="lazy"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Training-Data-Shot-08.png" alt="Training data — Top-down view" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Training-Data-Shot-10.png" alt="Training data — Wheel detail" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/c74051c7-4d09-47fd-88c0-0553043bacc7?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/44b77936-ff1c-48e2-b8d6-fc93e143e807?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
   </div>
 </div>
 
-<!-- ══ PHASE 02: 3D PIPELINE ══ -->
+<!-- ══ MINIATURES ══ -->
 <div class="section">
-  <div class="section-label">Phase 02 — 3D Pipeline</div>
-  <div class="split flip">
-    <div class="split-text">
-      <h3>Grayscale to AI render</h3>
-      <p>Every shot started as a 3D animation in Cinema 4D — grayscale geometry providing the structural skeleton for camera movement, lighting, and form. These renders were then passed through generative AI pipelines (ComfyUI, MoonValley Marey) to be textured, lit, and transformed. The 3D gave precision; the AI gave unpredictability.</p>
-    </div>
-    <div class="split-media"><img src="slides/slide_131.png" alt="C4D viewport wireframe — Bounding box and camera path" loading="lazy"></div>
+  <p class="body-text" style="max-width:680px; color:var(--text-secondary); line-height:1.7; margin-bottom:3rem;">RC cars were filmed on iPhone to capture real-world motion and light, then run through custom-trained models to transform the footage into photoreal Aston Martin F1 imagery.</p>
+  <div class="section-label">Miniatures</div>
+  <div class="gallery g-2">
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/f1b685c0-1d11-4197-ad4e-c2ee8be93772?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/d8229501-76da-4510-8d32-d0fe8217838c?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
   </div>
 </div>
-<div class="section" style="padding-top:0;">
-  <div class="gallery g-3">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/wirebuild_frame.png" alt="Wireframe build" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_02.jpg" alt="Wind tunnel data visualization" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_03.jpg" alt="F1 car simulation" loading="lazy"></div>
-  </div>
-  <div class="gallery g-4" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_123.png" alt="3D wireframe car" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_124.png" alt="Bounding box viewport" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_132.png" alt="White car base render" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_133.png" alt="Dark particle render" loading="lazy"></div>
+
+<!-- ══ STORYBOARD ══ -->
+<div class="section">
+  <div class="section-label">Storyboard</div>
+  <div style="max-width:720px;margin:0 auto"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/1472dbfb-2462-4cf5-b8c9-43c966a9fbb2?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+</div>
+
+<!-- ══ LOOK DEVELOPMENT ══ -->
+<div class="section">
+  <p class="body-text" style="max-width:680px; color:var(--text-secondary); line-height:1.7; margin-bottom:3rem;">Extensive visual exploration across multiple environments to define the film's aesthetic language before production.</p>
+  <h2 style="font-family:var(--font-display); font-size:clamp(1.8rem,3vw,2.8rem); font-weight:300; letter-spacing:-0.03em; color:var(--text-primary); margin-bottom:1rem;">Look Development</h2>
+
+  <!-- 05 Look Dev / root — Pyro Tunnel -->
+  <div class="bleed"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Pyro-Tunnel-01.png" alt="Pyro tunnel exploration 01" loading="lazy"></div>
+  <div class="bleed" style="margin-top:.75rem"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Pyro-Tunnel-02.png" alt="Pyro tunnel exploration 02" loading="lazy"></div>
+
+  <!-- 05 Look Dev / Style Frames (cropped to uniform aspect, focus on car) -->
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-01.png" alt="Style frame 01" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-02.png" alt="Style frame 02" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
   </div>
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_140.png" alt="Wireframe front view, before AI" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_141.png" alt="Rainbow/spectral car, after AI" loading="lazy"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-03.png" alt="Style frame 03" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-04.png" alt="Style frame 04" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-05.png" alt="Style frame 05" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-06.png" alt="Style frame 06" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-07.png" alt="Style frame 07" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-08.png" alt="Style frame 08" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-09.png" alt="Style frame 09" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-10.png" alt="Style frame 10" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-11.jpeg" alt="Style frame 11" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+    <div class="g-item" style="aspect-ratio:16/9;overflow:hidden"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Style-Frame-12.png" alt="Style frame 12" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center"></div>
+  </div>
+
+  <!-- 05 Look Dev / Tokyo Prism -->
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Tokyo-Prism-01.png" alt="Tokyo Prism 01" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Tokyo-Prism-03.png" alt="Tokyo Prism 03" loading="lazy"></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Tokyo-Prism-04.png" alt="Tokyo Prism 04" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Tokyo-Prism-05.png" alt="Tokyo Prism 05" loading="lazy"></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Tokyo-Prism-06.png" alt="Tokyo Prism 06" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Tokyo-Prism-07.png" alt="Tokyo Prism 07" loading="lazy"></div>
+  </div>
+  <!-- TODO: Tokyo-Prism-10.mp4 video — GUID needed from Bunny Stream -->
+
+  <!-- 05 Look Dev / WindTunnel -->
+  <div class="gallery g-4" style="margin-top:.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Wind-Tunnel-LookDev-01.png" alt="Wind tunnel look dev 01" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Wind-Tunnel-LookDev-02.png" alt="Wind tunnel look dev 02" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Wind-Tunnel-LookDev-03.png" alt="Wind tunnel look dev 03" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Wind-Tunnel-LookDev-04.png" alt="Wind tunnel look dev 04" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ══ UI ══ -->
+<div class="bleed"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/b5873aa2-67cf-4c38-b7ee-47987e0a5611?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+<div class="section">
+  <h2 style="font-family:var(--font-display); font-size:clamp(1.8rem,3vw,2.8rem); font-weight:300; letter-spacing:-0.03em; color:var(--text-primary); margin-bottom:1rem;">UI / Data Layer</h2>
+  <p class="body-text" style="max-width:680px; color:var(--text-secondary); line-height:1.7; margin-bottom:3rem;">Custom interface elements — loaders, datawaves, node graphs, smoke simulations — designed to ground the AI-generated world in a tactile, engineered aesthetic.</p>
+
+  <!-- 06_UI/UI/ root — Fan Isolated -->
+  <div class="bleed"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Fan-Isolated.png" alt="UI fan isolated" loading="lazy"></div>
+
+
+  <!-- 06_UI/UI/ root — Cavalry Car + Fan Cavalry (cropped 16:9) -->
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item" style="overflow:hidden"><div class="video-wrap" style="transform:scale(1.3)"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/d6b4a103-761f-4b6a-b5a7-91ca9ae0d748?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item" style="overflow:hidden"><div class="video-wrap" style="transform:scale(1.3)"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/30068ea3-e761-4661-b286-538817222337?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+  </div>
+
+  <!-- 06_UI/UI/Datawave/ -->
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/9bf214f9-1f5d-46ce-9b27-cf2cc6de161b?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/734f8f76-a690-41f3-9f63-35612db2456a?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+  </div>
+
+  <!-- 06_UI/UI/UI Frames/ -->
+  <div class="gallery g-3" style="margin-top:.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Frame-01.jpg" alt="UI frame 01" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Frame-02.jpg" alt="UI frame 02" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Frame-03.jpg" alt="UI frame 03" loading="lazy"></div>
   </div>
   <div class="gallery g-3" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_142.png" alt="Blue wireframe render" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_143.png" alt="Particle explosion" loading="lazy"></div>
-    <div class="g-item"><div class="ph-slot"><span>Slide 145 — Checkerboard compositing</span></div></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Frame-04.jpg" alt="UI frame 04" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Frame-05.jpg" alt="UI frame 05" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Frame-06.jpg" alt="UI frame 06" loading="lazy"></div>
   </div>
-</div>
+  <div class="bleed" style="margin-top:.75rem"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Frame-07.png" alt="UI frame 07" loading="lazy"></div>
 
-<!-- ══ FULL-BLEED — HERO FRAME ══ -->
-<div class="bleed"><img src="slides/slide_098.png" alt="F1 car in sand/dust at sunset — Hero output frame" loading="lazy"></div>
-
-<!-- ══ PHASE 03: MINIATURES + CAMERA CONTROL ══ -->
-<div class="section">
-  <div class="section-label">Phase 03 — Miniatures</div>
-  <div class="split">
-    <div class="split-text">
-      <h3>Real physics, AI finish</h3>
-      <p>For the high-speed driving sequences, we filmed miniature RC cars on physical sets — capturing real tire spin, suspension bounce, and motion blur that AI alone can't replicate. The footage was then style-transferred through the trained LoRAs, marrying physical motion with the film's generative visual language.</p>
-    </div>
-    <div class="split-media"><img src="slides/slide_089.png" alt="Hand painting miniature RC car — Practical model prep" loading="lazy"></div>
-  </div>
-</div>
-<div class="section" style="padding-top:0;">
-  <div class="gallery g-3">
-    <div class="g-item"><img src="slides/slide_090.png" alt="RC car on ground, motion blur" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_091.png" alt="Studio setup / workshop" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_155.png" alt="Miniature on camera platform" loading="lazy"></div>
+  <!-- 06_UI/UI/UI nodes/ -->
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/eb18dc0c-e0ee-4e0b-a3fa-0af35ccd32b7?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Nodes-02.png" alt="UI nodes 02" loading="lazy"></div>
   </div>
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_159.png" alt="Camera rig / motion control" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_162.png" alt="RC car action, dust kick" loading="lazy"></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/f0582f89-7f2c-4b0f-82d6-350383a4301e?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_UI-Nodes-04.png" alt="UI nodes 04" loading="lazy"></div>
   </div>
+
+  <!-- 06_UI/UI/UI smoke/ -->
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_179.png" alt="RC car in desert sand — Raw miniature footage" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_200.png" alt="Same shot after AI style transfer — Final output frame" loading="lazy"></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/fffc2e72-e78a-4e08-ad17-05480a88e0d3?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/9d276c90-23e7-44ab-a777-3e1af80186b4?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
   </div>
 </div>
 
-<!-- ══ SHOT BREAKDOWNS ══ -->
+<!-- ══ DATA LAYER ══ -->
 <div class="section">
-  <div class="section-label">Shot Breakdowns</div>
-
-  <!-- BREAKDOWN 01 -->
-  <div class="breakdown">
-    <div class="breakdown-label">Shot 01 — Desert Sequence</div>
-    <div class="carousel-wrap">
-    <button class="carousel-arrow prev">&#8592;</button>
-    <button class="carousel-arrow next">&#8594;</button>
-    <div class="carousel">
-      <div class="carousel-spacer"></div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: iPhone footage<br>Raw miniature in sand</span></div>
-        <div class="carousel-step"><strong>01</strong> iPhone Capture</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: 3D camera track<br>Mapped in Cinema 4D</span></div>
-        <div class="carousel-step"><strong>02</strong> 3D Mapping</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: AI style transfer<br>First pass through LoRA</span></div>
-        <div class="carousel-step"><strong>03</strong> AI Layer 01</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Additional AI passes<br>Environment + particle layers</span></div>
-        <div class="carousel-step"><strong>04</strong> AI Layer 02</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Logo + comp tightening<br>Final 3D logo placement</span></div>
-        <div class="carousel-step"><strong>05</strong> Logo + Comp</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Final output<br>Delivered frame</span></div>
-        <div class="carousel-step"><strong>06</strong> Final</div>
-      </div>
-      <div class="carousel-spacer"></div>
-    </div>
-    </div>
-  </div>
-
-  <!-- BREAKDOWN 02 -->
-  <div class="breakdown">
-    <div class="breakdown-label">Shot 02 — Tunnel Sequence</div>
-    <div class="carousel-wrap">
-    <button class="carousel-arrow prev">&#8592;</button>
-    <button class="carousel-arrow next">&#8594;</button>
-    <div class="carousel">
-      <div class="carousel-spacer"></div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: iPhone footage<br>Raw miniature on track</span></div>
-        <div class="carousel-step"><strong>01</strong> iPhone Capture</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: 3D camera track<br>Geometry + camera path</span></div>
-        <div class="carousel-step"><strong>02</strong> 3D Mapping</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: AI style transfer<br>Neon environment pass</span></div>
-        <div class="carousel-step"><strong>03</strong> AI Layer 01</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Refinement passes<br>Light trails + atmosphere</span></div>
-        <div class="carousel-step"><strong>04</strong> AI Layer 02</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Logo + comp<br>Brand placement in 3D</span></div>
-        <div class="carousel-step"><strong>05</strong> Logo + Comp</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Final output</span></div>
-        <div class="carousel-step"><strong>06</strong> Final</div>
-      </div>
-      <div class="carousel-spacer"></div>
-    </div>
-    </div>
-  </div>
-
-  <!-- BREAKDOWN 03 -->
-  <div class="breakdown">
-    <div class="breakdown-label">Shot 03 — Smoke Sequence</div>
-    <div class="carousel-wrap">
-    <button class="carousel-arrow prev">&#8592;</button>
-    <button class="carousel-arrow next">&#8594;</button>
-    <div class="carousel">
-      <div class="carousel-spacer"></div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: iPhone footage<br>RC car in dust/smoke</span></div>
-        <div class="carousel-step"><strong>01</strong> iPhone Capture</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: 3D scene build<br>Wireframe + camera</span></div>
-        <div class="carousel-step"><strong>02</strong> 3D Mapping</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: AI texture pass<br>Smoke + atmospheric layers</span></div>
-        <div class="carousel-step"><strong>03</strong> AI Layer 01</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Second AI pass<br>Detail refinement</span></div>
-        <div class="carousel-step"><strong>04</strong> AI Layer 02</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Logo lockup<br>3D tracked brand marks</span></div>
-        <div class="carousel-step"><strong>05</strong> Logo + Comp</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Final output</span></div>
-        <div class="carousel-step"><strong>06</strong> Final</div>
-      </div>
-      <div class="carousel-spacer"></div>
-    </div>
-    </div>
-  </div>
-
-  <!-- BREAKDOWN 04 -->
-  <div class="breakdown">
-    <div class="breakdown-label">Shot 04 — Forest Sequence</div>
-    <div class="carousel-wrap">
-    <button class="carousel-arrow prev">&#8592;</button>
-    <button class="carousel-arrow next">&#8594;</button>
-    <div class="carousel">
-      <div class="carousel-spacer"></div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: iPhone footage<br>Miniature in foliage</span></div>
-        <div class="carousel-step"><strong>01</strong> iPhone Capture</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: 3D camera solve<br>Point cloud + geometry</span></div>
-        <div class="carousel-step"><strong>02</strong> 3D Mapping</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: AI environment pass<br>Forest atmosphere</span></div>
-        <div class="carousel-step"><strong>03</strong> AI Layer 01</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Detail layers<br>Leaf scatter + light rays</span></div>
-        <div class="carousel-step"><strong>04</strong> AI Layer 02</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Final comp<br>Logo + grade</span></div>
-        <div class="carousel-step"><strong>05</strong> Logo + Comp</div>
-      </div>
-      <div class="carousel-item">
-        <div class="ph-slot"><span>Video: Final output</span></div>
-        <div class="carousel-step"><strong>06</strong> Final</div>
-      </div>
-      <div class="carousel-spacer"></div>
-    </div>
-    </div>
+  <p class="body-text" style="max-width:680px; color:var(--text-secondary); line-height:1.7; margin-bottom:3rem;">Exploring how to overlay meaningful telemetry and data visualization onto AI-generated footage with no inherent physical reference points.</p>
+  <div class="section-label">Data Layer</div>
+  <div class="gallery g-2">
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/904df642-b3ae-43eb-9084-2ba0d09af1d7?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/b3eb40c2-9051-436c-9e29-31edf07f12ef?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
   </div>
 </div>
 
-<!-- ══ UI / DATA LAYER ══ -->
+<!-- ══ CAMERA CONTROL — SHOT BREAKDOWNS ══ -->
 <div class="section">
-  <div class="section-label">UI / Data Layer</div>
-  <div class="split">
-    <div class="split-text">
-      <p>Custom HUD and data visualization elements designed to reinforce CoreWeave's cloud infrastructure narrative. Every UI element was built from scratch — no templates, no plugins.</p>
-      <p>Real-time telemetry overlays, particle-driven data streams, and procedural grid systems layered on top of the AI-rendered footage to bridge the gap between cinematic storytelling and technical brand identity.</p>
+  <h2 style="font-family:var(--font-display); font-size:clamp(1.8rem,3vw,2.8rem); font-weight:300; letter-spacing:-0.03em; color:var(--text-primary); margin-bottom:2rem;">Shot Breakdowns</h2>
+
+  <!-- BOXES CAROUSEL -->
+  <div class="breakdown">
+    <div class="breakdown-label">Boxes</div>
+    <div class="carousel-wrap">
+    <div class="carousel">
+      <div class="carousel-spacer"></div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/9790c0f7-2a65-40c3-8a58-2e3c9e3c95b6?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>01</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/b1a9525f-b55c-4a14-b440-ab28f0480bb9?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>02</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/c6c0d530-d3e6-429d-96dc-5b8465bebe1f?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>03</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/86d5366a-da1f-4005-bc02-ef8c2583050e?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>04</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/b51deb46-ae55-48e2-9c01-aadfb22dd0f9?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>05</strong></div>
+      </div>
+      <div class="carousel-spacer"></div>
     </div>
-    <div class="split-media">
-      <div class="ph-slot"><span>Video: UI overlay in motion<br>Data telemetry HUD on car footage</span></div>
     </div>
   </div>
+
+  <!-- CLOUDS CAROUSEL -->
+  <div class="breakdown">
+    <div class="breakdown-label">Clouds</div>
+    <div class="carousel-wrap">
+    <div class="carousel">
+      <div class="carousel-spacer"></div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/c10737fc-1f09-4ba4-bea6-77ca463a8e6c?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>01</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/a185ff00-36df-4ffc-a8ac-5bb1aaf24496?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>02</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/672c8592-d9ff-4e2a-8930-41e49b732c46?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>03</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/fcf5263e-06e0-4805-830b-2a43ea734e65?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>04</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/f733140e-3002-42b8-8df6-f3c8fb1721fc?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>05</strong></div>
+      </div>
+      <div class="carousel-spacer"></div>
+    </div>
+    </div>
+  </div>
+
+  <!-- SMOKE TUNNEL CAROUSEL -->
+  <div class="breakdown">
+    <div class="breakdown-label">Smoke Tunnel</div>
+    <div class="carousel-wrap">
+    <div class="carousel">
+      <div class="carousel-spacer"></div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/6bbe6b9b-d071-440a-91e7-14ced01da2ce?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>01</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/aa69b3d5-e2b1-442b-ba99-a1e1e184517a?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>02</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/c897ffcd-6780-4bdb-a34a-600e2b11d7b3?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>03</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/65b8923f-b4a6-43d2-87f2-ec1722af16b1?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>04</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/fbd76141-8e7d-476f-ad9d-f9da1c6a0226?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>05</strong></div>
+      </div>
+      <div class="carousel-spacer"></div>
+    </div>
+    </div>
+  </div>
+
+  <!-- TOKYO CAROUSEL -->
+  <div class="breakdown">
+    <div class="breakdown-label">Tokyo — Iterations</div>
+    <div class="carousel-wrap">
+    <div class="carousel">
+      <div class="carousel-spacer"></div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/02ad4496-4d42-4160-8c0d-a18851f87408?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>01</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/c8d75818-a1dd-45b4-b6b3-44a63a7c1051?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>02</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/afb05ecb-b961-49c6-9dc0-264da60cc875?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>03</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/687f3ae1-d854-4294-9fc7-db99e1a25007?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>04</strong></div>
+      </div>
+      <div class="carousel-item">
+        <div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/8e444af8-80b2-4e7b-852d-2ef4a5831d89?autoplay=false&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="carousel-step"><strong>05</strong></div>
+      </div>
+      <div class="carousel-spacer"></div>
+    </div>
+    </div>
+  </div>
+
+  <!-- CLOUDS STILLS -->
   <div class="gallery g-3" style="margin-top:2rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_04.jpg" alt="UI data overlay" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_05.jpg" alt="Cloud data streams" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/video/UI/ui_frame_06.jpg" alt="Telemetry HUD" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Camera-Clouds-06.png" alt="Cloud volumetric 06" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Camera-Clouds-07.png" alt="Cloud volumetric 07" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_Camera-Clouds-08.png" alt="Cloud volumetric 08" loading="lazy"></div>
   </div>
-  <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><div class="ph-slot"><span>UI close-up — grid system detail<br>Procedural data elements</span></div></div>
-    <div class="g-item"><div class="ph-slot"><span>UI close-up — telemetry readout<br>Speed / G-force overlays</span></div></div>
-  </div>
+
+  <!-- SMOKE TUNNEL STILLS -->
+  <div class="bleed" style="margin-top:.75rem"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_SmokeTunnel-Still-01.png" alt="Smoke tunnel still 01" loading="lazy"></div>
+  <div class="bleed" style="margin-top:.75rem"><img src="https://kyfolio.b-cdn.net/010_Coreweave/CW-Aston-Martin_SmokeTunnel-Still-03.png" alt="Smoke tunnel still 03" loading="lazy"></div>
 </div>
 
-<!-- ══ LOOK DEV ══ -->
+<!-- ══ OTHER SHOTS ══ -->
 <div class="section">
-  <div class="section-label">Look Development</div>
+  <div class="section-label">Other Shots</div>
   <div class="gallery g-2">
-    <div class="g-item"><img src="slides/slide_097.png" alt="Purple neon F1 car — Look dev exploration" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_098.png" alt="Sand/dust car at sunset — Final look direction" loading="lazy"></div>
-  </div>
-  <div class="gallery g-4" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_099.png" alt="Green particles" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_100.png" alt="White car, smoke" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_101.png" alt="Dark cave" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_102.png" alt="Atmospheric smoke" loading="lazy"></div>
-  </div>
-  <div class="gallery g-3" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_104.png" alt="Green laser environment" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_106.png" alt="Neon speed blur" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_107.png" alt="Desert dunes" loading="lazy"></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/f7fbb112-70bb-42b0-aba9-4ac7704922ef?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/f3443cee-d0d5-4f9a-9e5c-9696d8934faf?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
   </div>
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_108.png" alt="Blue planet sweep" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_109.png" alt="White sphere, sky" loading="lazy"></div>
-  </div>
-</div>
-
-<!-- ══ FULL-BLEED — FINAL ══ -->
-<div class="bleed"><img src="slides/slide_105.png" alt="Dust storm with car emerging — Hero output frame" loading="lazy"></div>
-
-<!-- ══ FILM STILLS ══ -->
-<div class="section">
-  <div class="section-label">Film Stills</div>
-  <div class="gallery g-2">
-    <div class="g-item"><img src="slides/slide_170.png" alt="Teal F1 car closeup detail" loading="lazy"></div>
-    <div class="g-item"><div class="ph-slot"><span>Slide 186 — Aramco branded car</span></div></div>
-  </div>
-  <div class="gallery g-3" style="margin-top:.75rem">
-    <div class="g-item"><img src="slides/slide_171.png" alt="Clouds / atmospheric" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_188.png" alt="Neon speed tunnel" loading="lazy"></div>
-    <div class="g-item"><img src="slides/slide_199.png" alt="Light speed streaks" loading="lazy"></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/04322936-3049-4a85-9a77-c489fc6e25cc?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/a2120575-c1fd-42c2-8ecb-45518d736657?autoplay=true&loop=true&muted=true&preload=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
   </div>
 </div>
 
@@ -647,6 +681,14 @@ video { display: block; max-width: 100%; }
   </div>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close">✕</button>
+  <button class="lightbox-prev" aria-label="Previous">&#10094;</button>
+  <img src="" alt="">
+  <button class="lightbox-next" aria-label="Next">&#10095;</button>
+</div>
+
 <script>
 const menuBtn = document.getElementById('menuBtn');
 const menuOverlay = document.getElementById('menuOverlay');
@@ -673,14 +715,25 @@ document.querySelectorAll('.carousel').forEach(carousel => {
       if (dist < closestDist) { closestDist = dist; closest = item; }
     });
     items.forEach(item => {
+      const iframe = item.querySelector('iframe');
       if (item === closest) {
-        item.classList.add('active');
-        const v = item.querySelector('video');
-        if (v && v.paused) v.play().catch(() => {});
+        if (!item.classList.contains('active')) {
+          item.classList.add('active');
+          if (iframe && iframe.src.includes('autoplay=false')) {
+            iframe.src = iframe.src.replace('autoplay=false', 'autoplay=true');
+          }
+          const v = item.querySelector('video');
+          if (v && v.paused) v.play().catch(() => {});
+        }
       } else {
-        item.classList.remove('active');
-        const v = item.querySelector('video');
-        if (v && !v.paused) v.pause();
+        if (item.classList.contains('active')) {
+          item.classList.remove('active');
+          if (iframe && iframe.src.includes('autoplay=true')) {
+            iframe.src = iframe.src.replace('autoplay=true', 'autoplay=false');
+          }
+          const v = item.querySelector('video');
+          if (v && !v.paused) v.pause();
+        }
       }
     });
   }
@@ -688,18 +741,7 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   carousel.addEventListener('scroll', updateActive, { passive: true });
   updateActive();
 
-  /* Arrow navigation */
-  const wrap = carousel.closest('.carousel-wrap');
-  if (wrap) {
-    wrap.querySelector('.carousel-arrow.prev').addEventListener('click', () => {
-      const activeIdx = items.findIndex(i => i.classList.contains('active'));
-      if (activeIdx > 0) items[activeIdx - 1].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    });
-    wrap.querySelector('.carousel-arrow.next').addEventListener('click', () => {
-      const activeIdx = items.findIndex(i => i.classList.contains('active'));
-      if (activeIdx < items.length - 1) items[activeIdx + 1].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    });
-  }
+  /* Arrow navigation handled in carousel dots/hint section below */
 });
 
 // Credits toggle
@@ -718,6 +760,125 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
       setTimeout(() => { content.style.display = 'none'; }, 400);
     }
   });
+});
+
+
+// Lazy-load video iframes
+// Lazy-load iframes and fade in smoothly after loaded
+const lazyFrames = document.querySelectorAll('iframe[data-src]');
+const frameObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const iframe = entry.target;
+      iframe.src = iframe.dataset.src;
+      iframe.removeAttribute('data-src');
+      iframe.addEventListener('load', () => {
+        // Delay fade-in to let the player fully initialize past any UI flash
+        setTimeout(() => iframe.classList.add('loaded'), 800);
+      });
+      frameObserver.unobserve(iframe);
+    }
+  });
+}, { rootMargin: '1200px 0px' });
+lazyFrames.forEach(f => frameObserver.observe(f));
+
+// Also handle the hero iframe (already has src)
+document.querySelectorAll('iframe[src*="mediadelivery"]').forEach(iframe => {
+  if (!iframe.dataset.src) {
+    iframe.addEventListener('load', () => {
+      setTimeout(() => iframe.classList.add('loaded'), 800);
+    });
+    if (iframe.contentWindow) {
+      setTimeout(() => iframe.classList.add('loaded'), 1500);
+    }
+  }
+});
+
+// Carousel dots + hint
+document.querySelectorAll('.carousel-wrap').forEach(wrap => {
+  const carousel = wrap.querySelector('.carousel');
+  const items = carousel.querySelectorAll('.carousel-item');
+  if (!items.length) return;
+
+  // Create arrows
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'carousel-arrow prev';
+  prevBtn.innerHTML = '&#10094;';
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'carousel-arrow next';
+  nextBtn.innerHTML = '&#10095;';
+
+  // Wire arrow clicks
+  prevBtn.addEventListener('click', () => {
+    const active = carousel.querySelector('.carousel-item.active');
+    if (active && active.previousElementSibling && active.previousElementSibling.classList.contains('carousel-item')) {
+      active.previousElementSibling.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  });
+  nextBtn.addEventListener('click', () => {
+    const active = carousel.querySelector('.carousel-item.active');
+    if (active && active.nextElementSibling && active.nextElementSibling.classList.contains('carousel-item')) {
+      active.nextElementSibling.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  });
+
+  // Create nav row: ❮ ● ● ● ● ● ❯
+  const navDiv = document.createElement('div');
+  navDiv.className = 'carousel-dots';
+  navDiv.appendChild(prevBtn);
+  items.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Step ' + (i + 1));
+    dot.addEventListener('click', () => {
+      items[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    });
+    navDiv.appendChild(dot);
+  });
+  navDiv.appendChild(nextBtn);
+  wrap.after(navDiv);
+
+  // Update dots on scroll
+  const dots = navDiv.querySelectorAll('.carousel-dot');
+  carousel.addEventListener('scroll', () => {
+    items.forEach((item, i) => {
+      if (item.classList.contains('active')) {
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[i]) dots[i].classList.add('active');
+      }
+    });
+  });
+});
+
+// Lightbox
+const lb = document.getElementById('lightbox');
+const lbImg = lb.querySelector('img');
+const lbClose = lb.querySelector('.lightbox-close');
+const lbPrev = lb.querySelector('.lightbox-prev');
+const lbNext = lb.querySelector('.lightbox-next');
+let lbImages = [];
+let lbIndex = 0;
+
+// Collect all gallery/bleed images (not video wraps)
+document.querySelectorAll('.g-item img, .bleed > img').forEach(img => {
+  lbImages.push(img.src);
+  img.addEventListener('click', () => {
+    lbIndex = lbImages.indexOf(img.src);
+    lbImg.src = img.src;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+lbClose.addEventListener('click', () => { lb.classList.remove('open'); document.body.style.overflow = ''; });
+lb.addEventListener('click', (e) => { if (e.target === lb) { lb.classList.remove('open'); document.body.style.overflow = ''; } });
+lbPrev.addEventListener('click', (e) => { e.stopPropagation(); lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; lbImg.src = lbImages[lbIndex]; });
+lbNext.addEventListener('click', (e) => { e.stopPropagation(); lbIndex = (lbIndex + 1) % lbImages.length; lbImg.src = lbImages[lbIndex]; });
+document.addEventListener('keydown', (e) => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; lbImg.src = lbImages[lbIndex]; }
+  if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbImages.length; lbImg.src = lbImages[lbIndex]; }
 });
 </script>
 </body>

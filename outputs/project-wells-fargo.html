@@ -13,7 +13,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #0a0a0a; --bg-card: #111111;
-  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
+  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #555555;
   --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -144,14 +144,18 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .credits { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
+  .header-tags { display: none; }
+  .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
   .menu-close { right: 1.5rem; top: 1.2rem; }
   .project-header { padding: 6rem 1.5rem 2.5rem; }
-  .hero-video { padding: 0 1.5rem; }
+  .hero-video { padding: 0; }
   .intro, .section { padding: 3rem 1.5rem; }
+  .g-2 { grid-template-columns: 1fr 1fr; }
   .g-3 { grid-template-columns: 1fr 1fr; }
+  .gallery { gap: 0.5rem; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .page-item { padding: 2rem 1.5rem; }

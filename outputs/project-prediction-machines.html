@@ -13,7 +13,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #0a0a0a; --bg-card: #111111;
-  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
+  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #555555;
   --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -111,7 +111,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .g-item.wide { aspect-ratio: 16/7; }
 .g-item.sq   { aspect-ratio: 1/1; }
 .g-item.tall { aspect-ratio: 3/4; }
-.g-item img { width: 100%; height: auto; object-fit: contain; display: block; }
+.g-item img { width: 100%; display: block; }
 .g-item .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.28; }
 
 /* CREDITS */
@@ -144,6 +144,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .credits { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
+  .header-tags { display: none; }
+  .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
@@ -151,7 +153,9 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .project-header { padding: 6rem 1.5rem 2.5rem; }
   .hero-video { padding: 0 1.5rem; }
   .intro, .section { padding: 3rem 1.5rem; }
-  .g-3 { grid-template-columns: 1fr 1fr; }
+  .g-2, .g-3, .gallery { grid-template-columns: 1fr !important; }
+  .gallery { gap: 0.5rem; }
+  .hero-video { padding: 0; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .page-item { padding: 2rem 1.5rem; }
@@ -227,22 +231,15 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/Asset%202.png" alt="Asset 2" style="width:100%;display:block;">
 </div>
 
-<div style="padding: 5rem 8rem;">
+<div class="section" style="padding-top:0;padding-bottom:0;">
   <div style="position:relative;padding-top:56.25%;"><iframe src="https://iframe.mediadelivery.net/embed/615661/36a80050-d94d-4508-b292-a72efc20a4af?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="border:none;position:absolute;top:0;left:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"></iframe></div>
 </div>
 
 <!-- Toggling grid -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;padding:3rem;">
-  <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/Codegen_Frames_210609.jpg" alt="Codegen Frames" style="width:100%;display:block;">
-  <div></div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;padding:0 3rem 3rem;">
-  <div></div>
-  <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_004.jpg" alt="Environment 004" style="width:100%;display:block;">
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;padding:0 3rem 3rem;">
+<div class="section" style="padding-bottom:0;">
+  <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/Codegen_Frames_210609.jpg" alt="Codegen Frames" style="width:100%;display:block;margin-bottom:1.5rem;">
+  <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_004.jpg" alt="Environment 004" style="width:100%;display:block;margin-bottom:1.5rem;">
   <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_006.jpg" alt="Environment 006" style="width:100%;display:block;">
-  <div></div>
 </div>
 
 <div style="padding: 3rem;">
@@ -255,8 +252,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <!-- ══ STILLS ══ -->
 <div class="section">
   <div class="section-label">Stills</div>
-  <div class="gallery g-3">
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_006.jpg" alt="Environment 006" style="width:100%;height:auto;display:block;"></div>
+  <div class="gallery g-2">
     <div class="g-item std"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_008.jpg" alt="Environment 008" style="width:100%;height:auto;display:block;"></div>
     <div class="g-item std"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_009.jpg" alt="Environment 009" style="width:100%;height:auto;display:block;"></div>
   </div>
