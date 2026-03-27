@@ -258,13 +258,8 @@ nav.nav--dark .nav-location { color: var(--text-dim); }
 }
 .hero-scroll-link:hover { color: var(--text-secondary); }
 .hero-scroll-mobile { display: inline; }
-.hero-scroll-mobile .scroll-arrow-bounce { display: none; }
-.scroll-arrow-bounce {
-  display: block;
-  margin-top: 0.4rem;
-  animation: bounceArrow 1.5s ease-in-out infinite;
-  font-size: 1rem;
-}
+.scroll-arrow-static { display: inline; }
+.scroll-arrow-bounce { display: none; }
 @keyframes bounceArrow {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(6px); }
@@ -1274,7 +1269,8 @@ section {
   .hero-video-spacer { display: none; }
   .hero-scroll-link:first-child { display: none; }
   .hero-scroll-mobile { display: flex; flex-direction: column; align-items: center; }
-  .hero-scroll-mobile .scroll-arrow-bounce { display: block; }
+  .hero-scroll-mobile .scroll-arrow-static { display: none; }
+  .hero-scroll-mobile .scroll-arrow-bounce { display: block; margin-top: 0.4rem; animation: bounceArrow 1.5s ease-in-out infinite; font-size: 1rem; }
   .hero-bottom-bar { justify-content: center; }
   .hero-statement { font-size: clamp(2.2rem, 8vw, 3.6rem); }
   .hero-line-top { white-space: normal; }
@@ -1374,7 +1370,7 @@ section {
   </div>
   <div class="hero-bottom-bar">
     <a href="#play" class="hero-scroll-link">Fall in love with the mystery ↓</a>
-    <a href="#work" class="hero-scroll-link hero-scroll-mobile">Scroll to view more ↓<span class="scroll-arrow-bounce">↓</span></a>
+    <a href="#work" class="hero-scroll-link hero-scroll-mobile">Scroll to view more <span class="scroll-arrow-static">↓</span><span class="scroll-arrow-bounce">↓</span></a>
   </div>
 </section>
 
@@ -1457,7 +1453,9 @@ section {
     <!-- 5: large (center) -->
     <a href="project-mirror-state.html" class="project-card size-large reveal stagger-5">
       <span class="project-index">5</span>
-      <div class="project-visual pv-6"><div class="shape"></div></div>
+      <div class="project-visual">
+        <img class="project-thumb" src="https://kyfolio.b-cdn.net/030_Mirror-state/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/030_Mirror-state/Animations/01_Thumb.mp4">
+      </div>
       <div class="project-overlay">
         <div class="project-tags"></div>
         <div class="project-title">Mirror State</div>
@@ -1542,7 +1540,7 @@ section {
         For me it started with music, from there it was making huge paintings, then writing on huge paintings, cleaning windows on high-rise buildings, working on houses, working in advertising, working in tech, being ravenous in my pursuit to learn more about people, movement, and of course design.
       </p>
       <p>
-        I've spent my life trying to reduce friction between raw human emotions and the technicalities associated with expressing them with integrity and truth. In other words, <span style="font-weight:600; background:linear-gradient(90deg,#f4845f,#e8637a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">I only practice the piano so I can play the blues when I'm sad.</span>
+        I've spent my life trying to reduce friction between raw human emotions and the technicalities associated with expressing them through visual media. In other words, <span style="font-weight:600; background:linear-gradient(90deg,#f4845f,#e8637a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">I only practice the piano so I can play the blues when I'm sad.</span>
       </p>
       <p>
         I am currently based in Los Angeles, where I work with clients as a broad creative partner, leveraging a uniquely personal breadth of experience to help solve problems that transcend mediums.
@@ -1729,7 +1727,7 @@ function initCarousel(id, holdMs) {
     setTimeout(() => prev.classList.remove('exit-up'), 500);
   }, holdMs);
 }
-initCarousel('roleCarousel', 2000);
+initCarousel('roleCarousel', 1400);
 
 // ─── NAV COLOR — dark over light sections, white over footer ───
 const navEl = document.querySelector('nav');
