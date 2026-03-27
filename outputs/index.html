@@ -251,6 +251,24 @@ nav.nav--dark .nav-location { color: var(--text-dim); }
   text-transform: uppercase;
   color: var(--text-dim);
 }
+.hero-scroll-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.hero-scroll-link:hover { color: var(--text-secondary); }
+.hero-scroll-mobile { display: inline; }
+.hero-scroll-mobile .scroll-arrow-bounce { display: none; }
+.scroll-arrow-bounce {
+  display: block;
+  margin-top: 0.4rem;
+  animation: bounceArrow 1.5s ease-in-out infinite;
+  font-size: 1rem;
+}
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
 
 .hero-content {
   max-width: 80vw;
@@ -1254,6 +1272,10 @@ section {
   .hero { padding: 5rem 1.5rem 2rem; min-height: auto; }
   .hero-video { display: none; }
   .hero-video-spacer { display: none; }
+  .hero-scroll-link:first-child { display: none; }
+  .hero-scroll-mobile { display: flex; flex-direction: column; align-items: center; }
+  .hero-scroll-mobile .scroll-arrow-bounce { display: block; }
+  .hero-bottom-bar { justify-content: center; }
   .hero-statement { font-size: clamp(2.2rem, 8vw, 3.6rem); }
   .hero-line-top { white-space: normal; }
   .hero-line-mid, .hero-line-bot { display: inline; }
@@ -1351,8 +1373,8 @@ section {
 
   </div>
   <div class="hero-bottom-bar">
-    <span>Fall in love with the mystery ↓</span>
-    <span>Scroll to view more ↓</span>
+    <a href="#play" class="hero-scroll-link">Fall in love with the mystery ↓</a>
+    <a href="#work" class="hero-scroll-link hero-scroll-mobile">Scroll to view more ↓<span class="scroll-arrow-bounce">↓</span></a>
   </div>
 </section>
 
@@ -1482,10 +1504,10 @@ section {
 
   <div class="play-grid">
     <div class="play-item pi-1 reveal stagger-1" data-lightbox="1" data-title="Blue Spiral Neon" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png" alt="Blue Spiral Neon" loading="lazy"></div>
-    <div class="play-item pi-2 reveal stagger-2" data-lightbox="2" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif" alt="Chromatic Chain" loading="lazy"></div>
+    <div class="play-item pi-2 reveal stagger-2" data-lightbox="2" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif"><video class="play-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.mp4" autoplay muted loop playsinline></video></div>
     <div class="play-item pi-5 reveal stagger-5" data-lightbox="5" data-title="If You Wish Arches" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg" alt="If You Wish Arches" loading="lazy"></div>
-    <div class="play-item pi-6 reveal stagger-6" data-lightbox="6" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif" alt="Globby Eyes" loading="lazy"></div>
-    <div class="play-item pi-7 reveal stagger-7" data-lightbox="7" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif" alt="Bird Warrior" loading="lazy"></div>
+    <div class="play-item pi-6 reveal stagger-6" data-lightbox="6" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif"><video class="play-visual" src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.mp4" autoplay muted loop playsinline></video></div>
+    <div class="play-item pi-7 reveal stagger-7" data-lightbox="7" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif"><video class="play-visual" src="https://kyfolio.b-cdn.net/_Play/bird-warrior.mp4" autoplay muted loop playsinline></video></div>
   </div>
 </section>
 
