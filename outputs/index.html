@@ -1662,12 +1662,10 @@ menuClose.addEventListener('click', () => {
   menuOverlay.classList.remove('open');
 });
 
-// Disable scroll snap briefly when clicking menu links so navigation lands correctly
+// Close menu when clicking anchor links
 document.querySelectorAll('.menu-link[href^="#"]').forEach(link => {
   link.addEventListener('click', () => {
-    window.__snapDisabled = true;
     menuOverlay.classList.remove('open');
-    setTimeout(() => { window.__snapDisabled = false; }, 1500);
   });
 });
 
@@ -1855,68 +1853,6 @@ document.querySelectorAll('.project-card').forEach(card => {
   });
 });
 
-// ─── SECTION SCROLL SNAP ───
-(function() {
-  const SNAP_IDS = ['hero', 'work', 'archive', 'play', 'about'];
-  const DOWN_THRESHOLD = 120; // px from section bottom before snapping forward
-  const UP_THRESHOLD   = 8;   // px — only snap back when truly at the top of a section
-  let isSnapping = false;
-  let snapTimer = null;
-
-  function elTop(id) {
-    const el = document.getElementById(id);
-    return el ? el.getBoundingClientRect().top + window.pageYOffset : 0;
-  }
-
-  function elBottom(id) {
-    const el = document.getElementById(id);
-    if (!el) return 0;
-    return elTop(id) + el.offsetHeight;
-  }
-
-  function elBottomForSnap(id) {
-    if (id === 'work') {
-      const arch = document.getElementById('archive');
-      if (arch) return arch.getBoundingClientRect().top + window.pageYOffset + arch.offsetHeight;
-    }
-    return elBottom(id);
-  }
-
-  function getCurrentIndex() {
-    const mid = window.pageYOffset + window.innerHeight * 0.35;
-    for (let i = SNAP_IDS.length - 1; i >= 0; i--) {
-      if (elTop(SNAP_IDS[i]) <= mid) return i;
-    }
-    return 0;
-  }
-
-  function snapTo(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    isSnapping = true;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    clearTimeout(snapTimer);
-    snapTimer = setTimeout(() => { isSnapping = false; }, 1000);
-  }
-
-  window.addEventListener('wheel', function(e) {
-    if (isSnapping) { e.preventDefault(); return; }
-    if (window.__snapDisabled) return;
-    if (document.getElementById('lightbox').classList.contains('open')) return;
-
-    const idx = getCurrentIndex();
-    const scrollY = window.pageYOffset;
-    const scrollBottom = scrollY + window.innerHeight;
-
-    // Only snap going forward — scrolling back is always completely free
-    if (e.deltaY > 0 && idx < SNAP_IDS.length - 1) {
-      if (scrollBottom >= elBottomForSnap(SNAP_IDS[idx]) - DOWN_THRESHOLD) {
-        e.preventDefault();
-        snapTo(SNAP_IDS[idx + 1]);
-      }
-    }
-  }, { passive: false });
-})();
 </script>
 
 </body>
