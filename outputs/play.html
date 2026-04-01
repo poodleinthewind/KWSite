@@ -522,6 +522,7 @@ nav {
       <li><a href="index.html#work" class="menu-link">Work</a></li>
       <li><a href="index.html#archive" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="labs.html" class="menu-link">Labs</a></li>
       <li><a href="index.html#about" class="menu-link">About</a></li>
       <li><a href="index.html#contact" class="menu-link">Contact</a></li>
     </ul>
@@ -642,20 +643,15 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
 revealEls.forEach(el => revealObserver.observe(el));
 
-const allItems = document.querySelectorAll('.pg-item');
-
-// Wait for all images to load, then stagger-reveal to avoid reflow glitching
-const imgs = Array.from(document.querySelectorAll('.pg-visual'));
-const loaded = imgs.map(img => {
-  if (img.complete && img.naturalHeight > 0) return Promise.resolve();
-  return new Promise(r => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); });
-});
-Promise.all(loaded).then(() => {
-  allItems.forEach((item, i) => {
-    setTimeout(() => {
-      item.classList.add('ready');
-    }, i * 40);
-  });
+// Reveal each item as soon as its own image/video loads
+document.querySelectorAll('.pg-item').forEach((item, i) => {
+  const visual = item.querySelector('.pg-visual');
+  const show = () => item.classList.add('ready');
+  if (!visual) { show(); return; }
+  if (visual.tagName === 'VIDEO') { show(); return; }
+  if (visual.complete && visual.naturalHeight > 0) { show(); return; }
+  visual.addEventListener('load', show, { once: true });
+  visual.addEventListener('error', show, { once: true });
 });
 
 // ─── LIGHTBOX ───

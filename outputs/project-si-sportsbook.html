@@ -104,6 +104,10 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .g-item img { width: 100%; height: auto; display: block; }
 .g-item .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.28; }
 
+/* PULL QUOTE */
+.pull-quote { padding: 5rem 3rem; text-align: center; }
+.pull-quote p { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.35; color: var(--text-primary); max-width: 960px; margin: 0 auto; }
+
 /* CREDITS */
 .credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 4rem; }
 .credit-role { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.35rem; }
@@ -173,6 +177,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <li><a href="index.html#work" class="menu-link">Work</a></li>
       <li><a href="all-work.html" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="labs.html" class="menu-link">Labs</a></li>
       <li><a href="index.html#about" class="menu-link">About</a></li>
       <li><a href="index.html#contact" class="menu-link">Contact</a></li>
     </ul>
@@ -201,7 +206,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>Tasked to create an accessible re-design of the Sports Illustrated Sportsbook brand &mdash; blending nostalgic moments from the iconic editorial powerhouse with an evolved design system that is flexible for daily use.</p>
+    <p>Sports Illustrated brought me on to redesign the brand for their Sportsbook platform. The brief was in figuring out how to retain the legacy but modernize it for the current competitive landscape. It needed to feel like SI without the editorial, native to digital.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
@@ -213,11 +218,11 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <div class="meta-label">Role</div>
       <div class="meta-value">Creative Director</div>
     </div>
-    <div class="meta-block">
-      <div class="meta-label">Agency</div>
-      <div class="meta-value">Godfrey Dadich and Partners</div>
-    </div>
   </div>
+</div>
+
+<div class="pull-quote">
+  <p>Embracing the deep legacy of one of the most iconic brands in sports — and finding a way to carry it forward without losing what made it matter.</p>
 </div>
 
 <!-- ══ FULL-BLEED: BRAND IDENTITY ══ -->
@@ -229,8 +234,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
   <div class="split">
     <div class="split-text">
-      <h3>Honoring Legacy, Designing Forward</h3>
-      <p>The challenge was creating a brand that honored Sports Illustrated's legacy while feeling native to a modern betting experience. The design system needed to flex across live scores, odds displays, promotional banners, and editorial content &mdash; all while maintaining the editorial authority SI is known for.</p>
+      <h3>Not a reskin.</h3>
+      <p>I didn't want to just slap the SI mark on a betting app. It had to actually feel like Sports Illustrated &mdash; the editorial authority, the photography, the weight of decades of sports culture &mdash; translated into something that works at the speed of live odds and daily content.</p>
     </div>
     <div class="split-media">
       <img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Artboard%206New_New.png" alt="In the Game brand direction" loading="lazy">
@@ -239,8 +244,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
   <div class="split flip">
     <div class="split-text">
-      <h3>Brand System</h3>
-      <p>An evolved design system balancing the weight of SI's editorial heritage with the speed and clarity a sportsbook demands. Typography, color, and layout rules were built to scale from a single score widget to full-screen promotional moments.</p>
+      <h3>Built to flex.</h3>
+      <p>The system needed to hold up everywhere &mdash; a score widget, a promo banner, a full editorial spread. Typography and color were tuned to carry SI's voice whether the context was a push notification or a hero moment.</p>
     </div>
     <div class="split-media">
       <img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Artboard%207New_New.png" alt="In the Game brand system" loading="lazy">
@@ -289,54 +294,26 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
   <div class="split">
     <div class="split-text">
-      <h3>Bringing the Brand to Life</h3>
-      <p>A motion language was developed to bring the brand to life across app transitions, score updates, and promotional content. Each animation reinforces the brand's energy while keeping the interface fast and readable.</p>
+      <h3>Nothing extra.</h3>
+      <p>After setting the tone for the motion language, I scaled it with another designer. It had to feel energetic enough to match live sports but stay clean enough that the interface never gets in the way.</p>
     </div>
     <div class="split-media">
       <div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/f8163fa6-546b-49d6-b180-63df8078dccc?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
     </div>
   </div>
 
-  <div class="split flip">
-    <div class="split-text">
-      <h3>Sport-Specific Motion</h3>
-      <p>Each sport received its own motion treatment &mdash; tailored animations that reflect the pace and character of the game, from the crack of a bat to the precision of a golf swing.</p>
-    </div>
-    <div class="split-media">
-      <div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/97a0c5fa-e2c2-476e-a41c-43e40aa4aaef?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
-    </div>
+  <!-- Sport-specific motion -->
+  <div class="gallery g-2" style="margin-top:.75rem;">
+    <div class="g-item"><div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/97a0c5fa-e2c2-476e-a41c-43e40aa4aaef?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/695e51a2-10bb-4a75-9dc4-c866d4924f38?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
   </div>
 </div>
 
-<!-- ══ IT'S ON THE APP VIDEO ══ -->
-<div style="padding:3rem 8rem;">
-  <div class="video-wrap">
-    <iframe src="https://iframe.mediadelivery.net/embed/615661/688430e9-37fb-451f-bbc3-bbcd55479731?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
-  </div>
-</div>
-
-<!-- ══ MORE MOTION ══ -->
-<div class="section">
-  <div class="section-label">Motion Details</div>
-
-  <div class="split">
-    <div class="split-text">
-      <h3>Side Scroll</h3>
-      <p>Horizontal scrolling interactions designed to showcase odds, featured bets, and promotional content in a fluid, swipeable format native to the mobile experience.</p>
-    </div>
-    <div class="split-media">
-      <div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/695e51a2-10bb-4a75-9dc4-c866d4924f38?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
-    </div>
-  </div>
-
-  <div class="split flip">
-    <div class="split-text">
-      <h3>Logo Animation</h3>
-      <p>A secondary logo animation built for flexibility &mdash; short enough for app loading states, bold enough for broadcast moments.</p>
-    </div>
-    <div class="split-media">
-      <div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/54a0d79d-4e29-4d0b-9c2a-0793fa2719f9?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
-    </div>
+<!-- ══ APP + LOGO VIDEOS ══ -->
+<div style="padding:3rem 10rem;">
+  <div class="gallery g-2">
+    <div class="g-item"><div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/688430e9-37fb-451f-bbc3-bbcd55479731?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/54a0d79d-4e29-4d0b-9c2a-0793fa2719f9?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
   </div>
 </div>
 
