@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Next — Kyle Watson</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Google Next — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +14,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #0a0a0a; --bg-card: #111111;
-  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #555555;
+  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
   --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -119,8 +120,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .g-4 { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  .header-tags { display: none; }
-  .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
@@ -128,7 +127,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .project-header { padding: 6rem 1.5rem 2.5rem; }
   .hero-video { padding: 0; }
   .intro, .section { padding: 3rem 1.5rem; }
-  .bleed img { height: 40vh; min-height: 240px; object-position: right center; }
+  .bleed img { height: 40vh; min-height: 240px; }
   .g-2 { grid-template-columns: 1fr 1fr; }
   .g-3 { grid-template-columns: 1fr 1fr; }
   .gallery { gap: 0.5rem; }
@@ -141,7 +140,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .split-text { padding-right: 0; }
   .split.flip .split-text { padding-left: 0; }
   .gallery.gif-gallery.g-2 { grid-template-columns: 1fr 1fr; }
-  .g-3 .g-item:nth-child(3) { grid-column: 1 / -1; }
 }
 
 /* CREDITS TOGGLE */
@@ -166,7 +164,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <li><a href="index.html#work" class="menu-link">Work</a></li>
       <li><a href="all-work.html" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
-      <li><a href="labs.html" class="menu-link">Labs</a></li>
       <li><a href="index.html#about" class="menu-link">About</a></li>
       <li><a href="index.html#contact" class="menu-link">Contact</a></li>
     </ul>
@@ -182,12 +179,12 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <span class="tag">Motion</span>
     <span class="tag">Design</span>
   </div>
-  <h1 class="header-title">Next</h1>
+  <h1 class="header-title">Google Next</h1>
 </header>
 
 <!-- ─── HERO IMAGE ─── -->
 <div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_05.jpg" alt="Next 2019 keynote stage" loading="eager" style="height: 75vh; min-height: 480px;">
+  <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/event_05.jpg" alt="Google Next 2019 keynote stage" loading="eager" style="height: 75vh; min-height: 480px;">
 </div>
 
 <div class="year-divider">
@@ -198,7 +195,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <!-- ─── INTRO ─── -->
 <div class="intro">
   <div class="intro-text">
-    <p>For my third year creative directing the content at Next we worked in tandem with Jorge Estrada and the gang at Ordinary Folks to concept and animate around the constantly changing stage narrative at Next &rsquo;19. This project was featured on <em>AdAge</em>&rsquo;s list of best experiential for 2019.</p>
+    <p>For my third year creative directing the content at Google Next we worked in tandem with Jorge Estrada and the gang at Ordinary Folks to concept and animate around the constantly changing stage narrative at Next &rsquo;19. This project was featured on <em>AdAge</em>&rsquo;s list of best experiential for 2019.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
@@ -217,6 +214,10 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <div class="meta-block">
       <div class="meta-label">Collaborators</div>
       <div class="meta-value">Andy Babbitz, Jorge Estrada, Ordinary Folks, Camille Connolly</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2018 &ndash; 2019</div>
     </div>
   </div>
 </div>
@@ -313,13 +314,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 <!-- ─── BLEED: 2018 Keynote ─── -->
 <div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202018/stills/day0_01.jpg" alt="Next 2018 keynote stage" loading="lazy">
+  <img src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202018/stills/day0_01.jpg" alt="Google Next 2018 keynote stage" loading="lazy">
 </div>
 
 <!-- ─── INTRO '18 ─── -->
 <div class="intro">
   <div class="intro-text">
-    <p>In 2018 it was our job to break through the expected 16:9 format and tell a more dynamic story on four giant rotating LED cubes.</p>
+    <p>Every year Google Cloud Next is reinvented. In 2018 it was our job to break through the expected 16:9 format and tell a more dynamic story on four giant rotating LED cubes.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
@@ -334,6 +335,10 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <div class="meta-block">
       <div class="meta-label">Agency</div>
       <div class="meta-value">Jack Morton</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2018</div>
     </div>
   </div>
 </div>
@@ -376,6 +381,11 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <!-- ─── VIDEO (Combined) ─── -->
 <div class="section">
   <div class="section-label">Video</div>
+  <div style="width:100%;margin-bottom:2rem">
+    <div class="video-wrap">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/c9b86aae-2043-4336-bd8c-a68a94154a03?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
   <div style="width:100%">
     <div class="video-wrap">
       <iframe src="https://iframe.mediadelivery.net/embed/615661/98d1a61a-d6c7-4e6c-815f-8d5df9d41669?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
@@ -398,6 +408,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <span class="footer-copy">&copy; 2026 Kyle Watson</span>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
     <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>

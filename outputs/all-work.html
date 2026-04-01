@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <title>Archive — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,14 +11,14 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --bg: #f6f3ec; --bg-elevated: #edeae3; --bg-card: #e8e5de;
-  --text-primary: #010103; --text-secondary: #555555; --text-dim: #999999;
-  --accent: #010103; --border: #d4d0c8;
+  --bg: #0a0a0a; --bg-elevated: #111111; --bg-card: #141414;
+  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
+  --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Space Grotesk', monospace;
 }
-html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #c4c0b8 var(--bg); background: var(--bg); }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #2a2a2a var(--bg); }
 body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--bg); }
 
@@ -116,7 +117,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
   cursor: pointer;
   border-radius: 3px;
   background: var(--bg-card);
-  min-height: 0;
+  min-height: 320px;
   text-decoration: none;
   display: block;
   color: var(--text-primary);
@@ -125,39 +126,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
 .project-card.size-medium { grid-column: span 5; aspect-ratio: 4/3; }
 .project-card.size-small  { grid-column: span 6; aspect-ratio: 16/10; }
 .project-card.size-wide   { grid-column: span 12; aspect-ratio: 21/7; }
-
-/* 3-wide asymmetric at large screens */
-@media (min-width: 1400px) {
-  .projects-grid {
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: auto;
-  }
-  /* Reset all cards to small by default */
-  .project-card.size-large,
-  .project-card.size-medium,
-  .project-card.size-small {
-    grid-column: span 3;
-    aspect-ratio: 16/10;
-  }
-  /* Row 1 pattern: large + small + small (1st of every 9) */
-  .projects-grid .project-card:nth-child(9n+1) {
-    grid-column: span 6;
-    aspect-ratio: 16/8;
-  }
-  /* Row 2 pattern: small + large + small (5th of every 9) */
-  .projects-grid .project-card:nth-child(9n+5) {
-    grid-column: span 6;
-    aspect-ratio: 16/8;
-  }
-  /* Row 3 pattern: small + small + large (9th of every 9, i.e. 9n) */
-  .projects-grid .project-card:nth-child(9n) {
-    grid-column: span 6;
-    aspect-ratio: 16/8;
-  }
-  .project-card.size-wide {
-    grid-column: span 12;
-  }
-}
 
 .project-visual { width: 100%; height: 100%; position: absolute; inset: 0; transition: transform 0.9s cubic-bezier(0.16,1,0.3,1); overflow: hidden; }
 .project-card:hover .project-visual { transform: scale(1.04); }
@@ -199,9 +167,9 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
   border: 1px solid rgba(244,132,95,0.3);
   padding: 0.3rem 0.75rem; border-radius: 2px;
 }
-.project-title { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.3rem; color: #fff; }
+.project-title { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.3rem; }
 .project-card.size-large .project-title { font-size: clamp(1.2rem, 2.5vw, 2rem); }
-.project-client { font-size: 0.78rem; color: rgba(255,255,255,0.7); font-weight: 300; }
+.project-client { font-size: 0.78rem; color: var(--text-secondary); font-weight: 300; }
 
 .project-index { position: absolute; top: 1.5rem; left: 1.5rem; font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; z-index: 3; }
 .project-arrow { position: absolute; top: 1.5rem; right: 1.5rem; width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(4px); transition: all 0.3s ease; z-index: 3; }
@@ -229,18 +197,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
   .project-card.size-wide { grid-column: span 12; }
 }
 @media (max-width: 768px) {
-  :root {
-    --bg: #0a0a0a; --bg-elevated: #141414; --bg-card: #1a1a1a;
-    --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
-    --accent: #e8e8e8; --border: #222222;
-  }
-  html { background: var(--bg); scrollbar-color: #333 var(--bg); }
-  body { background: var(--bg); }
-  ::selection { background: var(--accent); color: var(--bg); }
-  .filter-btn { border-color: #333; color: var(--text-secondary); }
-  .filter-btn:hover, .filter-btn.active { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
-  .project-title { color: #fff; }
-  .project-client { color: rgba(255,255,255,0.7); }
   nav { padding: 1.2rem 1.5rem; }
   .page-header { padding: 6rem 1.5rem 2rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
   /* filter bar: horizontally scrollable, no wrap */
@@ -251,7 +207,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
   .project-card.size-large, .project-card.size-medium, .project-card.size-small { grid-column: span 12; aspect-ratio: 4/3; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .custom-cursor { display: none; }
-  .project-tags { display: none; }
 }
 </style>
 </head>
@@ -271,7 +226,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
       <li><a href="index.html#work" class="menu-link">Work</a></li>
       <li><a href="all-work.html" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
-      <li><a href="labs.html" class="menu-link">Labs</a></li>
       <li><a href="index.html#about" class="menu-link">About</a></li>
       <li><a href="index.html#contact" class="menu-link">Contact</a></li>
     </ul>
@@ -283,7 +237,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <a href="index.html">← Back</a>
   </div>
   <h1 class="page-title">Archive</h1>
-  <p class="page-desc">Over a decade across motion, brand, AI, and experiential.</p>
+  <p class="page-desc">Fifteen years across motion, brand, AI, and experiential. Directed for Google, IBM, YouTube, Palo Alto Networks, and more.</p>
 </header>
 
 <div class="filter-bar">
@@ -306,42 +260,39 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">3D</span></div>
       <div class="project-title">CoreWeave x Aston Martin F1</div>
-      <div class="project-client">CoreWeave</div>
+      <div class="project-client">Asteria Film</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 020: Marey -->
-  <a href="project-moonvalley-marey.html" class="project-card size-medium" data-categories="ai motion 3d">
+  <!-- 020: Moonvalley: Marey -->
+  <a href="project-moonvalley-marey.html" class="project-card size-medium" data-categories="ai motion">
     <span class="project-index">020</span>
     <div class="project-visual pv-2"><div class="shape"></div></div>
     <img class="project-thumb" src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="">
     <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/020_Marey/video/marey_launch_v1.mp4" data-start="10" data-end="26"></video>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">Film</span></div>
-      <div class="project-title">Marey</div>
+      <div class="project-title">Moonvalley: Marey</div>
       <div class="project-client">Moonvalley</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
   <!-- 030: Mirror State -->
-  <a href="project-mirror-state.html" class="project-card size-medium" data-categories="design experiential 3d">
+  <a href="project-mirror-state.html" class="project-card size-medium" data-categories="ai design">
     <span class="project-index">030</span>
-    <div class="project-visual">
-      <img class="project-thumb" src="https://kyfolio.b-cdn.net/030_Mirror-state/thumb.jpg" alt="">
-      <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/030_Mirror-state/Animations/01_Thumb.mp4"></video>
-    </div>
+    <div class="project-visual pv-6"><div class="shape"></div></div>
     <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">3D</span><span class="project-tag">Brand Identity</span><span class="project-tag">Motion</span></div>
+      <div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Design</span></div>
       <div class="project-title">Mirror State</div>
-      <div class="project-client">Proofpoint</div>
+      <div class="project-client"></div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 040: New Landscapes (HIDDEN — restore when populated) -->
-  <a href="project-new-landscapes.html" class="project-card size-large" data-categories="ai motion 3d" style="display:none;">
+  <!-- 040: New Landscapes -->
+  <a href="project-new-landscapes.html" class="project-card size-large" data-categories="ai motion 3d">
     <span class="project-index">040</span>
     <div class="project-visual pv-3"><div class="shape"></div></div>
     <div class="project-overlay">
@@ -352,8 +303,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 050: Spotify (HIDDEN — restore when populated) -->
-  <a href="#" class="project-card size-small" data-categories="motion design" style="display:none;">
+  <!-- 050: Spotify -->
+  <a href="#" class="project-card size-small" data-categories="motion design" style="pointer-events:none;opacity:0.4;">
     <span class="project-index">050</span>
     <div class="project-visual pv-5"><div class="shape"></div></div>
     <div class="project-overlay">
@@ -363,15 +314,15 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     </div>
   </a>
 
-  <!-- 060: Open Minds -->
-  <a href="project-ibm-open-minds.html" class="project-card size-small" data-categories="motion design experiential">
+  <!-- 060: IBM Open Minds -->
+  <a href="project-ibm-open-minds.html" class="project-card size-small" data-categories="motion design">
     <span class="project-index">060</span>
     <div class="project-visual pv-5"><div class="shape"></div></div>
     <img class="project-thumb" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumb.jpg" alt="">
     <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumbnail-Loop.mp4"></video>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
-      <div class="project-title">Open Minds</div>
+      <div class="project-title">IBM Open Minds</div>
       <div class="project-client">IBM</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
@@ -389,8 +340,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 080: Unity (HIDDEN — restore when populated) -->
-  <a href="project-unity.html" class="project-card size-medium" data-categories="motion design" style="display:none;">
+  <!-- 080: Unity -->
+  <a href="project-unity.html" class="project-card size-medium" data-categories="motion design">
     <span class="project-index">080</span>
     <div class="project-visual pv-8"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/Frame%201.jpg" alt="Unity" style="width:100%;height:100%;object-fit:cover;"></div>
     <div class="project-overlay">
@@ -401,14 +352,14 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 090: Forge -->
-  <a href="project-youtube-forge.html" class="project-card size-medium" data-categories="motion design experiential 3d">
+  <!-- 090: YouTube Forge -->
+  <a href="project-youtube-forge.html" class="project-card size-medium" data-categories="motion design experiential">
     <span class="project-index">090</span>
     <div class="project-visual pv-9"><div class="shape"></div></div>
     <img class="project-thumb" src="https://kyfolio.b-cdn.net/080_Forge/stills/NEAL_BLACK_L%20copyNew_New.jpg" alt="" style="transform: scale(1.15); object-position: center 40%;">
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
-      <div class="project-title">Forge</div>
+      <div class="project-title">YouTube Forge</div>
       <div class="project-client">YouTube</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
@@ -428,15 +379,15 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
   </a>
 
-  <!-- 110: Next -->
-  <a href="project-google-next.html" class="project-card size-large" data-categories="experiential motion design 3d">
+  <!-- 110: Google Next -->
+  <a href="project-google-next.html" class="project-card size-large" data-categories="experiential motion design">
     <span class="project-index">110</span>
     <div class="project-visual pv-7"><div class="shape"></div></div>
     <img class="project-thumb" src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_thumb.jpg" alt="">
-    <img class="project-video" src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_01.gif" alt="Next" loading="lazy">
+    <img class="project-video" src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_01.gif" alt="Google Next" loading="lazy">
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Experiential</span><span class="project-tag">Motion</span><span class="project-tag">Design</span></div>
-      <div class="project-title">Next</div>
+      <div class="project-title">Google Next</div>
       <div class="project-client">Google</div>
     </div>
     <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
@@ -460,7 +411,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
   <!-- 130: Groove Around the Globe -->
   <a href="project-google-groove.html" class="project-card size-large" data-categories="experiential motion">
     <span class="project-index">130</span>
-    <div class="project-visual pv-10"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png" alt="Groove Around the Globe" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="project-visual pv-10"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/poster_mockup.jpg" alt="Groove Around the Globe" style="width:100%;height:100%;object-fit:cover;"></div>
     <div class="project-overlay">
       <div class="project-tags"><span class="project-tag">Experiential</span><span class="project-tag">Motion</span></div>
       <div class="project-title">Groove Around the Globe</div>
@@ -517,6 +468,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
   <span class="footer-copy">&copy; 2026 Kyle Watson</span>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
     <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
@@ -583,7 +535,7 @@ filterBtns.forEach(btn => {
     const filter = btn.dataset.filter;
     cards.forEach(card => {
       const cats = card.dataset.categories || '';
-      if (filter === 'all' || cats.split(' ').includes(filter)) {
+      if (filter === 'all' || cats.includes(filter)) {
         card.classList.remove('hidden');
       } else {
         card.classList.add('hidden');

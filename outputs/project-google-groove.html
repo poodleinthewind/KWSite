@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <title>Groove Around the Globe — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #0a0a0a; --bg-card: #111111;
-  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #555555;
+  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
   --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -137,8 +138,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .credits { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  .header-tags { display: none; }
-  .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
@@ -176,7 +175,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <li><a href="index.html#work" class="menu-link">Work</a></li>
       <li><a href="all-work.html" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
-      <li><a href="labs.html" class="menu-link">Labs</a></li>
       <li><a href="index.html#about" class="menu-link">About</a></li>
       <li><a href="index.html#contact" class="menu-link">Contact</a></li>
     </ul>
@@ -197,14 +195,14 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 </header>
 
 <!-- ══ HERO IMAGE ══ -->
-<div class="bleed" style="max-height:60vh;overflow:hidden;">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png" alt="Groove Around the Globe" style="margin-top:-14%;">
+<div class="bleed">
+  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/banner.png" alt="Groove Around the Globe event banner">
 </div>
 
 <!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>In 2020, when the world had slowed down, Google Cloud wanted to bring their global design teams together. We conceived and produced a 24-hour livestream featuring DJs and musicians from around the world &mdash; a virtual festival that chased the sun across time zones.</p>
+    <p>In times of deep covid, Google Cloud wanted to unite their design teams around the globe with something universal &mdash; music. The result was a 24-hour virtual festival that chased the sun over the horizon and across various musical frontiers.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
@@ -216,28 +214,57 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <div class="meta-label">Role</div>
       <div class="meta-value">Creative Director, Lead Designer</div>
     </div>
+    <div class="meta-block">
+      <div class="meta-label">Agency</div>
+      <div class="meta-value">Jack Morton</div>
+    </div>
   </div>
 </div>
 
-<!-- ══ FULL-BLEED PROCESS IMAGE ══ -->
+<!-- ══ FULL-BLEED HERO IMAGE ══ -->
 <div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/screenshot.png" alt="Groove Around the Globe wireframe process">
+  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/poster_mockup.jpg" alt="Groove Around the Globe poster mockup">
+</div>
+
+<!-- ══ PROCESS ══ -->
+<div class="section">
+  <div class="section-label">Process</div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>A common language</h3>
+      <p>While not all instruments in this world are global, percussion is something that all cultures utilize in their music. Vibrations that are usually felt or interpreted audibly were illustrated in attempts to communicate a common language.</p>
+    </div>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png" alt="Groove percussion illustration">
+    </div>
+  </div>
 </div>
 
 <!-- ══ STILLS ══ -->
 <div class="section">
-  <div class="gallery g-2">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png" alt="Groove percussion illustration"></div>
+  <div class="section-label">Stills</div>
+  <div class="gallery g-3">
     <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_02.png" alt="Groove design system"></div>
-  </div>
-  <div class="gallery g-3" style="margin-top:.75rem">
     <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_03.png" alt="Groove visual identity"></div>
     <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_04.png" alt="Groove event graphics"></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
     <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_05.png" alt="Groove collateral"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_06.png" alt="Groove branding"></div>
+  </div>
+  <div class="gallery g-3" style="margin-top:.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_07.png" alt="Groove graphics"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_08.png" alt="Groove typography"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_09.png" alt="Groove pattern"></div>
   </div>
   <div class="gallery g-2" style="margin-top:.75rem">
     <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/mockup_01.jpg" alt="Groove mockup"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/ticket_mockup.jpg" alt="Groove ticket mockup" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/mockup_02.jpg" alt="Groove presentation mockup"></div>
+  </div>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/mockup_03.jpg" alt="Groove screen mockup"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/ticket_mockup.jpg" alt="Groove ticket mockup"></div>
   </div>
 </div>
 
@@ -273,6 +300,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <span class="footer-copy">&copy; 2026 Kyle Watson</span>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
     <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>

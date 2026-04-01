@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <title>Mirror State — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #0a0a0a; --bg-card: #111111;
-  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #555555;
+  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
   --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -100,8 +101,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .credits { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  .header-tags { display: none; }
-  .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
@@ -140,7 +139,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <li><a href="index.html#work" class="menu-link">Work</a></li>
       <li><a href="all-work.html" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
-      <li><a href="labs.html" class="menu-link">Labs</a></li>
       <li><a href="index.html#about" class="menu-link">About</a></li>
       <li><a href="index.html#contact" class="menu-link">Contact</a></li>
     </ul>
@@ -151,75 +149,58 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="header-back">
     <a href="all-work.html">← Back</a>
   </div>
-  <div class="header-tags"><span class="tag">Brand Identity</span><span class="tag">Motion</span><span class="tag">3D</span></div>
+  <div class="header-tags"><!-- TODO: tags --></div>
   <h1 class="header-title">Mirror State</h1>
 </header>
 
 <div class="hero-video">
   <div class="video-wrap">
-    <video autoplay muted loop playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-      <source src="https://kyfolio.b-cdn.net/030_Mirror-state/Animations/01_Thumb.mp4" type="video/mp4">
-    </video>
+    <!--
+    <iframe src="https://iframe.mediadelivery.net/embed/LIBRARY_ID/VIDEO_ID?autoplay=0&loop=1&muted=1&preload=true"
+      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    -->
+    <div class="ph">Mirror State</div>
   </div>
 </div>
 
 <div class="intro">
-  <div class="intro-text">
-    <p>Mirror State was a brand identity and motion system developed for Proofpoint. I used it as a medium to explore a concept I&rsquo;d been fascinated by for years. Refraction. And how things change, warp, and abstract in an environment full of mirrors.</p>
-    <p>We made gradient light panels from the palette that we evolved for this event and stuck them into the workspace to see how extruded versions of the newly refreshed brand assets would read. The result &mdash; a mirror state. An environment where you can&rsquo;t hide anything. A light, an artifact&hellip; a cyberthreat. Everything becomes visible in this place.</p>
-  </div>
+  <div class="intro-text"><p><!-- TODO: overview --></p></div>
   <div class="intro-divider"></div>
   <div class="meta">
-    <div class="meta-block"><div class="meta-label">Client</div><div class="meta-value"><strong>Proofpoint</strong></div></div>
-    <div class="meta-block"><div class="meta-label">Role</div><div class="meta-value">Creative Director, 3D Artist</div></div>
-    <div class="meta-block"><div class="meta-label">Tools</div><div class="meta-value">Cinema 4D, After Effects, Octane Render</div></div>
+    <div class="meta-block"><div class="meta-label">Client</div><div class="meta-value"><strong><!-- TODO --></strong></div></div>
+    <div class="meta-block"><div class="meta-label">Role</div><div class="meta-value"><!-- TODO --></div></div>
+    <div class="meta-block"><div class="meta-label">Agency</div><div class="meta-value"><!-- TODO --></div></div>
+    <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value"><!-- TODO --></div></div>
   </div>
 </div>
 
-<!-- ─── APPLICATION ─── -->
+<div class="bleed"><div class="ph-rect"></div></div>
+
 <div class="section">
-  <div class="section-label">Application</div>
-  <div class="gallery g-2" style="margin-bottom:.75rem">
-    <div class="g-item" style="aspect-ratio:4/3;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Final-mock/Badge.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="g-item" style="aspect-ratio:4/3;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Final-mock/iphone.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+  <div class="section-label">Process</div>
+  <div class="split">
+    <div class="split-text"><h3><!-- TODO --></h3><p><!-- TODO --></p></div>
+    <div class="split-media"><div class="ph"></div></div>
   </div>
-  <div class="gallery g-3" style="margin-bottom:.75rem">
-    <div class="g-item" style="aspect-ratio:4/3;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Final-mock/maleshirt.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="g-item" style="aspect-ratio:4/3;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Final-mock/moleskine.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="g-item" style="aspect-ratio:4/3;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Final-mock/femaleshirt.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+  <div class="split flip">
+    <div class="split-text"><h3><!-- TODO --></h3><p><!-- TODO --></p></div>
+    <div class="split-media"><div class="ph"></div></div>
   </div>
-  <div class="bleed" style="margin-bottom:.75rem"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Final-mock/Reg%20Desk.jpg" alt="" loading="lazy" style="width:100%;display:block;"></div>
-  <div class="bleed" style="aspect-ratio:16/9;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Final-mock/lightpost.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
 </div>
 
-<!-- ─── 3D EXPLORATION ─── -->
 <div class="section">
-  <div class="section-label">3D Exploration</div>
-  <div class="bleed" style="margin-bottom:.75rem"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Stills/mirror-state-still-01.png" alt="" loading="lazy" style="width:100%;display:block;"></div>
-  <div class="gallery g-2" style="margin-bottom:.75rem">
-    <div class="g-item" style="aspect-ratio:2/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Stills/mirror-state-still-02.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="g-item" style="aspect-ratio:2/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Stills/mirror-state-still-03.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+  <div class="section-label">Stills</div>
+  <div class="gallery g-3">
+    <div class="g-item std"><div class="ph"></div></div>
+    <div class="g-item std"><div class="ph"></div></div>
+    <div class="g-item std"><div class="ph"></div></div>
   </div>
-  <div style="margin-bottom:.75rem"><video autoplay muted loop playsinline preload="none" style="width:100%;display:block;"><source src="https://kyfolio.b-cdn.net/030_Mirror-state/Animations/191da3996a2e918a8b6bacd1948a1d75.mp4" type="video/mp4"></video></div>
-  <div class="gallery g-2" style="margin-bottom:.75rem">
-    <div class="g-item" style="aspect-ratio:2/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Stills/mirror-state-still-04.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="g-item" style="aspect-ratio:2/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Stills/mirror-state-still-05.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-  </div>
-  <div style="margin-bottom:.75rem"><video autoplay muted loop playsinline preload="none" style="width:100%;display:block;"><source src="https://kyfolio.b-cdn.net/030_Mirror-state/Animations/731e982e8ac2af6c9f13bfc186d2b5ec.mp4" type="video/mp4"></video></div>
-  <div class="bleed"><img src="https://kyfolio.b-cdn.net/030_Mirror-state/Stills/mirror-state-still-06.png" alt="" loading="lazy" style="width:100%;display:block;"></div>
-</div>
-
-<!-- ─── STYLE GUIDE ─── -->
-<div class="section">
-  <div class="section-label">Style Guide</div>
-  <div style="max-width:60%;margin:0 auto;">
-    <video autoplay muted loop playsinline preload="none" style="width:100%;display:block;">
-      <source src="https://kyfolio.b-cdn.net/030_Mirror-state/MirrorState_Guidelines.mp4" type="video/mp4">
-    </video>
+  <div class="gallery g-2" style="margin-top:.75rem">
+    <div class="g-item std"><div class="ph"></div></div>
+    <div class="g-item std"><div class="ph"></div></div>
   </div>
 </div>
 
-<!-- ─── CREDITS ─── -->
 <div class="section credits-section">
   <button class="credits-toggle" aria-expanded="false">
     <span class="section-label" style="margin-bottom:0">Credits</span>
@@ -227,8 +208,9 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   </button>
   <div class="credits-content" style="display:none;">
   <div class="credits">
-    <div><div class="credit-role">Creative Director / 3D Artist</div><div class="credit-name">Kyle Watson</div></div>
-    <div><div class="credit-role">Client</div><div class="credit-name">Proofpoint</div></div>
+    <div><div class="credit-role"><!-- TODO: role --></div><div class="credit-name">Kyle Watson</div></div>
+    <div><div class="credit-role">Client</div><div class="credit-name"><!-- TODO --></div></div>
+    <div><div class="credit-role">Year</div><div class="credit-name"><!-- TODO --></div></div>
   </div>
   </div>
 </div>
@@ -236,11 +218,11 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <nav class="pagination">
   <a href="project-ibm-open-minds.html" class="page-item prev">
     <span class="page-dir">← Previous</span>
-    <span class="page-title">Open Minds</span>
+    <span class="page-title">IBM Open Minds</span>
   </a>
   <a href="project-google-next.html" class="page-item next">
     <span class="page-dir">Next →</span>
-    <span class="page-title">Next</span>
+    <span class="page-title">Google Next</span>
   </a>
 </nav>
 
@@ -248,6 +230,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <span class="footer-copy">&copy; 2026 Kyle Watson</span>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
     <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
