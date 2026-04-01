@@ -1376,7 +1376,7 @@ section {
 
 <!-- HERO VIDEO — fixed behind content -->
 <div class="hero-video">
-  <video autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4"></video>
+  <video autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/_Site/HomepageLoop2.mp4"></video>
 </div>
 <div class="hero-video-spacer"></div>
 
@@ -1501,9 +1501,9 @@ section {
   </div>
 
   <div class="play-grid">
-    <div class="play-item pi-1 reveal stagger-1" data-lightbox="1" data-title="Blue Spiral Neon" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png" alt="Blue Spiral Neon" loading="lazy"></div>
+    <div class="play-item pi-1 reveal stagger-1" data-lightbox="1" data-title="Blue Spiral Neon" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png" alt="Blue Spiral Neon"></div>
     <div class="play-item pi-2 reveal stagger-2" data-lightbox="2" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif"><video class="play-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.mp4" autoplay muted loop playsinline></video></div>
-    <div class="play-item pi-5 reveal stagger-5" data-lightbox="5" data-title="If You Wish Arches" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg" alt="If You Wish Arches" loading="lazy"></div>
+    <div class="play-item pi-5 reveal stagger-5" data-lightbox="5" data-title="If You Wish Arches" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg"><img class="play-visual" src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg" alt="If You Wish Arches"></div>
     <div class="play-item pi-6 reveal stagger-6" data-lightbox="6" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif"><video class="play-visual" src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.mp4" autoplay muted loop playsinline></video></div>
     <div class="play-item pi-7 reveal stagger-7" data-lightbox="7" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif"><video class="play-visual" src="https://kyfolio.b-cdn.net/_Play/bird-warrior.mp4" autoplay muted loop playsinline></video></div>
   </div>
@@ -1683,8 +1683,13 @@ menuOverlay.querySelectorAll('.menu-link').forEach(link => {
     menuOverlay.classList.remove('open');
     setTimeout(() => {
       if (target) {
-        const y = target.getBoundingClientRect().top + window.pageYOffset - 20;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        const scrollToTarget = () => {
+          const y = target.getBoundingClientRect().top + window.pageYOffset - 20;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        };
+        scrollToTarget();
+        // Re-adjust after media finishes loading (prevents layout shift)
+        setTimeout(scrollToTarget, 800);
       }
     }, 450);
   });

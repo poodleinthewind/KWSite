@@ -102,13 +102,13 @@ video { display: block; max-width: 100%; }
 .g-3   { grid-template-columns: repeat(3, 1fr); }
 .g-2-1 { grid-template-columns: 2fr 1fr; }
 .g-1-2 { grid-template-columns: 1fr 2fr; }
-.g-item { overflow: hidden; position: relative; background: var(--bg-card); }
-.g-item.std  { aspect-ratio: 4/3; }
-.g-item.wide { aspect-ratio: 16/7; }
-.g-item.sq   { aspect-ratio: 1/1; }
-.g-item.tall { aspect-ratio: 3/4; }
-.g-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.g-item .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.28; }
+.g-item { overflow: hidden; position: relative; background: var(--bg); }
+.g-item img, .g-item video { width: 100%; height: auto; display: block; }
+.g-4 { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+/* PULL QUOTE */
+.pull-quote { padding: 5rem 3rem; text-align: center; }
+.pull-quote p { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.35; color: var(--text-primary); max-width: 960px; margin: 0 auto; }
 
 /* CREDITS */
 .credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 4rem; }
@@ -152,6 +152,7 @@ video { display: block; max-width: 100%; }
   .bleed .ph-rect { height: 40vh; min-height: 240px; }
   .g-2 { grid-template-columns: 1fr 1fr; }
   .g-3 { grid-template-columns: 1fr 1fr; }
+  .g-4 { grid-template-columns: 1fr 1fr; }
   .gallery { gap: 0.5rem; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
@@ -202,14 +203,21 @@ video { display: block; max-width: 100%; }
 <!-- ══ HERO VIDEO ══ -->
 <div class="hero-video">
   <div class="video-wrap">
-    <iframe src="https://iframe.mediadelivery.net/embed/615661/4e6a443b-9e84-4ce8-a5de-9ba2ee267886?autoplay=false&loop=false&muted=false&preload=true&controls=true" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    <div class="hero-poster" id="heroPoster" style="position:absolute;inset:0;z-index:2;cursor:pointer;">
+      <img src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="Marey" style="width:100%;height:100%;object-fit:cover;">
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="31" stroke="rgba(255,255,255,0.8)" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="rgba(255,255,255,0.9)"/></svg>
+      </div>
+    </div>
+    <iframe id="heroIframe" src="about:blank" data-src="https://iframe.mediadelivery.net/embed/615661/4e6a443b-9e84-4ce8-a5de-9ba2ee267886?autoplay=true&loop=false&muted=false&preload=true&controls=true" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
 
 <!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>MoonValley invited me to help produce the release video for Marey — their first studio-grade, frame-perfect AI video tool, trained exclusively on licensed data. The goal was to express a new sense of control in a chaotic creative landscape. The result: an epochal journey shaped by a fluid, nonlinear approach to filmmaking.</p>
+    <p>MoonValley invited me to help produce the release video for Marey — their first studio-grade, frame-perfect AI video tool, trained exclusively on licensed data. The goal was to express a new sense of control in a chaotic creative landscape.</p>
+    <p>The process started by mapping every movement with 3D primitives — simple geometric forms choreographed to define the motion, timing, and spatial language of each sequence. From there we layered on complexity: texture, lighting, and generative passes built on top of that structural foundation. We also vibe-coded a suite of custom procedural sine wave tools, giving us precise control over the organic, rhythmic motion that runs through the film. The result was an epochal journey shaped by a fluid, nonlinear approach to filmmaking.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
@@ -224,37 +232,158 @@ video { display: block; max-width: 100%; }
   </div>
 </div>
 
-<!-- ══ FULL-BLEED ══ -->
-<div class="bleed"><img src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="Marey launch still" loading="lazy"></div>
+<!-- ══ PULL QUOTE ══ -->
+<div class="pull-quote">
+  <p>Every frame started as a primitive. Simple geometry, choreographed in 3D, defining the motion before anything else existed.</p>
+</div>
 
-<!-- ══ 001. TRAINING THE MODELS ══ -->
+<!-- ══ 001. WALK ══ -->
 <div class="section">
-  <div class="section-label">001. Training the Models</div>
-  <div class="split">
-    <div class="split-text">
-      <h3>Control in a chaotic landscape.</h3>
-      <p>Marey is the first AI video tool trained exclusively on licensed data — a new standard. The creative challenge was making that precision feel visceral and cinematic rather than mechanical. We built toward a fluid, nonlinear narrative: not a demo, but an experience.</p>
-    </div>
-    <div class="split-media"><img src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="Marey visual" loading="lazy"></div>
+  <div class="section-label">001. Walk</div>
+  <!-- Walk_001 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-01.mp4"></video></div>
+  </div>
+  <!-- Walk_002 + 003 + 004 + 005 four-up grid -->
+  <div class="gallery g-4">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-02.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-03.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-04.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-05.mp4"></video></div>
+  </div>
+  <!-- Walk_006 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-06.mp4"></video></div>
   </div>
 </div>
 
-<!-- ══ 002. SETTING THE LOOK ══ -->
+<!-- ══ 002. HORSE ══ -->
 <div class="section">
-  <div class="section-label">002. Setting the Look</div>
-  <div class="split">
-    <div class="split-text">
-      <h3>Tools as a creative act.</h3>
-      <p>To guide the models, we created a series of base visuals using C4D, After Effects, and a suite of custom, vibe-coded parametric tools built in Claude.ai — including a tunnel generator, geometric wave field visualizer, sine wave system, and more.</p>
-    </div>
-    <div class="split-media"><img src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="Marey process" loading="lazy"></div>
+  <div class="section-label">002. Horse</div>
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Horse/horse-01.mp4"></video></div>
   </div>
 </div>
 
-<!-- ══ 003. STILLS ══ -->
+<!-- ══ 003. REVOLVE ══ -->
 <div class="section">
-  <div class="section-label">003. Stills</div>
-  <!-- TODO: Add stills when uploaded to Bunny 020_Marey/stills/ -->
+  <div class="section-label">003. Revolve</div>
+  <!-- CamOrbit_01 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Revolve/camorbit-01.mp4"></video></div>
+  </div>
+  <!-- CamOrbit_02 + 03 side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Revolve/camorbit-02.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Revolve/camorbit-03.mp4"></video></div>
+  </div>
+  <!-- CamOrbit_04 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Revolve/camorbit-04.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ 004. ROCK ══ -->
+<div class="section">
+  <div class="section-label">004. Rock</div>
+  <!-- Rock_01 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Rock/rock-01.mp4"></video></div>
+  </div>
+  <!-- Rock_02 + 03 side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Rock/rock-02.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Rock/rock-03.mp4"></video></div>
+  </div>
+  <!-- Rock_04 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Rock/rock-04.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ PULL QUOTE ══ -->
+<div class="pull-quote">
+  <p>We vibe-coded a suite of custom tools — procedural sine waves, tunnel generators, geometric wave fields — giving us precise, expressive control over every organic rhythm in the film.</p>
+</div>
+
+<!-- ══ 004. TUNNEL ══ -->
+<div class="section">
+  <div class="section-label">004. Tunnel</div>
+  <!-- Tunnel 01 side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-01-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-01-02.mp4"></video></div>
+  </div>
+  <!-- Tunnel 02 side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-02-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-02-02.mp4"></video></div>
+  </div>
+  <!-- Tunnel 03 side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-03-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-03-02.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ 005. SIGN ══ -->
+<div class="section">
+  <div class="section-label">005. Sign</div>
+  <!-- Desert wave side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Sign/desert-wave-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Sign/desert-wave-02.mp4"></video></div>
+  </div>
+  <!-- Snake side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Sign/signwave-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Sign/signwave-02.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ PULL QUOTE ══ -->
+<div class="pull-quote">
+  <p>We knew it was essential to crush the footage — layer on as much life and imperfection as possible. Texture and grit were never afterthoughts. They were the point.</p>
+</div>
+
+<!-- ══ 006. CHAOS CTRL ══ -->
+<div class="section">
+  <div class="section-label">006. Chaos Ctrl</div>
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Chaos-Ctrl/signwave-comp.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ 007. POSE ══ -->
+<div class="section">
+  <div class="section-label">007. Pose</div>
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Pose/pose-control.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Pose/animate-diff.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ 009. UI WAVE ══ -->
+<div class="section">
+  <div class="section-label">008. UI Wave</div>
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/UI-Wave/ui-01.mov"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/UI-Wave/ui-02.mov"></video></div>
+  </div>
+</div>
+
+<!-- ══ PULL QUOTE ══ -->
+<div class="pull-quote">
+  <p>Finding control and humanity in the era of AI is the challenge. Marey gave us a way to do both.</p>
+</div>
+
+<!-- ══ 009. CAMERA ══ -->
+<div class="section">
+  <div class="section-label">009. Camera</div>
+  <div class="gallery g-2">
+    <div class="g-item" style="aspect-ratio:1/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/020_Marey/Camera/camera-01.jpg" alt="Camera reference" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="g-item" style="aspect-ratio:1/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/020_Marey/Camera/camera-02.png" alt="Camera texture" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+  </div>
 </div>
 
 <!-- ══ CREDITS ══ -->
@@ -287,7 +416,6 @@ video { display: block; max-width: 100%; }
   <span class="footer-copy">&copy; 2026 Kyle Watson</span>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
     <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
@@ -301,6 +429,18 @@ menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
 menuOverlay.querySelectorAll('.menu-link').forEach(link => {
   link.addEventListener('click', () => menuOverlay.classList.remove('open'));
 });
+
+// Hero poster → play video on click
+const poster = document.getElementById('heroPoster');
+const iframe = document.getElementById('heroIframe');
+if (poster && iframe) {
+  poster.addEventListener('click', () => {
+    iframe.src = iframe.dataset.src;
+    poster.style.opacity = '0';
+    poster.style.pointerEvents = 'none';
+    poster.style.transition = 'opacity 0.4s ease';
+  });
+}
 
 // Credits toggle
 document.querySelectorAll('.credits-toggle').forEach(btn => {
