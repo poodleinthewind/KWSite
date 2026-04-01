@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Open Minds — Kyle Watson</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>IBM Open Minds — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +14,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #0a0a0a; --bg-card: #111111;
-  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #555555;
+  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
   --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -45,7 +46,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .hero-video { background: var(--bg); padding: 0 3rem; }
 .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-.video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-wrap .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0d0d 0%, var(--project-color) 100%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
 .intro { padding: 3rem 3rem 3rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; align-items: start; min-height: 20rem; }
 .intro-text { padding-right: 3rem; font-size: 0.98rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; max-width: 580px; }
@@ -70,8 +70,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .split.flip > * { direction: ltr; }
 .split-text h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
 .split-text p { font-size: 0.9rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
-.split-media { overflow: hidden; position: relative; }
-.split-media img { width: 100%; height: auto; display: block; }
+.split-media { aspect-ratio: 4/3; overflow: hidden; background: var(--bg-card); position: relative; }
 .split-media .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 .gallery { display: grid; gap: 0.75rem; }
 .g-2 { grid-template-columns: 1fr 1fr; }
@@ -107,8 +106,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .credits { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  .header-tags { display: none; }
-  .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
@@ -141,7 +138,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <li><a href="index.html#work" class="menu-link">Work</a></li>
       <li><a href="all-work.html" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
-      <li><a href="labs.html" class="menu-link">Labs</a></li>
       <li><a href="index.html#about" class="menu-link">About</a></li>
       <li><a href="index.html#contact" class="menu-link">Contact</a></li>
     </ul>
@@ -157,20 +153,21 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <span class="tag">Motion</span>
     <span class="tag">Experiential</span>
   </div>
-  <h1 class="header-title">Open Minds</h1>
+  <h1 class="header-title">IBM Open Minds</h1>
 </header>
 
 <!-- ─── HERO VIDEO ─── -->
 <div class="hero-video">
-  <div class="video-wrap">
-    <video autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Hero.mp4"></video>
+  <div class="video-wrap" style="opacity:0; transition: opacity 0.6s ease;">
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/f2b3b4a8-0975-45dd-8eb3-3bf8942f5490?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false"
+      allow="autoplay; encrypted-media" allowfullscreen loading="lazy" onload="setTimeout(()=>this.parentElement.style.opacity='1',1500)"></iframe>
   </div>
 </div>
 
 <!-- ─── INTRO ─── -->
 <div class="intro">
   <div class="intro-text">
-    <p>Open Minds was a docuseries and live event platform for IBM celebrating open-source advocates and the communities they serve. We designed and directed the studio environment, motion graphics package, and documentary-style portrait series&mdash;bridging editorial storytelling with experiential design.</p>
+    <p>Open Minds was a docuseries and live event platform for IBM celebrating open-source advocates and the communities they serve. We designed and directed the stage experience, motion graphics package, and documentary-style portrait series&mdash;bridging editorial storytelling with large-format experiential design.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
@@ -185,6 +182,10 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <div class="meta-block">
       <div class="meta-label">Agency</div>
       <div class="meta-value">&mdash;</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2022</div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Collaborators</div>
@@ -210,8 +211,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="section-label">Process</div>
   <div class="split">
     <div class="split-text">
-      <h3>Studio as canvas.</h3>
-      <p>We wanted it to feel like a working set&mdash;a place where ideas could take shape, something deliberately unfinished. Translucent LED panels and projected typography shifted tone with each subject&rsquo;s story&mdash;quiet and reflective one moment, charged and graphic the next. The set stayed alive.</p>
+      <h3>Stage as canvas.</h3>
+      <p>The stage design needed to feel intimate despite the scale of the venue. We created a layered environment using translucent LED panels and projected typography that shifted tone with each speaker&rsquo;s story&mdash;warm and personal for the portrait segments, bold and graphic for the keynote moments.</p>
     </div>
     <div class="split-media">
       <img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Stage-Design-01.png" alt="Open Minds stage design" loading="lazy">
@@ -220,7 +221,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="split flip">
     <div class="split-text">
       <h3>Faces behind the code.</h3>
-      <p>Working with photographer Mark Mahaney, we developed a portrait series that brought the open-source contributors into focus. Natural light brought candor and optimism to the portraits&mdash;letting the people feel approachable and the work feel open.</p>
+      <p>Working with photographer Mark Mahaney, we developed a portrait series that brought the open-source contributors into focus. The visual language balanced editorial restraint with the energy of the community&mdash;natural light, honest moments, and a color palette that tied back to the stage environment.</p>
     </div>
     <div class="split-media">
       <img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Portrait-JJ-Asghar-01.jpg" alt="JJ Asghar portrait" loading="lazy">
@@ -265,33 +266,26 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <div class="g-item"><img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Stage-Design-03.png" alt="Stage design render" loading="lazy"></div>
     <div class="g-item"><img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Portrait-Sheri-Hinish-02.jpg" alt="Sheri Hinish portrait" loading="lazy"></div>
   </div>
-  <div style="margin-top:.75rem; display:grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; max-width: 60%; margin-left: auto; margin-right: auto;">
-    <img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Logo-Asset-01.png" alt="Open Minds logo" loading="lazy" style="width:100%;display:block;">
-    <img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Logo-Asset-02.png" alt="Open Minds logo" loading="lazy" style="width:100%;display:block;">
+  <div class="gallery g-2" style="margin-top:.75rem;">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Logo-Asset-01.png" alt="Open Minds logo" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Logo-Asset-02.png" alt="Open Minds logo" loading="lazy"></div>
   </div>
 </div>
 
-<!-- ─── EPISODE CUTDOWNS ─── -->
+<!-- ─── HOMEPAGE HERO ─── -->
+<div class="bleed">
+  <div class="video-wrap" style="opacity:0; transition: opacity 0.6s ease;">
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/8dd576e5-95e1-4632-bdfd-ec65c84b8de5?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false"
+      allow="autoplay; encrypted-media" allowfullscreen loading="lazy" onload="setTimeout(()=>this.parentElement.style.opacity='1',1500)"></iframe>
+  </div>
+</div>
+
+<!-- ─── FULL VIDEO ─── -->
 <div class="section">
-  <div class="section-label">Episodes</div>
-  <div style="max-width:60%;margin:0 auto 2rem;">
-    <div class="video-wrap">
-      <iframe src="https://iframe.mediadelivery.net/embed/615661/f3fa1659-42ca-4c4d-9625-cd0077139026?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
-        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
-  </div>
-  <div style="max-width:60%;margin:0 auto;">
-    <div class="video-wrap">
-      <iframe src="https://iframe.mediadelivery.net/embed/615661/8fc34d5b-6f26-4ddd-8a40-780e2b5a44fb?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
-        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
-  </div>
-</div>
-
-<!-- ─── JJ VIDEO ─── -->
-<div class="section" style="padding-bottom:0;">
-  <div style="max-width:60%;margin:0 auto;">
-    <video autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Homepage-Hero.mov" style="width:100%;display:block;"></video>
+  <div class="section-label">Full Episode</div>
+  <div class="video-wrap">
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/c2db6107-c6aa-42a7-af1f-581337242b00?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
+      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
   </div>
 </div>
 
@@ -306,6 +300,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <div><div class="credit-role">Creative Director / Designer</div><div class="credit-name">Kyle Watson</div></div>
       <div><div class="credit-role">Photography</div><div class="credit-name">Mark Mahaney</div></div>
       <div><div class="credit-role">Client</div><div class="credit-name">IBM</div></div>
+      <div><div class="credit-role">Year</div><div class="credit-name">2022</div></div>
     </div>
   </div>
 </div>
@@ -325,6 +320,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <span class="footer-copy">&copy; 2026 Kyle Watson</span>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
     <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
