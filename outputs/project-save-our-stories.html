@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <title>Save Our Stories — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +13,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #0a0a0a; --bg-card: #111111;
-  --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
+  --text-primary: #e8e8e8; --text-secondary: #aaaaaa; --text-dim: #555555;
   --accent: #c8ff00; --border: #1e1e1e;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -146,6 +145,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .credits { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
+  .header-tags { display: none; }
+  .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
@@ -183,6 +184,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
       <li><a href="index.html#work" class="menu-link">Work</a></li>
       <li><a href="all-work.html" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="labs.html" class="menu-link">Labs</a></li>
       <li><a href="index.html#about" class="menu-link">About</a></li>
       <li><a href="index.html#contact" class="menu-link">Contact</a></li>
     </ul>
@@ -228,10 +230,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <div class="meta-block">
       <div class="meta-label">Agency</div>
       <div class="meta-value">BBDO San Francisco</div>
-    </div>
-    <div class="meta-block">
-      <div class="meta-label">Year</div>
-      <div class="meta-value">2011</div>
     </div>
   </div>
 </div>
@@ -323,7 +321,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   </a>
   <a href="project-google-next.html" class="page-item next">
     <span class="page-dir">Next →</span>
-    <span class="page-title">Google Next</span>
+    <span class="page-title">Next</span>
   </a>
 </nav>
 
@@ -331,7 +329,6 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <span class="footer-copy">&copy; 2026 Kyle Watson</span>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
     <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>

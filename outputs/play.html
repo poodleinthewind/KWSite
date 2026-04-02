@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <title>Play — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,14 +11,14 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #0a0a0a;
-  --bg-elevated: #111111;
-  --bg-card: #141414;
-  --text-primary: #e8e8e8;
-  --text-secondary: #888888;
-  --text-dim: #444444;
-  --accent: #c8ff00;
-  --border: #1e1e1e;
+  --bg: #f6f3ec;
+  --bg-elevated: #edeae3;
+  --bg-card: #e8e5de;
+  --text-primary: #010103;
+  --text-secondary: #555555;
+  --text-dim: #999999;
+  --accent: #010103;
+  --border: #d4d0c8;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Space Grotesk', monospace;
@@ -28,7 +27,8 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: #2a2a2a var(--bg);
+  scrollbar-color: #c4c0b8 var(--bg);
+  background: var(--bg);
 }
 
 body {
@@ -268,6 +268,15 @@ nav {
   border-radius: 2px;
   break-inside: avoid;
   margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pg-item.ready {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }
 
 .pg-visual {
@@ -306,6 +315,7 @@ nav {
 }
 
 .pg-item:hover .pg-meta { opacity: 1; }
+
 
 .pg-meta-title {
   font-family: var(--font-mono);
@@ -463,6 +473,16 @@ nav {
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
+  :root {
+    --bg: #0a0a0a; --bg-elevated: #141414; --bg-card: #1a1a1a;
+    --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
+    --accent: #e8e8e8; --border: #222222;
+  }
+  html { background: var(--bg); scrollbar-color: #333 var(--bg); }
+  body { background: var(--bg); }
+  ::selection { background: var(--accent); color: var(--bg); }
+  .filter-btn { border-color: #333; color: var(--text-secondary); }
+  .filter-btn:hover, .filter-btn.active { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
   nav { padding: 1.2rem 1.5rem; }
   .nav-title, .nav-location { display: none; }
   .menu-overlay { padding: 4rem 1.5rem 2rem; }
@@ -470,13 +490,14 @@ nav {
   .menu-close { right: 1.5rem; top: 1.2rem; }
   .play-header { padding: 7rem 1.5rem 3rem; }
   .filter-bar { padding: 1rem 1.5rem; overflow-x: auto; }
-  .play-gallery { padding: 0.75rem; columns: 1; }
+  .play-gallery { padding: 0.75rem; columns: 2; column-gap: 0.5rem; }
+  .pg-item { margin-bottom: 0.5rem; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .custom-cursor { display: none; }
 }
 
 @media (max-width: 480px) {
-  .play-gallery { columns: 1; }
+  .play-gallery { columns: 2; column-gap: 0.5rem; }
 }
 </style>
 </head>
@@ -501,6 +522,7 @@ nav {
       <li><a href="index.html#work" class="menu-link">Work</a></li>
       <li><a href="index.html#archive" class="menu-link">Archive</a></li>
       <li><a href="play.html" class="menu-link">Play</a></li>
+      <li><a href="labs.html" class="menu-link">Labs</a></li>
       <li><a href="index.html#about" class="menu-link">About</a></li>
       <li><a href="index.html#contact" class="menu-link">Contact</a></li>
     </ul>
@@ -511,12 +533,10 @@ nav {
 <header class="play-header">
   <div class="play-header-label">
     <a href="index.html">← Back</a>
-    <span class="sep">/</span>
-    <span>Play</span>
   </div>
   <h1>Play</h1>
   <p class="play-header-desc">
-    Illustration, motion experiments, painting studies, and personal R&D. The work that doesn't have a client brief, a deadline, or a deliverable — only a question.
+    Illustration, motion experiments, painting studies, and personal R&D.<br>Relentlessly exploring ideas on the fringes of capability and curiosity.
   </p>
 </header>
 
@@ -538,12 +558,12 @@ nav {
 <!-- PLAY GALLERY — masonry columns -->
 <div class="play-gallery">
   <div class="pg-item reveal" data-title="Blue Spiral Neon" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png" alt="Blue Spiral Neon" loading="lazy"></div>
-  <div class="pg-item reveal" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.gif" alt="Chromatic Chain" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.mp4"><video class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.mp4" autoplay muted loop playsinline></video></div>
   <div class="pg-item reveal" data-title="Chromatic Orb" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg" alt="Chromatic Orb" loading="lazy"></div>
   <div class="pg-item reveal" data-title="Blue Moon Face" data-src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png" alt="Blue Moon Face" loading="lazy"></div>
   <div class="pg-item reveal" data-title="If You Wish" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg" alt="If You Wish" loading="lazy"></div>
-  <div class="pg-item reveal" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.gif" alt="Globby Eyes" loading="lazy"></div>
-  <div class="pg-item reveal" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/bird-warrior.gif" alt="Bird Warrior" loading="lazy"></div>
+  <div class="pg-item reveal" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.mp4"><video class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.mp4" autoplay muted loop playsinline></video></div>
+  <div class="pg-item reveal" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.mp4"><video class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/bird-warrior.mp4" autoplay muted loop playsinline></video></div>
   <div class="pg-item reveal" data-title="Collage Portrait" data-src="https://kyfolio.b-cdn.net/_Play/collage-portrait-blue.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/collage-portrait-blue.jpg" alt="Collage Portrait" loading="lazy"></div>
   <div class="pg-item reveal" data-title="Marble Spheres" data-src="https://kyfolio.b-cdn.net/_Play/marble-spheres.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/marble-spheres.jpg" alt="Marble Spheres" loading="lazy"></div>
   <div class="pg-item reveal" data-title="Fall in Love" data-src="https://kyfolio.b-cdn.net/_Play/fall-in-love-chrome.jpg"><img class="pg-visual" src="https://kyfolio.b-cdn.net/_Play/fall-in-love-chrome.jpg" alt="Fall in Love" loading="lazy"></div>
@@ -590,7 +610,6 @@ nav {
   <div class="footer-left">&copy; 2026 Kyle Watson</div>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>
     <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
@@ -624,7 +643,16 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
 revealEls.forEach(el => revealObserver.observe(el));
 
-const allItems = document.querySelectorAll('.pg-item');
+// Reveal each item as soon as its own image/video loads
+document.querySelectorAll('.pg-item').forEach((item, i) => {
+  const visual = item.querySelector('.pg-visual');
+  const show = () => item.classList.add('ready');
+  if (!visual) { show(); return; }
+  if (visual.tagName === 'VIDEO') { show(); return; }
+  if (visual.complete && visual.naturalHeight > 0) { show(); return; }
+  visual.addEventListener('load', show, { once: true });
+  visual.addEventListener('error', show, { once: true });
+});
 
 // ─── LIGHTBOX ───
 const lightbox    = document.getElementById('lightbox');
