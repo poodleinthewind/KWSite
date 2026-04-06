@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Groove Around the Globe — Kyle Watson</title>
+<title>Prediction Machines — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root { --project-color: #0a2040; }
+:root { --project-color: #1a1030; }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -50,7 +50,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 /* HERO VIDEO */
 .hero-video { background: var(--bg); padding: 0 3rem 0; }
-.video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; }
+.video-wrap { position: relative; width: 100%; background: #0d0d0d; }
 .video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-wrap .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0d0d 0%, var(--project-color) 100%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
 
@@ -74,6 +74,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 /* FULL-BLEED */
 .bleed { width: 100%; overflow: hidden; }
 .bleed img { width: 100%; display: block; }
+.bleed .ph-rect { height: 60vh; min-height: 380px; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* SECTION WRAPPER */
 .section { padding: 5rem 3rem; border-bottom: 1px solid var(--border); }
@@ -95,7 +96,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .split-text p { font-size: 0.9rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
 .split-text p + p { margin-top: 1rem; }
 .split-media { overflow: hidden; background: var(--bg-card); position: relative; }
-.split-media img { width: 100%; height: auto; display: block; }
+.split-media img { width: 100%; height: auto; object-fit: contain; }
+.split-media .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* GALLERY */
 .gallery { display: grid; gap: 0.75rem; }
@@ -105,7 +107,16 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .g-2-1 { grid-template-columns: 2fr 1fr; }
 .g-1-2 { grid-template-columns: 1fr 2fr; }
 .g-item { overflow: hidden; position: relative; background: var(--bg-card); }
-.g-item img { width: 100%; height: auto; display: block; }
+.g-item.std  { aspect-ratio: auto; }
+.g-item.wide { aspect-ratio: 16/7; }
+.g-item.sq   { aspect-ratio: 1/1; }
+.g-item.tall { aspect-ratio: 3/4; }
+.g-item img { width: 100%; display: block; }
+.g-item .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.28; }
+
+/* PULL QUOTE */
+.pull-quote { padding: 5rem 3rem; text-align: center; }
+.pull-quote p { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.35; color: var(--text-primary); max-width: 960px; margin: 0 auto; }
 
 /* CREDITS */
 .credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 4rem; }
@@ -144,11 +155,11 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
   .menu-close { right: 1.5rem; top: 1.2rem; }
   .project-header { padding: 6rem 1.5rem 2.5rem; }
-  .hero-video { padding: 0; }
+  .hero-video { padding: 0 1.5rem; }
   .intro, .section { padding: 3rem 1.5rem; }
-  .g-2 { grid-template-columns: 1fr 1fr; }
-  .g-3 { grid-template-columns: 1fr 1fr; }
+  .g-2, .g-3, .gallery { grid-template-columns: 1fr !important; }
   .gallery { gap: 0.5rem; }
+  .hero-video { padding: 0; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .page-item { padding: 2rem 1.5rem; }
@@ -191,53 +202,79 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="header-tags">
     <span class="tag">Creative Direction</span>
     <span class="tag">Design</span>
-    <span class="tag">Event</span>
+    <span class="tag">Motion</span>
   </div>
-  <h1 class="header-title">Groove Around the Globe</h1>
+  <h1 class="header-title">Prediction Machines</h1>
 </header>
 
-<!-- ══ HERO IMAGE ══ -->
-<div class="bleed" style="max-height:60vh;overflow:hidden;">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=1200&quality=80" alt="Groove Around the Globe" style="margin-top:-14%;">
+<!-- ══ HERO VIDEO ══ -->
+<div class="hero-video">
+  <div class="video-wrap">
+    <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC010_Mountains_002.png" alt="Prediction Machines — Mountains" style="width:100%;height:auto;display:block;">
+  </div>
 </div>
 
 <!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>In 2020, when the world had slowed down, Google Cloud wanted to bring their global design teams together. We conceived and produced a 24-hour livestream featuring DJs and musicians from around the world &mdash; a virtual festival that chased the sun across time zones.</p>
+    <p>Our brains evolved to see patterns, predict danger, and pull information from everywhere to form unique thoughts. What happens when a machine can do the same thing? In an unprecedented brief, we were tasked with visualizing what it looks like when artificial intelligence starts to think alongside us.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
     <div class="meta-block">
-      <div class="meta-label">Client</div>
-      <div class="meta-value"><strong>Google Cloud</strong></div>
+      <div class="meta-label">Role</div>
+      <div class="meta-value">Creative Director, Design Lead</div>
     </div>
     <div class="meta-block">
-      <div class="meta-label">Role</div>
-      <div class="meta-value">Creative Director, Lead Designer</div>
+      <div class="meta-label">Agency</div>
+      <div class="meta-value">Godfrey Dadich &amp; Partners</div>
     </div>
   </div>
 </div>
 
-<!-- ══ FULL-BLEED PROCESS IMAGE ══ -->
-<div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/screenshot.png?width=1200&quality=80" alt="Groove Around the Globe wireframe process" loading="lazy">
+<div class="pull-quote">
+  <p>This was the first concept of an LLM. We had the opportunity to visualize that narrative from scratch.</p>
 </div>
+
+<div style="padding: 3rem;">
+  <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/Asset%202.png" alt="Asset 2" style="width:100%;display:block;">
+</div>
+
+<div class="pull-quote">
+  <p>How do we visualize diffusion? How do we welcome the audience into a theater of latent space for the very first time?</p>
+</div>
+
+<div class="section" style="padding-top:0;padding-bottom:0;">
+  <div style="position:relative;padding-top:56.25%;"><iframe src="https://iframe.mediadelivery.net/embed/615661/36a80050-d94d-4508-b292-a72efc20a4af?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="border:none;position:absolute;top:0;left:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"></iframe></div>
+</div>
+
+<!-- Toggling grid -->
+<div class="section" style="padding-bottom:0;">
+  <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/Codegen_Frames_210609.jpg" alt="Codegen Frames" style="width:100%;display:block;margin-bottom:1.5rem;">
+  <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_004.jpg" alt="Environment 004" style="width:100%;display:block;margin-bottom:1.5rem;">
+  <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_006.jpg" alt="Environment 006" style="width:100%;display:block;">
+</div>
+
+<div style="padding: 3rem;">
+  <img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_002.jpg" alt="Environment 002" style="width:100%;display:block;">
+</div>
+
+<div class="pull-quote">
+  <p>Every frame had to have movement and purpose. Translation was the story.</p>
+</div>
+
+<div class="bleed"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/Preview.jpg" alt="Preview" style="width:100%;display:block;"></div>
 
 <!-- ══ STILLS ══ -->
 <div class="section">
+  <div class="section-label">Stills</div>
   <div class="gallery g-2">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=800&quality=80" alt="Groove percussion illustration" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_02.png?width=800&quality=80" alt="Groove design system" loading="lazy"></div>
-  </div>
-  <div class="gallery g-3" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_03.png?width=800&quality=80" alt="Groove visual identity" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_04.png?width=800&quality=80" alt="Groove event graphics" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_05.png?width=800&quality=80" alt="Groove collateral" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_008.jpg" alt="Environment 008" style="width:100%;height:auto;display:block;"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_009.jpg" alt="Environment 009" style="width:100%;height:auto;display:block;"></div>
   </div>
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/mockup_01.jpg?width=800&quality=80" alt="Groove mockup" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/ticket_mockup.jpg?width=800&quality=80" alt="Groove ticket mockup" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_010.jpg" alt="Environment 010" style="width:100%;height:auto;display:block;"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC040_Environment_011.jpg" alt="Environment 011" style="width:100%;height:auto;display:block;"></div>
   </div>
 </div>
 
@@ -250,22 +287,21 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="credits-content" style="display:none;">
   <div class="credits">
     <div><div class="credit-role">Creative Director</div><div class="credit-name">Kyle Watson</div></div>
-    <div><div class="credit-role">Executive Producer</div><div class="credit-name">Danny Lim</div></div>
-    <div><div class="credit-role">Animator</div><div class="credit-name">Walter Soyka</div></div>
-    <div><div class="credit-role">Agency</div><div class="credit-name">Jack Morton</div></div>
+    <div><div class="credit-role">Storyboards + Styleframes</div><div class="credit-name">Kyle Watson</div></div>
+    <div><div class="credit-role">Agency</div><div class="credit-name">Godfrey Dadich &amp; Partners</div></div>
   </div>
   </div>
 </div>
 
 <!-- ══ PREV / NEXT ══ -->
 <nav class="pagination">
-  <a href="project-youtube-forge.html" class="page-item prev">
+  <a href="project-new-landscapes.html" class="page-item prev">
     <span class="page-dir">&larr; Previous</span>
-    <span class="page-title">Forge</span>
+    <span class="page-title">New Landscapes</span>
   </a>
-  <a href="project-si-sportsbook.html" class="page-item next">
+  <a href="project-ibm-open-minds.html" class="page-item next">
     <span class="page-dir">Next &rarr;</span>
-    <span class="page-title">In the Game</span>
+    <span class="page-title">Open Minds</span>
   </a>
 </nav>
 
@@ -304,23 +340,6 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
     }
   });
 });
-</script>
-<script>
-// Pause off-screen autoplay videos
-(function() {
-  const videos = document.querySelectorAll('video[autoplay]');
-  if (!videos.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.play().catch(() => {});
-      } else {
-        entry.target.pause();
-      }
-    });
-  }, { threshold: 0.1 });
-  videos.forEach(v => observer.observe(v));
-})();
 </script>
 </body>
 </html>

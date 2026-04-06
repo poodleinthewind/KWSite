@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Groove Around the Globe — Kyle Watson</title>
+<title>Marey — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root { --project-color: #0a2040; }
+:root { --project-color: #2d1b4e; }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -23,7 +23,6 @@ html { scrollbar-width: thin; scrollbar-color: #2a2a2a var(--bg); }
 body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--bg); }
 img { display: block; max-width: 100%; }
-video { display: block; max-width: 100%; }
 
 /* NAV */
 nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
@@ -52,6 +51,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .hero-video { background: var(--bg); padding: 0 3rem 0; }
 .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; }
 .video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+video { display: block; max-width: 100%; }
 .video-wrap .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0d0d 0%, var(--project-color) 100%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
 
 /* INTRO */
@@ -74,17 +75,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 /* FULL-BLEED */
 .bleed { width: 100%; overflow: hidden; }
 .bleed img { width: 100%; display: block; }
+.bleed .video-wrap { padding-bottom: 56.25%; }
+.bleed .ph-rect { height: 60vh; min-height: 380px; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* SECTION WRAPPER */
 .section { padding: 5rem 3rem; border-bottom: 1px solid var(--border); }
 .section:last-of-type { border-bottom: none; }
 .section-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 3rem; }
-
-/* NARRATIVE */
-.narrative { max-width: 680px; }
-.narrative h3 { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
-.narrative p { font-size: 0.95rem; line-height: 1.95; color: var(--text-secondary); font-weight: 300; }
-.narrative p + p { margin-top: 1rem; }
 
 /* SPLIT ROW */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
@@ -94,8 +91,9 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .split-text h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
 .split-text p { font-size: 0.9rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
 .split-text p + p { margin-top: 1rem; }
-.split-media { overflow: hidden; background: var(--bg-card); position: relative; }
-.split-media img { width: 100%; height: auto; display: block; }
+.split-media { aspect-ratio: 4/3; overflow: hidden; background: var(--bg-card); position: relative; }
+.split-media img, .split-media .ph { width: 100%; height: 100%; object-fit: cover; }
+.split-media .ph { background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* GALLERY */
 .gallery { display: grid; gap: 0.75rem; }
@@ -104,8 +102,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .g-3   { grid-template-columns: repeat(3, 1fr); }
 .g-2-1 { grid-template-columns: 2fr 1fr; }
 .g-1-2 { grid-template-columns: 1fr 2fr; }
-.g-item { overflow: hidden; position: relative; background: var(--bg-card); }
-.g-item img { width: 100%; height: auto; display: block; }
+.g-item { overflow: hidden; position: relative; background: var(--bg); }
+.g-item img, .g-item video { width: 100%; height: auto; display: block; }
+.g-4 { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+/* PULL QUOTE */
+.pull-quote { padding: 5rem 3rem; text-align: center; }
+.pull-quote p { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.35; color: var(--text-primary); max-width: 960px; margin: 0 auto; }
 
 /* CREDITS */
 .credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 4rem; }
@@ -146,8 +149,10 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .project-header { padding: 6rem 1.5rem 2.5rem; }
   .hero-video { padding: 0; }
   .intro, .section { padding: 3rem 1.5rem; }
+  .bleed .ph-rect { height: 40vh; min-height: 240px; }
   .g-2 { grid-template-columns: 1fr 1fr; }
   .g-3 { grid-template-columns: 1fr 1fr; }
+  .g-4 { grid-template-columns: 1fr 1fr; }
   .gallery { gap: 0.5rem; }
   .credits { grid-template-columns: 1fr; }
   .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
@@ -186,58 +191,204 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <!-- ══ PROJECT HEADER ══ -->
 <header class="project-header">
   <div class="header-back">
-    <a href="all-work.html">&larr; Back</a>
+    <a href="all-work.html">← Back</a>
   </div>
   <div class="header-tags">
-    <span class="tag">Creative Direction</span>
-    <span class="tag">Design</span>
-    <span class="tag">Event</span>
+    <span class="tag">Generative AI</span>
+    <span class="tag">Film</span>
+    <span class="tag">Motion</span>
   </div>
-  <h1 class="header-title">Groove Around the Globe</h1>
+  <h1 class="header-title">Marey</h1>
 </header>
 
-<!-- ══ HERO IMAGE ══ -->
-<div class="bleed" style="max-height:60vh;overflow:hidden;">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=1200&quality=80" alt="Groove Around the Globe" style="margin-top:-14%;">
+<!-- ══ HERO VIDEO ══ -->
+<div class="hero-video">
+  <div class="video-wrap">
+    <div class="hero-poster" id="heroPoster" style="position:absolute;inset:0;z-index:2;cursor:pointer;">
+      <img src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="Marey" style="width:100%;height:100%;object-fit:cover;">
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="31" stroke="rgba(255,255,255,0.8)" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="rgba(255,255,255,0.9)"/></svg>
+      </div>
+    </div>
+    <iframe id="heroIframe" src="about:blank" data-src="https://iframe.mediadelivery.net/embed/615661/4e6a443b-9e84-4ce8-a5de-9ba2ee267886?autoplay=true&loop=false&muted=false&preload=true&controls=true" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+  </div>
 </div>
 
 <!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>In 2020, when the world had slowed down, Google Cloud wanted to bring their global design teams together. We conceived and produced a 24-hour livestream featuring DJs and musicians from around the world &mdash; a virtual festival that chased the sun across time zones.</p>
+    <p>MoonValley invited me to help produce the release video for Marey &mdash; their first studio-grade, frame-perfect AI video tool, trained exclusively on licensed data. The goal was to express a new sense of control in a chaotic creative landscape.</p>
+    <p>We needed to communicate the importance of creative intention. This era is no longer about how you got there, but what was the idea. Can you visualize the intent? Choreograph the motion curves in your mind? Then this is the product for you. Working alongside the otherworldly creatives at Asteria Film allowed us to explode processes and push ideas far outside of the boundaries into entirely new conceptual terrain.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
     <div class="meta-block">
       <div class="meta-label">Client</div>
-      <div class="meta-value"><strong>Google Cloud</strong></div>
+      <div class="meta-value"><strong>Moonvalley</strong></div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Role</div>
-      <div class="meta-value">Creative Director, Lead Designer</div>
+      <div class="meta-value">Animation<br>Design</div>
     </div>
   </div>
 </div>
 
-<!-- ══ FULL-BLEED PROCESS IMAGE ══ -->
-<div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/screenshot.png?width=1200&quality=80" alt="Groove Around the Globe wireframe process" loading="lazy">
+<!-- ══ PULL QUOTE ══ -->
+<div class="pull-quote">
+  <p>The motion starts in the mind. Everything else is just a rendering.</p>
 </div>
 
-<!-- ══ STILLS ══ -->
+<!-- ══ 001. WALK ══ -->
 <div class="section">
+  <div class="section-label">001. Walk</div>
+  <!-- Walk_001 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-01.mp4"></video></div>
+  </div>
+  <!-- Walk_002 + 003 + 004 + 005 four-up grid -->
+  <div class="gallery g-4">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-02.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-03.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-04.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-05.mp4"></video></div>
+  </div>
+  <!-- Walk_006 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Walk/walk-06.mp4"></video></div>
+  </div>
+</div>
+
+<div class="pull-quote">
+  <p>We left perfection at the door. Spending hours, days, weeks refining resolutions and having technicalities hamstring ideas &mdash; that&rsquo;s all over now.</p>
+</div>
+
+<!-- ══ 002. HORSE ══ -->
+<div class="section">
+  <div class="section-label">002. Horse</div>
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Horse/horse-01.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ 003. REVOLVE ══ -->
+<div class="section">
+  <div class="section-label">003. Revolve</div>
+  <!-- CamOrbit_01 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Revolve/camorbit-01.mp4"></video></div>
+  </div>
+  <!-- CamOrbit_02 + 03 side by side -->
   <div class="gallery g-2">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=800&quality=80" alt="Groove percussion illustration" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_02.png?width=800&quality=80" alt="Groove design system" loading="lazy"></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Revolve/camorbit-02.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Revolve/camorbit-03.mp4"></video></div>
   </div>
-  <div class="gallery g-3" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_03.png?width=800&quality=80" alt="Groove visual identity" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_04.png?width=800&quality=80" alt="Groove event graphics" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_05.png?width=800&quality=80" alt="Groove collateral" loading="lazy"></div>
+  <!-- CamOrbit_04 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Revolve/camorbit-04.mp4"></video></div>
   </div>
-  <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/mockup_01.jpg?width=800&quality=80" alt="Groove mockup" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/ticket_mockup.jpg?width=800&quality=80" alt="Groove ticket mockup" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+</div>
+
+<div class="pull-quote">
+  <p>Render grain, texture, and grit were accepted directly into the look rather than polishing it away.</p>
+</div>
+
+<!-- ══ 004. ROCK ══ -->
+<div class="section">
+  <div class="section-label">004. Rock</div>
+  <!-- Rock_01 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Rock/rock-01.mp4"></video></div>
+  </div>
+  <!-- Rock_02 + 03 side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Rock/rock-02.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Rock/rock-03.mp4"></video></div>
+  </div>
+  <!-- Rock_04 full width -->
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Rock/rock-04.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ PULL QUOTE ══ -->
+<div class="pull-quote">
+  <p>Procedural sine waves, tunnel generators, geometric wave fields &mdash; we vibe-coded the tools we needed around the idea. Finally. After 20 years of doing it the other way around.</p>
+</div>
+
+<!-- ══ 004. TUNNEL ══ -->
+<div class="section">
+  <div class="section-label">004. Tunnel</div>
+  <!-- Tunnel 01 side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-01-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-01-02.mp4"></video></div>
+  </div>
+  <!-- Tunnel 02 side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-02-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-02-02.mp4"></video></div>
+  </div>
+  <!-- Tunnel 03 side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-03-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Tunnel/tunnel-03-02.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ 005. SIGN ══ -->
+<div class="section">
+  <div class="section-label">005. Sign</div>
+  <!-- Desert wave side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Sign/desert-wave-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Sign/desert-wave-02.mp4"></video></div>
+  </div>
+  <!-- Snake side by side -->
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Sign/signwave-01.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Sign/signwave-02.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ PULL QUOTE ══ -->
+
+<!-- ══ 006. CHAOS CTRL ══ -->
+<div class="section">
+  <div class="section-label">006. Chaos Ctrl</div>
+  <div class="gallery">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Chaos-Ctrl/signwave-comp.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ 007. POSE ══ -->
+<div class="section">
+  <div class="section-label">007. Pose</div>
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Pose/pose-control.mp4"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/Pose/animate-diff.mp4"></video></div>
+  </div>
+</div>
+
+<!-- ══ 009. UI WAVE ══ -->
+<div class="section">
+  <div class="section-label">008. UI Wave</div>
+  <div class="gallery g-2">
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/UI-Wave/ui-01.mov"></video></div>
+    <div class="g-item"><video autoplay muted loop playsinline src="https://kyfolio.b-cdn.net/020_Marey/UI-Wave/ui-02.mov"></video></div>
+  </div>
+</div>
+
+<!-- ══ PULL QUOTE ══ -->
+<div class="pull-quote">
+  <p>Finding control and humanity in the era of AI is the challenge. Marey gave us a way to do both.</p>
+</div>
+
+<!-- ══ 009. CAMERA ══ -->
+<div class="section">
+  <div class="section-label">009. Camera</div>
+  <div class="gallery g-2">
+    <div class="g-item" style="aspect-ratio:1/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/020_Marey/Camera/camera-01.jpg" alt="Camera reference" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="g-item" style="aspect-ratio:1/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/020_Marey/Camera/camera-02.png" alt="Camera texture" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
   </div>
 </div>
 
@@ -249,23 +400,21 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   </button>
   <div class="credits-content" style="display:none;">
   <div class="credits">
-    <div><div class="credit-role">Creative Director</div><div class="credit-name">Kyle Watson</div></div>
-    <div><div class="credit-role">Executive Producer</div><div class="credit-name">Danny Lim</div></div>
-    <div><div class="credit-role">Animator</div><div class="credit-name">Walter Soyka</div></div>
-    <div><div class="credit-role">Agency</div><div class="credit-name">Jack Morton</div></div>
+    <div><div class="credit-role">Animation &amp; Design</div><div class="credit-name">Kyle Watson</div></div>
+    <div><div class="credit-role">Client</div><div class="credit-name">Moonvalley</div></div>
   </div>
   </div>
 </div>
 
 <!-- ══ PREV / NEXT ══ -->
 <nav class="pagination">
-  <a href="project-youtube-forge.html" class="page-item prev">
-    <span class="page-dir">&larr; Previous</span>
-    <span class="page-title">Forge</span>
+  <a href="project-coreweave-aston-martin.html" class="page-item prev">
+    <span class="page-dir">← Previous</span>
+    <span class="page-title">CoreWeave x Aston Martin F1</span>
   </a>
-  <a href="project-si-sportsbook.html" class="page-item next">
-    <span class="page-dir">Next &rarr;</span>
-    <span class="page-title">In the Game</span>
+  <a href="project-new-landscapes.html" class="page-item next">
+    <span class="page-dir">Next →</span>
+    <span class="page-title">New Landscapes</span>
   </a>
 </nav>
 
@@ -287,6 +436,18 @@ menuOverlay.querySelectorAll('.menu-link').forEach(link => {
   link.addEventListener('click', () => menuOverlay.classList.remove('open'));
 });
 
+// Hero poster → play video on click
+const poster = document.getElementById('heroPoster');
+const iframe = document.getElementById('heroIframe');
+if (poster && iframe) {
+  poster.addEventListener('click', () => {
+    iframe.src = iframe.dataset.src;
+    poster.style.opacity = '0';
+    poster.style.pointerEvents = 'none';
+    poster.style.transition = 'opacity 0.4s ease';
+  });
+}
+
 // Credits toggle
 document.querySelectorAll('.credits-toggle').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -304,23 +465,6 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
     }
   });
 });
-</script>
-<script>
-// Pause off-screen autoplay videos
-(function() {
-  const videos = document.querySelectorAll('video[autoplay]');
-  if (!videos.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.play().catch(() => {});
-      } else {
-        entry.target.pause();
-      }
-    });
-  }, { threshold: 0.1 });
-  videos.forEach(v => observer.observe(v));
-})();
 </script>
 </body>
 </html>

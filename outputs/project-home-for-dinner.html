@@ -211,9 +211,9 @@ video { display: block; max-width: 100%; }
 <div class="section">
   <div class="section-label">Stills</div>
   <div class="gallery g-3">
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/stills/still_01.jpg" alt="Home for Dinner" loading="lazy"></div>
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/stills/still_02.jpg" alt="Home for Dinner" loading="lazy"></div>
-    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/stills/still_03.jpg" alt="Home for Dinner" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/stills/still_01.jpg?width=800&quality=80" alt="Home for Dinner" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/stills/still_02.jpg?width=800&quality=80" alt="Home for Dinner" loading="lazy"></div>
+    <div class="g-item std"><img src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/stills/still_03.jpg?width=800&quality=80" alt="Home for Dinner" loading="lazy"></div>
   </div>
 </div>
 -->
@@ -264,6 +264,23 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
     }
   });
 });
+</script>
+<script>
+// Pause off-screen autoplay videos
+(function() {
+  const videos = document.querySelectorAll('video[autoplay]');
+  if (!videos.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(() => {});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+  videos.forEach(v => observer.observe(v));
+})();
 </script>
 </body>
 </html>

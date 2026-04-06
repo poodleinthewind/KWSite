@@ -288,5 +288,22 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
   });
 });
 </script>
+<script>
+// Pause off-screen autoplay videos
+(function() {
+  const videos = document.querySelectorAll('video[autoplay]');
+  if (!videos.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(() => {});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+  videos.forEach(v => observer.observe(v));
+})();
+</script>
 </body>
 </html>

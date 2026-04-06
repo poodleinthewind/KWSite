@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Groove Around the Globe — Kyle Watson</title>
+<title>In the Game — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root { --project-color: #0a2040; }
+:root { --project-color: #5c0a0a; }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -51,7 +51,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 /* HERO VIDEO */
 .hero-video { background: var(--bg); padding: 0 3rem 0; }
 .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #0d0d0d; }
-.video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.video-wrap video, .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: none; }
 .video-wrap .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0d0d 0%, var(--project-color) 100%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
 
 /* INTRO */
@@ -74,17 +74,12 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 /* FULL-BLEED */
 .bleed { width: 100%; overflow: hidden; }
 .bleed img { width: 100%; display: block; }
+.bleed .ph-rect { height: 60vh; min-height: 380px; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* SECTION WRAPPER */
 .section { padding: 5rem 3rem; border-bottom: 1px solid var(--border); }
 .section:last-of-type { border-bottom: none; }
 .section-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 3rem; }
-
-/* NARRATIVE */
-.narrative { max-width: 680px; }
-.narrative h3 { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
-.narrative p { font-size: 0.95rem; line-height: 1.95; color: var(--text-secondary); font-weight: 300; }
-.narrative p + p { margin-top: 1rem; }
 
 /* SPLIT ROW */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
@@ -96,6 +91,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .split-text p + p { margin-top: 1rem; }
 .split-media { overflow: hidden; background: var(--bg-card); position: relative; }
 .split-media img { width: 100%; height: auto; display: block; }
+.split-media .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* GALLERY */
 .gallery { display: grid; gap: 0.75rem; }
@@ -106,6 +102,11 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .g-1-2 { grid-template-columns: 1fr 2fr; }
 .g-item { overflow: hidden; position: relative; background: var(--bg-card); }
 .g-item img { width: 100%; height: auto; display: block; }
+.g-item .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.28; }
+
+/* PULL QUOTE */
+.pull-quote { padding: 5rem 3rem; text-align: center; }
+.pull-quote p { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.35; color: var(--text-primary); max-width: 960px; margin: 0 auto; }
 
 /* CREDITS */
 .credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 4rem; }
@@ -189,55 +190,130 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <a href="all-work.html">&larr; Back</a>
   </div>
   <div class="header-tags">
-    <span class="tag">Creative Direction</span>
-    <span class="tag">Design</span>
-    <span class="tag">Event</span>
+    <span class="tag">Brand Design</span>
+    <span class="tag">Motion Design</span>
   </div>
-  <h1 class="header-title">Groove Around the Globe</h1>
+  <h1 class="header-title">In the Game</h1>
 </header>
 
-<!-- ══ HERO IMAGE ══ -->
-<div class="bleed" style="max-height:60vh;overflow:hidden;">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=1200&quality=80" alt="Groove Around the Globe" style="margin-top:-14%;">
+<!-- ══ HERO VIDEO ══ -->
+<div class="hero-video">
+  <video controls preload="metadata" poster="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/hero_poster.jpg" style="width:100%;display:block;">
+    <source src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/video/sportsbook_v12_1.mp4" type="video/mp4">
+  </video>
 </div>
 
 <!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>In 2020, when the world had slowed down, Google Cloud wanted to bring their global design teams together. We conceived and produced a 24-hour livestream featuring DJs and musicians from around the world &mdash; a virtual festival that chased the sun across time zones.</p>
+    <p>Sports Illustrated brought me on to redesign the brand for their Sportsbook platform. The brief was in figuring out how to retain the legacy but modernize it for the current competitive landscape. It needed to feel like SI without the editorial, native to digital.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
     <div class="meta-block">
       <div class="meta-label">Client</div>
-      <div class="meta-value"><strong>Google Cloud</strong></div>
+      <div class="meta-value"><strong>Sports Illustrated</strong></div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Role</div>
-      <div class="meta-value">Creative Director, Lead Designer</div>
+      <div class="meta-value">Creative Director</div>
     </div>
   </div>
 </div>
 
-<!-- ══ FULL-BLEED PROCESS IMAGE ══ -->
-<div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/screenshot.png?width=1200&quality=80" alt="Groove Around the Globe wireframe process" loading="lazy">
+<div class="pull-quote">
+  <p>Embracing the deep legacy of one of the most iconic brands in sports — and finding a way to carry it forward without losing what made it matter.</p>
 </div>
 
-<!-- ══ STILLS ══ -->
+<!-- ══ FULL-BLEED: BRAND IDENTITY ══ -->
+<div class="bleed"><img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Asset-115Grid.jpg" alt="In the Game brand identity frame" loading="lazy"></div>
+
+<!-- ══ PROCESS: THE ASK ══ -->
 <div class="section">
-  <div class="gallery g-2">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=800&quality=80" alt="Groove percussion illustration" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_02.png?width=800&quality=80" alt="Groove design system" loading="lazy"></div>
+  <div class="section-label">The Ask</div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>Not a reskin.</h3>
+      <p>I didn't want to just slap the SI mark on a betting app. It had to actually feel like Sports Illustrated &mdash; the editorial authority, the photography, the weight of decades of sports culture &mdash; translated into something that works at the speed of live odds and daily content.</p>
+    </div>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Artboard%206New_New.png" alt="In the Game brand direction" loading="lazy">
+    </div>
   </div>
-  <div class="gallery g-3" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_03.png?width=800&quality=80" alt="Groove visual identity" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_04.png?width=800&quality=80" alt="Groove event graphics" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_05.png?width=800&quality=80" alt="Groove collateral" loading="lazy"></div>
+
+  <div class="split flip">
+    <div class="split-text">
+      <h3>Built to flex.</h3>
+      <p>The system needed to hold up everywhere &mdash; a score widget, a promo banner, a full editorial spread. Typography and color were tuned to carry SI's voice whether the context was a push notification or a hero moment.</p>
+    </div>
+    <div class="split-media">
+      <img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Artboard%207New_New.png" alt="In the Game brand system" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- ══ FULL-BLEED: LOGO ANIMATION ══ -->
+<div class="bleed">
+  <div class="video-wrap">
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/edf3bb86-8f30-4886-8d3c-1579e1d6e2e3?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- ══ DESIGN SYSTEM ══ -->
+<div class="section">
+  <div class="section-label">Design System</div>
+  <div class="gallery g-3">
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Asset%20111Grid.png" alt="In the Game design system grid" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Asset%20112Grid.png" alt="In the Game design system typography" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Asset%20113Grid.png" alt="In the Game design system color" loading="lazy"></div>
   </div>
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/mockup_01.jpg?width=800&quality=80" alt="Groove mockup" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/ticket_mockup.jpg?width=800&quality=80" alt="Groove ticket mockup" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Asset%20114Grid.png" alt="In the Game design system layout" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/Asset-115Grid.jpg" alt="In the Game design system components" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ══ TRANSITION VIDEO ══ -->
+<div style="padding:3rem 8rem;">
+  <div class="video-wrap">
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/e556be77-fb7c-438e-824d-1437756a0bb9?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- ══ SCROLL UP VIDEO ══ -->
+<div style="padding:3rem 8rem;">
+  <div class="video-wrap">
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/e94ad0bd-7993-4938-998f-4fa0b2c9ffdc?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- ══ MOTION SYSTEM ══ -->
+<div class="section">
+  <div class="section-label">Motion System</div>
+
+  <div class="split">
+    <div class="split-text">
+      <h3>Nothing extra.</h3>
+      <p>After setting the tone for the motion language, I scaled it with another designer. It had to feel energetic enough to match live sports but stay clean enough that the interface never gets in the way.</p>
+    </div>
+    <div class="split-media">
+      <div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/f8163fa6-546b-49d6-b180-63df8078dccc?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+    </div>
+  </div>
+
+  <!-- Sport-specific motion -->
+  <div class="gallery g-2" style="margin-top:.75rem;">
+    <div class="g-item"><div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/97a0c5fa-e2c2-476e-a41c-43e40aa4aaef?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/695e51a2-10bb-4a75-9dc4-c866d4924f38?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+  </div>
+</div>
+
+<!-- ══ APP + LOGO VIDEOS ══ -->
+<div style="padding:3rem 10rem;">
+  <div class="gallery g-2">
+    <div class="g-item"><div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/688430e9-37fb-451f-bbc3-bbcd55479731?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><iframe src="https://iframe.mediadelivery.net/embed/615661/54a0d79d-4e29-4d0b-9c2a-0793fa2719f9?autoplay=true&loop=true&muted=true&preload=true&controls=false" loading="lazy" style="width:100%;height:100%;position:absolute;inset:0;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
   </div>
 </div>
 
@@ -250,22 +326,21 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="credits-content" style="display:none;">
   <div class="credits">
     <div><div class="credit-role">Creative Director</div><div class="credit-name">Kyle Watson</div></div>
-    <div><div class="credit-role">Executive Producer</div><div class="credit-name">Danny Lim</div></div>
-    <div><div class="credit-role">Animator</div><div class="credit-name">Walter Soyka</div></div>
-    <div><div class="credit-role">Agency</div><div class="credit-name">Jack Morton</div></div>
+    <div><div class="credit-role">Storyboards + Styleframes</div><div class="credit-name">Kyle Watson, Kelly Bernard</div></div>
+    <div><div class="credit-role">Animator</div><div class="credit-name">Cisco Torres</div></div>
   </div>
   </div>
 </div>
 
 <!-- ══ PREV / NEXT ══ -->
 <nav class="pagination">
-  <a href="project-youtube-forge.html" class="page-item prev">
+  <a href="project-google-groove.html" class="page-item prev">
     <span class="page-dir">&larr; Previous</span>
-    <span class="page-title">Forge</span>
+    <span class="page-title">Groove Around the Globe</span>
   </a>
-  <a href="project-si-sportsbook.html" class="page-item next">
+  <a href="index.html" class="page-item next">
     <span class="page-dir">Next &rarr;</span>
-    <span class="page-title">In the Game</span>
+    <span class="page-title">Archive</span>
   </a>
 </nav>
 
@@ -304,23 +379,6 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
     }
   });
 });
-</script>
-<script>
-// Pause off-screen autoplay videos
-(function() {
-  const videos = document.querySelectorAll('video[autoplay]');
-  if (!videos.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.play().catch(() => {});
-      } else {
-        entry.target.pause();
-      }
-    });
-  }, { threshold: 0.1 });
-  videos.forEach(v => observer.observe(v));
-})();
 </script>
 </body>
 </html>

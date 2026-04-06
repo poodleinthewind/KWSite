@@ -243,28 +243,28 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
   <div class="gallery g-2">
     <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
-      <iframe src="https://iframe.mediadelivery.net/embed/615661/9e49bb35-d203-48a0-84a5-bfae802a2005?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/9e49bb35-d203-48a0-84a5-bfae802a2005?autoplay=true&loop=true&muted=true&preload=false&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
-      <iframe src="https://iframe.mediadelivery.net/embed/615661/4d9dd273-8d3a-4a2b-9875-94a8628896d8?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
-    </div>
-  </div>
-
-  <div class="gallery g-2">
-    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
-      <iframe src="https://iframe.mediadelivery.net/embed/615661/38ed3636-e650-49eb-8311-6f83259d3579?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
-      <iframe src="https://iframe.mediadelivery.net/embed/615661/7686cb8f-1959-4f68-b2d2-7c5cc5ee5d20?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/4d9dd273-8d3a-4a2b-9875-94a8628896d8?autoplay=true&loop=true&muted=true&preload=false&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 
   <div class="gallery g-2">
     <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
-      <iframe src="https://iframe.mediadelivery.net/embed/615661/e6ca958a-8e09-4bd2-9907-e621311fdde6?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/38ed3636-e650-49eb-8311-6f83259d3579?autoplay=true&loop=true&muted=true&preload=false&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
-      <iframe src="https://iframe.mediadelivery.net/embed/615661/dd75b99b-b415-4e8d-84a0-320dc34d43f9?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/7686cb8f-1959-4f68-b2d2-7c5cc5ee5d20?autoplay=true&loop=true&muted=true&preload=false&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="gallery g-2">
+    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/e6ca958a-8e09-4bd2-9907-e621311fdde6?autoplay=true&loop=true&muted=true&preload=false&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/dd75b99b-b415-4e8d-84a0-320dc34d43f9?autoplay=true&loop=true&muted=true&preload=false&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -331,6 +331,23 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
     }
   });
 });
+</script>
+<script>
+// Pause off-screen autoplay videos
+(function() {
+  const videos = document.querySelectorAll('video[autoplay]');
+  if (!videos.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(() => {});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+  videos.forEach(v => observer.observe(v));
+})();
 </script>
 </body>
 </html>

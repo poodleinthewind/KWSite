@@ -205,12 +205,12 @@ video { display: block; max-width: 100%; }
 <div class="hero-video">
   <div class="video-wrap">
     <div class="hero-poster" id="heroPoster" style="position:absolute;inset:0;z-index:2;cursor:pointer;">
-      <img src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="Marey" style="width:100%;height:100%;object-fit:cover;">
+      <img src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg?width=1200&quality=80" alt="Marey" style="width:100%;height:100%;object-fit:cover;">
       <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
         <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="31" stroke="rgba(255,255,255,0.8)" stroke-width="2"/><polygon points="26,20 26,44 46,32" fill="rgba(255,255,255,0.9)"/></svg>
       </div>
     </div>
-    <iframe id="heroIframe" src="about:blank" data-src="https://iframe.mediadelivery.net/embed/615661/4e6a443b-9e84-4ce8-a5de-9ba2ee267886?autoplay=true&loop=false&muted=false&preload=true&controls=true" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    <iframe id="heroIframe" src="about:blank" data-src="https://iframe.mediadelivery.net/embed/615661/4e6a443b-9e84-4ce8-a5de-9ba2ee267886?autoplay=true&loop=false&muted=false&preload=false&controls=true" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
 
@@ -387,8 +387,8 @@ video { display: block; max-width: 100%; }
 <div class="section">
   <div class="section-label">009. Camera</div>
   <div class="gallery g-2">
-    <div class="g-item" style="aspect-ratio:1/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/020_Marey/Camera/camera-01.jpg" alt="Camera reference" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="g-item" style="aspect-ratio:1/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/020_Marey/Camera/camera-02.png" alt="Camera texture" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="g-item" style="aspect-ratio:1/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/020_Marey/Camera/camera-01.jpg?width=800&quality=80" alt="Camera reference" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="g-item" style="aspect-ratio:1/1;overflow:hidden;"><img src="https://kyfolio.b-cdn.net/020_Marey/Camera/camera-02.png?width=800&quality=80" alt="Camera texture" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
   </div>
 </div>
 
@@ -465,6 +465,23 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
     }
   });
 });
+</script>
+<script>
+// Pause off-screen autoplay videos
+(function() {
+  const videos = document.querySelectorAll('video[autoplay]');
+  if (!videos.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(() => {});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+  videos.forEach(v => observer.observe(v));
+})();
 </script>
 </body>
 </html>

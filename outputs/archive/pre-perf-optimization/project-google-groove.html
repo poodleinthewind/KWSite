@@ -198,7 +198,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 <!-- ══ HERO IMAGE ══ -->
 <div class="bleed" style="max-height:60vh;overflow:hidden;">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=1200&quality=80" alt="Groove Around the Globe" style="margin-top:-14%;">
+  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png" alt="Groove Around the Globe" style="margin-top:-14%;">
 </div>
 
 <!-- ══ INTRO ══ -->
@@ -221,23 +221,23 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 
 <!-- ══ FULL-BLEED PROCESS IMAGE ══ -->
 <div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/screenshot.png?width=1200&quality=80" alt="Groove Around the Globe wireframe process" loading="lazy">
+  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/screenshot.png" alt="Groove Around the Globe wireframe process">
 </div>
 
 <!-- ══ STILLS ══ -->
 <div class="section">
   <div class="gallery g-2">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=800&quality=80" alt="Groove percussion illustration" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_02.png?width=800&quality=80" alt="Groove design system" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png" alt="Groove percussion illustration"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_02.png" alt="Groove design system"></div>
   </div>
   <div class="gallery g-3" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_03.png?width=800&quality=80" alt="Groove visual identity" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_04.png?width=800&quality=80" alt="Groove event graphics" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_05.png?width=800&quality=80" alt="Groove collateral" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_03.png" alt="Groove visual identity"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_04.png" alt="Groove event graphics"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_05.png" alt="Groove collateral"></div>
   </div>
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/mockup_01.jpg?width=800&quality=80" alt="Groove mockup" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/ticket_mockup.jpg?width=800&quality=80" alt="Groove ticket mockup" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/mockup_01.jpg" alt="Groove mockup"></div>
+    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/ticket_mockup.jpg" alt="Groove ticket mockup" style="width:100%;height:100%;object-fit:cover;"></div>
   </div>
 </div>
 
@@ -304,23 +304,6 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
     }
   });
 });
-</script>
-<script>
-// Pause off-screen autoplay videos
-(function() {
-  const videos = document.querySelectorAll('video[autoplay]');
-  if (!videos.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.play().catch(() => {});
-      } else {
-        entry.target.pause();
-      }
-    });
-  }, { threshold: 0.1 });
-  videos.forEach(v => observer.observe(v));
-})();
 </script>
 </body>
 </html>

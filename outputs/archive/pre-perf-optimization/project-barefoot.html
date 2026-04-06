@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Groove Around the Globe — Kyle Watson</title>
+<title>Barefoot Wine — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root { --project-color: #0a2040; }
+:root { --project-color: #e8637a; }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -74,6 +74,8 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 /* FULL-BLEED */
 .bleed { width: 100%; overflow: hidden; }
 .bleed img { width: 100%; display: block; }
+.bleed video { width: 100%; display: block; }
+.bleed .ph-rect { height: 60vh; min-height: 380px; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* SECTION WRAPPER */
 .section { padding: 5rem 3rem; border-bottom: 1px solid var(--border); }
@@ -94,8 +96,10 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .split-text h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
 .split-text p { font-size: 0.9rem; line-height: 1.9; color: var(--text-secondary); font-weight: 300; }
 .split-text p + p { margin-top: 1rem; }
-.split-media { overflow: hidden; background: var(--bg-card); position: relative; }
-.split-media img { width: 100%; height: auto; display: block; }
+.split-media { aspect-ratio: 4/3; overflow: hidden; background: var(--bg-card); position: relative; }
+.split-media img { width: 100%; height: 100%; object-fit: cover; }
+.split-media video { width: 100%; height: 100%; object-fit: cover; }
+.split-media .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.3; }
 
 /* GALLERY */
 .gallery { display: grid; gap: 0.75rem; }
@@ -105,7 +109,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 .g-2-1 { grid-template-columns: 2fr 1fr; }
 .g-1-2 { grid-template-columns: 1fr 2fr; }
 .g-item { overflow: hidden; position: relative; background: var(--bg-card); }
-.g-item img { width: 100%; height: auto; display: block; }
+.g-item.std  { aspect-ratio: 4/3; }
+.g-item.wide { aspect-ratio: 16/7; }
+.g-item.sq   { aspect-ratio: 1/1; }
+.g-item.tall { aspect-ratio: 3/4; }
+.g-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.g-item video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.g-item .ph { width: 100%; height: 100%; background: linear-gradient(135deg, #111 0%, var(--project-color) 100%); opacity: 0.28; }
 
 /* CREDITS */
 .credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem 4rem; }
@@ -189,55 +199,73 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
     <a href="all-work.html">&larr; Back</a>
   </div>
   <div class="header-tags">
-    <span class="tag">Creative Direction</span>
+    <span class="tag">Art Direction</span>
     <span class="tag">Design</span>
-    <span class="tag">Event</span>
+    <span class="tag">Animation</span>
+    <span class="tag">Social</span>
   </div>
-  <h1 class="header-title">Groove Around the Globe</h1>
+  <h1 class="header-title">Barefoot Wine</h1>
 </header>
 
-<!-- ══ HERO IMAGE ══ -->
-<div class="bleed" style="max-height:60vh;overflow:hidden;">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=1200&quality=80" alt="Groove Around the Globe" style="margin-top:-14%;">
+<!-- ══ HERO VIDEO ══ -->
+<div class="hero-video">
+  <div class="video-wrap">
+    <iframe src="https://iframe.mediadelivery.net/embed/615661/2d09421a-1884-411b-a343-ec70cf43e98e?autoplay=false&loop=false&muted=false&preload=true&controls=true" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+  </div>
 </div>
 
 <!-- ══ INTRO ══ -->
 <div class="intro">
   <div class="intro-text">
-    <p>In 2020, when the world had slowed down, Google Cloud wanted to bring their global design teams together. We conceived and produced a 24-hour livestream featuring DJs and musicians from around the world &mdash; a virtual festival that chased the sun across time zones.</p>
+    <p>When social media brand expression was in its infancy, Barefoot Wine reached out to us at BBDO SF to try a little experiment. The project involved creating multiple content pieces in response to relevant news and culture weekly. The team would gather each morning to discuss current events and deliver finished content the same afternoon.</p>
+    <p>As the sole content producer, I often conceptualized, shot, edited, designed, and animated all materials independently.</p>
   </div>
   <div class="intro-divider"></div>
   <div class="meta">
     <div class="meta-block">
       <div class="meta-label">Client</div>
-      <div class="meta-value"><strong>Google Cloud</strong></div>
+      <div class="meta-value"><strong>Barefoot Wine</strong></div>
     </div>
     <div class="meta-block">
       <div class="meta-label">Role</div>
-      <div class="meta-value">Creative Director, Lead Designer</div>
+      <div class="meta-value">Art Director, Designer, Animator</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Agency</div>
+      <div class="meta-value">BBDO SF</div>
     </div>
   </div>
 </div>
 
-<!-- ══ FULL-BLEED PROCESS IMAGE ══ -->
-<div class="bleed">
-  <img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/screenshot.png?width=1200&quality=80" alt="Groove Around the Globe wireframe process" loading="lazy">
-</div>
-
-<!-- ══ STILLS ══ -->
+<!-- ══ VIDEO GALLERY ══ -->
 <div class="section">
+  <div class="section-label">Work</div>
+
   <div class="gallery g-2">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png?width=800&quality=80" alt="Groove percussion illustration" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_02.png?width=800&quality=80" alt="Groove design system" loading="lazy"></div>
+    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/9e49bb35-d203-48a0-84a5-bfae802a2005?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/4d9dd273-8d3a-4a2b-9875-94a8628896d8?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
   </div>
-  <div class="gallery g-3" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_03.png?width=800&quality=80" alt="Groove visual identity" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_04.png?width=800&quality=80" alt="Groove event graphics" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_05.png?width=800&quality=80" alt="Groove collateral" loading="lazy"></div>
+
+  <div class="gallery g-2">
+    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/38ed3636-e650-49eb-8311-6f83259d3579?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/7686cb8f-1959-4f68-b2d2-7c5cc5ee5d20?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
   </div>
-  <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/mockup_01.jpg?width=800&quality=80" alt="Groove mockup" loading="lazy"></div>
-    <div class="g-item"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/ticket_mockup.jpg?width=800&quality=80" alt="Groove ticket mockup" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+
+  <div class="gallery g-2">
+    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/e6ca958a-8e09-4bd2-9907-e621311fdde6?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="g-item std" style="position:relative;padding-bottom:56.25%;aspect-ratio:auto;">
+      <iframe src="https://iframe.mediadelivery.net/embed/615661/dd75b99b-b415-4e8d-84a0-320dc34d43f9?autoplay=true&loop=true&muted=true&preload=true&controls=false" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+    </div>
   </div>
 </div>
 
@@ -249,23 +277,22 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   </button>
   <div class="credits-content" style="display:none;">
   <div class="credits">
-    <div><div class="credit-role">Creative Director</div><div class="credit-name">Kyle Watson</div></div>
-    <div><div class="credit-role">Executive Producer</div><div class="credit-name">Danny Lim</div></div>
-    <div><div class="credit-role">Animator</div><div class="credit-name">Walter Soyka</div></div>
-    <div><div class="credit-role">Agency</div><div class="credit-name">Jack Morton</div></div>
+    <div><div class="credit-role">Art Director / Designer / Animator</div><div class="credit-name">Kyle Watson</div></div>
+    <div><div class="credit-role">Agency</div><div class="credit-name">BBDO San Francisco</div></div>
+    <div><div class="credit-role">Client</div><div class="credit-name">Barefoot Wine</div></div>
   </div>
   </div>
 </div>
 
 <!-- ══ PREV / NEXT ══ -->
 <nav class="pagination">
-  <a href="project-youtube-forge.html" class="page-item prev">
+  <a href="project-save-our-stories.html" class="page-item prev">
     <span class="page-dir">&larr; Previous</span>
-    <span class="page-title">Forge</span>
+    <span class="page-title">Save Our Stories</span>
   </a>
-  <a href="project-si-sportsbook.html" class="page-item next">
+  <a href="project-wells-fargo.html" class="page-item next">
     <span class="page-dir">Next &rarr;</span>
-    <span class="page-title">In the Game</span>
+    <span class="page-title">Why I Work</span>
   </a>
 </nav>
 
@@ -304,23 +331,6 @@ document.querySelectorAll('.credits-toggle').forEach(btn => {
     }
   });
 });
-</script>
-<script>
-// Pause off-screen autoplay videos
-(function() {
-  const videos = document.querySelectorAll('video[autoplay]');
-  if (!videos.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.play().catch(() => {});
-      } else {
-        entry.target.pause();
-      }
-    });
-  }, { threshold: 0.1 });
-  videos.forEach(v => observer.observe(v));
-})();
 </script>
 </body>
 </html>
