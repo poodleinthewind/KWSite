@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DropComp — Create Assets</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --text: #c8c4b8;
+    --text-bright: #e8e4d8;
+    --muted: #5a5850;
+    --dim: #3a3a38;
+    --border: #222;
+    --accent: #4a90ff;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --serif: 'DM Serif Display', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  .w { max-width: 920px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV */
+  nav { padding: 24px 0; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-weight: 700; font-size: 18px; letter-spacing: -0.3px; color: var(--text-bright); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 400; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+
+  hr { border: none; height: 1px; background: var(--border); margin: 0; }
+
+  /* PAGE HEADER */
+  .page-header { padding: 60px 0 40px; }
+  .page-header .back { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; display: inline-block; margin-bottom: 20px; }
+  .page-header .back:hover { color: var(--text); }
+  .page-header h1 { font-family: var(--serif); font-weight: 400; font-size: 36px; color: var(--text-bright); margin-bottom: 12px; }
+  .page-header p { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 520px; }
+
+  /* SECTIONS */
+  .section { padding: 48px 0; position: relative; }
+  .section-ruled::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: min(920px, calc(100% - 64px)); height: 1px; background: var(--border);
+  }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 24px; color: var(--text-bright); margin-bottom: 16px; }
+  h3 { font-size: 16px; font-weight: 600; color: var(--text-bright); margin-bottom: 12px; }
+  p.body { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+
+  /* FOLDER STRUCTURE */
+  .folder { background: #0a0a0a; padding: 20px 24px; margin-bottom: 16px; border: 1px solid var(--border); border-radius: 8px; }
+  .folder-title { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+  .fr { font-size: 12px; color: var(--muted); font-family: 'DM Sans', monospace; padding: 3px 0; display: flex; }
+  .fr strong { color: var(--accent); }
+  .fr span { margin-left: auto; color: var(--dim); font-size: 11px; }
+
+  /* STEPS */
+  .steps { max-width: 680px; }
+  .step { padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; }
+  .step h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text-bright); }
+  .step p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .step a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  code { display: inline-block; background: #0a0a0a; color: var(--accent); font-family: 'DM Sans', monospace; font-size: 12px; padding: 3px 10px; margin-top: 6px; border: 1px solid var(--border); border-radius: 4px; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tip-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+  .tip-card strong { font-size: 13px; font-weight: 600; color: var(--text-bright); display: block; margin-bottom: 4px; }
+  .tip-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .tip-card code { font-size: 11px; }
+
+  /* CALLOUT */
+  .callout {
+    margin-top: 40px;
+    padding: 24px 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    border-left: 3px solid var(--accent);
+  }
+  .callout h3 { font-size: 15px; font-weight: 600; color: var(--text-bright); margin-bottom: 6px; }
+  .callout p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .callout a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* FOOTER */
+  footer { padding: 40px 0; border-top: 1px solid var(--border); }
+  footer p { font-size: 12px; color: var(--dim); }
+
+  @media (max-width: 700px) {
+    .tips-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .page-header h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="w">
+  <nav><div class="nav-inner">
+    <a class="logo" href="index.html">Drop<span>Comp</span></a>
+    <div class="nav-links">
+      <a href="index.html">Download</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#install">Install</a>
+      <a href="index.html#faq">FAQ</a>
+    </div>
+  </div></nav>
+  <hr>
+
+  <div class="page-header">
+    <a class="back" href="index.html">← Back to DropComp</a>
+    <h1>Creating assets for DropComp</h1>
+    <p>DropComp reads standard .aep files from numbered folders. No special format, nothing proprietary — just organize your files, save, and refresh the library.</p>
+  </div>
+</div>
+
+<!-- FOLDER STRUCTURE -->
+<div class="w">
+  <div class="section section-ruled">
+    <h2>Folder structure</h2>
+    <p class="body">Your asset library is a single directory with numbered category folders inside it. Each folder holds .aep files of that type. You can rename these or add your own — DropComp reads whatever's there.</p>
+    <div class="folder">
+      <div class="folder-title">Example layout</div>
+      <div class="fr">&gt; <strong>&nbsp;01_PNG_Sequences/</strong><span>Confetti, particles, frame-by-frame exports</span></div>
+      <div class="fr">&gt; <strong>&nbsp;02_MOV_Alpha/</strong><span>ProRes 4444 or MOV with transparency</span></div>
+      <div class="fr">&gt; <strong>&nbsp;03_Track_Mattes/</strong><span>Luma/alpha matte templates for reveals</span></div>
+      <div class="fr">&gt; <strong>&nbsp;04_Complex_Templates/</strong><span>Multi-layer transitions and effects</span></div>
+      <div class="fr">&gt; <strong>&nbsp;05_Text_Animators/</strong><span>Reusable text animation presets</span></div>
+      <div class="fr">&gt; <strong>&nbsp;06_Brand_Assets/</strong><span>Logos, colors, brand elements</span></div>
+      <div class="fr">&gt; <strong>&nbsp;06_Title_Cards/</strong><span>Lower thirds, full-screen titles</span></div>
+      <div class="fr">&gt; <strong>&nbsp;07_Logos/</strong><span>Animated logo reveals</span></div>
+    </div>
+    <p class="body">The numbers just control sort order in the panel. You can add new folders like <code>08_Overlays/</code> and DropComp will pick them up automatically on the next refresh.</p>
+  </div>
+</div>
+
+<!-- HOW TO CREATE -->
+<div class="w">
+  <div class="section section-ruled">
+    <h2>How to create an asset file</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>1. Create a new composition</h3>
+        <p>Open After Effects and create a new comp at whatever resolution you're targeting. The comp should be <strong>fully self-contained</strong> — all footage, images, and precomps should live inside the project file. If you reference external files, the asset will break when someone else opens it.</p>
+      </div>
+      <div class="step">
+        <h3>2. Build your animation</h3>
+        <p>Design the transition, title card, text animator, logo reveal, or whatever you're making. Keep it modular — this should be something you'd want to reuse across multiple projects. If it has text layers or color controls, consider adding <strong>Essential Properties</strong> so users can quickly customize it without digging into the comp.</p>
+      </div>
+      <div class="step">
+        <h3>3. Name the file descriptively</h3>
+        <p>Use a clear, scannable filename that describes what the asset does. DropComp displays the filename in the grid, so make it count.</p>
+        <code>Slide_Left.aep</code> <code>Glitch_Transition_01.aep</code> <code>Lower_Third_Clean.aep</code>
+      </div>
+      <div class="step">
+        <h3>4. Save to the right folder</h3>
+        <p>Drop the .aep file into the matching numbered category folder. If it's a text animation, it goes in <code>05_Text_Animators/</code>. If it's a complex multi-layer transition, it goes in <code>04_Complex_Templates/</code>. If nothing fits, create a new numbered folder — DropComp will pick it up automatically.</p>
+      </div>
+      <div class="step">
+        <h3>5. Refresh the library</h3>
+        <p>Back in the DropComp panel, click <strong>Refresh Library</strong>. Your new asset will appear in the grid immediately.</p>
+      </div>
+      <div class="step">
+        <h3>6. Generate a hover preview</h3>
+        <p>Select your new asset in the panel, then go to <strong>Admin Tools → Gen Preview</strong>. This renders a short preview clip that plays when you hover over the thumbnail. You can also use <strong>Gen All</strong> to batch-generate previews for every asset that's missing one.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BEST PRACTICES -->
+<div class="w">
+  <div class="section section-ruled">
+    <h2>Best practices</h2>
+    <div class="tips-grid">
+      <div class="tip-card"><strong>Keep comps self-contained</strong><p>Collect all footage and precomps into the project file. Nothing should reference external paths or files on your hard drive — the asset needs to work on any machine.</p></div>
+      <div class="tip-card"><strong>Use consistent naming</strong><p>Stick to a <code>Category_Name.aep</code> convention. When you have 50+ assets in a folder, consistent names make scanning the grid much faster.</p></div>
+      <div class="tip-card"><strong>Expose Essential Properties</strong><p>If your asset has text layers, color fills, or values someone might want to change, add them as Essential Properties. This lets users tweak things without opening the comp.</p></div>
+      <div class="tip-card"><strong>Build at your target resolution</strong><p>Assets import at whatever resolution they were built at. If you're working in 1920×1080, build your assets at 1920×1080. No scaling needed.</p></div>
+    </div>
+
+    <div class="callout">
+      <h3>Automate with Atom</h3>
+      <p>If you use <a href="https://tryatom.ai/" target="_blank">Atom</a> — a Claude-powered assistant that runs inside After Effects — you can use skills to automate the project reduction workflow. Run the Reduce Project skill to strip unused footage, collect assets, and clean up your .aep in one step, so every file you save is ready for DropComp.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="w">
+  <footer><p>DropComp · 2026</p></footer>
+</div>
+
+</body>
+</html>

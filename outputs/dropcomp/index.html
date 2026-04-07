@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DropComp</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --surface-2: #1c1c1c;
+    --text: #c8c4b8;
+    --text-bright: #e8e4d8;
+    --muted: #5a5850;
+    --dim: #3a3a38;
+    --border: #222;
+    --accent: #4a90ff;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --serif: 'DM Serif Display', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+  .w { max-width: 920px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV */
+  nav { padding: 24px 0; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-weight: 700; font-size: 18px; letter-spacing: -0.3px; color: var(--text-bright); }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 400; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+
+  hr { border: none; height: 1px; background: var(--border); margin: 0; }
+
+  /* HERO */
+  .hero-wrap {
+    background: linear-gradient(180deg, #141414 0%, var(--bg) 70%);
+    position: relative;
+  }
+  .hero-wrap::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 70% 50% at 30% 0%, rgba(232, 96, 32, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero { padding: 80px 0 60px; }
+  .hero-label { font-size: 12px; color: var(--muted); margin-bottom: 24px; font-style: italic; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: 42px; line-height: 1.15; margin-bottom: 24px; max-width: 560px; color: var(--text-bright); }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero p { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 400px; margin-bottom: 32px; }
+  .hero-row { display: flex; gap: 12px; align-items: center; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 22px; border-radius: 100px;
+    font-size: 13px; font-weight: 500; text-decoration: none;
+    font-family: var(--sans); transition: all 0.15s; cursor: pointer; border: none;
+  }
+  .btn-accent { background: var(--accent); color: #fff; }
+  .btn-accent:hover { background: #3a7de6; }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--muted); }
+  .btn svg { width: 14px; height: 14px; }
+
+  .platforms { display: flex; gap: 6px; margin-bottom: 14px; }
+  .plat {
+    font-size: 11px; padding: 4px 12px; background: transparent;
+    border: 1px solid var(--border); color: var(--muted);
+    cursor: pointer; font-family: var(--sans); transition: all 0.15s;
+  }
+  .plat.active { background: var(--text-bright); color: var(--bg); border-color: var(--text-bright); }
+  .plat:hover:not(.active) { border-color: var(--muted); }
+
+  /* DEMO SLOT */
+  .hero-demo {
+    margin-top: 48px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .hero-demo img { width: 100%; height: auto; display: block; }
+
+  /* BANDS */
+  .band { padding: 80px 0; position: relative; }
+  .band-ruled::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: min(920px, calc(100% - 64px)); height: 1px; background: var(--border);
+  }
+  .band-surface { background: var(--surface); }
+
+  /* SECTIONS */
+  .section-label { font-size: 11px; color: var(--muted); margin-bottom: 12px; font-style: italic; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.15; margin-bottom: 8px; color: var(--text-bright); }
+  .section-desc { font-size: 13px; color: var(--muted); margin-bottom: 36px; line-height: 1.7; max-width: 360px; }
+
+  /* FEATURES GRID (v1 card style) */
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    transition: border-color 0.2s;
+  }
+  .feature-card:hover { border-color: var(--dim); }
+  .feature-icon { font-size: 22px; margin-bottom: 14px; }
+  .feature-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text-bright); }
+  .feature-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* INSTALL STEPS (v1 style) */
+  .install-steps { max-width: 640px; }
+  .step { padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; }
+  .step h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text-bright); }
+  .step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .step a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  code { display: inline-block; background: #0a0a0a; color: var(--accent); font-family: 'DM Sans', monospace; font-size: 12px; padding: 3px 10px; margin-top: 6px; border: 1px solid var(--border); border-radius: 4px; }
+
+  /* CREATE ASSETS */
+  .folder { background: #0a0a0a; padding: 20px 24px; margin-bottom: 32px; border: 1px solid var(--border); border-radius: 8px; }
+  .folder-title { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+  .fr { font-size: 12px; color: var(--muted); font-family: 'DM Sans', monospace; padding: 3px 0; display: flex; }
+  .fr strong { color: var(--accent); }
+  .fr span { margin-left: auto; color: var(--dim); font-size: 11px; }
+
+  .create-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+  .create-step { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .create-step .cn { font-size: 10px; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
+  .create-step h3 { font-size: 14px; font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+  .create-step p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .create-step code { font-size: 11px; margin-top: 4px; }
+
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tip-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+  .tip-card strong { font-size: 13px; font-weight: 600; color: var(--text-bright); display: block; margin-bottom: 4px; }
+  .tip-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .tip-card code { font-size: 11px; }
+
+  /* FAQ */
+  .faq-list { max-width: 640px; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    background: none; border: none; color: var(--text); width: 100%;
+    text-align: left; padding: 16px 0; font-family: var(--sans); transition: color 0.15s;
+  }
+  .faq-q:hover { color: var(--accent); }
+  .faq-arrow { width: 12px; height: 12px; flex-shrink: 0; transition: transform 0.2s; color: var(--dim); }
+  .faq-q.open .faq-arrow { transform: rotate(180deg); color: var(--accent); }
+  .faq-a { font-size: 13px; color: var(--muted); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.25s ease, padding 0.25s; }
+  .faq-a.open { max-height: 200px; padding-bottom: 16px; }
+
+  /* CALLOUT */
+  .callout {
+    margin-top: 40px;
+    padding: 24px 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    border-left: 3px solid var(--accent);
+  }
+  .callout h3 { font-size: 15px; font-weight: 600; color: var(--text-bright); margin-bottom: 6px; }
+  .callout p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .callout a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* FOOTER */
+  footer { padding: 40px 0; border-top: 1px solid var(--border); }
+  footer .footer-inner { display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-size: 12px; color: var(--dim); }
+  footer a { color: var(--muted); text-decoration: none; font-size: 12px; transition: color 0.15s; }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 700px) {
+    .features-grid, .create-steps, .tips-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    h1 { font-size: 32px; }
+    .hero { padding: 60px 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="w">
+    <nav><div class="nav-inner">
+      <div class="logo">Drop<span>Comp</span></div>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#install">Install</a>
+        <a href="create.html">Create assets</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div></nav>
+    <hr>
+
+    <section class="hero" id="download">
+      <div class="hero-label">After Effects extension</div>
+      <h1>How After Effects always <em>should have</em> worked</h1>
+      <p>Browse, preview, and drop .aep assets straight onto your timeline. No importing, no digging through folders.</p>
+      <div class="platforms">
+        <button class="plat active" data-os="mac">macOS</button>
+        <button class="plat" data-os="win">Windows</button>
+        <button class="plat" data-os="linux">Linux</button>
+      </div>
+      <div class="hero-row">
+        <a href="DropComp.zxp" class="btn btn-accent" id="downloadBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span id="downloadLabel">Download for macOS</span>
+        </a>
+        <a href="#install" class="btn btn-ghost">Install guide</a>
+      </div>
+    </section>
+
+    <div class="hero-demo" id="demoSlot">
+      <img src="dropcomp-demo.gif" alt="DropComp — browsing and previewing assets inside After Effects">
+    </div>
+
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="band band-ruled" id="features">
+  <div class="w">
+    <div class="section-label">Features</div>
+    <h2>Everything you need, built in.</h2>
+    <div class="section-desc">DropComp turns a folder of .aep assets into a browseable, searchable library right inside After Effects.</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Instant Preview</h3>
+        <p>Hover over any asset to see an animated preview without importing anything into your project.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📂</div>
+        <h3>Organized Categories</h3>
+        <p>Assets are sorted into transitions, text animators, title cards, logos, and more — all browsable from the sidebar.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⭐</div>
+        <h3>Favorites</h3>
+        <p>Star the assets you use most and access them from a dedicated favorites panel for quick workflows.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3>Multi-Library</h3>
+        <p>Switch between multiple asset folders using the library dropdown. Different projects, different clients.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎛️</div>
+        <h3>Adjustable Grid</h3>
+        <p>Toggle between S, M, and L grid sizes to see more assets at once or get larger previews.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛠️</div>
+        <h3>Admin Tools</h3>
+        <p>Generate hover previews for your assets individually or in batch with the built-in admin panel.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSTALL -->
+<div class="band band-surface" id="install">
+  <div class="w">
+    <div class="section-label">Installation</div>
+    <h2>Up and running in 2 minutes.</h2>
+    <div class="section-desc">No terminal. No complicated setup.</div>
+    <div class="install-steps">
+      <div class="step">
+        <h3>Install the Extension</h3>
+        <p>Double-click <strong>DropComp.zxp</strong> or drag it onto the <a href="https://aescripts.com/learn/zxp-installer/" target="_blank">ZXP Installer</a> app.</p>
+      </div>
+      <div class="step">
+        <h3>Restart After Effects</h3>
+        <p>Quit and relaunch After Effects so it registers the new extension.</p>
+      </div>
+      <div class="step">
+        <h3>Open DropComp</h3>
+        <p>Go to <strong>Window → Extensions → Drop Comp</strong> to open the panel.</p>
+      </div>
+      <div class="step">
+        <h3>Set the Kit Location</h3>
+        <p>Click <strong>Kit Location</strong> in the sidebar and point it to your asset folder.</p>
+        <code>~/Desktop/My Motion Assets</code>
+      </div>
+      <div class="step">
+        <h3>Start Creating</h3>
+        <p>Browse assets, hover to preview, double-click to apply. That's it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CREATE ASSETS (link to separate page) -->
+<div class="band band-ruled" id="create">
+  <div class="w">
+    <div class="section-label">Creating assets</div>
+    <h2>Build your own library.</h2>
+    <div class="section-desc">DropComp reads standard .aep files from numbered folders. No special format, nothing proprietary.</div>
+    <a href="create.html" class="btn btn-ghost" style="margin-top:8px;">Read the guide →</a>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="band band-surface" id="faq">
+  <div class="w">
+    <div class="section-label">FAQ</div>
+    <h2>Common questions.</h2>
+    <div class="section-desc">Everything else you might need to know.</div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">What versions of After Effects are supported? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">DropComp works with After Effects CC 2020 and later on both macOS and Windows.</div></div>
+      <div class="faq-item"><button class="faq-q">How do I install the .zxp file? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Download the free ZXP Installer from aescripts.com, then drag DropComp.zxp onto it. Or just double-click the .zxp file.</div></div>
+      <div class="faq-item"><button class="faq-q">Can I use my own assets? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes. Drop .aep files into the appropriate numbered folder inside your Motion Kit directory, then hit Refresh Library in the panel.</div></div>
+      <div class="faq-item"><button class="faq-q">How do I generate previews for new assets? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Select an asset in the panel, then use Admin Tools → Gen Preview. Use Gen All to batch-generate previews for everything.</div></div>
+      <div class="faq-item"><button class="faq-q">Can I switch between multiple asset libraries? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes — use the Library dropdown in the panel to switch between different asset folders. Great for managing per-client or per-project libraries.</div></div>
+      <div class="faq-item"><button class="faq-q">Is it free? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes, completely free.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="w">
+  <footer>
+    <div class="footer-inner">
+      <p>DropComp · Built for After Effects · 2026</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.plat').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.plat').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById('downloadLabel').textContent =
+        { mac:'Download for macOS', win:'Download for Windows', linux:'Download for Linux' }[t.dataset.os];
+    });
+  });
+  const ua = navigator.userAgent.toLowerCase();
+  document.querySelector(`.plat[data-os="${ua.includes('win')?'win':ua.includes('linux')?'linux':'mac'}"]`)?.click();
+
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const o = q.classList.contains('open');
+      document.querySelectorAll('.faq-q').forEach(x => x.classList.remove('open'));
+      document.querySelectorAll('.faq-a').forEach(x => x.classList.remove('open'));
+      if (!o) { q.classList.add('open'); q.nextElementSibling.classList.add('open'); }
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => { e.preventDefault(); document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'}); });
+  });
+</script>
+</body>
+</html>
