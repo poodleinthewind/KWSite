@@ -10,15 +10,15 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #0e0e0e;
-    --surface: #161616;
-    --surface-2: #1c1c1c;
-    --text: #c8c4b8;
-    --text-bright: #e8e4d8;
-    --muted: #5a5850;
-    --dim: #3a3a38;
-    --border: #222;
-    --accent: #4a90ff;
+    --bg: #ffffff;
+    --surface: #f7f7f7;
+    --surface-2: #efefef;
+    --text: #444444;
+    --text-bright: #1a1a1a;
+    --muted: #6b6b6b;
+    --dim: #999999;
+    --border: #e2e2e2;
+    --accent: #0d99ff;
     --sans: 'DM Sans', -apple-system, sans-serif;
     --serif: 'DM Serif Display', Georgia, serif;
   }
@@ -32,7 +32,7 @@
   nav { padding: 24px 0; }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; }
   .logo { font-weight: 700; font-size: 18px; letter-spacing: -0.3px; color: var(--text-bright); }
-  .logo span { color: var(--accent); }
+  .logo span { color: #0d99ff; }
   .nav-links { display: flex; gap: 28px; }
   .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 400; transition: color 0.15s; }
   .nav-links a:hover { color: var(--text); }
@@ -41,12 +41,12 @@
 
   /* HERO */
   .hero-wrap {
-    background: linear-gradient(180deg, #141414 0%, var(--bg) 70%);
+    background: linear-gradient(180deg, #f0f0f0 0%, var(--bg) 70%);
     position: relative;
   }
   .hero-wrap::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse 70% 50% at 30% 0%, rgba(232, 96, 32, 0.04) 0%, transparent 70%);
+    background: none;
     pointer-events: none;
   }
 
@@ -63,8 +63,8 @@
     font-size: 13px; font-weight: 500; text-decoration: none;
     font-family: var(--sans); transition: all 0.15s; cursor: pointer; border: none;
   }
-  .btn-accent { background: var(--accent); color: #fff; }
-  .btn-accent:hover { background: #3a7de6; }
+  .btn-accent { background: #1a1a1a; color: #fff; }
+  .btn-accent:hover { background: #333; }
   .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
   .btn-ghost:hover { border-color: var(--muted); }
   .btn svg { width: 14px; height: 14px; }
@@ -75,7 +75,7 @@
     border: 1px solid var(--border); color: var(--muted);
     cursor: pointer; font-family: var(--sans); transition: all 0.15s;
   }
-  .plat.active { background: var(--text-bright); color: var(--bg); border-color: var(--text-bright); }
+  .plat.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
   .plat:hover:not(.active) { border-color: var(--muted); }
 
   /* DEMO SLOT */
@@ -122,10 +122,10 @@
   .step h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text-bright); }
   .step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
   .step a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
-  code { display: inline-block; background: #0a0a0a; color: var(--accent); font-family: 'DM Sans', monospace; font-size: 12px; padding: 3px 10px; margin-top: 6px; border: 1px solid var(--border); border-radius: 4px; }
+  code { display: inline-block; background: #f0f0f0; color: #d63384; font-family: 'DM Sans', monospace; font-size: 12px; padding: 3px 10px; margin-top: 6px; border: 1px solid var(--border); border-radius: 4px; }
 
   /* CREATE ASSETS */
-  .folder { background: #0a0a0a; padding: 20px 24px; margin-bottom: 32px; border: 1px solid var(--border); border-radius: 8px; }
+  .folder { background: #f7f7f7; padding: 20px 24px; margin-bottom: 32px; border: 1px solid var(--border); border-radius: 8px; }
   .folder-title { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
   .fr { font-size: 12px; color: var(--muted); font-family: 'DM Sans', monospace; padding: 3px 0; display: flex; }
   .fr strong { color: var(--accent); }
@@ -198,14 +198,14 @@
         <a href="#how">How it works</a>
         <a href="#features">Features</a>
         <a href="#install">Install</a>
-        <a href="./create">Create assets</a>
+        <a href="create.html">Create assets</a>
         <a href="#faq">FAQ</a>
       </div>
     </div></nav>
     <hr>
 
     <section class="hero" id="download">
-      <div class="hero-label">After Effects extension</div>
+
       <h1>How After Effects always <em>should have</em> worked</h1>
       <p>Browse, preview, and drop .aep assets straight onto your timeline. No importing, no digging through folders.</p>
       <div class="platforms">
@@ -316,7 +316,7 @@
     <div class="section-label">Creating assets</div>
     <h2>Build your own library.</h2>
     <div class="section-desc">DropComp reads standard .aep files from numbered folders. No special format, nothing proprietary.</div>
-    <a href="./create" class="btn btn-ghost" style="margin-top:8px;">Read the guide →</a>
+    <a href="create.html" class="btn btn-ghost" style="margin-top:8px;">Read the guide →</a>
   </div>
 </div>
 
