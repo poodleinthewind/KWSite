@@ -1,1 +1,1 @@
-{"cleanUrls": true}
+{"cleanUrls": true, "redirects": [{"source": "/dropcomp/create.html", "destination": "/dropcomp/create", "permanent": true}]}
