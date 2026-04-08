@@ -709,12 +709,12 @@ video { display: block; max-width: 100%; }
 <div class="section">
   <div class="section-label">Other Shots</div>
   <div class="gallery g-2">
-    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/f7fbb112-70bb-42b0-aba9-4ac7704922ef?autoplay=true&loop=true&muted=true&preload=false&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
-    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/f3443cee-d0d5-4f9a-9e5c-9696d8934faf?autoplay=true&loop=true&muted=true&preload=false&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><video autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/010_Coreweave/video/Shot-33.mp4"></video></div></div>
+    <div class="g-item"><div class="video-wrap"><video autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/010_Coreweave/video/Visor-Pullout.mp4"></video></div></div>
   </div>
   <div class="gallery g-2" style="margin-top:.75rem">
-    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/04322936-3049-4a85-9a77-c489fc6e25cc?autoplay=true&loop=true&muted=true&preload=false&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
-    <div class="g-item"><div class="video-wrap"><iframe data-src="https://iframe.mediadelivery.net/embed/615661/a2120575-c1fd-42c2-8ecb-45518d736657?autoplay=true&loop=true&muted=true&preload=false&controls=false&showSpeed=false&playButton=false&settingsButton=false&chromecast=false&airplay=false&fullscreenButton=false&volumeControl=false&timeline=false" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div>
+    <div class="g-item"><div class="video-wrap"><video autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/010_Coreweave/video/Logo-Insert.mp4"></video></div></div>
+    <div class="g-item"><div class="video-wrap"><video autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/010_Coreweave/video/Moonshot-Chase-v12.mp4"></video></div></div>
   </div>
 </div>
 
@@ -857,32 +857,13 @@ const videoObserver = new IntersectionObserver((entries) => {
 }, { rootMargin: '600px 0px' });
 lazyVideos.forEach(v => videoObserver.observe(v));
 
-// Lazy-load remaining iframes (Other Shots + Hero)
-const lazyFrames = document.querySelectorAll('iframe[data-src]');
-const frameObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const iframe = entry.target;
-      iframe.src = iframe.dataset.src;
-      iframe.removeAttribute('data-src');
-      iframe.addEventListener('load', () => {
-        setTimeout(() => iframe.classList.add('loaded'), 800);
-      });
-      frameObserver.unobserve(iframe);
-    }
-  });
-}, { rootMargin: '1200px 0px' });
-lazyFrames.forEach(f => frameObserver.observe(f));
-
-// Hero iframe fade-in (already has src)
+// Hero iframe fade-in
 document.querySelectorAll('iframe[src*="mediadelivery"]').forEach(iframe => {
-  if (!iframe.dataset.src) {
-    iframe.addEventListener('load', () => {
-      setTimeout(() => iframe.classList.add('loaded'), 800);
-    });
-    if (iframe.contentWindow) {
-      setTimeout(() => iframe.classList.add('loaded'), 1500);
-    }
+  iframe.addEventListener('load', () => {
+    setTimeout(() => iframe.classList.add('loaded'), 800);
+  });
+  if (iframe.contentWindow) {
+    setTimeout(() => iframe.classList.add('loaded'), 1500);
   }
 });
 
