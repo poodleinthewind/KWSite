@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+  <meta name="robots" content="noai, noimageai">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <title>Open Minds — Kyle Watson</title>
@@ -108,6 +109,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   .credits { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
+  .episode-wrap { max-width: 100% !important; }
   .header-tags { display: none; }
   .project-tags { display: none; }
   nav.top { padding: 1.2rem 1.5rem; }
@@ -166,7 +168,7 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <!-- ─── HERO VIDEO ─── -->
 <div class="hero-video">
   <div class="video-wrap">
-    <video autoplay muted loop playsinline preload="metadata" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Hero.mp4"></video>
+    <video autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Hero.mp4"></video>
   </div>
 </div>
 
@@ -237,17 +239,17 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
   <div class="gallery g-3">
     <div class="g-item">
       <div class="video-wrap">
-        <video autoplay muted loop playsinline preload="metadata" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/motion/grid-01.mp4"></video>
+        <video autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/motion/grid-01.mp4"></video>
       </div>
     </div>
     <div class="g-item">
       <div class="video-wrap">
-        <video autoplay muted loop playsinline preload="metadata" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/motion/grid-02.mp4"></video>
+        <video autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/motion/grid-02.mp4"></video>
       </div>
     </div>
     <div class="g-item">
       <div class="video-wrap">
-        <video autoplay muted loop playsinline preload="metadata" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/motion/grid-03.mp4"></video>
+        <video autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/motion/grid-03.mp4"></video>
       </div>
     </div>
   </div>
@@ -274,13 +276,13 @@ nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6
 <!-- ─── EPISODE CUTDOWNS ─── -->
 <div class="section">
   <div class="section-label">Episodes</div>
-  <div style="max-width:60%;margin:0 auto 2rem;">
+  <div class="episode-wrap" style="max-width:60%;margin:0 auto 2rem;">
     <div class="video-wrap">
       <iframe src="https://iframe.mediadelivery.net/embed/615661/f3fa1659-42ca-4c4d-9625-cd0077139026?autoplay=false&loop=false&muted=false&preload=false&responsive=true"
         allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
-  <div style="max-width:60%;margin:0 auto;">
+  <div class="episode-wrap" style="max-width:60%;margin:0 auto;">
     <div class="video-wrap">
       <iframe src="https://iframe.mediadelivery.net/embed/615661/8fc34d5b-6f26-4ddd-8a40-780e2b5a44fb?autoplay=false&loop=false&muted=false&preload=false&responsive=true"
         allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>

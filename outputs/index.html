@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+  <meta name="robots" content="noai, noimageai">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0a" media="(max-width: 768px)">
 <meta name="theme-color" content="#f6f3ec" media="(min-width: 769px)">
@@ -1380,7 +1381,7 @@ section {
 
 <!-- HERO VIDEO — fixed behind content -->
 <div class="hero-video">
-  <video autoplay muted loop playsinline preload="metadata" poster="https://kyfolio.b-cdn.net/_Site/HomepageLoop2.mp4?thumb=true" src="https://kyfolio.b-cdn.net/_Site/HomepageLoop2.mp4"></video>
+  <video autoplay muted loop playsinline preload="auto" src="https://kyfolio.b-cdn.net/_Site/HomepageLoop2.mp4"></video>
 </div>
 <div class="hero-video-spacer"></div>
 
@@ -1397,7 +1398,7 @@ section {
     <a href="project-coreweave-aston-martin.html" class="project-card size-large reveal stagger-1">
       <span class="project-index">1</span>
       <div class="project-visual pv-1"><div class="shape"></div></div>
-      <img class="project-thumb" src="https://kyfolio.b-cdn.net/010_Coreweave/video/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4">
+      <img class="project-thumb" loading="lazy" src="https://kyfolio.b-cdn.net/010_Coreweave/video/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4">
       <div class="project-overlay">
         <div class="project-tags">
           <span class="project-tag">Generative AI</span>
@@ -1413,7 +1414,7 @@ section {
     <a href="project-moonvalley-marey.html" class="project-card size-medium reveal stagger-2">
       <span class="project-index">2</span>
       <div class="project-visual pv-2"><div class="shape"></div></div>
-      <img class="project-thumb" src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/020_Marey/video/marey_launch_v2.mp4" data-start="10" data-end="26">
+      <img class="project-thumb" loading="lazy" src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/020_Marey/video/marey_launch_v2.mp4" data-start="10" data-end="26">
       <div class="project-overlay">
         <div class="project-tags">
           <span class="project-tag">Generative AI</span>
@@ -1427,9 +1428,10 @@ section {
     </a>
 
     <!-- 3: medium -->
-    <a href="project-new-landscapes.html" class="project-card size-medium reveal stagger-3" style="display:none;">
+    <a href="project-new-landscapes.html" class="project-card size-medium reveal stagger-3">
       <span class="project-index">3</span>
       <div class="project-visual pv-3"><div class="shape"></div></div>
+      <img class="project-thumb" loading="lazy" src="https://kyfolio.b-cdn.net/040_New-Landscapes/video/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/040_New-Landscapes/video/AnimateDiff_00192.mp4">
       <div class="project-overlay">
         <div class="project-tags">
           <span class="project-tag">Generative AI</span>
@@ -1458,7 +1460,7 @@ section {
     <a href="project-mirror-state.html" class="project-card size-large reveal stagger-5">
       <span class="project-index">5</span>
       <div class="project-visual">
-        <img class="project-thumb" src="https://kyfolio.b-cdn.net/030_Mirror-state/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/030_Mirror-state/Animations/01_Thumb.mp4">
+        <img class="project-thumb" loading="lazy" src="https://kyfolio.b-cdn.net/030_Mirror-state/thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/030_Mirror-state/Animations/01_Thumb.mp4">
       </div>
       <div class="project-overlay">
         <div class="project-tags"></div>
@@ -1472,7 +1474,7 @@ section {
     <a href="project-ibm-open-minds.html" class="project-card size-small reveal stagger-6">
       <span class="project-index">6</span>
       <div class="project-visual pv-5"><div class="shape"></div></div>
-      <img class="project-thumb" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumbnail-Loop.mp4">
+      <img class="project-thumb" loading="lazy" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumb.jpg" alt="" data-video="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumbnail-Loop.mp4">
       <div class="project-overlay">
         <div class="project-tags"></div>
         <div class="project-title">Open Minds</div>
@@ -1519,7 +1521,7 @@ section {
   <button class="lightbox-prev" id="lightboxPrev">&#x2190;</button>
   <button class="lightbox-next" id="lightboxNext">&#x2192;</button>
   <div class="lightbox-content">
-    <img class="lightbox-visual" id="lightboxVisual" src="" alt="">
+    <img loading="lazy" class="lightbox-visual" id="lightboxVisual" src="" alt="">
     <div class="lightbox-meta">
       <span class="lightbox-title" id="lightboxTitle"></span>
       <span class="lightbox-year" id="lightboxYear"></span>
@@ -1536,7 +1538,7 @@ section {
 
   <div class="about-section">
     <div class="about-text reveal">
-      <video class="about-photo" autoplay muted loop playsinline preload="metadata" src="https://kyfolio.b-cdn.net/_Site/KW-Spin.mp4"></video>
+      <video class="about-photo" autoplay muted loop playsinline preload="none" src="https://kyfolio.b-cdn.net/_Site/KW-Spin.mp4"></video>
       <p>
         Most Kyles on the internet started their careers first by pounding copious amounts of monster energy drink, then gradually progressed to abstract expressionism via punching holes in drywall.
       </p>
