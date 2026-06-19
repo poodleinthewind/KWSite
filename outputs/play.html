@@ -83,7 +83,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  mix-blend-mode: difference;
+  background: var(--bg);
 }
 
 .nav-name {
@@ -92,98 +92,28 @@ nav {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #fff;
-  text-decoration: none;
-}
-
-.nav-title {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #fff;
-  opacity: 0.5;
-}
-
-.nav-location {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #fff;
-  opacity: 0.5;
-}
-
-.nav-menu-btn {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #fff;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem 0;
-}
-
-/* ─── MENU OVERLAY ─── */
-.menu-overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  z-index: 800;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 5rem 3rem 3rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.menu-overlay.open {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.menu-close {
-  position: absolute;
-  top: 1.6rem;
-  right: 3rem;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.menu-close:hover { color: var(--text-primary); }
-
-.menu-links {
-  list-style: none;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.menu-link {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 7rem);
-  font-weight: 300;
-  letter-spacing: -0.03em;
   color: var(--text-primary);
   text-decoration: none;
-  line-height: 1.15;
-  text-align: right;
-  transition: color 0.3s ease, padding-right 0.3s ease;
 }
 
-.menu-link:hover { color: #f4845f; padding-right: 1rem; }
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-link:hover { opacity: 0.5; }
+.nav-link.active { opacity: 0.4; }
 
 /* ─── PAGE HEADER ─── */
 .play-header {
@@ -476,10 +406,6 @@ nav {
   .filter-btn { border-color: #333; color: var(--text-secondary); }
   .filter-btn:hover, .filter-btn.active { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
   nav { padding: 1.2rem 1.5rem; }
-  .nav-title, .nav-location { display: none; }
-  .menu-overlay { padding: 4rem 1.5rem 2rem; }
-  .menu-link { font-size: clamp(3.5rem, 12vw, 5rem); }
-  .menu-close { right: 1.5rem; top: 1.2rem; }
   .play-header { padding: 7rem 1.5rem 3rem; }
   .filter-bar { padding: 1rem 1.5rem; overflow-x: auto; }
   .play-gallery { padding: 0.75rem; columns: 2; column-gap: 0.5rem; }
@@ -503,25 +429,12 @@ nav {
 <!-- NAV -->
 <nav id="nav">
   <a href="index.html" class="nav-name">KYLE WATSON</a>
-  <span class="nav-title">MULTIDISCIPLINARY CREATIVE DIRECTOR</span>
-  <span class="nav-location">LOS ANGELES, CALIFORNIA</span>
-  <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
-</nav>
-
-<!-- MENU OVERLAY -->
-<div class="menu-overlay" id="menuOverlay">
-  <button class="menu-close" id="menuClose" aria-label="Close menu">CLOSE</button>
-  <div class="menu-content">
-    <ul class="menu-links">
-      <li><a href="index.html#work" class="menu-link">Work</a></li>
-      <li><a href="index.html#archive" class="menu-link">Archive</a></li>
-      <li><a href="play.html" class="menu-link">Play</a></li>
-      <li><a href="labs.html" class="menu-link">Labs</a></li>
-      <li><a href="index.html#about" class="menu-link">About</a></li>
-      <li><a href="index.html#contact" class="menu-link">Contact</a></li>
-    </ul>
+  <div class="nav-links">
+    <a href="all-work.html" class="nav-link">Work</a>
+    <a href="play.html" class="nav-link active">Play</a>
+    <a href="index.html" class="nav-link">About</a>
   </div>
-</div>
+</nav>
 
 <!-- PAGE HEADER -->
 <header class="play-header">
@@ -551,52 +464,52 @@ nav {
 
 <!-- PLAY GALLERY — masonry columns -->
 <div class="play-gallery">
-  <div class="pg-item reveal" data-title="Blue Spiral Neon" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png"><img class="pg-visual" width="1800" height="3600" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png" alt="Blue Spiral Neon"></div>
-  <div class="pg-item reveal" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.mp4"><video class="pg-visual" width="500" height="500" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.mp4" autoplay muted loop playsinline preload="none"></video></div>
-  <div class="pg-item reveal" data-title="Chromatic Orb" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg"><img class="pg-visual" width="1080" height="1080" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg" alt="Chromatic Orb"></div>
-  <div class="pg-item reveal" data-title="Blue Moon Face" data-src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png"><img class="pg-visual" width="300" height="348" data-src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png" alt="Blue Moon Face"></div>
-  <div class="pg-item reveal" data-title="If You Wish" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg"><img class="pg-visual" width="2500" height="3406" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg" alt="If You Wish"></div>
-  <div class="pg-item reveal" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.mp4"><video class="pg-visual" width="800" height="800" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.mp4" autoplay muted loop playsinline preload="none"></video></div>
-  <div class="pg-item reveal" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.mp4"><video class="pg-visual" width="600" height="600" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.mp4" autoplay muted loop playsinline preload="none"></video></div>
-  <div class="pg-item reveal" data-title="Collage Portrait" data-src="https://kyfolio.b-cdn.net/_Play/collage-portrait-blue.jpg"><img class="pg-visual" width="4000" height="3184" data-src="https://kyfolio.b-cdn.net/_Play/collage-portrait-blue.jpg" alt="Collage Portrait"></div>
-  <div class="pg-item reveal" data-title="Marble Spheres" data-src="https://kyfolio.b-cdn.net/_Play/marble-spheres.jpg"><img class="pg-visual" width="4000" height="2233" data-src="https://kyfolio.b-cdn.net/_Play/marble-spheres.jpg" alt="Marble Spheres"></div>
-  <div class="pg-item reveal" data-title="Fall in Love" data-src="https://kyfolio.b-cdn.net/_Play/fall-in-love-chrome.jpg"><img class="pg-visual" width="1280" height="1170" data-src="https://kyfolio.b-cdn.net/_Play/fall-in-love-chrome.jpg" alt="Fall in Love"></div>
-  <div class="pg-item reveal" data-title="Peeking Over the Fence" data-src="https://kyfolio.b-cdn.net/_Play/peeking-over-fence.jpg"><img class="pg-visual" width="4000" height="2131" data-src="https://kyfolio.b-cdn.net/_Play/peeking-over-fence.jpg" alt="Peeking Over the Fence"></div>
-  <div class="pg-item reveal" data-title="Blue Abstract" data-src="https://kyfolio.b-cdn.net/_Play/blue-abstract-framed.jpg"><img class="pg-visual" width="5611" height="3579" data-src="https://kyfolio.b-cdn.net/_Play/blue-abstract-framed.jpg" alt="Blue Abstract"></div>
-  <div class="pg-item reveal" data-title="Art4All Poster" data-src="https://kyfolio.b-cdn.net/_Play/art4all-poster.jpg"><img class="pg-visual" width="2500" height="3235" data-src="https://kyfolio.b-cdn.net/_Play/art4all-poster.jpg" alt="Art4All Poster"></div>
-  <div class="pg-item reveal" data-title="Dino Boy — Clay" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-clay.jpg"><img class="pg-visual" width="2500" height="1667" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-clay.jpg" alt="Dino Boy Clay"></div>
-  <div class="pg-item reveal" data-title="Dino Boy — Lit" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-lit.jpg"><img class="pg-visual" width="2500" height="643" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-lit.jpg" alt="Dino Boy Lit"></div>
-  <div class="pg-item reveal" data-title="Dino Boy — Sketch" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-sketch.jpg"><img class="pg-visual" width="2500" height="2425" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-sketch.jpg" alt="Dino Boy Sketch"></div>
-  <div class="pg-item reveal" data-title="Belonging Arch Poster" data-src="https://kyfolio.b-cdn.net/_Play/belonging-arch-poster.jpg"><img class="pg-visual" width="2500" height="3406" data-src="https://kyfolio.b-cdn.net/_Play/belonging-arch-poster.jpg" alt="Belonging Arch Poster"></div>
-  <div class="pg-item reveal" data-title="Mycology Club" data-src="https://kyfolio.b-cdn.net/_Play/mycology-club-print.jpg"><img class="pg-visual" width="5296" height="3370" data-src="https://kyfolio.b-cdn.net/_Play/mycology-club-print.jpg" alt="Mycology Club"></div>
-  <div class="pg-item reveal" data-title="Cowboy Man" data-src="https://kyfolio.b-cdn.net/_Play/cowboy-man.jpg"><img class="pg-visual" width="3000" height="3000" data-src="https://kyfolio.b-cdn.net/_Play/cowboy-man.jpg" alt="Cowboy Man"></div>
-  <div class="pg-item reveal" data-title="Don't Smoke" data-src="https://kyfolio.b-cdn.net/_Play/dont-smoke-painting.jpg"><img class="pg-visual" width="2448" height="2448" data-src="https://kyfolio.b-cdn.net/_Play/dont-smoke-painting.jpg" alt="Don't Smoke"></div>
-  <div class="pg-item reveal" data-title="Flybox Space Portal" data-src="https://kyfolio.b-cdn.net/_Play/flybox-space-portal.jpg"><img class="pg-visual" width="1727" height="2315" data-src="https://kyfolio.b-cdn.net/_Play/flybox-space-portal.jpg" alt="Flybox Space Portal"></div>
-  <div class="pg-item reveal" data-title="Moon Man" data-src="https://kyfolio.b-cdn.net/_Play/moon-man.jpg"><img class="pg-visual" width="3000" height="3000" data-src="https://kyfolio.b-cdn.net/_Play/moon-man.jpg" alt="Moon Man"></div>
-  <div class="pg-item reveal" data-title="Pink Mask" data-src="https://kyfolio.b-cdn.net/_Play/pink-mask-creature.jpg"><img class="pg-visual" width="1536" height="1641" data-src="https://kyfolio.b-cdn.net/_Play/pink-mask-creature.jpg" alt="Pink Mask"></div>
-  <div class="pg-item reveal" data-title="Gas Can Sky" data-src="https://kyfolio.b-cdn.net/_Play/gas-can-sky.jpg"><img class="pg-visual" width="2500" height="3134" data-src="https://kyfolio.b-cdn.net/_Play/gas-can-sky.jpg" alt="Gas Can Sky"></div>
-  <div class="pg-item reveal" data-title="Collage Portrait Gold" data-src="https://kyfolio.b-cdn.net/_Play/collage-portrait-gold.jpg"><img class="pg-visual" width="2843" height="3751" data-src="https://kyfolio.b-cdn.net/_Play/collage-portrait-gold.jpg" alt="Collage Portrait Gold"></div>
-  <div class="pg-item reveal" data-title="Love Me" data-src="https://kyfolio.b-cdn.net/_Play/love-me-yellow.jpg"><img class="pg-visual" width="2000" height="1987" data-src="https://kyfolio.b-cdn.net/_Play/love-me-yellow.jpg" alt="Love Me"></div>
-  <div class="pg-item reveal" data-title="Moonface Collage" data-src="https://kyfolio.b-cdn.net/_Play/moonface-collage.jpg"><img class="pg-visual" width="1469" height="1353" data-src="https://kyfolio.b-cdn.net/_Play/moonface-collage.jpg" alt="Moonface Collage"></div>
-  <div class="pg-item reveal" data-title="Purple Collage" data-src="https://kyfolio.b-cdn.net/_Play/purple-collage.jpg"><img class="pg-visual" width="2575" height="3227" data-src="https://kyfolio.b-cdn.net/_Play/purple-collage.jpg" alt="Purple Collage"></div>
-  <div class="pg-item reveal" data-title="Orange Strongman" data-src="https://kyfolio.b-cdn.net/_Play/orange-strongman.jpg"><img class="pg-visual" width="3000" height="3000" data-src="https://kyfolio.b-cdn.net/_Play/orange-strongman.jpg" alt="Orange Strongman"></div>
-  <div class="pg-item reveal" data-title="Portrait Banner" data-src="https://kyfolio.b-cdn.net/_Play/portrait-banner-outdoor.jpg"><img class="pg-visual" width="3294" height="3719" data-src="https://kyfolio.b-cdn.net/_Play/portrait-banner-outdoor.jpg" alt="Portrait Banner"></div>
-  <div class="pg-item reveal" data-title="Iridescent Starburst" data-src="https://kyfolio.b-cdn.net/_Play/iridescent-starburst.jpg"><img class="pg-visual" width="2500" height="1406" data-src="https://kyfolio.b-cdn.net/_Play/iridescent-starburst.jpg" alt="Iridescent Starburst"></div>
-  <div class="pg-item reveal" data-title="Prismatic Glass" data-src="https://kyfolio.b-cdn.net/_Play/prismatic-glass.jpg"><img class="pg-visual" width="2500" height="1406" data-src="https://kyfolio.b-cdn.net/_Play/prismatic-glass.jpg" alt="Prismatic Glass"></div>
-  <div class="pg-item reveal" data-title="Spaceman Planets" data-src="https://kyfolio.b-cdn.net/_Play/spaceman-planets.jpg"><img class="pg-visual" width="3057" height="4000" data-src="https://kyfolio.b-cdn.net/_Play/spaceman-planets.jpg" alt="Spaceman Planets"></div>
-  <div class="pg-item reveal" data-title="Blue Figure Studio" data-src="https://kyfolio.b-cdn.net/_Play/blue-figure-studio.jpg"><img class="pg-visual" width="3264" height="2448" data-src="https://kyfolio.b-cdn.net/_Play/blue-figure-studio.jpg" alt="Blue Figure Studio"></div>
-  <div class="pg-item reveal" data-title="Piano Night" data-src="https://kyfolio.b-cdn.net/_Play/piano-night.jpg"><img class="pg-visual" width="2844" height="1600" data-src="https://kyfolio.b-cdn.net/_Play/piano-night.jpg" alt="Piano Night"></div>
-  <div class="pg-item reveal" data-title="Colorful TV Woman" data-src="https://kyfolio.b-cdn.net/_Play/colorful-tv-woman.jpg"><img class="pg-visual" width="2000" height="1440" data-src="https://kyfolio.b-cdn.net/_Play/colorful-tv-woman.jpg" alt="Colorful TV Woman"></div>
-  <div class="pg-item reveal" data-title="Split Face" data-src="https://kyfolio.b-cdn.net/_Play/split-face-painting.jpg"><img class="pg-visual" width="2400" height="2400" data-src="https://kyfolio.b-cdn.net/_Play/split-face-painting.jpg" alt="Split Face"></div>
-  <div class="pg-item reveal" data-title="Striped Gold Face" data-src="https://kyfolio.b-cdn.net/_Play/striped-gold-face.jpg"><img class="pg-visual" width="2251" height="2829" data-src="https://kyfolio.b-cdn.net/_Play/striped-gold-face.jpg" alt="Striped Gold Face"></div>
-  <div class="pg-item reveal" data-title="Liquid Chrome Moon" data-src="https://kyfolio.b-cdn.net/_Play/liquid-chrome-moon.jpg"><img class="pg-visual" width="1050" height="1350" data-src="https://kyfolio.b-cdn.net/_Play/liquid-chrome-moon.jpg" alt="Liquid Chrome Moon"></div>
-  <div class="pg-item reveal" data-title="Planet Character" data-src="https://kyfolio.b-cdn.net/_Play/planet-character.png"><img class="pg-visual" width="1080" height="1350" data-src="https://kyfolio.b-cdn.net/_Play/planet-character.png" alt="Planet Character"></div>
-  <div class="pg-item reveal" data-title="Black Swirl" data-src="https://kyfolio.b-cdn.net/_Play/black-swirl.jpg"><img class="pg-visual" width="2500" height="1408" data-src="https://kyfolio.b-cdn.net/_Play/black-swirl.jpg" alt="Black Swirl"></div>
-  <div class="pg-item reveal" data-title="Warm Gradient" data-src="https://kyfolio.b-cdn.net/_Play/warm-gradient-curve.jpg"><img class="pg-visual" width="2500" height="1406" data-src="https://kyfolio.b-cdn.net/_Play/warm-gradient-curve.jpg" alt="Warm Gradient"></div>
-  <div class="pg-item reveal" data-title="TugBoat" data-src="https://kyfolio.b-cdn.net/_Play/TugBoat.jpg"><img class="pg-visual" width="1000" height="1000" data-src="https://kyfolio.b-cdn.net/_Play/TugBoat.jpg" alt="TugBoat"></div>
-  <div class="pg-item reveal" data-title="Use Your Heart" data-src="https://kyfolio.b-cdn.net/_Play/use-your-heart-sign.jpg"><img class="pg-visual" width="2500" height="3107" data-src="https://kyfolio.b-cdn.net/_Play/use-your-heart-sign.jpg" alt="Use Your Heart"></div>
-  <div class="pg-item reveal" data-title="Mycology Tiedye" data-src="https://kyfolio.b-cdn.net/_Play/mycology-tiedye-flag.jpg"><img class="pg-visual" width="2500" height="1563" data-src="https://kyfolio.b-cdn.net/_Play/mycology-tiedye-flag.jpg" alt="Mycology Tiedye"></div>
-  <div class="pg-item reveal" data-title="Warm Gradient Rod" data-src="https://kyfolio.b-cdn.net/_Play/warm-gradient-rod.jpg"><img class="pg-visual" width="2277" height="2160" data-src="https://kyfolio.b-cdn.net/_Play/warm-gradient-rod.jpg" alt="Warm Gradient Rod"></div>
+  <div class="pg-item reveal" data-title="Blue Spiral Neon" data-src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png"><img class="pg-visual" width="1800" height="3600" src="https://kyfolio.b-cdn.net/_Play/blue-spiral-neon.png" loading="lazy" alt="Blue Spiral Neon"></div>
+  <div class="pg-item reveal" data-title="Chromatic Chain" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.mp4"><video class="pg-visual" width="500" height="500" src="https://kyfolio.b-cdn.net/_Play/chromatic-chain.mp4" autoplay muted loop playsinline preload="none"></video></div>
+  <div class="pg-item reveal" data-title="Chromatic Orb" data-src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg"><img class="pg-visual" width="1080" height="1080" src="https://kyfolio.b-cdn.net/_Play/chromatic-orb.jpg" loading="lazy" alt="Chromatic Orb"></div>
+  <div class="pg-item reveal" data-title="Blue Moon Face" data-src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png"><img class="pg-visual" width="300" height="348" src="https://kyfolio.b-cdn.net/_Play/blue-moon-face.png" loading="lazy" alt="Blue Moon Face"></div>
+  <div class="pg-item reveal" data-title="If You Wish" data-src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg"><img class="pg-visual" width="2500" height="3406" src="https://kyfolio.b-cdn.net/_Play/if-you-wish-arches.jpg" loading="lazy" alt="If You Wish"></div>
+  <div class="pg-item reveal" data-title="Globby Eyes" data-src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.mp4"><video class="pg-visual" width="800" height="800" src="https://kyfolio.b-cdn.net/_Play/globby-eyes-space.mp4" autoplay muted loop playsinline preload="none"></video></div>
+  <div class="pg-item reveal" data-title="Bird Warrior" data-src="https://kyfolio.b-cdn.net/_Play/bird-warrior.mp4"><video class="pg-visual" width="600" height="600" src="https://kyfolio.b-cdn.net/_Play/bird-warrior.mp4" autoplay muted loop playsinline preload="none"></video></div>
+  <div class="pg-item reveal" data-title="Collage Portrait" data-src="https://kyfolio.b-cdn.net/_Play/collage-portrait-blue.jpg"><img class="pg-visual" width="4000" height="3184" src="https://kyfolio.b-cdn.net/_Play/collage-portrait-blue.jpg" loading="lazy" alt="Collage Portrait"></div>
+  <div class="pg-item reveal" data-title="Marble Spheres" data-src="https://kyfolio.b-cdn.net/_Play/marble-spheres.jpg"><img class="pg-visual" width="4000" height="2233" src="https://kyfolio.b-cdn.net/_Play/marble-spheres.jpg" loading="lazy" alt="Marble Spheres"></div>
+  <div class="pg-item reveal" data-title="Fall in Love" data-src="https://kyfolio.b-cdn.net/_Play/fall-in-love-chrome.jpg"><img class="pg-visual" width="1280" height="1170" src="https://kyfolio.b-cdn.net/_Play/fall-in-love-chrome.jpg" loading="lazy" alt="Fall in Love"></div>
+  <div class="pg-item reveal" data-title="Peeking Over the Fence" data-src="https://kyfolio.b-cdn.net/_Play/peeking-over-fence.jpg"><img class="pg-visual" width="4000" height="2131" src="https://kyfolio.b-cdn.net/_Play/peeking-over-fence.jpg" loading="lazy" alt="Peeking Over the Fence"></div>
+  <div class="pg-item reveal" data-title="Blue Abstract" data-src="https://kyfolio.b-cdn.net/_Play/blue-abstract-framed.jpg"><img class="pg-visual" width="5611" height="3579" src="https://kyfolio.b-cdn.net/_Play/blue-abstract-framed.jpg" loading="lazy" alt="Blue Abstract"></div>
+  <div class="pg-item reveal" data-title="Art4All Poster" data-src="https://kyfolio.b-cdn.net/_Play/art4all-poster.jpg"><img class="pg-visual" width="2500" height="3235" src="https://kyfolio.b-cdn.net/_Play/art4all-poster.jpg" loading="lazy" alt="Art4All Poster"></div>
+  <div class="pg-item reveal" data-title="Dino Boy — Clay" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-clay.jpg"><img class="pg-visual" width="2500" height="1667" src="https://kyfolio.b-cdn.net/_Play/dino-boy-clay.jpg" loading="lazy" alt="Dino Boy Clay"></div>
+  <div class="pg-item reveal" data-title="Dino Boy — Lit" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-lit.jpg"><img class="pg-visual" width="2500" height="643" src="https://kyfolio.b-cdn.net/_Play/dino-boy-lit.jpg" loading="lazy" alt="Dino Boy Lit"></div>
+  <div class="pg-item reveal" data-title="Dino Boy — Sketch" data-src="https://kyfolio.b-cdn.net/_Play/dino-boy-sketch.jpg"><img class="pg-visual" width="2500" height="2425" src="https://kyfolio.b-cdn.net/_Play/dino-boy-sketch.jpg" loading="lazy" alt="Dino Boy Sketch"></div>
+  <div class="pg-item reveal" data-title="Belonging Arch Poster" data-src="https://kyfolio.b-cdn.net/_Play/belonging-arch-poster.jpg"><img class="pg-visual" width="2500" height="3406" src="https://kyfolio.b-cdn.net/_Play/belonging-arch-poster.jpg" loading="lazy" alt="Belonging Arch Poster"></div>
+  <div class="pg-item reveal" data-title="Mycology Club" data-src="https://kyfolio.b-cdn.net/_Play/mycology-club-print.jpg"><img class="pg-visual" width="5296" height="3370" src="https://kyfolio.b-cdn.net/_Play/mycology-club-print.jpg" loading="lazy" alt="Mycology Club"></div>
+  <div class="pg-item reveal" data-title="Cowboy Man" data-src="https://kyfolio.b-cdn.net/_Play/cowboy-man.jpg"><img class="pg-visual" width="3000" height="3000" src="https://kyfolio.b-cdn.net/_Play/cowboy-man.jpg" loading="lazy" alt="Cowboy Man"></div>
+  <div class="pg-item reveal" data-title="Don't Smoke" data-src="https://kyfolio.b-cdn.net/_Play/dont-smoke-painting.jpg"><img class="pg-visual" width="2448" height="2448" src="https://kyfolio.b-cdn.net/_Play/dont-smoke-painting.jpg" loading="lazy" alt="Don't Smoke"></div>
+  <div class="pg-item reveal" data-title="Flybox Space Portal" data-src="https://kyfolio.b-cdn.net/_Play/flybox-space-portal.jpg"><img class="pg-visual" width="1727" height="2315" src="https://kyfolio.b-cdn.net/_Play/flybox-space-portal.jpg" loading="lazy" alt="Flybox Space Portal"></div>
+  <div class="pg-item reveal" data-title="Moon Man" data-src="https://kyfolio.b-cdn.net/_Play/moon-man.jpg"><img class="pg-visual" width="3000" height="3000" src="https://kyfolio.b-cdn.net/_Play/moon-man.jpg" loading="lazy" alt="Moon Man"></div>
+  <div class="pg-item reveal" data-title="Pink Mask" data-src="https://kyfolio.b-cdn.net/_Play/pink-mask-creature.jpg"><img class="pg-visual" width="1536" height="1641" src="https://kyfolio.b-cdn.net/_Play/pink-mask-creature.jpg" loading="lazy" alt="Pink Mask"></div>
+  <div class="pg-item reveal" data-title="Gas Can Sky" data-src="https://kyfolio.b-cdn.net/_Play/gas-can-sky.jpg"><img class="pg-visual" width="2500" height="3134" src="https://kyfolio.b-cdn.net/_Play/gas-can-sky.jpg" loading="lazy" alt="Gas Can Sky"></div>
+  <div class="pg-item reveal" data-title="Collage Portrait Gold" data-src="https://kyfolio.b-cdn.net/_Play/collage-portrait-gold.jpg"><img class="pg-visual" width="2843" height="3751" src="https://kyfolio.b-cdn.net/_Play/collage-portrait-gold.jpg" loading="lazy" alt="Collage Portrait Gold"></div>
+  <div class="pg-item reveal" data-title="Love Me" data-src="https://kyfolio.b-cdn.net/_Play/love-me-yellow.jpg"><img class="pg-visual" width="2000" height="1987" src="https://kyfolio.b-cdn.net/_Play/love-me-yellow.jpg" loading="lazy" alt="Love Me"></div>
+  <div class="pg-item reveal" data-title="Moonface Collage" data-src="https://kyfolio.b-cdn.net/_Play/moonface-collage.jpg"><img class="pg-visual" width="1469" height="1353" src="https://kyfolio.b-cdn.net/_Play/moonface-collage.jpg" loading="lazy" alt="Moonface Collage"></div>
+  <div class="pg-item reveal" data-title="Purple Collage" data-src="https://kyfolio.b-cdn.net/_Play/purple-collage.jpg"><img class="pg-visual" width="2575" height="3227" src="https://kyfolio.b-cdn.net/_Play/purple-collage.jpg" loading="lazy" alt="Purple Collage"></div>
+  <div class="pg-item reveal" data-title="Orange Strongman" data-src="https://kyfolio.b-cdn.net/_Play/orange-strongman.jpg"><img class="pg-visual" width="3000" height="3000" src="https://kyfolio.b-cdn.net/_Play/orange-strongman.jpg" loading="lazy" alt="Orange Strongman"></div>
+  <div class="pg-item reveal" data-title="Portrait Banner" data-src="https://kyfolio.b-cdn.net/_Play/portrait-banner-outdoor.jpg"><img class="pg-visual" width="3294" height="3719" src="https://kyfolio.b-cdn.net/_Play/portrait-banner-outdoor.jpg" loading="lazy" alt="Portrait Banner"></div>
+  <div class="pg-item reveal" data-title="Iridescent Starburst" data-src="https://kyfolio.b-cdn.net/_Play/iridescent-starburst.jpg"><img class="pg-visual" width="2500" height="1406" src="https://kyfolio.b-cdn.net/_Play/iridescent-starburst.jpg" loading="lazy" alt="Iridescent Starburst"></div>
+  <div class="pg-item reveal" data-title="Prismatic Glass" data-src="https://kyfolio.b-cdn.net/_Play/prismatic-glass.jpg"><img class="pg-visual" width="2500" height="1406" src="https://kyfolio.b-cdn.net/_Play/prismatic-glass.jpg" loading="lazy" alt="Prismatic Glass"></div>
+  <div class="pg-item reveal" data-title="Spaceman Planets" data-src="https://kyfolio.b-cdn.net/_Play/spaceman-planets.jpg"><img class="pg-visual" width="3057" height="4000" src="https://kyfolio.b-cdn.net/_Play/spaceman-planets.jpg" loading="lazy" alt="Spaceman Planets"></div>
+  <div class="pg-item reveal" data-title="Blue Figure Studio" data-src="https://kyfolio.b-cdn.net/_Play/blue-figure-studio.jpg"><img class="pg-visual" width="3264" height="2448" src="https://kyfolio.b-cdn.net/_Play/blue-figure-studio.jpg" loading="lazy" alt="Blue Figure Studio"></div>
+  <div class="pg-item reveal" data-title="Piano Night" data-src="https://kyfolio.b-cdn.net/_Play/piano-night.jpg"><img class="pg-visual" width="2844" height="1600" src="https://kyfolio.b-cdn.net/_Play/piano-night.jpg" loading="lazy" alt="Piano Night"></div>
+  <div class="pg-item reveal" data-title="Colorful TV Woman" data-src="https://kyfolio.b-cdn.net/_Play/colorful-tv-woman.jpg"><img class="pg-visual" width="2000" height="1440" src="https://kyfolio.b-cdn.net/_Play/colorful-tv-woman.jpg" loading="lazy" alt="Colorful TV Woman"></div>
+  <div class="pg-item reveal" data-title="Split Face" data-src="https://kyfolio.b-cdn.net/_Play/split-face-painting.jpg"><img class="pg-visual" width="2400" height="2400" src="https://kyfolio.b-cdn.net/_Play/split-face-painting.jpg" loading="lazy" alt="Split Face"></div>
+  <div class="pg-item reveal" data-title="Striped Gold Face" data-src="https://kyfolio.b-cdn.net/_Play/striped-gold-face.jpg"><img class="pg-visual" width="2251" height="2829" src="https://kyfolio.b-cdn.net/_Play/striped-gold-face.jpg" loading="lazy" alt="Striped Gold Face"></div>
+  <div class="pg-item reveal" data-title="Liquid Chrome Moon" data-src="https://kyfolio.b-cdn.net/_Play/liquid-chrome-moon.jpg"><img class="pg-visual" width="1050" height="1350" src="https://kyfolio.b-cdn.net/_Play/liquid-chrome-moon.jpg" loading="lazy" alt="Liquid Chrome Moon"></div>
+  <div class="pg-item reveal" data-title="Planet Character" data-src="https://kyfolio.b-cdn.net/_Play/planet-character.png"><img class="pg-visual" width="1080" height="1350" src="https://kyfolio.b-cdn.net/_Play/planet-character.png" loading="lazy" alt="Planet Character"></div>
+  <div class="pg-item reveal" data-title="Black Swirl" data-src="https://kyfolio.b-cdn.net/_Play/black-swirl.jpg"><img class="pg-visual" width="2500" height="1408" src="https://kyfolio.b-cdn.net/_Play/black-swirl.jpg" loading="lazy" alt="Black Swirl"></div>
+  <div class="pg-item reveal" data-title="Warm Gradient" data-src="https://kyfolio.b-cdn.net/_Play/warm-gradient-curve.jpg"><img class="pg-visual" width="2500" height="1406" src="https://kyfolio.b-cdn.net/_Play/warm-gradient-curve.jpg" loading="lazy" alt="Warm Gradient"></div>
+  <div class="pg-item reveal" data-title="TugBoat" data-src="https://kyfolio.b-cdn.net/_Play/TugBoat.jpg"><img class="pg-visual" width="1000" height="1000" src="https://kyfolio.b-cdn.net/_Play/TugBoat.jpg" loading="lazy" alt="TugBoat"></div>
+  <div class="pg-item reveal" data-title="Use Your Heart" data-src="https://kyfolio.b-cdn.net/_Play/use-your-heart-sign.jpg"><img class="pg-visual" width="2500" height="3107" src="https://kyfolio.b-cdn.net/_Play/use-your-heart-sign.jpg" loading="lazy" alt="Use Your Heart"></div>
+  <div class="pg-item reveal" data-title="Mycology Tiedye" data-src="https://kyfolio.b-cdn.net/_Play/mycology-tiedye-flag.jpg"><img class="pg-visual" width="2500" height="1563" src="https://kyfolio.b-cdn.net/_Play/mycology-tiedye-flag.jpg" loading="lazy" alt="Mycology Tiedye"></div>
+  <div class="pg-item reveal" data-title="Warm Gradient Rod" data-src="https://kyfolio.b-cdn.net/_Play/warm-gradient-rod.jpg"><img class="pg-visual" width="2277" height="2160" src="https://kyfolio.b-cdn.net/_Play/warm-gradient-rod.jpg" loading="lazy" alt="Warm Gradient Rod"></div>
 </div>
 
 <!-- FOOTER -->
@@ -620,14 +533,6 @@ document.querySelectorAll('a, button, .pg-item').forEach(el => {
   el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
 });
 
-// ─── MENU OVERLAY ───
-const menuBtn = document.getElementById('menuBtn');
-const menuOverlay = document.getElementById('menuOverlay');
-const menuClose = document.getElementById('menuClose');
-
-menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
-menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
-
 // ─── SCROLL REVEAL ───
 const revealEls = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver(entries => {
@@ -637,27 +542,7 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
 revealEls.forEach(el => revealObserver.observe(el));
 
-// ─── LAZY LOAD (unfurl from the top) ───
-// Each .pg-visual reserves its box via width/height attrs, so the gallery
-// has its full height immediately. We only fetch a visual's Bunny URL once
-// it nears the viewport, so images load top-down as you scroll.
-const lazyObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const el = entry.target;
-    if (entry.isIntersecting) {
-      if (el.dataset.src && !el.getAttribute('src')) {
-        const done = () => el.classList.add('loaded');
-        el.addEventListener(el.tagName === 'VIDEO' ? 'loadeddata' : 'load', done, { once: true });
-        el.addEventListener('error', done, { once: true });
-        el.setAttribute('src', el.dataset.src);
-      }
-      if (el.tagName === 'VIDEO') el.play().catch(() => {});
-    } else if (el.tagName === 'VIDEO') {
-      el.pause();
-    }
-  });
-}, { rootMargin: '400px 0px', threshold: 0.01 });
-document.querySelectorAll('.pg-visual[data-src]').forEach(el => lazyObserver.observe(el));
+
 
 // ─── LIGHTBOX ───
 const lightbox    = document.getElementById('lightbox');
