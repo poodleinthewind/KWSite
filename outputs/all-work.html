@@ -2,258 +2,178 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <meta name="robots" content="noai, noimageai">
+<meta name="robots" content="noai, noimageai">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<title>Archive — Kyle Watson</title>
+<title>Work — Kyle Watson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
 :root {
-  --bg: #f6f3ec; --bg-elevated: #edeae3; --bg-card: #e8e5de;
-  --text-primary: #010103; --text-secondary: #555555; --text-dim: #999999;
-  --accent: #010103; --border: #d4d0c8;
+  --bg: #f6f3ec;
+  --text-primary: #010103;
+  --text-secondary: #555555;
+  --text-dim: #999999;
+  --border: #d4d0c8;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-mono: 'Space Grotesk', monospace;
+  --font-mono: 'Space Grotesk', sans-serif;
 }
-html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #c4c0b8 var(--bg); background: var(--bg); }
-body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-::selection { background: var(--accent); color: var(--bg); }
 
-/* ─── CURSOR ─── */
-.custom-cursor { width: 10px; height: 10px; border: 1.5px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.15s ease, width 0.25s ease, height 0.25s ease; mix-blend-mode: difference; }
-.custom-cursor.hover { width: 36px; height: 36px; }
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--text-primary); color: var(--bg); }
 
 /* ─── NAV ─── */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: difference; }
-.nav-name { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; text-decoration: none; }
-.nav-menu-btn { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; padding: 0; }
-
-/* ─── FULLSCREEN MENU ─── */
-.menu-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 800; display: flex; flex-direction: column; align-items: flex-end; padding: 5rem 3rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-.menu-overlay.open { opacity: 1; pointer-events: all; }
-.menu-close { position: absolute; top: 1.6rem; right: 3rem; background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); }
-.menu-close:hover { color: var(--text-primary); }
-.menu-links { list-style: none; margin-top: auto; margin-bottom: auto; }
-.menu-link { display: block; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; line-height: 1.15; text-align: right; transition: color 0.3s ease, padding-right 0.3s ease; }
-.menu-link:hover { color: #f4845f; padding-right: 1rem; }
-
-/* ─── PAGE HEADER ─── */
-.page-header {
-  padding: 10rem 3rem 4rem;
-  border-bottom: 1px solid var(--border);
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  padding: 1.6rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg);
 }
-.page-header-label {
+
+.nav-name {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.nav-links { display: flex; gap: 2rem; }
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-link:hover { opacity: 0.5; }
+.nav-link.active { opacity: 0.4; }
+
+/* ─── PAGE ─── */
+.page-wrap {
+  padding: 9rem 3rem 6rem;
+  max-width: 1100px;
+}
+
+.page-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-dim);
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.page-header-label a {
-  color: var(--text-dim);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-.page-header-label a:hover { color: var(--text-secondary); }
-.page-header-label .sep { opacity: 0.3; }
-.page-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 3rem);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin-bottom: 2rem;
-}
-.page-desc {
-  max-width: 600px;
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  font-weight: 300;
+  margin-bottom: 3rem;
 }
 
-/* ─── FILTER BAR ─── */
-.filter-bar {
-  padding: 1.5rem 3rem;
-  display: flex;
-  gap: 0.5rem;
-  border-bottom: 1px solid var(--border);
-  align-items: center;
+/* ─── PROJECT LIST ─── */
+.project-list {
+  list-style: none;
+  border-top: 1px solid var(--border);
 }
-.filter-btn {
+
+.project-row {
+  border-bottom: 1px solid var(--border);
+}
+
+.project-row a {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: opacity 0.15s;
+}
+
+.project-row a:hover { opacity: 0.5; }
+
+.project-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  padding-top: 0.15em;
+}
+
+.project-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.project-meta {
+  display: flex;
+  gap: 2rem;
+  align-items: baseline;
+  text-align: right;
+}
+
+.project-client {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.project-discipline {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 0.35rem 0.85rem;
-  border-radius: 2px;
-  border: 1px solid transparent;
-  background: transparent;
   color: var(--text-dim);
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-.filter-btn:hover { color: var(--text-secondary); border-color: var(--border); }
-.filter-btn.active { color: var(--text-primary); border-color: var(--text-dim); }
-
-/* ─── PROJECTS GRID — same 12-col system as homepage ─── */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 0.75rem;
-  padding: 0.75rem 0.75rem 8rem;
+  min-width: 10rem;
+  text-align: right;
 }
 
-.project-card {
-  position: relative;
+/* ─── HOVER THUMBNAIL ─── */
+.thumb-follow {
+  position: fixed;
+  pointer-events: none;
+  z-index: 900;
+  width: 260px;
+  aspect-ratio: 16/10;
   overflow: hidden;
-  cursor: pointer;
-  border-radius: 3px;
-  background: var(--bg-card);
-  min-height: 0;
-  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  transform: translate(-50%, -50%);
+}
+
+.thumb-follow img,
+.thumb-follow video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  color: var(--text-primary);
-}
-.project-card.size-large  { grid-column: span 7; aspect-ratio: 16/10; }
-.project-card.size-medium { grid-column: span 5; aspect-ratio: 4/3; }
-.project-card.size-small  { grid-column: span 6; aspect-ratio: 16/10; }
-.project-card.size-wide   { grid-column: span 12; aspect-ratio: 21/7; }
-
-/* 3-wide asymmetric at large screens */
-@media (min-width: 1400px) {
-  .projects-grid {
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: auto;
-  }
-  /* Reset all cards to small by default */
-  .project-card.size-large,
-  .project-card.size-medium,
-  .project-card.size-small {
-    grid-column: span 3;
-    aspect-ratio: 16/10;
-  }
-  /* Row 1 pattern: large + small + small (1st of every 9) */
-  .projects-grid .project-card:nth-child(9n+1) {
-    grid-column: span 6;
-    aspect-ratio: 16/8;
-  }
-  /* Row 2 pattern: small + large + small (5th of every 9) */
-  .projects-grid .project-card:nth-child(9n+5) {
-    grid-column: span 6;
-    aspect-ratio: 16/8;
-  }
-  /* Row 3 pattern: small + small + large (9th of every 9, i.e. 9n) */
-  .projects-grid .project-card:nth-child(9n) {
-    grid-column: span 6;
-    aspect-ratio: 16/8;
-  }
-  .project-card.size-wide {
-    grid-column: span 12;
-  }
+  position: absolute;
+  inset: 0;
 }
 
-.project-visual { width: 100%; height: 100%; position: absolute; inset: 0; transition: transform 0.9s cubic-bezier(0.16,1,0.3,1); overflow: hidden; }
-.project-card:hover .project-visual { transform: scale(1.04); }
+.thumb-follow.visible { opacity: 1; }
 
-.shape { position: absolute; border-radius: 50%; filter: blur(50px); opacity: 0.45; animation: float 9s ease-in-out infinite; }
-
-/* Visual themes per project */
-.pv-1  .shape { width: 220px; height: 220px; background: #1e3a5f; top: 15%; right: 10%; }
-.pv-2  .shape { width: 260px; height: 160px; background: #11998e; bottom: 10%; left: 15%; animation-delay: -2s; }
-.pv-3  .shape { width: 190px; height: 190px; background: #1a5a30; top: 30%; left: 35%; animation-delay: -4s; }
-.pv-4  .shape { width: 230px; height: 170px; background: #5a1a8a; bottom: 20%; right: 20%; animation-delay: -1s; }
-.pv-5  .shape { width: 210px; height: 210px; background: #0055aa; top: 15%; right: 20%; animation-delay: -3s; }
-.pv-6  .shape { width: 250px; height: 180px; background: #7a1a3a; top: 25%; left: 15%; animation-delay: -5s; }
-.pv-7  .shape { width: 240px; height: 180px; background: #1c2b4a; bottom: 15%; right: 15%; animation-delay: -6s; }
-.pv-8  .shape { width: 200px; height: 200px; background: #1a1a1a; top: 20%; left: 20%; animation-delay: -7s; }
-.pv-9  .shape { width: 230px; height: 160px; background: #5a1010; top: 30%; right: 25%; animation-delay: -0.5s; }
-.pv-10 .shape { width: 220px; height: 190px; background: #0a2040; bottom: 25%; left: 10%; animation-delay: -2.5s; }
-.pv-11 .shape { width: 260px; height: 170px; background: #5c1010; top: 15%; left: 30%; animation-delay: -4.5s; }
-
-@keyframes float {
-  0%, 100% { transform: translate(0,0) scale(1); }
-  33% { transform: translate(12px,-8px) scale(1.04); }
-  66% { transform: translate(-8px,12px) scale(0.96); }
-}
-
-.project-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.05) 50%, transparent 100%);
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 2rem; z-index: 2;
-}
-.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
-.project-tag {
-  font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em;
-  text-transform: uppercase; font-weight: 500;
-  background: linear-gradient(90deg, #f4845f 0%, #e8637a 100%);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
-  border: 1px solid rgba(244,132,95,0.3);
-  padding: 0.3rem 0.75rem; border-radius: 2px;
-}
-.project-title { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.3rem; color: #fff; }
-.project-card.size-large .project-title { font-size: clamp(1.2rem, 2.5vw, 2rem); }
-.project-client { font-size: 0.78rem; color: rgba(255,255,255,0.7); font-weight: 300; }
-
-.project-index { position: absolute; top: 1.5rem; left: 1.5rem; font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; z-index: 3; }
-.project-arrow { position: absolute; top: 1.5rem; right: 1.5rem; width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(4px); transition: all 0.3s ease; z-index: 3; }
-.project-arrow svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.project-card:hover .project-arrow { opacity: 1; transform: translateY(0); }
-
-/* THUMBNAIL & HOVER VIDEO */
-.project-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-.project-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; opacity: 0; transition: opacity 0.4s ease; }
-.project-card:hover .project-video { opacity: 1; }
-
-/* Hidden when filtered out */
-.project-card.hidden { display: none; }
-
-/* ─── FOOTER ─── */
-.footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-.footer-copy { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--text-dim); }
-.footer-links { display: flex; gap: 2rem; }
-.footer-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--text-dim); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
-.footer-links a:hover { color: var(--text-primary); }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 1200px) {
-  .project-card.size-large, .project-card.size-medium, .project-card.size-small { grid-column: span 6; aspect-ratio: 4/3; min-height: auto; }
-  .project-card.size-wide { grid-column: span 12; }
-}
-@media (max-width: 768px) {
-  :root {
-    --bg: #0a0a0a; --bg-elevated: #141414; --bg-card: #1a1a1a;
-    --text-primary: #e8e8e8; --text-secondary: #888888; --text-dim: #444444;
-    --accent: #e8e8e8; --border: #222222;
-  }
-  html { background: var(--bg); scrollbar-color: #333 var(--bg); }
-  body { background: var(--bg); }
-  ::selection { background: var(--accent); color: var(--bg); }
-  .filter-btn { border-color: #333; color: var(--text-secondary); }
-  .filter-btn:hover, .filter-btn.active { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
-  .project-title { color: #fff; }
-  .project-client { color: rgba(255,255,255,0.7); }
+@media (max-width: 700px) {
+  .page-wrap { padding: 7rem 1.5rem 4rem; }
   nav { padding: 1.2rem 1.5rem; }
-  .page-header { padding: 6rem 1.5rem 2rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
-  /* filter bar: horizontally scrollable, no wrap */
-  .filter-bar { padding: 1rem 1.5rem; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 0.4rem; }
-  .filter-bar::-webkit-scrollbar { display: none; }
-  .filter-btn { white-space: nowrap; padding: 0.6rem 1.2rem; font-size: 0.65rem; flex-shrink: 0; }
-  .projects-grid { padding: 0.5rem 0.5rem 4rem; gap: 0.5rem; }
-  .project-card.size-large, .project-card.size-medium, .project-card.size-small { grid-column: span 12; aspect-ratio: 4/3; }
-  .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
-  .custom-cursor { display: none; }
-  .project-tags { display: none; }
+  .project-meta { display: none; }
+  .project-row a { grid-template-columns: 2.5rem 1fr; gap: 1rem; }
+  .thumb-follow { display: none; }
 }
 </style>
   <script defer src="/_vercel/insights/script.js"></script>
@@ -261,357 +181,259 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 
 </head>
 <body>
 
-<div class="custom-cursor" id="cursor"></div>
-
 <nav>
   <a href="index.html" class="nav-name">KYLE WATSON</a>
-  <button class="nav-menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
+  <div class="nav-links">
+    <a href="all-work.html" class="nav-link active">Work</a>
+    <a href="play.html" class="nav-link">Play</a>
+    <a href="index.html" class="nav-link">About</a>
+  </div>
 </nav>
 
-<div class="menu-overlay" id="menuOverlay">
-  <button class="menu-close" id="menuClose" aria-label="Close menu">CLOSE</button>
-  <div class="menu-content">
-    <ul class="menu-links">
-      <li><a href="index.html#work" class="menu-link">Work</a></li>
-      <li><a href="all-work.html" class="menu-link">Archive</a></li>
-      <li><a href="play.html" class="menu-link">Play</a></li>
-      <li><a href="labs.html" class="menu-link">Labs</a></li>
-      <li><a href="index.html#about" class="menu-link">About</a></li>
-      <li><a href="index.html#contact" class="menu-link">Contact</a></li>
+<div class="thumb-follow" id="thumbFollow">
+  <img id="thumbImg" src="" alt="">
+  <video id="thumbVid" muted loop playsinline preload="none"></video>
+</div>
+
+<main>
+  <div class="page-wrap">
+    <p class="page-label">Selected Work</p>
+
+    <ul class="project-list" id="projectList">
+
+      <li class="project-row">
+        <a href="project-coreweave-aston-martin.html"
+           data-thumb="https://kyfolio.b-cdn.net/010_Coreweave/video/thumb.jpg"
+           data-video="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4">
+          <span class="project-num">01</span>
+          <span class="project-name">CoreWeave × Aston Martin F1</span>
+          <span class="project-meta">
+            <span class="project-client">CoreWeave</span>
+            <span class="project-discipline">Generative AI, 3D</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-moonvalley-marey.html"
+           data-thumb="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg"
+           data-video="https://kyfolio.b-cdn.net/020_Marey/video/marey_launch_v1.mp4">
+          <span class="project-num">02</span>
+          <span class="project-name">Marey</span>
+          <span class="project-meta">
+            <span class="project-client">Moonvalley</span>
+            <span class="project-discipline">AI, Motion</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-new-landscapes.html"
+           data-thumb="https://kyfolio.b-cdn.net/040_New-Landscapes/video/thumb.jpg">
+          <span class="project-num">03</span>
+          <span class="project-name">New Landscapes</span>
+          <span class="project-meta">
+            <span class="project-client">Palo Alto Networks</span>
+            <span class="project-discipline">AI, Motion</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-mirror-state.html"
+           data-thumb="https://kyfolio.b-cdn.net/030_Mirror-state/thumb.jpg">
+          <span class="project-num">04</span>
+          <span class="project-name">Mirror State</span>
+          <span class="project-meta">
+            <span class="project-client">Proofpoint</span>
+            <span class="project-discipline">Brand, Experiential</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-google-next.html"
+           data-thumb="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_thumb.jpg"
+           data-video="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_01.gif">
+          <span class="project-num">05</span>
+          <span class="project-name">Next</span>
+          <span class="project-meta">
+            <span class="project-client">Google</span>
+            <span class="project-discipline">Experiential, Motion</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-youtube-forge.html"
+           data-thumb="https://kyfolio.b-cdn.net/080_Forge/stills/NEAL_BLACK_L%20copyNew_New.jpg">
+          <span class="project-num">06</span>
+          <span class="project-name">Forge</span>
+          <span class="project-meta">
+            <span class="project-client">YouTube</span>
+            <span class="project-discipline">Experiential, Motion</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-ibm-open-minds.html"
+           data-thumb="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumb.jpg"
+           data-video="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumbnail-Loop.mp4">
+          <span class="project-num">07</span>
+          <span class="project-name">Open Minds</span>
+          <span class="project-meta">
+            <span class="project-client">IBM</span>
+            <span class="project-discipline">Motion, Design</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-prediction-machines.html"
+           data-thumb="https://kyfolio.b-cdn.net/050_Prediction-machines/SC010_Mountains_002.jpg">
+          <span class="project-num">08</span>
+          <span class="project-name">Prediction Machines</span>
+          <span class="project-meta">
+            <span class="project-client">GDP</span>
+            <span class="project-discipline">Motion, Design</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-home-for-dinner.html"
+           data-thumb="https://kyfolio.b-cdn.net/100_Home-for-Dinner/video/thumb.jpg"
+           data-video="https://kyfolio.b-cdn.net/100_Home-for-Dinner/video/INTS848_TrakCare_HomeForDinner_Agency_01.mp4">
+          <span class="project-num">09</span>
+          <span class="project-name">Home for Dinner</span>
+          <span class="project-meta">
+            <span class="project-client">InterSystems</span>
+            <span class="project-discipline">Film, Motion</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-google-groove.html"
+           data-thumb="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png">
+          <span class="project-num">10</span>
+          <span class="project-name">Groove Around the Globe</span>
+          <span class="project-meta">
+            <span class="project-client">Google</span>
+            <span class="project-discipline">Experiential, Motion</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-si-sportsbook.html"
+           data-thumb="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/hero_thumb.jpg"
+           data-video="https://kyfolio.b-cdn.net/110_SI-Sportsbook/video/sportsbook_v12_1.mp4">
+          <span class="project-num">11</span>
+          <span class="project-name">In the Game</span>
+          <span class="project-meta">
+            <span class="project-client">Sports Illustrated</span>
+            <span class="project-discipline">Brand, Motion</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-save-our-stories.html"
+           data-thumb="https://kyfolio.b-cdn.net/130_Save-Our-Stories/stills/hero_poster.jpg"
+           data-video="https://kyfolio.b-cdn.net/130_Save-Our-Stories/video/sos_film.mp4">
+          <span class="project-num">12</span>
+          <span class="project-name">Save Our Stories</span>
+          <span class="project-meta">
+            <span class="project-client">826 Valencia</span>
+            <span class="project-discipline">Campaign, Design</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-barefoot.html"
+           data-thumb="https://kyfolio.b-cdn.net/160_Barefoot/video/thumb.jpg"
+           data-video="https://kyfolio.b-cdn.net/160_Barefoot/video/cooler_pour.mp4">
+          <span class="project-num">13</span>
+          <span class="project-name">Barefoot Toe-llective</span>
+          <span class="project-meta">
+            <span class="project-client">Barefoot Wine</span>
+            <span class="project-discipline">Animation</span>
+          </span>
+        </a>
+      </li>
+
+      <li class="project-row">
+        <a href="project-wells-fargo.html"
+           data-thumb="https://kyfolio.b-cdn.net/170_Wells-Fargo/video/thumb.jpg"
+          <span class="project-num">14</span>
+          <span class="project-name">Why I Work</span>
+          <span class="project-meta">
+            <span class="project-client">Wells Fargo</span>
+            <span class="project-discipline">Campaign, Film</span>
+          </span>
+        </a>
+      </li>
+
     </ul>
   </div>
-</div>
-
-<header class="page-header">
-  <div class="page-header-label">
-    <a href="index.html">← Back</a>
-  </div>
-  <h1 class="page-title">Archive</h1>
-  <p class="page-desc">Over a decade across motion, brand, AI, and experiential.</p>
-</header>
-
-<div class="filter-bar">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="ai">AI</button>
-  <button class="filter-btn" data-filter="motion">Motion</button>
-  <button class="filter-btn" data-filter="experiential">Experiential</button>
-  <button class="filter-btn" data-filter="design">Design</button>
-  <button class="filter-btn" data-filter="3d">3D</button>
-</div>
-
-<div class="projects-grid">
-
-  <!-- 010: CoreWeave x Aston Martin F1 -->
-  <a href="project-coreweave-aston-martin.html" class="project-card size-large" data-categories="ai 3d design">
-    <span class="project-index">010</span>
-    <div class="project-visual pv-1"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/010_Coreweave/video/thumb.jpg" alt="">
-    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/010_Coreweave/video/shot_14.mp4"></video>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">3D</span></div>
-      <div class="project-title">CoreWeave x Aston Martin F1</div>
-      <div class="project-client">CoreWeave</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 020: Marey -->
-  <a href="project-moonvalley-marey.html" class="project-card size-medium" data-categories="ai motion 3d">
-    <span class="project-index">020</span>
-    <div class="project-visual pv-2"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/020_Marey/video/thumb.jpg" alt="">
-    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/020_Marey/video/marey_launch_v2.mp4" data-start="10" data-end="26"></video>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">Film</span></div>
-      <div class="project-title">Marey</div>
-      <div class="project-client">Moonvalley</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 030: Mirror State -->
-  <a href="project-mirror-state.html" class="project-card size-medium" data-categories="design experiential 3d">
-    <span class="project-index">030</span>
-    <div class="project-visual">
-      <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/030_Mirror-state/thumb.jpg" alt="">
-      <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/030_Mirror-state/Animations/01_Thumb.mp4"></video>
-    </div>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">3D</span><span class="project-tag">Brand Identity</span><span class="project-tag">Motion</span></div>
-      <div class="project-title">Mirror State</div>
-      <div class="project-client">Proofpoint</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 040: New Landscapes -->
-  <a href="project-new-landscapes.html" class="project-card size-large" data-categories="ai motion 3d">
-    <span class="project-index">040</span>
-    <div class="project-visual pv-3"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/040_New-Landscapes/video/thumb.jpg" alt="">
-    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/040_New-Landscapes/video/AnimateDiff_00192.mp4"></video>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Generative AI</span><span class="project-tag">3D</span><span class="project-tag">Motion</span></div>
-      <div class="project-title">New Landscapes</div>
-      <div class="project-client">Palo Alto Networks</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 050: Spotify (HIDDEN — restore when populated) -->
-  <a href="#" class="project-card size-small" data-categories="motion design" style="display:none;">
-    <span class="project-index">050</span>
-    <div class="project-visual pv-5"><div class="shape"></div></div>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Coming Soon</span></div>
-      <div class="project-title">Spotify</div>
-      <div class="project-client">Spotify</div>
-    </div>
-  </a>
-
-  <!-- 060: Open Minds -->
-  <a href="project-ibm-open-minds.html" class="project-card size-small" data-categories="motion design experiential">
-    <span class="project-index">060</span>
-    <div class="project-visual pv-5"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumb.jpg" alt="">
-    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/060_IBM-Open-Minds/IBM-Open-Minds_Thumbnail-Loop.mp4"></video>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
-      <div class="project-title">Open Minds</div>
-      <div class="project-client">IBM</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 070: Prediction Machines -->
-  <a href="project-prediction-machines.html" class="project-card size-large" data-categories="ai motion design">
-    <span class="project-index">070</span>
-    <div class="project-visual pv-4"><img src="https://kyfolio.b-cdn.net/050_Prediction-machines/SC010_Mountains_002.jpg" alt="Prediction Machines" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="shape"></div></div>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Motion</span></div>
-      <div class="project-title">Prediction Machines</div>
-      <div class="project-client"></div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 080: Unity (HIDDEN — restore when populated) -->
-  <a href="project-unity.html" class="project-card size-medium" data-categories="motion design" style="display:none;">
-    <span class="project-index">080</span>
-    <div class="project-visual pv-8"><img src="https://kyfolio.b-cdn.net/070_Unity/stills/Frame%201.jpg" alt="Unity" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Design</span></div>
-      <div class="project-title">Unity</div>
-      <div class="project-client">InterSystems</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 090: Forge -->
-  <a href="project-youtube-forge.html" class="project-card size-medium" data-categories="motion design experiential 3d">
-    <span class="project-index">090</span>
-    <div class="project-visual pv-9"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/080_Forge/stills/NEAL_BLACK_L%20copyNew_New.jpg" alt="" style="transform: scale(1.15); object-position: center 40%;">
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Motion</span><span class="project-tag">Brand</span></div>
-      <div class="project-title">Forge</div>
-      <div class="project-client">YouTube</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 100: Home for Dinner -->
-  <a href="project-home-for-dinner.html" class="project-card size-small" data-categories="motion advertising">
-    <span class="project-index">100</span>
-    <div class="project-visual pv-10"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/video/thumb.jpg" alt="" style="object-fit: cover; transform: scale(1.15);">
-    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/100_Home-for-Dinner/video/INTS848_TrakCare_HomeForDinner_Agency_01.mp4" data-start="2" data-end="15" style="object-fit: cover; transform: scale(1.15);"></video>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Healthcare</span><span class="project-tag">Advertising</span></div>
-      <div class="project-title">Home for Dinner</div>
-      <div class="project-client">InterSystems</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 110: Next -->
-  <a href="project-google-next.html" class="project-card size-large" data-categories="experiential motion design 3d">
-    <span class="project-index">110</span>
-    <div class="project-visual pv-7"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_thumb.jpg" alt="">
-    <img class="project-video" src="https://kyfolio.b-cdn.net/090_Google-Next/Next%202019/stills/opensource_01.gif" alt="Next" loading="lazy">
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Experiential</span><span class="project-tag">Motion</span><span class="project-tag">Design</span></div>
-      <div class="project-title">Next</div>
-      <div class="project-client">Google</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 120: Sports Illustrated Sportsbook -->
-  <a href="project-si-sportsbook.html" class="project-card size-small" data-categories="design motion">
-    <span class="project-index">120</span>
-    <div class="project-visual pv-11">
-      <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/stills/hero_thumb.jpg" alt="In the Game">
-      <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/110_SI-Sportsbook/video/sportsbook_v12_1.mp4" data-start="15" data-end="19"></video>
-    </div>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Design</span><span class="project-tag">Brand</span></div>
-      <div class="project-title">In the Game</div>
-      <div class="project-client">Sports Illustrated</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 130: Groove Around the Globe -->
-  <a href="project-google-groove.html" class="project-card size-large" data-categories="experiential motion">
-    <span class="project-index">130</span>
-    <div class="project-visual pv-10"><img src="https://kyfolio.b-cdn.net/120_Groove-Around-the-Globe/stills/grid_01.png" alt="Groove Around the Globe" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Experiential</span><span class="project-tag">Motion</span></div>
-      <div class="project-title">Groove Around the Globe</div>
-      <div class="project-client">Google</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 140: Save Our Stories -->
-  <a href="project-save-our-stories.html" class="project-card size-medium" data-categories="design campaign">
-    <span class="project-index">140</span>
-    <div class="project-visual pv-12"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/130_Save-Our-Stories/stills/hero_poster.jpg" alt="">
-    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/130_Save-Our-Stories/video/sos_film.mp4" data-start="20" data-end="28"></video>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Art Direction</span><span class="project-tag">Campaign</span></div>
-      <div class="project-title">Save Our Stories</div>
-      <div class="project-client">826 Valencia</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 150: Barefoot Toe-llective -->
-  <a href="project-barefoot.html" class="project-card size-medium" data-categories="art-direction animation">
-    <span class="project-index">150</span>
-    <div class="project-visual pv-12"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/160_Barefoot/video/thumb.jpg" alt="">
-    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/160_Barefoot/video/cooler_pour.mp4"></video>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Art Direction</span><span class="project-tag">Animation</span></div>
-      <div class="project-title">Barefoot Toe-llective</div>
-      <div class="project-client">Barefoot Wine</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-  <!-- 170: Why I Work -->
-  <a href="project-wells-fargo.html" class="project-card size-small" data-categories="campaign documentary">
-    <span class="project-index">170</span>
-    <div class="project-visual pv-12"><div class="shape"></div></div>
-    <img loading="lazy" class="project-thumb" src="https://kyfolio.b-cdn.net/170_Wells-Fargo/video/thumb.jpg" alt="">
-    <video class="project-video" muted loop playsinline preload="none" data-src="https://kyfolio.b-cdn.net/170_Wells-Fargo/video/whyiwork_alexis.mp4" data-start="2"></video>
-    <div class="project-overlay">
-      <div class="project-tags"><span class="project-tag">Brand Campaign</span><span class="project-tag">Documentary</span></div>
-      <div class="project-title">Why I Work</div>
-      <div class="project-client">Wells Fargo</div>
-    </div>
-    <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-  </a>
-
-</div>
-
-<footer class="footer">
-  <span class="footer-copy">&copy; 2026 Kyle Watson</span>
-  <div class="footer-links">
-    <a href="https://www.linkedin.com/in/kyledwatson/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.instagram.com/poodleinthewild" target="_blank" rel="noopener">Instagram</a>
-  </div>
-</footer>
+</main>
 
 <script>
-// ─── CURSOR ───
-const cursor = document.getElementById('cursor');
+const thumb = document.getElementById('thumbFollow');
+const thumbImg = document.getElementById('thumbImg');
+const thumbVid = document.getElementById('thumbVid');
+let mx = 0, my = 0, tx = 0, ty = 0;
+let raf;
+
 document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-});
-document.querySelectorAll('a, .filter-btn').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  mx = e.clientX;
+  my = e.clientY;
 });
 
-// ─── HOVER VIDEO ───
-document.querySelectorAll('.project-card').forEach(card => {
-  const video = card.querySelector('.project-video');
-  if (!video) return;
+function lerp(a, b, t) { return a + (b - a) * t; }
 
-  const startTime = parseFloat(video.dataset.start) || 0;
-  const endTime = parseFloat(video.dataset.end) || 0;
+function animate() {
+  tx = lerp(tx, mx, 0.12);
+  ty = lerp(ty, my, 0.12);
+  thumb.style.left = tx + 'px';
+  thumb.style.top = ty + 'px';
+  raf = requestAnimationFrame(animate);
+}
 
-  // Loop within start–end range
-  if (endTime > startTime) {
-    video.addEventListener('timeupdate', () => {
-      if (video.currentTime >= endTime) video.currentTime = startTime;
-    });
-  }
+document.querySelectorAll('.project-row a').forEach(link => {
+  link.addEventListener('mouseenter', () => {
+    const videoSrc = link.dataset.video;
+    const imgSrc = link.dataset.thumb;
 
-  card.addEventListener('mouseenter', () => {
-    if (!video.src && video.dataset.src) {
-      video.src = video.dataset.src;
-    }
-    video.currentTime = startTime;
-    video.play().catch(() => {});
-  });
-
-  card.addEventListener('mouseleave', () => {
-    video.pause();
-    video.currentTime = startTime;
-  });
-});
-
-// ─── MENU ───
-const menuBtn = document.getElementById('menuBtn');
-const menuOverlay = document.getElementById('menuOverlay');
-const menuClose = document.getElementById('menuClose');
-menuBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
-menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
-menuOverlay.querySelectorAll('.menu-link').forEach(link => {
-  link.addEventListener('click', () => menuOverlay.classList.remove('open'));
-});
-
-// ─── FILTERS ───
-const filterBtns = document.querySelectorAll('.filter-btn');
-const cards = document.querySelectorAll('.project-card');
-
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    cards.forEach(card => {
-      const cats = card.dataset.categories || '';
-      if (filter === 'all' || cats.split(' ').includes(filter)) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
+    if (videoSrc && !videoSrc.endsWith('.gif')) {
+      thumbImg.style.display = 'none';
+      thumbVid.style.display = 'block';
+      if (thumbVid.src !== videoSrc) {
+        thumbVid.src = videoSrc;
+        thumbVid.load();
       }
-    });
-  });
-});
+      thumbVid.play().catch(() => {});
+    } else {
+      thumbVid.style.display = 'none';
+      thumbVid.pause();
+      thumbImg.style.display = 'block';
+      const src = videoSrc || imgSrc;
+      if (src) thumbImg.src = src;
+    }
 
-// ─── PARALLAX ───
-cards.forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    const visual = card.querySelector('.project-visual');
-    if (visual) visual.style.transform = `scale(1.04) translate(${x * -10}px, ${y * -10}px)`;
+    thumb.classList.add('visible');
+    if (!raf) animate();
   });
-  card.addEventListener('mouseleave', () => {
-    const visual = card.querySelector('.project-visual');
-    if (visual) visual.style.transform = '';
+
+  link.addEventListener('mouseleave', () => {
+    thumb.classList.remove('visible');
+    thumbVid.pause();
   });
 });
 </script>
+
 </body>
 </html>
