@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noai, noimageai">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>About — Kyle Watson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f6f3ec;
+  --text-primary: #010103;
+  --text-secondary: #555555;
+  --text-dim: #999999;
+  --border: #d4d0c8;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Grotesk', sans-serif;
+}
+
+html { background: var(--bg); }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  padding: 1.6rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg);
+}
+
+.nav-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.nav-links { display: flex; gap: 2rem; }
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-link:hover { opacity: 0.5; }
+.nav-link.active { opacity: 0.4; }
+
+.about-wrap {
+  max-width: 680px;
+  padding: 12rem 3rem 8rem;
+}
+
+.about-bio {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin-bottom: 4rem;
+}
+
+.about-meta {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0.6rem 2rem;
+  margin-bottom: 4rem;
+}
+
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding-top: 0.1em;
+}
+
+.meta-value {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.about-contact {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--text-primary);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+
+.about-contact:hover { opacity: 0.5; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">KYLE WATSON</a>
+  <div class="nav-links">
+    <a href="all-work.html" class="nav-link">Work</a>
+    <a href="play.html" class="nav-link">Play</a>
+    <a href="about.html" class="nav-link active">About</a>
+  </div>
+</nav>
+
+<main>
+  <div class="about-wrap">
+    <p class="about-bio">Kyle Watson is a multidisciplinary creative director based in Los Angeles. He works across motion, brand, experiential, and emerging media — manipulating processes and conventions to realize ideas.</p>
+
+    <div class="about-meta">
+      <span class="meta-label">Discipline</span>
+      <span class="meta-value">Creative Direction, Motion, Brand, Experiential</span>
+
+      <span class="meta-label">Location</span>
+      <span class="meta-value">Los Angeles, California</span>
+
+      <span class="meta-label">Clients</span>
+      <span class="meta-value">Google, YouTube, IBM, Microsoft, Aston Martin, Wells Fargo, Palo Alto Networks, Sports Illustrated</span>
+
+      <span class="meta-label">Awards</span>
+      <span class="meta-value">AdAge Best Experiential — Google Next '19</span>
+    </div>
+
+    <a href="mailto:kyle@kylewatson.work" class="about-contact">kyle@kylewatson.work</a>
+  </div>
+</main>
+
+</body>
+</html>
